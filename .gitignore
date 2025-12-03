@@ -1,4 +1,17 @@
+# Data folders
 Datascaled/
 RawData/
 LargeData/
-draft/  
+draft/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*/__pycache__/
+*.pyc
+
+# Trash folder
+Trash/
