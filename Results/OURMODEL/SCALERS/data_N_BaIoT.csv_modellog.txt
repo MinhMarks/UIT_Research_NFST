@@ -1,0 +1,200 @@
+         6953 function calls (6662 primitive calls) in 0.005 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.005    0.005 /tmp/ipykernel_464792/1906486538.py:74(function)
+        1    0.001    0.001    0.005    0.005 /tmp/ipykernel_464792/453115586.py:1(preprocess_data_noise)
+        7    0.000    0.000    0.002    0.000 {built-in method builtins.print}
+        4    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1176(__getitem__)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1685(_array_str_implementation)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:605(array2string)
+        4    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1689(_getitem_tuple)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:550(wrapper)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:567(_array2string)
+        4    0.000    0.000    0.002    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1719(_getitem_axis)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1004(_getitem_tuple_same_dim)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1756(_get_slice_axis)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:4380(_slice)
+        2    0.000    0.000    0.002    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:708(_slice_take_blocks_ax0)
+        2    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:1353(take_nd)
+        2    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/array_algos/take.py:59(take_nd)
+        2    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:828(_formatArray)
+    277/2    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:837(recurser)
+        2    0.001    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/array_algos/take.py:120(_take_nd_ndarray)
+        2    0.000    0.000    0.001    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:496(_get_format_function)
+        1    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:455(<lambda>)
+        1    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:961(__init__)
+        1    0.000    0.000    0.001    0.001 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:987(fillFormat)
+      275    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:801(_extendLine_pretty)
+      274    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1073(__call__)
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/IPython/core/interactiveshell.py:3043(write)
+        4    0.000    0.000    0.000    0.000 {built-in method numpy.empty}
+      275    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1042(<genexpr>)
+      275    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:787(_extendLine)
+2304/2288    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/ipykernel/iostream.py:655(write)
+      548    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath.dragon4_positional}
+        7    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1032(_getitem_lowerdim)
+      275    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1037(<genexpr>)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:957(_validate_tuple_indexer)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:3988(_ixs)
+       48    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/traitlets/traitlets.py:676(__get__)
+      142    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+      275    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1046(<genexpr>)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1574(_validate_key)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      275    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1047(<genexpr>)
+      274    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+       10    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/common.py:97(is_bool_indexer)
+      275    0.000    0.000    0.000    0.000 {method 'splitlines' of 'str' objects}
+        5    0.000    0.000    0.000    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:4613(_box_col_values)
+       40    0.000    0.000    0.000    0.000 {built-in method builtins.any}
+       48    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/traitlets/traitlets.py:629(get)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/shape_base.py:220(vstack)
+        2    0.000    0.000    0.000    0.000 {method 'max' of 'numpy.ndarray' objects}
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:6255(__finalize__)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:180(blknos)
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/ipykernel/iostream.py:550(_is_master_process)
+       34    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/dtypes/generic.py:42(_instancecheck)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:1938(to_numpy)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/_methods.py:42(_amax)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:2800(check_dict_or_set_indexers)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:339(_from_mgr)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:454(<lambda>)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1652(_is_scalar_access)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:145(unique)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:5437(_getitem_slice)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1282(__init__)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:1633(as_array)
+        3    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:69(_wrapreduction)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:659(_constructor_from_mgr)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:1012(iget)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:678(_constructor_sliced_from_mgr)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:339(_unique1d)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:974(_is_nested_tuple_indexer)
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/ipykernel/iostream.py:505(parent_header)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:278(__init__)
+       24    0.000    0.000    0.000    0.000 {built-in method posix.getpid}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/base.py:545(to_numpy)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:650(_simple_new)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:50(_make_options_dict)
+       34    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/dtypes/generic.py:37(_check)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:6320(__setattr__)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/base.py:82(shape)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3328(prod)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1667(_validate_integer)
+       10    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:586(_get_axis)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3052(max)
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1181(<genexpr>)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:294(make_block_same_class)
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/base.py:84(<genexpr>)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:1047(shape)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:5385(__getitem__)
+       96    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/typing.py:2182(cast)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:1297(__call__)
+       37    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/series.py:1480(_set_as_cached)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:2773(is_label_like)
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:981(<genexpr>)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:935(_expand_ellipsis)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:446(_get_formatdict)
+       24    0.000    0.000    0.000    0.000 {method 'write' of '_io.StringIO' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.locals}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:4604(_is_view)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1665(<genexpr>)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/series.py:707(dtype)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:255(fill_value)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:4198(_validate_positional_slice)
+        1    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/numeric.py:137(ones)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:4398(_set_is_copy)
+       28    0.000    0.000    0.000    0.000 {method 'get' of '_contextvars.ContextVar' objects}
+       29    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:1993(dtype)
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/IPython/core/displaypub.py:150(is_publishing)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:480(is_view)
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:2807(<genexpr>)
+       24    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.RLock' objects}
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:1180(<genexpr>)
+       10    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:912(__len__)
+        6    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/common.py:311(is_null_slice)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/_config/__init__.py:34(using_copy_on_write)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3190(min)
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/common.py:372(apply_if_callable)
+        6    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:161(iloc)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:992(_validate_key_length)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/dtypes/missing.py:673(na_value_for_dtype)
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/ipykernel/iostream.py:577(_schedule_flush)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/shape_base.py:216(_vhstack_dispatcher)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexers/utils.py:62(is_list_like_indexer)
+        1    0.000    0.000    0.000    0.000 {method 'sort' of 'numpy.ndarray' objects}
+       13    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/frame.py:1030(axes)
+       10    0.000    0.000    0.000    0.000 {built-in method numpy.asarray}
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/shape_base.py:80(atleast_2d)
+        6    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/range.py:999(__len__)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/array_algos/take.py:325(_get_take_nd_function)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/array_algos/take.py:564(_take_preprocess_indexer_and_fill_value)
+        2    0.000    0.000    0.000    0.000 {method 'transpose' of 'numpy.ndarray' objects}
+        6    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:6740(_validate_indexer)
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:2816(<genexpr>)
+       24    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/site-packages/IPython/core/displayhook.py:118(is_active)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/flags.py:51(__init__)
+        4    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/contextlib.py:446(__exit__)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/flags.py:87(allows_duplicate_labels)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/shape_base.py:208(_arrays_for_stack_dispatcher)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:2320(_preprocess_slice_or_indexer)
+        6    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x58ff81fd6e60}
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:572(_get_axis_number)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:241(is_single_block)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:1319(iget)
+        1    0.000    0.000    0.000    0.000 {method 'flatten' of 'numpy.ndarray' objects}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/series.py:831(_values)
+        4    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:592(_get_block_manager_axis)
+        2    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+        9    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:2650(is_view)
+        8    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:405(flags)
+       12    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:941(<genexpr>)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:216(is_extension)
+        6    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:696(ndim)
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:832(_reset_identity)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/common.py:152(cast_scalar_indexer)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:196(blklocs)
+        2    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+        4    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/contextlib.py:440(__init__)
+        2    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        4    0.000    0.000    0.000    0.000 {built-in method numpy.asanyarray}
+        2    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:2004(internal_values)
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/generic.py:363(attrs)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/indexing.py:2787(need_slice)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:132(_unpack_tuple)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/blocks.py:744(dtype)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.id}
+        4    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/flags.py:55(allows_duplicate_labels)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:1837(__init__)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:1940(_block)
+        2    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        4    0.000    0.000    0.000    0.000 /opt/tljh/user/lib/python3.12/contextlib.py:443(__enter__)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/base.py:367(ndim)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py:913(__init__)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/arrayprint.py:952(_none_or_positive_arg)
+        2    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/multiarray.py:180(concatenate)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/multiarray.py:1098(copyto)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3323(_prod_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:140(_unique_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3047(_max_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/shape_base.py:76(_atleast_2d_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3185(_min_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/jupyter-iclr2025/.local/lib/python3.12/site-packages/numpy/_core/multiarray.py:690(result_type)
+
+
