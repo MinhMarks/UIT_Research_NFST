@@ -1,0 +1,89 @@
+[1mdiff --git a/notebooks/experiments/OC-NSFT_old_noise_Kmean_threshold.ipynb b/notebooks/experiments/OC-NSFT_old_noise_Kmean_threshold.ipynb[m
+[1mindex 6d1cb7c..68f01ee 100644[m
+[1m--- a/notebooks/experiments/OC-NSFT_old_noise_Kmean_threshold.ipynb[m
+[1m+++ b/notebooks/experiments/OC-NSFT_old_noise_Kmean_threshold.ipynb[m
+[36m@@ -522,8 +522,8 @@[m
+     "    \n",[m
+     "    for ncluster in [1,100, 139,184,301]:\n",[m
+     "        X_train , y_train = cluster_kmeans( X_train0 , ncluster )\n",[m
+[31m-    "    \n",[m
+[31m-    "        npd, k, training_time = calculate_NPD(X_train, y_train)\n",[m
+[32m+[m[32m    "        plot_data_2D(X_train, y_train, \"Du lieu sau clusterr\") \n",[m
+[32m+[m[32m    "        npd = calculate_NPD(X_train, y_train)\n",[m
+     "        \n",[m
+     "        y_proba, y_predict, inference_time = learn( npd , X_train, y_train, X_test)  #,y_predict\n",[m
+     "        \n",[m
+[36m@@ -5466,7 +5466,72 @@[m
+     }[m
+    ],[m
+    "source": [[m
+[31m-    "resolution"[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "import cProfile\n",[m
+[32m+[m[32m    "import pstats    \n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "# dataset_prefixes =  ['N_BaIoT_dataloader.csv']\n",[m
+[32m+[m[32m    "dataset_prefixes =  ['data_ToNIoT', 'data_CICIoT2023','data_N_BaIoT','data_BoTIoT' ] # ,'data_N_BaIoT', 'data_BoTIoT']\n",[m
+[32m+[m[32m    "# dataset_prefixes =  ['data_CICIoT2023.csv']\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "#  'data_N_BaIoT.csv',  \n",[m
+[32m+[m[32m    "# scaler_names = ['MinMaxScaler']\n",[m
+[32m+[m[32m    "scaler_names = ['StandardScaler', 'MinMaxScaler','Normalizer',  'QuantileTransformer','RobustScaler','Normalizer']\n",[m
+[32m+[m[32m    "#  \n",[m
+[32m+[m[32m    "# scaler_names = ['QuantileTransformer', 'StandardScaler','QuantileTransformer']\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "    # Iterate through dataset prefixes and process each dataset pair\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "for prefix in dataset_prefixes:\n",[m
+[32m+[m[32m    "    \n",[m
+[32m+[m[32m    "    print(\"-\"*50)\n",[m
+[32m+[m[32m    "    print(\"--------\", prefix , \"-\"*30)\n",[m
+[32m+[m[32m    "    print(\"-\"*50)\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "    base_output_file = f\"testtime.csv\" \n",[m
+[32m+[m[32m    "    output_file = base_output_file + \"0.csv\"\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "    # Increment the filename if it already exists\n",[m
+[32m+[m[32m    "    counter = 0\n",[m
+[32m+[m[32m    "    while os.path.exists(output_file):\n",[m
+[32m+[m[32m    "        counter += 1\n",[m
+[32m+[m[32m    "        output_file = f\"{base_output_file}{counter}.csv\"\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "        \n",[m
+[32m+[m[32m    "    for scaler in scaler_names: \n",[m
+[32m+[m[32m    "        print(f\"Processing dataset {prefix} with {scaler} scaler ...\")\n",[m
+[32m+[m[32m    "        \n",[m
+[32m+[m[32m    "        # Construct file paths for train and test datasets with 'Train_' and 'Test_' prefixes\n",[m
+[32m+[m[32m    "        train_file = f'../../Datascaled/NoiseOCData/Train_{scaler}_{prefix}.csv'\n",[m
+[32m+[m[32m    "        test_file = f'../../Datascaled/NoiseOCData/Test_{scaler}_{prefix}.csv'\n",[m
+[32m+[m[32m    "        \n",[m
+[32m+[m[32m    "        # Load the CSV files\n",[m
+[32m+[m[32m    "        df_train = pd.read_csv(train_file)\n",[m
+[32m+[m[32m    "        df_test = pd.read_csv(test_file)\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "        df_train = df_train.dropna() \n",[m
+[32m+[m[32m    "        df_test = df_test.dropna() \n",[m
+[32m+[m[32m    "            \n",[m
+[32m+[m[32m    "            # Nối lại thành 1 DataFrame\n",[m
+[32m+[m[32m    "        df_full = pd.concat([df_train, df_test], ignore_index=True)\n",[m
+[32m+[m[32m    "            \n",[m
+[32m+[m[32m    "            # Chia theo tỉ lệ 70% train, 30% test\n",[m
+[32m+[m[32m    "        df_train_new, df_test_new = train_test_split(df_full, test_size=0.3, random_state=42)\n",[m
+[32m+[m[32m    "        for noise in [0]:\n",[m
+[32m+[m[32m    "        # for noise in range (0, 6): \n",[m
+[32m+[m[32m    "            \n",[m
+[32m+[m[32m    "            # log_file = f'Results/OURMODEL/SCALERS/{prefix}_modellog.txt'\n",[m
+[32m+[m[32m    "            # with open(log_file, \"w\") as f:\n",[m
+[32m+[m[32m    "            #     profiler = cProfile.Profile()\n",[m
+[32m+[m[32m    "            #     profiler.enable()\n",[m
+[32m+[m[32m    "                \n",[m
+[32m+[m[32m    "            function(df_train_new, df_test_new, scaler, noise)  # Chạy hàm cần profile\n",[m
+[32m+[m[32m    "            \n",[m
+[32m+[m[32m    "                # profiler.disable()\n",[m
+[32m+[m[32m    "                # stats = pstats.Stats(profiler, stream=f)\n",[m
+[32m+[m[32m    "                # stats.sort_stats(\"cumulative\").print_stats()"[m
+    ][m
+   }[m
+  ],[m
