@@ -431,9 +431,11 @@ def Model_evaluating(y_true, y_predict, y_scores):
     """
     print("..............................Report Parameter...............................")
     
+    # Invert true labels (1=Anomaly, 0=Normal)
+    y_true_inverted = 1 - y_true
     y_prob = y_scores[:, 1]
     
-    fpr, tpr, thresholds = roc_curve(y_true, y_prob)
+    fpr, tpr, thresholds = roc_curve(y_true_inverted, y_prob)
     j_scores = tpr - fpr
     optimal_idx = np.argmax(j_scores)
     optimal_threshold = thresholds[optimal_idx]
@@ -442,13 +444,24 @@ def Model_evaluating(y_true, y_predict, y_scores):
 
     y_predict_optimal = (y_prob >= optimal_threshold).astype(int)
 
-    mcc = matthews_corrcoef(y_true, y_predict_optimal)
-    f1 = f1_score(y_true, y_predict_optimal)
-    ppv = precision_score(y_true, y_predict_optimal)
-    recall = recall_score(y_true, y_predict_optimal)
-    accuracy = accuracy_score(y_true, y_predict_optimal)
-    auc_score = roc_auc_score(y_true, y_prob)
-    aucpr = average_precision_score(y_true, y_prob)
+    mcc = matthews_corrcoef(y_true_inverted, y_predict_optimal)
+    f1 = f1_score(y_true_inverted, y_predict_optimal)
+    ppv = precision_score(y_true_inverted, y_predict_optimal, zero_division=0)
+    recall = recall_score(y_true_inverted, y_predict_optimal, zero_division=0)
+    accuracy = accuracy_score(y_true_inverted, y_predict_optimal)
+    auc_score = roc_auc_score(y_true_inverted, y_prob)
+    aucpr = average_precision_score(y_true_inverted, y_prob)
+    
+    # In ra các kết quả
+    print("AUCROC:", auc_score * 100)
+    print("AUCPR:", aucpr * 100)
+    print("Accuracy:", accuracy * 100)
+    print("MCC:", mcc)
+    print("F1 score:", f1)
+    print("PPV (Precision):", ppv)
+    print("TPR (Recall):", recall)
+
+    return [auc_score * 100, aucpr * 100, accuracy * 100, mcc, f1, ppv, recall]
     
     print("AUCROC:", auc_score * 100)
     print("AUCPR:", aucpr * 100)

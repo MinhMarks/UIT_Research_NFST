@@ -28,6 +28,15 @@ set_seed(42)
 
 sys.path.append("../..")
 
+# --- Fix for ModuleNotFoundError ---
+# Get the directory where tune_baselines.py is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# The project root is two levels up from notebooks/baselines
+project_root = os.path.abspath(os.path.join(current_dir, "..", ".."))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+# -----------------------------------
+
 # PyOD Models
 from pyod.models.knn import KNN
 from pyod.models.lunar import LUNAR
@@ -79,17 +88,23 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
 
 
 def evaluate_model(y_true, y_pred, y_scores=None, y_probabilities=None):
-    mcc = matthews_corrcoef(y_true, y_pred)
-    f1 = f1_score(y_true, y_pred)
-    precision = precision_score(y_true, y_pred, zero_division=0)
-    recall = recall_score(y_true, y_pred, zero_division=0)
-    accuracy = accuracy_score(y_true, y_pred)
+    # Dữ liệu của bạn: Anomaly = 0, Normal = 1
+    # Mô hình PyOD: Anomaly = 1, Normal = 0
+    # Đảo ngược y_true để đồng nhất với output của PyOD (Anomaly = 1)
+    y_true_inverted = 1 - y_true
+    
+    mcc = matthews_corrcoef(y_true_inverted, y_pred)
+    f1 = f1_score(y_true_inverted, y_pred)
+    precision = precision_score(y_true_inverted, y_pred, zero_division=0)
+    recall = recall_score(y_true_inverted, y_pred, zero_division=0)
+    accuracy = accuracy_score(y_true_inverted, y_pred)
 
     auc_roc, auc_pr = None, None
     if y_probabilities is not None:
         try:
-            auc_roc = roc_auc_score(y_true, y_probabilities[:, 1])
-            auc_pr = average_precision_score(y_true, y_probabilities[:, 1])
+            # PyOD trả về xác suất Anomaly ở cột 1
+            auc_roc = roc_auc_score(y_true_inverted, y_probabilities[:, 1])
+            auc_pr = average_precision_score(y_true_inverted, y_probabilities[:, 1])
         except Exception:
             pass
             
