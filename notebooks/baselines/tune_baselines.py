@@ -67,19 +67,27 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
     X_train_total = train_data.iloc[:, :-1].to_numpy()
     y_train_total = train_data.iloc[:, -1].to_numpy()
 
-    X_train = X_train_total[y_train_total == 0]
-    y_train = y_train_total[y_train_total == 0]
+    # User's Dataset defined Normal=1 and Anomaly=0. 
+    # An unsupervised anomaly detector must train on Normal data!
+    X_train = X_train_total[y_train_total == 1]
+    y_train = y_train_total[y_train_total == 1]
 
     n_samples = X_train.shape[0]
     noise_samples_count = int(n_samples * (noise_percentage / 100))
 
-    X_train_noise = X_train_total[y_train_total == 1]
+    # Add noise from the Anomaly class (0)
+    X_train_noise = X_train_total[y_train_total == 0]
     
     noisy_indices = np.random.choice(X_train_noise.shape[0], size=noise_samples_count, replace=False)
     X_train_noise = X_train_noise[noisy_indices]
     
     X_train = np.vstack((X_train, X_train_noise))
+    # Keep true labels for potential supervised models (DevNet)
+    # y_train = 1, noisy data = 0
     y_train = np.concatenate((y_train, np.zeros(X_train_noise.shape[0])))
+
+    X_test = test_data.iloc[:, :-1].to_numpy()
+    y_test = test_data.iloc[:, -1].to_numpy()
 
     X_test = test_data.iloc[:, :-1].to_numpy()
     y_test = test_data.iloc[:, -1].to_numpy()
@@ -205,7 +213,10 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                 start_time = time.time()
                 
                 if model_name == 'DevNet':
-                    model.fit(X_train, y_train)
+                    # PyOD's DevNet assumes Anomaly=1 and Normal=0 during fit.
+                    # Our y_train currently has Anomaly=0 and Normal=1.
+                    y_train_inverted = 1 - y_train
+                    model.fit(X_train, y_train_inverted)
                 else:
                     model.fit(X_train)
                     
