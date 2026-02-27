@@ -28,6 +28,15 @@ set_seed(42)
 
 sys.path.append("../..")
 
+# --- Fix for ModuleNotFoundError ---
+# Get the directory where tune_baselines.py is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# The project root is two levels up from notebooks/baselines
+project_root = os.path.abspath(os.path.join(current_dir, "..", ".."))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+# -----------------------------------
+
 # PyOD Models
 from pyod.models.knn import KNN
 from pyod.models.lunar import LUNAR
