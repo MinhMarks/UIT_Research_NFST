@@ -56,17 +56,17 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
     X_train_total = train_data.iloc[:, :-1].to_numpy()
     y_train_total = train_data.iloc[:, -1].to_numpy()
 
-    # Separate the samples with label 1 (Normal Data)
+    # Separate the samples with label 0
     X_train = X_train_total[y_train_total == 1]
     y_train = y_train_total[y_train_total == 1]
 
-    print("Train Data Labels [1]:", np.unique(y_train))
+    print("Train Data Labels [0]:", np.unique(y_train))
 
     # Calculate how many samples to add noise to based on the provided percentage
     n_samples = X_train.shape[0]
     noise_samples_count = int(n_samples * (noise_percentage / 100))
 
-    # Get the samples with label 0 (for generating noise)
+    # Get the samples with label 1 (for generating noise)
     X_train_noise = X_train_total[y_train_total == 0]
     
     # Randomly select noise_samples_count from X_train_noise
@@ -253,24 +253,10 @@ def calculate_NPD(X, y, epsilon=1e-6):
     
 
 def BruteForce_Threshold(y_true, y_prob, minth=0.0, maxth=1.0, num_thresholds=1000):
-    """
-    Finds the best classification threshold for a binary model using brute force search.
+    thresholds = np.linspace(minth, maxth, num_thresholds)  
 
-    Args:
-        y_true (ndarray): True labels (0 or 1), shape (n_samples,).
-        y_prob (ndarray): Predicted probabilities for class 1, shape (n_samples,).
-        minth (float, optional): Minimum threshold value. Default is 0.0.
-        maxth (float, optional): Maximum threshold value. Default is 1.0.
-        num_thresholds (int, optional): Number of threshold values to search. Default is 1000.
-
-    Returns:
-        dict: Dictionary containing the best threshold for each evaluation metric.
-    """
-    thresholds = np.linspace(minth, maxth, num_thresholds)  # Generate candidate thresholds
-
-    # Initialize best metrics
     best_results = {
-        "accuracy": (0, 0),  # (best_threshold, best_score)
+        "accuracy": (0, 0),  
         "f1": (0, 0),
         "mcc": (0, 0),
         "auc_roc": (0, 0),
@@ -279,14 +265,14 @@ def BruteForce_Threshold(y_true, y_prob, minth=0.0, maxth=1.0, num_thresholds=10
 
     return best_results 
     for threshold in thresholds:
-        y_pred = (y_prob[:,1] >= threshold).astype(int)
+        y_pred = (y_prob[:,0] >= threshold).astype(int)
 
         # Compute evaluation metrics
         acc = accuracy_score(y_true, y_pred)
         f1 = f1_score(y_true, y_pred)
         mcc = matthews_corrcoef(y_true, y_pred)
-        auc_roc = roc_auc_score(1-y_true, y_prob[:, 1])
-        auc_pr = average_precision_score(1-y_true, y_prob[:, 1])
+        auc_roc = roc_auc_score(1-y_true, y_prob[:, 0])
+        auc_pr = average_precision_score(1-y_true, y_prob[:, 0])
 
         # Update best threshold for each metric
         if acc > best_results["accuracy"][1]:
@@ -325,7 +311,7 @@ def learn( npd, X_train, y_train , X_test):
     
     y_proba = np.nan_to_num(y_proba, nan=1.0)
 
-    y_predict = (y_proba[:, 1] > 0.2).astype(int) 
+    y_predict = (y_proba[:, 0] > 0.2).astype(int) 
     
     
     
@@ -335,7 +321,6 @@ def learn( npd, X_train, y_train , X_test):
     return y_proba, y_predict, (t2-t1)
     
     
-
 
 from sklearn.metrics import roc_curve
 def Model_evaluating(y_true, y_predict, y_scores):
@@ -351,8 +336,9 @@ def Model_evaluating(y_true, y_predict, y_scores):
     """
     print("..............................Report Parameter...............................")
     
-    # Lấy xác suất cho lớp dương (lớp 1)
-    y_prob = y_scores[:, 1]
+    # Do mô hình train bằng cụm Anomaly nên Anomaly tạo ra khoảng cách ngắn, 
+    # tỷ lệ thuận với xác suất thấp ở cột 1. Vậy xác suất Anomaly thực chất nằm ở cột 0.
+    y_prob = y_scores[:, 0]
     
     # Tính ROC và threshold tối ưu theo Youden’s J statistic
     y_true_inverted = 1 - y_true

@@ -97,22 +97,25 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
 
 def evaluate_model(y_true, y_pred, y_scores=None, y_probabilities=None):
     # Dữ liệu của bạn: Anomaly = 0, Normal = 1
-    # Mô hình PyOD: Anomaly = 1, Normal = 0
-    # Đảo ngược y_true để đồng nhất với output của PyOD (Anomaly = 1)
+    # Mô hình train trực tiếp bằng Anomaly nên Anomaly trở thành In-distribution (0 của PyOD)
+    # Ta phải lật ngược y_true để Anomaly = 1
     y_true_inverted = 1 - y_true
     
-    mcc = matthews_corrcoef(y_true_inverted, y_pred)
-    f1 = f1_score(y_true_inverted, y_pred)
-    precision = precision_score(y_true_inverted, y_pred, zero_division=0)
-    recall = recall_score(y_true_inverted, y_pred, zero_division=0)
-    accuracy = accuracy_score(y_true_inverted, y_pred)
+    # Lật ngược y_pred vì PyOD sẽ gán 0 cho in-distribution (tức là Anomaly)
+    y_pred_inverted = 1 - y_pred
+    
+    mcc = matthews_corrcoef(y_true_inverted, y_pred_inverted)
+    f1 = f1_score(y_true_inverted, y_pred_inverted)
+    precision = precision_score(y_true_inverted, y_pred_inverted, zero_division=0)
+    recall = recall_score(y_true_inverted, y_pred_inverted, zero_division=0)
+    accuracy = accuracy_score(y_true_inverted, y_pred_inverted)
 
     auc_roc, auc_pr = None, None
     if y_probabilities is not None:
         try:
-            # PyOD trả về xác suất Anomaly ở cột 1
-            auc_roc = roc_auc_score(y_true_inverted, y_probabilities[:, 1])
-            auc_pr = average_precision_score(y_true_inverted, y_probabilities[:, 1])
+            # Lấy xác suất của lớp in-distribution (0) vì mô hình train trên Anomaly
+            auc_roc = roc_auc_score(y_true_inverted, y_probabilities[:, 0])
+            auc_pr = average_precision_score(y_true_inverted, y_probabilities[:, 0])
         except Exception:
             pass
             
