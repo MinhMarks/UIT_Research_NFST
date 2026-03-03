@@ -299,12 +299,20 @@ def learn( npd, X_train, y_train , X_test):
     plot_data_2D(null_point_X, y_train, "Du lieu sau projection") 
 
     t1 = time.time()
-    train_score_tmp = distance_vector(null_point_X, null_point_X)
-    for i in range(len(train_score_tmp)):
-        train_score_tmp[i , i] = 1e9                                                      
-    train_score = np.amin(train_score_tmp, axis=1)
     
-    y_score = minimum_distance(null_point_X_test, null_point_X)
+    from sklearn.neighbors import NearestNeighbors
+    # Optimize distance calculations using NearestNeighbors (KDTree/BallTree)
+    nn = NearestNeighbors(n_neighbors=2, algorithm='auto', n_jobs=-1)
+    nn.fit(null_point_X)
+    
+    # train_score: distance from each train point to its nearest *other* train point
+    distances_train, _ = nn.kneighbors(null_point_X)
+    train_score = distances_train[:, 1]
+    
+    # y_score: distance from each test point to its nearest train point
+    distances_test, _ = nn.kneighbors(null_point_X_test, n_neighbors=1)
+    y_score = distances_test[:, 0]
+    
     y_proba = np.zeros((len(y_score), 2))
     y_proba[:, 1] = np.minimum(y_score / np.max(train_score), 1)                         
     y_proba[:, 0] = 1 - y_proba[:, 1]                                                     # Probability for class 0
