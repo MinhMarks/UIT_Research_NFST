@@ -1,0 +1,25 @@
+=== HYPERPARAMETER TUNING SENSITIVITY REPORT ===
+
+This report shows how much a model's performance (AUCPR) fluctuates depending on the hyperparameters chosen.
+Models with a high 'Avg Difference' are HIGHLY SENSITIVE to tuning and will fail without the right parameters.
+
+      Model       max       min  difference
+       LODA 40.073430 18.124272   21.949159
+        LOF 58.645938 43.859991   14.785947
+     DASVDD 53.533273 40.223565   13.309707
+        KNN 65.837320 52.662635   13.174685
+       HBOS 50.607356 38.971915   11.635441
+      CBLOF 48.283732 38.513626    9.770106
+  NeuTraLAD 66.220234 56.862652    9.357582
+      OCSVM 33.266964 27.936588    5.330376
+    IForest 62.089602 58.052386    4.037216
+        PCA 28.925241 28.200641    0.724599
+        DIF 58.519349 58.019711    0.499638
+       ECOD 39.368857 39.368857    0.000000
+      COPOD 37.447475 37.447475    0.000000
+       ALAD 10.890258 10.890258    0.000000
+AutoEncoder 63.290578 63.290578    0.000000
+
+Conclusion:
+- Models at the top of this list require rigorous GridSearch/Hyperopt.
+- Models at the bottom are more robust or have fewer parameters affecting variance.
