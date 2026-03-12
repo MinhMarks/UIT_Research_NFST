@@ -88,17 +88,23 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
 
 
 def evaluate_model(y_true, y_pred, y_scores=None, y_probabilities=None):
-    mcc = matthews_corrcoef(y_true, y_pred)
-    f1 = f1_score(y_true, y_pred)
-    precision = precision_score(y_true, y_pred, zero_division=0)
-    recall = recall_score(y_true, y_pred, zero_division=0)
-    accuracy = accuracy_score(y_true, y_pred)
+    # Lật nhãn dữ liệu: Do Normal (0) ít hơn Anomaly (1), ta lật nhãn để đánh giá AUCPR 
+    # tập trung vào lớp thiểu số (chuyển Normal thành 1 và Anomaly thành 0)
+    y_true_flipped = 1 - y_true
+    y_pred_flipped = 1 - y_pred
+    
+    mcc = matthews_corrcoef(y_true_flipped, y_pred_flipped)
+    f1 = f1_score(y_true_flipped, y_pred_flipped)
+    precision = precision_score(y_true_flipped, y_pred_flipped, zero_division=0)
+    recall = recall_score(y_true_flipped, y_pred_flipped, zero_division=0)
+    accuracy = accuracy_score(y_true_flipped, y_pred_flipped)
 
     auc_roc, auc_pr = None, None
     if y_probabilities is not None:
         try:
-            auc_roc = roc_auc_score(y_true, y_probabilities[:, 1])
-            auc_pr = average_precision_score(y_true, y_probabilities[:, 1])
+            # Xác suất của lớp 0 nguyên bản nay trở thành xác suất của lớp 1 sau khi lật
+            auc_roc = roc_auc_score(y_true_flipped, y_probabilities[:, 0])
+            auc_pr = average_precision_score(y_true_flipped, y_probabilities[:, 0])
         except Exception:
             pass
             
@@ -253,8 +259,8 @@ if __name__ == "__main__":
     scaler_names = ['QuantileTransformer', 'MinMaxScaler', 'Normalizer', 'RobustScaler']
     noise_levels = [0, 1, 3, 5]
     
-    output_all = "Tuned_Baseline_Results_All.csv"
-    output_best = "Best_Baseline_Results_Per_Model.csv"
+    output_all = "Tuned_Baseline_Results_All1.csv"
+    output_best = "Best_Baseline_Results_Per_Model1.csv"
 
     for prefix in dataset_prefixes:
         for scaler in scaler_names: 
