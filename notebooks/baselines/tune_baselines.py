@@ -201,7 +201,8 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
         for params in param_list:
             print(f"Testing params: {params}")
             try:
-                model = get_model(model_name, params)
+                import tracemalloc
+                tracemalloc.start()
                 start_time = time.time()
                 
                 if model_name == 'DevNet':
@@ -210,7 +211,10 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                     model.fit(X_train)
                     
                 train_time = time.time() - start_time
+                current, peak_train = tracemalloc.get_traced_memory()
+                tracemalloc.stop()
                 
+                tracemalloc.start()
                 start_time = time.time()
                 y_pred = model.predict(X_test)
                 
@@ -220,6 +224,8 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                     y_probabilities = None
                     
                 test_time = time.time() - start_time
+                current, peak_test = tracemalloc.get_traced_memory()
+                tracemalloc.stop()
                 
                 metrics = evaluate_model(y_test, y_pred, y_probabilities=y_probabilities)
                 
@@ -231,7 +237,9 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                     "Noise": noise_percentage,
                     **metrics,
                     "Time Train": train_time,
-                    "Time Test": test_time
+                    "Time Test": test_time,
+                    "Peak RAM Train (MB)": peak_train / 10**6,
+                    "Peak RAM Test (MB)": peak_test / 10**6
                 }
                 
                 # Save to All file

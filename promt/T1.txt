@@ -1,0 +1,3 @@
+Tương tự tôi cũng muốn hoàn thiện phần memory với baseline. Và nhầm mục đích vẽ biểu đồ và trình bày vào trong bài báo khoa học tôi muốn nó được ghi thẳng vào file result luôn. 
+
+Và đồng thời hãy đề xuất một số loại biểu đồ để so sánh, tôi muốn tạo thêm một folder mới rồi tôi sẽ copy file kết quả vào sau( baseline và experiment model của tôi, do đó hãy đọc cấu trúc file để trích xuất đúng thứ cần ). 
