@@ -1,0 +1,9 @@
+Trong proposed model của tôi có một cải tiến như sau: 
+   Chúng tôi đã chuyển từ Gram-Schmidt sang SVD để tìm ra subspace chiếu, điều này giúp cải thiện độ chính xác và độ ổn định của mô hình.
+   Tôi muốn làm các thực nghiệm, biểu đồ để thể hiện điều này. 
+   Cụ thể, tôi muốn so sánh về: 
+      - Độ chính xác (AUCPR, AUCROC) 
+      - Thời gian huấn luyện 
+      - Thời gian dự đoán 
+      - Bộ nhớ sử dụng 
+Về cài đặc thì cứ làm hơi giống với memory_comparison trước đó. Tôi muốn bạn tạo ra folder mới với một file code( code bằng file python nhé ) mới chạy cả 2 phiên bản (Gram-Schmidt và SVD) trên tất cả các dataset. Sau đó tạo ra các biểu đồ để so sánh 2 phiên bản này.

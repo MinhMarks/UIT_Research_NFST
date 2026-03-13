@@ -201,6 +201,7 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
         for params in param_list:
             print(f"Testing params: {params}")
             try:
+                model = get_model(model_name, params)
                 import tracemalloc
                 tracemalloc.start()
                 start_time = time.time()

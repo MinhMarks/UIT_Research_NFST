@@ -29,6 +29,14 @@ def load_and_merge_data(baseline_csv, model_csv):
         # Ensure column alignment. If your model exports 'Method' instead of 'Model', rename it.
         if 'Method' in df_model.columns and 'Model' not in df_model.columns:
             df_model = df_model.rename(columns={'Method': 'Model'})
+        
+        # If neither 'Method' nor 'Model' was present, assign the proposed method's name
+        if 'Model' not in df_model.columns:
+            df_model['Model'] = 'XXX'
+            
+        # If 'Dataset' is missing, add a fallback to prevent dropping during groupby
+        if 'Dataset' not in df_model.columns:
+            df_model['Dataset'] = 'Unknown_Dataset'
             
         df_list.append(df_model)
     else:
