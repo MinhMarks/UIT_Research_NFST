@@ -17,3 +17,7 @@ __pycache__/
 Trash/
 
 Results/ 
+
+*.csv
+*.png
+ 
