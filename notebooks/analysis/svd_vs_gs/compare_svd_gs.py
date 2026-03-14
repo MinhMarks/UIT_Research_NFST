@@ -10,6 +10,7 @@ from sklearn.metrics import (matthews_corrcoef, f1_score, precision_score,
                              recall_score, accuracy_score, roc_auc_score, 
                              average_precision_score)
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
 from scipy.spatial.distance import cdist
 from scipy.linalg import null_space
@@ -125,11 +126,55 @@ def evaluate_predictions(y_true, y_prob):
     auc_pr = average_precision_score(y_true_flipped, 1 - y_prob)
     return auc_roc * 100, auc_pr * 100
 
+def plot_2d_projections(dataset_name, projected_data, y_test):
+    os.makedirs("plots", exist_ok=True)
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+    
+    for ax, (method, X_proj) in zip(axes, projected_data.items()):
+        if X_proj.shape[1] > 2:
+            pca = PCA(n_components=2)
+            X_2d = pca.fit_transform(X_proj)
+        elif X_proj.shape[1] == 2:
+            X_2d = X_proj
+        elif X_proj.shape[1] == 1:
+            X_2d = np.hstack([X_proj, np.zeros_like(X_proj)])
+        else:
+            X_2d = np.zeros((X_proj.shape[0], 2))
+            
+        # Sample points if too large to avoid cluttered plots
+        n_samples = X_2d.shape[0]
+        if n_samples > 10000:
+            idx = np.random.choice(n_samples, 10000, replace=False)
+            X_plot = X_2d[idx]
+            y_plot = y_test[idx]
+        else:
+            X_plot = X_2d
+            y_plot = y_test
+            
+        # Rename labels for legend (0 -> Normal, 1 -> Anomaly)
+        labels = np.where(y_plot == 0, 'Normal (0)', 'Anomaly (1)')
+        palette = {'Normal (0)': 'dodgerblue', 'Anomaly (1)': 'salmon'}
+        
+        sns.scatterplot(x=X_plot[:, 0], y=X_plot[:, 1], hue=labels, palette=palette, ax=ax, alpha=0.5, s=20, edgecolor=None)
+        ax.set_title(f"{method} Projection (PCA 2D)")
+        ax.set_xlabel("Principal Component 1")
+        ax.set_ylabel("Principal Component 2")
+        
+    plt.suptitle(f"Projected Space Distribution: {dataset_name}", fontweight='bold')
+    plt.tight_layout()
+    plt.savefig(f"plots/Projection_2D_{dataset_name}.png", dpi=300)
+    plt.close()
+
 # ----------------- Pipeline -----------------
 def run_comparison():
     datasets = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
     scaler = 'MinMaxScaler'
-    base_dir = r"d:\project (1)\GMM-nfst\Datascaled\NoiseOCData"
+    # Data directory can be set via the DATA_DIR environment variable for server deployments.
+    # Example: export DATA_DIR=/data/GMM-nfst/Datascaled/NoiseOCData
+    # Locally, it falls back to a relative path from this file.
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    _default_data_dir = os.path.normpath(os.path.join(_script_dir, '..', '..', '..', 'Datascaled', 'NoiseOCData'))
+    base_dir = os.environ.get('DATA_DIR', _default_data_dir)
     results = []
 
     for ds in datasets:
@@ -157,6 +202,7 @@ def run_comparison():
         X_train_clustered, y_train_clustered, cluster_centers = cluster_kmeans(X_train, n_clusters)
         
         methods = {"SVD": calculate_NPD_svd, "Gram-Schmidt": calculate_NPD_gs}
+        projected_data_for_plot = {}
         
         for method_name, npd_func in methods.items():
             print(f"  --> Running {method_name} Variant...")
@@ -191,6 +237,8 @@ def run_comparison():
             y_prob_standardized = (y_prob - y_prob.min()) / (y_prob.max() - y_prob.min() + 1e-10)
             auc_roc, auc_pr = evaluate_predictions(y_test, y_prob_standardized)
             
+            projected_data_for_plot[method_name] = null_point_X_test
+            
             results.append({
                 "Dataset": ds.replace('data_', '').replace('.csv', ''),
                 "Method": method_name,
@@ -201,6 +249,9 @@ def run_comparison():
                 "Peak RAM Train (MB)": peak_train / 10**6,
                 "Peak RAM Test (MB)": peak_test / 10**6
             })
+            
+        ds_name = ds.replace('data_', '').replace('.csv', '')
+        plot_2d_projections(ds_name, projected_data_for_plot, y_test)
             
     df_results = pd.DataFrame(results)
     df_results.to_csv("svd_vs_gs_results.csv", index=False)
