@@ -31,11 +31,10 @@ except ModuleNotFoundError:
     current_dir = os.path.dirname(os.path.abspath(__file__))
     possible_paths = [
         current_dir,
-        os.path.join(current_dir, '.'), 
-
+        os.path.join(current_dir, '.'),
         os.path.join(current_dir, '..', 'deep-iforest'),
         os.path.join(current_dir, '..', '..', 'deep-iforest'),
-        r'D:\UIT\Research\Duongcpmputer\baselinePlus\deep-iforest',
+        os.path.join(current_dir, '..', '..', '..', 'deep-iforest'),
     ]
     
     deep_iforest_path = None

@@ -1,0 +1,2 @@
+
+Trong phần thực nghiệm với svd và gramschmidt tôi muốn làm thêm 1 phần nữa là so sánh về không gian các điểm sau khi được chiếu bằng 2 phương pháp này, kiểu sẽ chiếu điểm rồi qua pca 2D và plot ra biểu đồ. Mục tiêu nhầm trực quan hóa các bước. 

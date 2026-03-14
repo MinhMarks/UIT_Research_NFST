@@ -1,0 +1,1 @@
+Tôi muốn bổ sung các thực nghiêm chúng ta mới vừa làm vào trong file main.tex. Riêng đối với phần svd với grammschimdts tôi muốn nó nằm ở phần ablation study. 

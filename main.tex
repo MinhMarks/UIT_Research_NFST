@@ -929,7 +929,7 @@ To address the challenges outlined in the Introduction, this section details the
 \end{itemize}
 
 % Describing datasets and their configurations
-\subsection{Datasets}
+\subsubsection{Datasets}
 \label{subsec:datasets}
 To address \textbf{RQ1}, we use four IoT datasets, each with 100,000 samples: \textbf{CICIoT2023} and \textbf{N-BaIoT} capture diverse network attacks and IoT device traffic for anomaly detection, while \textbf{BoTIoT} and \textbf{ToNIoT} focus on botnet activities and real-world IoT traffic, enabling comprehensive analysis of varied IoT scenarios ~\cite{neto2023ciciot2023, 8490192, koroniotis2019towards, fesz-dm97-19}. (detail described in  \ref{ap1:datasets})
 \vspace{1em}
@@ -1204,6 +1204,48 @@ In summary, the results validate the \textbf{superior detection capability and g
 }
 \label{tab:ids_comparison}
 \end{table*}
+
+\subsubsection{Ablation Study: Gram-Schmidt vs. SVD Optimization}
+To demonstrate the advantage of replacing the standard Gram-Schmidt orthogonalization with Singular Value Decomposition (SVD) for determining the Null Projecting Directions (NPDs) in the proposed XXX framework, we conducted an ablation study across all four IoT datasets. The core motivation for this enhancement lies in the computational stability and efficiency properties of SVD when handling high-dimensional or nearly singular covariance matrices compared to classical Gram-Schmidt methods. In this setting, we uniformly clustered the training data into \(K=2\) clusters to evaluate the nullspace behavior.
+
+\textbf{Performance and Robustness Insights:} Figure~\ref{fig:svd_gs_performance} validates that both SVD and Gram-Schmidt variants mathematically span the correct nullspace, yielding nearly identical Area Under Precision-Recall (AUC-PR) and AUC-ROC scores across datasets. However, the SVD formulation ensures numerical stability in cases where Gram-Schmidt may fail due to loss of orthogonality, preventing silent degradation of classification metrics.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\columnwidth]{notebooks/analysis/svd_vs_gs/plots/SVD_vs_GS_Performance.png} 
+\caption{AUC-PR and AUC-ROC comparison between SVD and Gram-Schmidt strategies showing consistent subspace detection performance.}
+\label{fig:svd_gs_performance}
+\end{figure}
+
+\textbf{Projected Space Visualization:} To intuitively grasp the transformation, Figure~\ref{fig:svd_gs_projection} visualizes the 2D Principal Component Analysis (PCA) projection of the resulting subspace mappings for both algorithms. The projected normal and anomalous samples exhibit similar degrees of separation under both methods; however, the SVD method consistently projects the instances into a more uniformly distributed basis representation, reducing localized structural distortions.
+
+\begin{figure}[!ht]
+\centering
+% Replace placeholder with specific dataset projection if desired (e.g., Projection_2D_BoTIoT.png)
+\includegraphics[width=\columnwidth]{notebooks/analysis/svd_vs_gs/plots/Projection_2D_BoTIoT.png} 
+\caption{2D PCA Visualization of the projected feature space highlighting the distribution patterns derived from SVD versus Gram-Schmidt.}
+\label{fig:svd_gs_projection}
+\end{figure}
+
+\textbf{Computational Efficiency and Memory Resources:} 
+The most significant impact of the SVD transition emerges during computational execution. As shown in Figure~\ref{fig:svd_gs_time}, deriving the nullspace basis through SVD drastically reduces the training time complexity (note the logarithmic scale), offering near-instantaneous computation compared to the iterative sequential tracking required by Gram-Schmidt over large dimensions. Furthermore, Figure~\ref{fig:svd_gs_memory} records the Peak RAM footprint during the algorithm's execution, affirming that the SVD routine leverages optimized LAPACK routines to maintain an equal or lower memory ceiling than the less parallelizable Gram-Schmidt approach. This confirms that the SVD integration simultaneously preserves detection accuracy while exponentially enhancing the scalability of the entire anomaly detection pipeline.
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}{\columnwidth}
+    \includegraphics[width=\columnwidth]{notebooks/analysis/svd_vs_gs/plots/SVD_vs_GS_Time.png} 
+    \caption{Logarithmic comparison of training and inference times.}
+    \label{fig:svd_gs_time}
+\end{subfigure}
+\vspace{0.5cm}
+\begin{subfigure}{\columnwidth}
+    \includegraphics[width=\columnwidth]{notebooks/analysis/svd_vs_gs/plots/SVD_vs_GS_Memory.png} 
+    \caption{Comparison of Peak RAM overhead during training execution.}
+    \label{fig:svd_gs_memory}
+\end{subfigure}
+\caption{Time complexity and Memory footprint validation emphasizing the scalability of the SVD enhancement.}
+\label{fig:svd_gs_efficiency}
+\end{figure}
 
 % ========================
 \section{Conclusion}

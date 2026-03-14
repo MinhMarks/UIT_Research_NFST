@@ -1,0 +1,1 @@
+Hiện tại đang có tình trạng như thế này, tôi đang code trên máy tính cá nhân và chỉ push code lên server để chạy, và khi quăng lên server thì có một số chỗ đường dẫn bị vấn đề. Tôi muốn bạn điều chỉnh vấn đề này ở tất cả các file, sử dụng đường dẫn tương đối để khi quăng lên server thì không bị lỗi.

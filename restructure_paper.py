@@ -1,6 +1,9 @@
 import re
+import os
 
-filepath = r'd:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\main.tex'
+# Use path relative to this script's location so it works on any machine/server
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+filepath = os.path.join(_script_dir, 'main.tex')
 
 with open(filepath, 'r', encoding='utf-8') as f:
     text = f.read()
