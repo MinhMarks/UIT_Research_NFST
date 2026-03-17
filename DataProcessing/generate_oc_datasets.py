@@ -68,13 +68,23 @@ def generate_datasets():
         # Load Raw Data
         ds = DLClass(print_able=False)
         try:
-            # We need enough data to yield 45k normal and 15k anomaly.
+            # First, assume user wants to do full raw download
+            ds.DownLoad_Data(load_type="raw")
             ds.Load_Data(load_type="raw", limit_cnt=100_000)
+            
+            if ds.To_dataframe().empty:
+                raise ValueError("Raw Load resulted in empty dataframe, falling back to Preload")
+                
             ds.Preprocess_Data() # default scaling/encoding on raw categorical
         except Exception as e:
             log.warning(f"Failed to load Raw data for {prefix}: {e}. Trying Preload CSV...")
             try:
+                ds.DownLoad_Data(load_type="preload")
                 ds.Load_Data(load_type="preload")
+                
+                if ds.To_dataframe().empty:
+                    raise ValueError("Preload load resulted in empty dataframe")
+                    
                 try:
                     ds.Preprocess_Data()
                 except Exception as preprocess_e:
