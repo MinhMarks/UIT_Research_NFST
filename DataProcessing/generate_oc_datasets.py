@@ -20,7 +20,7 @@ log = setup_logger()
 # Setup paths (Server deployment friendly)
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 # Default DATA_DIR (where output CSVs will be saved)
-DATA_DIR = os.environ.get('DATA_DIR', os.path.normpath(os.path.join(_script_dir, '..', '..', 'Datascaled', 'Official_OC_Data')))
+DATA_DIR = os.environ.get('DATA_DIR', os.path.normpath(os.path.join(_script_dir, '..', 'Datascaled', 'Official_OC_Data')))
 # RawData folder (where dataset classes are)
 RAW_DATA_DIR = _script_dir
 # DataLoader folder (required by RawData classes)
