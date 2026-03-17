@@ -525,7 +525,7 @@ if __name__ == "__main__":
     # Adjust this path via DATA_DIR env variable for server deployment
     _script_dir  = os.path.dirname(os.path.abspath(__file__))
     _default_data = os.path.normpath(
-        os.path.join(_script_dir, '..', '..', 'Datascaled', 'NoiseOCData')
+        os.path.join(_script_dir, '..', '..', 'Datascaled', 'Official_OC_Data')
     )
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
 
