@@ -1,4 +1,4 @@
-from DataLoader.utils import *
+from utils import *
 from tqdm.auto import tqdm
 import time 
 SEED = 42

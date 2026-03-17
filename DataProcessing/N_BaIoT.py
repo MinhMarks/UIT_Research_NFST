@@ -1,4 +1,4 @@
-from DataLoader.utils import *
+from utils import *
 from zipfile import ZipFile, is_zipfile
 from tqdm.auto import tqdm
 import time 
