@@ -322,7 +322,7 @@ class CICIoT2023():
   
 
     base_self.__print(f"Remove all null, nan, inf values (rows).")
-    df = df.replace([np.inf, -np.inf], np.NaN)
+    df = df.replace([np.inf, -np.inf], np.nan)
     df = df.dropna(axis='index', how='any')
     # Remove duplicated samples (rows)
     base_self.__print(f"Remove duplicated samples (rows).")

@@ -161,8 +161,8 @@ def generate_datasets():
         # Guarantee no inf/nan
         train_df.replace([np.inf, -np.inf], np.nan, inplace=True)
         test_df.replace([np.inf, -np.inf], np.nan, inplace=True)
-        train_df.fillna(train_df.mean(), inplace=True)
-        test_df.fillna(train_df.mean(), inplace=True) # use train mean
+        train_df.fillna(train_df.mean(numeric_only=True), inplace=True)
+        test_df.fillna(train_df.mean(numeric_only=True), inplace=True) # use train mean
 
         # Scale and Save
         for scaler_name, scaler in SCALERS.items():
