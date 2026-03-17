@@ -75,7 +75,10 @@ def generate_datasets():
             log.warning(f"Failed to load Raw data for {prefix}: {e}. Trying Preload CSV...")
             try:
                 ds.Load_Data(load_type="preload")
-                ds.Preprocess_Data()
+                try:
+                    ds.Preprocess_Data()
+                except Exception as preprocess_e:
+                    log.warning(f"Preprocess skipped or partially failed for predefined preload: {preprocess_e}")
             except Exception as preload_e:
                 log.error(f"Failed completely for {prefix}: {preload_e}")
                 continue
