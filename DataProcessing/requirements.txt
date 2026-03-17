@@ -1,0 +1,8 @@
+requests
+tqdm
+pandas
+matplotlib
+tabulate
+natsort
+scikit-learn
+rarfile
