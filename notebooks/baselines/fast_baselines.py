@@ -276,9 +276,10 @@ if __name__ == "__main__":
                 X_train = imputer.fit_transform(X_train)
                 X_test = imputer.transform(X_test)
                 
-                # Run models in parallel
+                # Run models in parallel using multiprocessing backend for better stability on some systems
+                # Reducing n_jobs to 4 to avoid overwhelming the system
                 models_to_run = list(FAST_PARAMS.keys())
-                results = Parallel(n_jobs=-1, verbose=10)(
+                results = Parallel(n_jobs=4, backend="multiprocessing", verbose=10)(
                     delayed(run_single_model)(m, X_train, y_train, X_test, y_test, prefix, noise, scaler) 
                     for m in models_to_run
                 )
