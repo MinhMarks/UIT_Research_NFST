@@ -554,8 +554,8 @@ if __name__ == "__main__":
 
     for prefix in DATASETS:
         # One CSV and one log file per dataset per run (timestamped)
-        out_path = os.path.join(exp_dir, f"{prefix}_memopt_{RUN_TIMESTAMP}.csv")
-        log_path = os.path.join(exp_dir, f"{prefix}_memopt_{RUN_TIMESTAMP}.log")
+        out_path = os.path.join(exp_dir, f"{prefix}_memopt.csv")
+        log_path = os.path.join(exp_dir, f"{prefix}_memopt.log")
 
         # Setup logger for this dataset
         ds_logger = setup_logger(log_path, name=f"nfst.{prefix}")
