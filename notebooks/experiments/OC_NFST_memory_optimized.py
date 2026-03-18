@@ -39,6 +39,7 @@ from sklearn.metrics import (
     accuracy_score, matthews_corrcoef
 )
 from sklearn.model_selection import train_test_split
+from joblib import Parallel, delayed
 
 try:
     import faiss
@@ -431,10 +432,9 @@ def run_experiment(train_path: str, test_path: str,
     # Print dataset info AFTER imputation (values are final here)
     log.info(f"Training size : {len(X_train):,}  |  Testing size: {len(X_test):,}  |  Features: {X_train.shape[1]}")
 
-    results = []
     csv_header_written = os.path.exists(out_path) if out_path else False
 
-    for n_clusters in n_clusters_list:
+    def _process_one_cluster(n_clusters):
         # ---- Track peak RAM for this specific n_clusters run ----
         tracemalloc.start()
         try:
@@ -455,12 +455,8 @@ def run_experiment(train_path: str, test_path: str,
             test_time = time.time() - t_test
 
         except Exception as e:
-            log.error(f"[ERROR ncluster={n_clusters}]: {e}")
             tracemalloc.stop()
-            continue
-
-        finally:
-            pass  # tracemalloc will be stopped below after get_traced_memory
+            return {"error": f"[ERROR ncluster={n_clusters}]: {e}"}
 
         # Peak RAM at the highest point within this n_clusters run
         _, peak_bytes = tracemalloc.get_traced_memory()
@@ -470,8 +466,7 @@ def run_experiment(train_path: str, test_path: str,
         try:
             metrics = evaluate(y_test, y_proba)
         except Exception as e:
-            log.error(f"[EVAL ERROR ncluster={n_clusters}]: {e}")
-            continue
+            return {"error": f"[EVAL ERROR ncluster={n_clusters}]: {e}"}
 
         auc_roc  = metrics["AUCROC"]
         auc_pr   = metrics["AUCPR"]
@@ -494,25 +489,31 @@ def run_experiment(train_path: str, test_path: str,
             "Time Test":           round(test_time, 4),
             "Peak RAM Train (MB)": peak_mb,
         }
+        return {"result": result, "log_msg": f"[ncluster={actual_k}/{n_clusters}] AUC-ROC={auc_roc:.2f}%  AUC-PR={auc_pr:.2f}%  F1={metrics['F1 Score']:.4f}  MCC={metrics['MCC']:.4f}  Train={train_time:.3f}s  Test={test_time:.3f}s  Peak RAM={peak_mb} MB"}
 
-        log.info(
-            f"[ncluster={actual_k}/{n_clusters}] "
-            f"AUC-ROC={auc_roc:.2f}%  AUC-PR={auc_pr:.2f}%  "
-            f"F1={metrics['F1 Score']:.4f}  MCC={metrics['MCC']:.4f}  "
-            f"Train={train_time:.3f}s  Test={test_time:.3f}s  "
-            f"Peak RAM={peak_mb} MB"
-        )
+    # Run in parallel using all available cores, maximizing RAM utilization for speed (-1 jobs)
+    log.info(f"Firing up Parallel execution for {len(n_clusters_list)} cluster configs...")
+    parallel_outputs = Parallel(n_jobs=-1, verbose=10)(
+        delayed(_process_one_cluster)(nc) for nc in n_clusters_list
+    )
 
-        # --- Ghi ngay lập tức vào CSV sau mỗi ncluster ---
-        if out_path is not None:
-            pd.DataFrame([result]).to_csv(
-                out_path, mode='a',
-                header=not csv_header_written,
-                index=False
-            )
-            csv_header_written = True
-
-        results.append(result)
+    results = []
+    for output in parallel_outputs:
+        if "error" in output:
+            log.error(output["error"])
+        else:
+            res = output["result"]
+            log.info(output["log_msg"])
+            
+            # --- Ghi ngay lập tức vào CSV ---
+            if out_path is not None:
+                pd.DataFrame([res]).to_csv(
+                    out_path, mode='a',
+                    header=not csv_header_written,
+                    index=False
+                )
+                csv_header_written = True
+            results.append(res)
 
     return results
 
