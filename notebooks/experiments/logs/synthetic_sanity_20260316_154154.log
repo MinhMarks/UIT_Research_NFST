@@ -1,0 +1,101 @@
+2026-03-16 15:41:54 | INFO | ============================================================
+2026-03-16 15:41:54 | INFO | OC-NFST SYNTHETIC SANITY CHECK
+2026-03-16 15:41:54 | INFO | ============================================================
+2026-03-16 15:41:54 | INFO | 
+------------------------------------------------------------
+2026-03-16 15:41:54 | INFO | SCENARIO: balanced_sep5_feat20
+2026-03-16 15:41:54 | INFO | ------------------------------------------------------------
+2026-03-16 15:41:54 | INFO | Training size : 1,600  |  Testing size: 800  |  Features: 20
+2026-03-16 15:42:05 | INFO | ❌ FAIL [ncluster=5] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.326s  Test=0.074s
+2026-03-16 15:42:15 | INFO | ❌ FAIL [ncluster=10] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.285s  Test=0.054s
+2026-03-16 15:42:23 | INFO | ❌ FAIL [ncluster=15] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.199s  Test=0.048s
+2026-03-16 15:42:29 | INFO | ❌ FAIL [ncluster=20] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.217s  Test=0.049s
+2026-03-16 15:42:33 | INFO | ❌ FAIL [ncluster=25] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.201s  Test=0.037s
+2026-03-16 15:42:38 | INFO | ❌ FAIL [ncluster=30] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.283s  Test=0.042s
+2026-03-16 15:42:42 | INFO | ❌ FAIL [ncluster=35] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.232s  Test=0.045s
+2026-03-16 15:42:47 | INFO | ❌ FAIL [ncluster=40] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.197s  Test=0.038s
+2026-03-16 15:42:51 | INFO | ❌ FAIL [ncluster=45] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.236s  Test=0.032s
+2026-03-16 15:42:55 | INFO | ❌ FAIL [ncluster=50] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.273s  Test=0.055s
+2026-03-16 15:42:59 | INFO | ❌ FAIL [ncluster=55] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.241s  Test=0.044s
+2026-03-16 15:43:03 | INFO | ❌ FAIL [ncluster=60] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.298s  Test=0.046s
+2026-03-16 15:43:07 | INFO | ❌ FAIL [ncluster=65] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.315s  Test=0.041s
+2026-03-16 15:43:07 | INFO | 
+------------------------------------------------------------
+2026-03-16 15:43:07 | INFO | SCENARIO: balanced_sep2_feat20
+2026-03-16 15:43:07 | INFO | ------------------------------------------------------------
+2026-03-16 15:43:07 | INFO | Training size : 1,600  |  Testing size: 800  |  Features: 20
+2026-03-16 15:43:14 | INFO | ❌ FAIL [ncluster=5] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.236s  Test=0.039s
+2026-03-16 15:43:20 | INFO | ❌ FAIL [ncluster=10] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.244s  Test=0.042s
+2026-03-16 15:43:31 | INFO | ❌ FAIL [ncluster=15] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.319s  Test=0.048s
+2026-03-16 15:43:39 | INFO | ❌ FAIL [ncluster=20] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.309s  Test=0.047s
+2026-03-16 15:43:46 | INFO | ❌ FAIL [ncluster=25] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.378s  Test=0.049s
+2026-03-16 15:43:53 | INFO | ❌ FAIL [ncluster=30] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.316s  Test=0.053s
+2026-03-16 15:43:58 | INFO | ❌ FAIL [ncluster=35] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.196s  Test=0.027s
+2026-03-16 15:44:02 | INFO | ❌ FAIL [ncluster=40] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.288s  Test=0.049s
+2026-03-16 15:44:06 | INFO | ❌ FAIL [ncluster=45] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.235s  Test=0.090s
+2026-03-16 15:44:10 | INFO | ❌ FAIL [ncluster=50] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.233s  Test=0.035s
+2026-03-16 15:44:14 | INFO | ❌ FAIL [ncluster=55] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.354s  Test=0.043s
+2026-03-16 15:44:18 | INFO | ❌ FAIL [ncluster=60] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.195s  Test=0.027s
+2026-03-16 15:44:22 | INFO | ❌ FAIL [ncluster=65] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.549s  Test=0.037s
+2026-03-16 15:44:22 | INFO | 
+------------------------------------------------------------
+2026-03-16 15:44:22 | INFO | SCENARIO: balanced_sep5_feat50
+2026-03-16 15:44:22 | INFO | ------------------------------------------------------------
+2026-03-16 15:44:22 | INFO | Training size : 1,600  |  Testing size: 800  |  Features: 50
+2026-03-16 15:44:29 | INFO | ❌ FAIL [ncluster=5] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.756s  Test=0.058s
+2026-03-16 15:44:35 | INFO | ❌ FAIL [ncluster=10] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.907s  Test=0.040s
+2026-03-16 15:44:41 | INFO | ❌ FAIL [ncluster=15] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.855s  Test=0.029s
+2026-03-16 15:44:46 | INFO | ❌ FAIL [ncluster=20] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.949s  Test=0.034s
+2026-03-16 15:44:51 | INFO | ❌ FAIL [ncluster=25] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.760s  Test=0.029s
+2026-03-16 15:44:55 | INFO | ❌ FAIL [ncluster=30] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.821s  Test=0.048s
+2026-03-16 15:45:00 | INFO | ❌ FAIL [ncluster=35] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.940s  Test=0.032s
+2026-03-16 15:45:03 | INFO | ❌ FAIL [ncluster=40] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=1.003s  Test=0.044s
+2026-03-16 15:45:09 | INFO | ❌ FAIL [ncluster=45] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=1.165s  Test=0.042s
+2026-03-16 15:45:15 | INFO | ❌ FAIL [ncluster=50] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=1.037s  Test=0.048s
+2026-03-16 15:45:20 | INFO | ❌ FAIL [ncluster=55] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=1.040s  Test=0.043s
+2026-03-16 15:45:25 | INFO | ❌ FAIL [ncluster=60] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.984s  Test=0.050s
+2026-03-16 15:45:31 | INFO | ❌ FAIL [ncluster=65] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.927s  Test=0.045s
+2026-03-16 15:45:31 | INFO | 
+------------------------------------------------------------
+2026-03-16 15:45:31 | INFO | SCENARIO: balanced_sep5_noise5pct
+2026-03-16 15:45:31 | INFO | ------------------------------------------------------------
+2026-03-16 15:45:31 | INFO | Training size : 1,680  |  Testing size: 800  |  Features: 20
+2026-03-16 15:45:41 | INFO | ❌ FAIL [ncluster=5] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.382s  Test=0.042s
+2026-03-16 15:45:48 | INFO | ❌ FAIL [ncluster=10] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.290s  Test=0.034s
+2026-03-16 15:45:54 | INFO | ❌ FAIL [ncluster=15] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.276s  Test=0.040s
+2026-03-16 15:46:01 | INFO | ❌ FAIL [ncluster=20] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.260s  Test=0.054s
+2026-03-16 15:46:07 | INFO | ❌ FAIL [ncluster=25] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.214s  Test=0.044s
+2026-03-16 15:46:12 | INFO | ❌ FAIL [ncluster=30] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.300s  Test=0.048s
+2026-03-16 15:46:16 | INFO | ❌ FAIL [ncluster=35] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.321s  Test=0.047s
+2026-03-16 15:46:20 | INFO | ❌ FAIL [ncluster=40] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.245s  Test=0.030s
+2026-03-16 15:46:24 | INFO | ❌ FAIL [ncluster=45] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.282s  Test=0.031s
+2026-03-16 15:46:29 | INFO | ❌ FAIL [ncluster=50] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.266s  Test=0.046s
+2026-03-16 15:46:33 | INFO | ❌ FAIL [ncluster=55] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.209s  Test=0.044s
+2026-03-16 15:46:38 | INFO | ❌ FAIL [ncluster=60] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.289s  Test=0.037s
+2026-03-16 15:46:41 | INFO | ❌ FAIL [ncluster=65] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.256s  Test=0.040s
+2026-03-16 15:46:41 | INFO | 
+------------------------------------------------------------
+2026-03-16 15:46:41 | INFO | SCENARIO: imbalanced_75pct_normal
+2026-03-16 15:46:41 | INFO | ------------------------------------------------------------
+2026-03-16 15:46:41 | INFO | Training size : 2,400  |  Testing size: 800  |  Features: 20
+2026-03-16 15:46:50 | INFO | ❌ FAIL [ncluster=5] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.209s  Test=0.072s
+2026-03-16 15:47:03 | INFO | ❌ FAIL [ncluster=10] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.380s  Test=0.076s
+2026-03-16 15:47:17 | INFO | ❌ FAIL [ncluster=15] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.411s  Test=0.074s
+2026-03-16 15:47:27 | INFO | ❌ FAIL [ncluster=20] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.301s  Test=0.060s
+2026-03-16 15:47:35 | INFO | ❌ FAIL [ncluster=25] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.304s  Test=0.062s
+2026-03-16 15:47:41 | INFO | ❌ FAIL [ncluster=30] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.241s  Test=0.067s
+2026-03-16 15:47:48 | INFO | ❌ FAIL [ncluster=35] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.247s  Test=0.057s
+2026-03-16 15:47:53 | INFO | ❌ FAIL [ncluster=40] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.369s  Test=0.070s
+2026-03-16 15:47:59 | INFO | ❌ FAIL [ncluster=45] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.271s  Test=0.075s
+2026-03-16 15:48:04 | INFO | ❌ FAIL [ncluster=50] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.254s  Test=0.062s
+2026-03-16 15:48:10 | INFO | ❌ FAIL [ncluster=55] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.253s  Test=0.069s
+2026-03-16 15:48:15 | INFO | ❌ FAIL [ncluster=60] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.306s  Test=0.065s
+2026-03-16 15:48:20 | INFO | ❌ FAIL [ncluster=65] AUC-ROC=50.00%  AUC-PR=75.00%  F1=0.0000  MCC=0.0000  Train=0.311s  Test=0.061s
+2026-03-16 15:48:20 | INFO | 
+============================================================
+2026-03-16 15:48:20 | INFO | SUMMARY
+2026-03-16 15:48:20 | INFO | ============================================================
+2026-03-16 15:48:20 | INFO | 
+→ 0/0 scenarios PASSED
+2026-03-16 15:48:20 | INFO | Results saved to: /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/synthetic_sanity_20260316_154154.csv
+2026-03-16 15:48:20 | INFO | Log saved to    : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/logs/synthetic_sanity_20260316_154154.log

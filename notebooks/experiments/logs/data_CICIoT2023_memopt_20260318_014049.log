@@ -1,0 +1,22 @@
+2026-03-18 01:40:49 | INFO | Run started at 20260318_014049
+2026-03-18 01:40:49 | INFO | Dataset prefix : data_CICIoT2023
+2026-03-18 01:40:49 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-03-18 01:40:49 | INFO | N_CLUSTERS     : range(1, 301, 3) — 100 values
+2026-03-18 01:40:49 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-03-18 01:40:49 | INFO | CSV output     : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/noise/data_CICIoT2023_memopt_20260318_014049.csv
+2026-03-18 01:40:49 | INFO | Log file       : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/logs/data_CICIoT2023_memopt_20260318_014049.log
+2026-03-18 01:40:49 | INFO | ------------------------------------------------------------
+2026-03-18 01:40:49 | INFO | 
+>>> Processing data_CICIoT2023 | scaler=StandardScaler
+2026-03-18 01:40:49 | INFO | --- noise=0% ---
+2026-03-18 01:40:49 | INFO | ============================================================
+2026-03-18 01:40:49 | INFO | Dataset  : Train_StandardScaler_data_CICIoT2023.csv
+2026-03-18 01:40:49 | INFO | Scaler   : StandardScaler
+2026-03-18 01:40:49 | INFO | Noise    : 0%
+2026-03-18 01:40:49 | INFO | nClusters: 100 values (1..298)
+2026-03-18 01:40:49 | INFO | ============================================================
+2026-03-18 01:40:49 | INFO | Loaded Raw Shape -> Train: (30000, 45), Test: (30000, 45)
+2026-03-18 01:40:49 | INFO | Training size : 30,000  |  Testing size: 30,000  |  Features: 44
+2026-03-18 01:40:52 | INFO | [ncluster=1/1] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.064s  Test=2.088s  Peak RAM=37.275 MB
+2026-03-18 01:40:54 | INFO | [ncluster=4/4] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.070s  Test=2.156s  Peak RAM=37.107 MB
+2026-03-18 01:40:57 | INFO | [ncluster=7/7] AUC-ROC=50.00%  AUC-PR=50.00%  F1=0.0000  MCC=0.0000  Train=0.059s  Test=2.377s  Peak RAM=37.106 MB

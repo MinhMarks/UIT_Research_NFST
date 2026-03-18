@@ -1,0 +1,31 @@
+2026-03-16 11:56:20 | INFO | Run started at 20260316_115620
+2026-03-16 11:56:20 | INFO | Dataset prefix : data_CICIoT2023
+2026-03-16 11:56:20 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-03-16 11:56:20 | INFO | N_CLUSTERS     : range(1, 301, 3) — 100 values
+2026-03-16 11:56:20 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-03-16 11:56:20 | INFO | CSV output     : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/noise/data_CICIoT2023_memopt_20260316_115620.csv
+2026-03-16 11:56:20 | INFO | Log file       : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/logs/data_CICIoT2023_memopt_20260316_115620.log
+2026-03-16 11:56:20 | INFO | ------------------------------------------------------------
+2026-03-16 11:56:20 | INFO | 
+>>> Processing data_CICIoT2023 | scaler=StandardScaler
+2026-03-16 11:56:20 | INFO | --- noise=0% ---
+2026-03-16 11:56:20 | INFO | ============================================================
+2026-03-16 11:56:20 | INFO | Dataset  : Train_StandardScaler_data_CICIoT2023.csv
+2026-03-16 11:56:20 | INFO | Scaler   : StandardScaler
+2026-03-16 11:56:20 | INFO | Noise    : 0%
+2026-03-16 11:56:20 | INFO | nClusters: 100 values (1..298)
+2026-03-16 11:56:20 | INFO | ============================================================
+2026-03-16 11:56:21 | INFO | df_full shape: (99514, 41)
+2026-03-16 11:56:21 | INFO | Training size : 2,399  |  Testing size: 19,903  |  Features: 40
+2026-03-16 11:56:22 | INFO | [ncluster=1/1] AUC-ROC=91.10%  AUC-PR=15.05%  F1=0.2621  MCC=0.3521  Train=0.624s  Test=0.090s  Peak RAM=2.903 MB
+2026-03-16 11:56:26 | INFO | [ncluster=4/4] AUC-ROC=91.01%  AUC-PR=14.93%  F1=0.2603  MCC=0.3503  Train=0.567s  Test=0.094s  Peak RAM=2.722 MB
+2026-03-16 11:56:29 | INFO | [ncluster=7/7] AUC-ROC=91.13%  AUC-PR=15.09%  F1=0.2627  MCC=0.3526  Train=0.427s  Test=0.077s  Peak RAM=2.721 MB
+2026-03-16 11:56:33 | INFO | [ncluster=10/10] AUC-ROC=91.05%  AUC-PR=14.98%  F1=0.2610  MCC=0.3510  Train=0.466s  Test=0.079s  Peak RAM=2.721 MB
+2026-03-16 11:56:36 | INFO | [ncluster=13/13] AUC-ROC=90.87%  AUC-PR=14.72%  F1=0.2571  MCC=0.3472  Train=0.535s  Test=0.085s  Peak RAM=2.719 MB
+2026-03-16 11:56:40 | INFO | [ncluster=16/16] AUC-ROC=91.03%  AUC-PR=14.95%  F1=0.2605  MCC=0.3505  Train=0.485s  Test=0.085s  Peak RAM=2.72 MB
+2026-03-16 11:56:45 | INFO | [ncluster=19/19] AUC-ROC=91.03%  AUC-PR=14.95%  F1=0.2607  MCC=0.3506  Train=0.462s  Test=0.075s  Peak RAM=2.72 MB
+2026-03-16 11:56:49 | INFO | [ncluster=22/22] AUC-ROC=91.02%  AUC-PR=14.94%  F1=0.2604  MCC=0.3504  Train=0.515s  Test=0.087s  Peak RAM=2.72 MB
+2026-03-16 11:56:53 | INFO | [ncluster=25/25] AUC-ROC=91.08%  AUC-PR=15.03%  F1=0.2617  MCC=0.3517  Train=0.527s  Test=0.088s  Peak RAM=2.721 MB
+2026-03-16 11:56:56 | INFO | [ncluster=28/28] AUC-ROC=91.07%  AUC-PR=15.02%  F1=0.2616  MCC=0.3516  Train=0.392s  Test=0.070s  Peak RAM=2.721 MB
+2026-03-16 11:57:01 | INFO | [ncluster=31/31] AUC-ROC=90.90%  AUC-PR=14.92%  F1=0.2606  MCC=0.3500  Train=0.421s  Test=0.090s  Peak RAM=2.722 MB
+2026-03-16 11:57:05 | INFO | [ncluster=34/34] AUC-ROC=90.91%  AUC-PR=14.93%  F1=0.2603  MCC=0.3503  Train=0.515s  Test=0.083s  Peak RAM=2.722 MB

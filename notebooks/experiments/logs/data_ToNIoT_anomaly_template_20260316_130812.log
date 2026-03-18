@@ -1,0 +1,22 @@
+2026-03-16 13:08:12 | INFO | Run started at 20260316_130812
+2026-03-16 13:08:12 | INFO | Dataset prefix : data_ToNIoT
+2026-03-16 13:08:12 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-03-16 13:08:12 | INFO | N_CLUSTERS     : range(1, 301, 3) — 100 values
+2026-03-16 13:08:12 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-03-16 13:08:12 | INFO | CSV output     : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/noise/data_ToNIoT_anomaly_template_20260316_130812.csv
+2026-03-16 13:08:12 | INFO | Log file       : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/logs/data_ToNIoT_anomaly_template_20260316_130812.log
+2026-03-16 13:08:12 | INFO | ------------------------------------------------------------
+2026-03-16 13:08:12 | INFO | 
+>>> Processing data_ToNIoT | scaler=StandardScaler
+2026-03-16 13:08:12 | INFO | --- noise=0% ---
+2026-03-16 13:08:12 | INFO | ============================================================
+2026-03-16 13:08:12 | INFO | Dataset  : Train_StandardScaler_data_ToNIoT.csv
+2026-03-16 13:08:12 | INFO | Scaler   : StandardScaler
+2026-03-16 13:08:12 | INFO | Noise    : 0%
+2026-03-16 13:08:12 | INFO | nClusters: 100 values (1..298)
+2026-03-16 13:08:12 | INFO | ============================================================
+2026-03-16 13:08:12 | INFO | df_full shape: (48785, 29)
+2026-03-16 13:08:12 | INFO | Training size : 34,549  |  Testing size: 9,757  |  Features: 28
+2026-03-16 13:08:19 | INFO | [ncluster=1/1] AUC-ROC=58.59%  AUC-PR=26.43%  F1=0.2928  MCC=0.3892  Train=0.648s  Test=6.036s  Peak RAM=27.424 MB
+2026-03-16 13:08:28 | INFO | [ncluster=4/4] AUC-ROC=57.76%  AUC-PR=25.02%  F1=0.2686  MCC=0.3726  Train=0.742s  Test=6.911s  Peak RAM=27.247 MB
+2026-03-16 13:08:36 | INFO | [ncluster=7/7] AUC-ROC=55.42%  AUC-PR=20.42%  F1=0.1959  MCC=0.3035  Train=0.644s  Test=5.827s  Peak RAM=27.242 MB

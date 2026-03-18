@@ -539,7 +539,7 @@ if __name__ == "__main__":
                'QuantileTransformer', 'RobustScaler']   # deduped
 
     # Notebook: for ncluster in range(1, 301, 3)
-    N_CLUSTERS_LIST = list(range(1, 301, 3))            # [1, 4, 7, ..., 298, 301]
+    N_CLUSTERS_LIST = list(range(50, 301, 5))            # [1, 4, 7, ..., 298, 301]
 
     # Notebook: for noise in [0, 1, 3, 5]  (adjust here as needed)
     NOISE_LIST = [0, 1, 3, 5]

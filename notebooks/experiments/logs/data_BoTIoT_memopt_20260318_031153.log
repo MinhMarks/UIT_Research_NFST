@@ -1,0 +1,1240 @@
+2026-03-18 06:25:01 | INFO | Run started at 20260318_031153
+2026-03-18 06:25:01 | INFO | Dataset prefix : data_BoTIoT
+2026-03-18 06:25:01 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-03-18 06:25:01 | INFO | N_CLUSTERS     : range(1, 301, 3) — 51 values
+2026-03-18 06:25:01 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-03-18 06:25:01 | INFO | CSV output     : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/noise/data_BoTIoT_memopt_20260318_031153.csv
+2026-03-18 06:25:01 | INFO | Log file       : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/logs/data_BoTIoT_memopt_20260318_031153.log
+2026-03-18 06:25:01 | INFO | ------------------------------------------------------------
+2026-03-18 06:25:01 | INFO | 
+>>> Processing data_BoTIoT | scaler=StandardScaler
+2026-03-18 06:25:01 | INFO | --- noise=0% ---
+2026-03-18 06:25:01 | INFO | ============================================================
+2026-03-18 06:25:01 | INFO | Dataset  : Train_StandardScaler_data_BoTIoT.csv
+2026-03-18 06:25:01 | INFO | Scaler   : StandardScaler
+2026-03-18 06:25:01 | INFO | Noise    : 0%
+2026-03-18 06:25:01 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:25:01 | INFO | ============================================================
+2026-03-18 06:25:01 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:25:01 | INFO | Training size : 9,072  |  Testing size: 15,000  |  Features: 26
+2026-03-18 06:25:01 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:25:30 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.285s  Peak RAM=6.66 MB
+2026-03-18 06:25:30 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.019s  Test=0.276s  Peak RAM=6.662 MB
+2026-03-18 06:25:30 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.426s  Peak RAM=6.662 MB
+2026-03-18 06:25:30 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.499s  Peak RAM=6.664 MB
+2026-03-18 06:25:30 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.381s  Peak RAM=6.664 MB
+2026-03-18 06:25:30 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.452s  Peak RAM=6.664 MB
+2026-03-18 06:25:30 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.378s  Peak RAM=6.665 MB
+2026-03-18 06:25:30 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.400s  Peak RAM=6.665 MB
+2026-03-18 06:25:30 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.503s  Peak RAM=6.665 MB
+2026-03-18 06:25:30 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.338s  Peak RAM=6.666 MB
+2026-03-18 06:25:30 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.305s  Peak RAM=6.666 MB
+2026-03-18 06:25:30 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.050s  Test=0.309s  Peak RAM=6.666 MB
+2026-03-18 06:25:30 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.364s  Peak RAM=6.67 MB
+2026-03-18 06:25:30 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.045s  Test=0.340s  Peak RAM=6.672 MB
+2026-03-18 06:25:30 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.053s  Test=0.425s  Peak RAM=6.672 MB
+2026-03-18 06:25:30 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.379s  Peak RAM=6.67 MB
+2026-03-18 06:25:30 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.350s  Peak RAM=6.67 MB
+2026-03-18 06:25:30 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.329s  Peak RAM=6.67 MB
+2026-03-18 06:25:30 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.285s  Peak RAM=6.674 MB
+2026-03-18 06:25:30 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.348s  Peak RAM=6.671 MB
+2026-03-18 06:25:30 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.422s  Peak RAM=6.672 MB
+2026-03-18 06:25:30 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.397s  Peak RAM=6.673 MB
+2026-03-18 06:25:30 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.291s  Peak RAM=6.676 MB
+2026-03-18 06:25:30 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.353s  Peak RAM=6.673 MB
+2026-03-18 06:25:30 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.322s  Peak RAM=6.675 MB
+2026-03-18 06:25:30 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.369s  Peak RAM=6.676 MB
+2026-03-18 06:25:30 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.045s  Test=0.415s  Peak RAM=6.676 MB
+2026-03-18 06:25:30 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.054s  Test=0.383s  Peak RAM=6.676 MB
+2026-03-18 06:25:30 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.357s  Peak RAM=6.676 MB
+2026-03-18 06:25:30 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.294s  Peak RAM=6.677 MB
+2026-03-18 06:25:30 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.320s  Peak RAM=6.678 MB
+2026-03-18 06:25:30 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.292s  Peak RAM=6.678 MB
+2026-03-18 06:25:30 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.361s  Peak RAM=6.679 MB
+2026-03-18 06:25:30 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.297s  Peak RAM=6.679 MB
+2026-03-18 06:25:30 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.421s  Peak RAM=6.681 MB
+2026-03-18 06:25:30 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.305s  Peak RAM=6.679 MB
+2026-03-18 06:25:30 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.073s  Test=0.395s  Peak RAM=6.682 MB
+2026-03-18 06:25:30 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.310s  Peak RAM=6.685 MB
+2026-03-18 06:25:30 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.276s  Peak RAM=6.683 MB
+2026-03-18 06:25:30 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.270s  Peak RAM=6.683 MB
+2026-03-18 06:25:30 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.441s  Peak RAM=6.683 MB
+2026-03-18 06:25:30 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.280s  Peak RAM=6.683 MB
+2026-03-18 06:25:30 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.256s  Peak RAM=6.685 MB
+2026-03-18 06:25:30 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.062s  Test=0.257s  Peak RAM=6.685 MB
+2026-03-18 06:25:30 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.332s  Peak RAM=6.686 MB
+2026-03-18 06:25:30 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.247s  Peak RAM=6.685 MB
+2026-03-18 06:25:30 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.204s  Peak RAM=6.687 MB
+2026-03-18 06:25:30 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.183s  Peak RAM=6.686 MB
+2026-03-18 06:25:30 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.170s  Peak RAM=6.687 MB
+2026-03-18 06:25:30 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.155s  Peak RAM=6.689 MB
+2026-03-18 06:25:30 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.140s  Peak RAM=6.688 MB
+2026-03-18 06:25:30 | INFO | --- noise=1% ---
+2026-03-18 06:25:30 | INFO | ============================================================
+2026-03-18 06:25:30 | INFO | Dataset  : Train_StandardScaler_data_BoTIoT.csv
+2026-03-18 06:25:30 | INFO | Scaler   : StandardScaler
+2026-03-18 06:25:30 | INFO | Noise    : 1%
+2026-03-18 06:25:30 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:25:30 | INFO | ============================================================
+2026-03-18 06:25:30 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:25:30 | INFO | Training size : 9,162  |  Testing size: 14,910  |  Features: 26
+2026-03-18 06:25:30 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:26:00 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.269s  Peak RAM=6.729 MB
+2026-03-18 06:26:00 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.440s  Peak RAM=6.728 MB
+2026-03-18 06:26:00 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.414s  Peak RAM=6.728 MB
+2026-03-18 06:26:00 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.434s  Peak RAM=6.729 MB
+2026-03-18 06:26:00 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.342s  Peak RAM=6.73 MB
+2026-03-18 06:26:00 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.427s  Peak RAM=6.729 MB
+2026-03-18 06:26:00 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.273s  Peak RAM=6.731 MB
+2026-03-18 06:26:00 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.317s  Peak RAM=6.731 MB
+2026-03-18 06:26:00 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.427s  Peak RAM=6.734 MB
+2026-03-18 06:26:00 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.052s  Test=0.455s  Peak RAM=6.732 MB
+2026-03-18 06:26:00 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.511s  Peak RAM=6.733 MB
+2026-03-18 06:26:00 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.050s  Test=0.364s  Peak RAM=6.733 MB
+2026-03-18 06:26:00 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.350s  Peak RAM=6.735 MB
+2026-03-18 06:26:00 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.357s  Peak RAM=6.734 MB
+2026-03-18 06:26:00 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.431s  Peak RAM=6.735 MB
+2026-03-18 06:26:00 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.320s  Peak RAM=6.736 MB
+2026-03-18 06:26:00 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.409s  Peak RAM=6.735 MB
+2026-03-18 06:26:00 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.054s  Test=0.333s  Peak RAM=6.737 MB
+2026-03-18 06:26:00 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.059s  Test=0.332s  Peak RAM=6.737 MB
+2026-03-18 06:26:00 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.275s  Peak RAM=6.738 MB
+2026-03-18 06:26:00 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.610s  Peak RAM=6.738 MB
+2026-03-18 06:26:00 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.512s  Peak RAM=6.74 MB
+2026-03-18 06:26:00 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.089s  Test=0.610s  Peak RAM=6.739 MB
+2026-03-18 06:26:00 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.060s  Test=0.471s  Peak RAM=6.74 MB
+2026-03-18 06:26:00 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.399s  Peak RAM=6.74 MB
+2026-03-18 06:26:00 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.068s  Test=0.404s  Peak RAM=6.741 MB
+2026-03-18 06:26:00 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.288s  Peak RAM=6.742 MB
+2026-03-18 06:26:00 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.340s  Peak RAM=6.741 MB
+2026-03-18 06:26:00 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.395s  Peak RAM=6.742 MB
+2026-03-18 06:26:00 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.252s  Peak RAM=6.743 MB
+2026-03-18 06:26:00 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.254s  Peak RAM=6.744 MB
+2026-03-18 06:26:00 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.255s  Peak RAM=6.746 MB
+2026-03-18 06:26:00 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.299s  Peak RAM=6.746 MB
+2026-03-18 06:26:00 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.332s  Peak RAM=6.744 MB
+2026-03-18 06:26:00 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.393s  Peak RAM=6.747 MB
+2026-03-18 06:26:00 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.387s  Peak RAM=6.747 MB
+2026-03-18 06:26:00 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.308s  Peak RAM=6.747 MB
+2026-03-18 06:26:00 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.274s  Peak RAM=6.747 MB
+2026-03-18 06:26:00 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.304s  Peak RAM=6.748 MB
+2026-03-18 06:26:00 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.489s  Peak RAM=6.748 MB
+2026-03-18 06:26:00 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.416s  Peak RAM=6.748 MB
+2026-03-18 06:26:00 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.074s  Test=0.482s  Peak RAM=6.75 MB
+2026-03-18 06:26:00 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.245s  Peak RAM=6.751 MB
+2026-03-18 06:26:00 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.239s  Peak RAM=6.752 MB
+2026-03-18 06:26:00 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.243s  Peak RAM=6.753 MB
+2026-03-18 06:26:00 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.178s  Peak RAM=6.752 MB
+2026-03-18 06:26:00 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.207s  Peak RAM=6.753 MB
+2026-03-18 06:26:00 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.216s  Peak RAM=6.752 MB
+2026-03-18 06:26:00 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.162s  Peak RAM=6.754 MB
+2026-03-18 06:26:00 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.172s  Peak RAM=6.754 MB
+2026-03-18 06:26:00 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.175s  Peak RAM=6.755 MB
+2026-03-18 06:26:00 | INFO | --- noise=3% ---
+2026-03-18 06:26:00 | INFO | ============================================================
+2026-03-18 06:26:00 | INFO | Dataset  : Train_StandardScaler_data_BoTIoT.csv
+2026-03-18 06:26:00 | INFO | Scaler   : StandardScaler
+2026-03-18 06:26:00 | INFO | Noise    : 3%
+2026-03-18 06:26:00 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:26:00 | INFO | ============================================================
+2026-03-18 06:26:00 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:26:00 | INFO | Training size : 9,344  |  Testing size: 14,728  |  Features: 26
+2026-03-18 06:26:00 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:26:28 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.018s  Test=0.289s  Peak RAM=6.86 MB
+2026-03-18 06:26:28 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.423s  Peak RAM=6.861 MB
+2026-03-18 06:26:28 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.350s  Peak RAM=6.86 MB
+2026-03-18 06:26:28 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.058s  Test=0.421s  Peak RAM=6.863 MB
+2026-03-18 06:26:28 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.417s  Peak RAM=6.864 MB
+2026-03-18 06:26:28 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.398s  Peak RAM=6.864 MB
+2026-03-18 06:26:28 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.391s  Peak RAM=6.865 MB
+2026-03-18 06:26:28 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.527s  Peak RAM=6.864 MB
+2026-03-18 06:26:28 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.499s  Peak RAM=6.866 MB
+2026-03-18 06:26:28 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.414s  Peak RAM=6.866 MB
+2026-03-18 06:26:28 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.276s  Peak RAM=6.865 MB
+2026-03-18 06:26:28 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.281s  Peak RAM=6.866 MB
+2026-03-18 06:26:28 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.304s  Peak RAM=6.867 MB
+2026-03-18 06:26:28 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.378s  Peak RAM=6.867 MB
+2026-03-18 06:26:28 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.053s  Test=0.293s  Peak RAM=6.868 MB
+2026-03-18 06:26:28 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.330s  Peak RAM=6.87 MB
+2026-03-18 06:26:28 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.298s  Peak RAM=6.869 MB
+2026-03-18 06:26:28 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.306s  Peak RAM=6.87 MB
+2026-03-18 06:26:28 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.406s  Peak RAM=6.87 MB
+2026-03-18 06:26:28 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.072s  Test=0.337s  Peak RAM=6.872 MB
+2026-03-18 06:26:28 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.375s  Peak RAM=6.881 MB
+2026-03-18 06:26:28 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.365s  Peak RAM=6.872 MB
+2026-03-18 06:26:28 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.346s  Peak RAM=6.872 MB
+2026-03-18 06:26:28 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.295s  Peak RAM=6.873 MB
+2026-03-18 06:26:28 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.291s  Peak RAM=6.873 MB
+2026-03-18 06:26:28 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.319s  Peak RAM=6.873 MB
+2026-03-18 06:26:28 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.049s  Test=0.342s  Peak RAM=6.88 MB
+2026-03-18 06:26:28 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.351s  Peak RAM=6.885 MB
+2026-03-18 06:26:28 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.314s  Peak RAM=6.882 MB
+2026-03-18 06:26:28 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.274s  Peak RAM=6.876 MB
+2026-03-18 06:26:28 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.371s  Peak RAM=6.876 MB
+2026-03-18 06:26:28 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.344s  Peak RAM=6.883 MB
+2026-03-18 06:26:28 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.329s  Peak RAM=6.878 MB
+2026-03-18 06:26:28 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.277s  Peak RAM=6.878 MB
+2026-03-18 06:26:28 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.321s  Peak RAM=6.879 MB
+2026-03-18 06:26:28 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.267s  Peak RAM=6.879 MB
+2026-03-18 06:26:28 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.069s  Test=0.321s  Peak RAM=6.879 MB
+2026-03-18 06:26:28 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.285s  Peak RAM=6.88 MB
+2026-03-18 06:26:28 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.433s  Peak RAM=6.887 MB
+2026-03-18 06:26:28 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.065s  Test=0.409s  Peak RAM=6.884 MB
+2026-03-18 06:26:29 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.361s  Peak RAM=6.882 MB
+2026-03-18 06:26:29 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.257s  Peak RAM=6.884 MB
+2026-03-18 06:26:29 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.257s  Peak RAM=6.89 MB
+2026-03-18 06:26:29 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.278s  Peak RAM=6.883 MB
+2026-03-18 06:26:29 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.276s  Peak RAM=6.884 MB
+2026-03-18 06:26:29 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.244s  Peak RAM=6.886 MB
+2026-03-18 06:26:29 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.271s  Peak RAM=6.886 MB
+2026-03-18 06:26:29 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.203s  Peak RAM=6.886 MB
+2026-03-18 06:26:29 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.194s  Peak RAM=6.886 MB
+2026-03-18 06:26:29 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.198s  Peak RAM=6.888 MB
+2026-03-18 06:26:29 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.190s  Peak RAM=6.889 MB
+2026-03-18 06:26:29 | INFO | --- noise=5% ---
+2026-03-18 06:26:29 | INFO | ============================================================
+2026-03-18 06:26:29 | INFO | Dataset  : Train_StandardScaler_data_BoTIoT.csv
+2026-03-18 06:26:29 | INFO | Scaler   : StandardScaler
+2026-03-18 06:26:29 | INFO | Noise    : 5%
+2026-03-18 06:26:29 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:26:29 | INFO | ============================================================
+2026-03-18 06:26:29 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:26:29 | INFO | Training size : 9,525  |  Testing size: 14,547  |  Features: 26
+2026-03-18 06:26:29 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:26:57 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.420s  Peak RAM=6.992 MB
+2026-03-18 06:26:57 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.506s  Peak RAM=6.999 MB
+2026-03-18 06:26:57 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.351s  Peak RAM=6.995 MB
+2026-03-18 06:26:57 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.412s  Peak RAM=6.994 MB
+2026-03-18 06:26:57 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.369s  Peak RAM=6.996 MB
+2026-03-18 06:26:57 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.363s  Peak RAM=6.996 MB
+2026-03-18 06:26:57 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.329s  Peak RAM=6.996 MB
+2026-03-18 06:26:57 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.368s  Peak RAM=7.006 MB
+2026-03-18 06:26:57 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.304s  Peak RAM=7.007 MB
+2026-03-18 06:26:57 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.324s  Peak RAM=7.008 MB
+2026-03-18 06:26:57 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.377s  Peak RAM=6.999 MB
+2026-03-18 06:26:57 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.367s  Peak RAM=7.003 MB
+2026-03-18 06:26:57 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.415s  Peak RAM=6.999 MB
+2026-03-18 06:26:57 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.348s  Peak RAM=7.009 MB
+2026-03-18 06:26:57 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.421s  Peak RAM=7.003 MB
+2026-03-18 06:26:57 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.313s  Peak RAM=7.0 MB
+2026-03-18 06:26:57 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.373s  Peak RAM=7.002 MB
+2026-03-18 06:26:57 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.049s  Test=0.530s  Peak RAM=7.013 MB
+2026-03-18 06:26:57 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.337s  Peak RAM=7.008 MB
+2026-03-18 06:26:57 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.388s  Peak RAM=7.013 MB
+2026-03-18 06:26:57 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.351s  Peak RAM=7.007 MB
+2026-03-18 06:26:57 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.321s  Peak RAM=7.01 MB
+2026-03-18 06:26:57 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.377s  Peak RAM=7.005 MB
+2026-03-18 06:26:57 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.296s  Peak RAM=7.006 MB
+2026-03-18 06:26:57 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.421s  Peak RAM=7.006 MB
+2026-03-18 06:26:57 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.480s  Peak RAM=7.01 MB
+2026-03-18 06:26:57 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.380s  Peak RAM=7.007 MB
+2026-03-18 06:26:57 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.282s  Peak RAM=7.007 MB
+2026-03-18 06:26:57 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.263s  Peak RAM=7.008 MB
+2026-03-18 06:26:57 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.444s  Peak RAM=7.01 MB
+2026-03-18 06:26:57 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.269s  Peak RAM=7.012 MB
+2026-03-18 06:26:57 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.364s  Peak RAM=7.011 MB
+2026-03-18 06:26:57 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.383s  Peak RAM=7.014 MB
+2026-03-18 06:26:57 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.259s  Peak RAM=7.012 MB
+2026-03-18 06:26:57 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.074s  Test=0.302s  Peak RAM=7.012 MB
+2026-03-18 06:26:57 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.273s  Peak RAM=7.011 MB
+2026-03-18 06:26:57 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.287s  Peak RAM=7.011 MB
+2026-03-18 06:26:57 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.313s  Peak RAM=7.016 MB
+2026-03-18 06:26:57 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.269s  Peak RAM=7.014 MB
+2026-03-18 06:26:57 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.312s  Peak RAM=7.014 MB
+2026-03-18 06:26:57 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.351s  Peak RAM=7.013 MB
+2026-03-18 06:26:57 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.350s  Peak RAM=7.016 MB
+2026-03-18 06:26:57 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.299s  Peak RAM=7.017 MB
+2026-03-18 06:26:57 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.340s  Peak RAM=7.016 MB
+2026-03-18 06:26:57 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.350s  Peak RAM=7.018 MB
+2026-03-18 06:26:57 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.310s  Peak RAM=7.017 MB
+2026-03-18 06:26:57 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.249s  Peak RAM=7.018 MB
+2026-03-18 06:26:57 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.235s  Peak RAM=7.018 MB
+2026-03-18 06:26:57 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.201s  Peak RAM=7.018 MB
+2026-03-18 06:26:57 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.200s  Peak RAM=7.02 MB
+2026-03-18 06:26:57 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.193s  Peak RAM=7.022 MB
+2026-03-18 06:26:57 | INFO | 
+>>> Processing data_BoTIoT | scaler=MinMaxScaler
+2026-03-18 06:26:57 | INFO | --- noise=0% ---
+2026-03-18 06:26:57 | INFO | ============================================================
+2026-03-18 06:26:57 | INFO | Dataset  : Train_MinMaxScaler_data_BoTIoT.csv
+2026-03-18 06:26:57 | INFO | Scaler   : MinMaxScaler
+2026-03-18 06:26:57 | INFO | Noise    : 0%
+2026-03-18 06:26:57 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:26:57 | INFO | ============================================================
+2026-03-18 06:26:57 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:26:57 | INFO | Training size : 9,072  |  Testing size: 15,000  |  Features: 26
+2026-03-18 06:26:57 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:27:25 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.019s  Test=0.289s  Peak RAM=6.66 MB
+2026-03-18 06:27:25 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.339s  Peak RAM=6.662 MB
+2026-03-18 06:27:25 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.397s  Peak RAM=6.663 MB
+2026-03-18 06:27:25 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.499s  Peak RAM=6.663 MB
+2026-03-18 06:27:25 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.488s  Peak RAM=6.665 MB
+2026-03-18 06:27:25 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.501s  Peak RAM=6.663 MB
+2026-03-18 06:27:25 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.366s  Peak RAM=6.665 MB
+2026-03-18 06:27:25 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.461s  Peak RAM=6.665 MB
+2026-03-18 06:27:25 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.353s  Peak RAM=6.667 MB
+2026-03-18 06:27:25 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.444s  Peak RAM=6.665 MB
+2026-03-18 06:27:25 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.268s  Peak RAM=6.668 MB
+2026-03-18 06:27:25 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.380s  Peak RAM=6.667 MB
+2026-03-18 06:27:25 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.321s  Peak RAM=6.668 MB
+2026-03-18 06:27:25 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.247s  Peak RAM=6.668 MB
+2026-03-18 06:27:25 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.380s  Peak RAM=6.669 MB
+2026-03-18 06:27:25 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.291s  Peak RAM=6.67 MB
+2026-03-18 06:27:25 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.355s  Peak RAM=6.671 MB
+2026-03-18 06:27:25 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.433s  Peak RAM=6.671 MB
+2026-03-18 06:27:25 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.394s  Peak RAM=6.671 MB
+2026-03-18 06:27:25 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.365s  Peak RAM=6.671 MB
+2026-03-18 06:27:25 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.348s  Peak RAM=6.672 MB
+2026-03-18 06:27:25 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.305s  Peak RAM=6.672 MB
+2026-03-18 06:27:25 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.251s  Peak RAM=6.674 MB
+2026-03-18 06:27:25 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.261s  Peak RAM=6.675 MB
+2026-03-18 06:27:25 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.296s  Peak RAM=6.674 MB
+2026-03-18 06:27:25 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.371s  Peak RAM=6.674 MB
+2026-03-18 06:27:25 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.064s  Test=0.291s  Peak RAM=6.676 MB
+2026-03-18 06:27:25 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.300s  Peak RAM=6.675 MB
+2026-03-18 06:27:25 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.345s  Peak RAM=6.677 MB
+2026-03-18 06:27:25 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.076s  Test=0.346s  Peak RAM=6.677 MB
+2026-03-18 06:27:25 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.410s  Peak RAM=6.678 MB
+2026-03-18 06:27:25 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.045s  Test=0.371s  Peak RAM=6.678 MB
+2026-03-18 06:27:25 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.285s  Peak RAM=6.68 MB
+2026-03-18 06:27:25 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.317s  Peak RAM=6.678 MB
+2026-03-18 06:27:25 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.317s  Peak RAM=6.679 MB
+2026-03-18 06:27:25 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.266s  Peak RAM=6.68 MB
+2026-03-18 06:27:25 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.301s  Peak RAM=6.68 MB
+2026-03-18 06:27:25 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.356s  Peak RAM=6.681 MB
+2026-03-18 06:27:25 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.256s  Peak RAM=6.682 MB
+2026-03-18 06:27:25 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.271s  Peak RAM=6.683 MB
+2026-03-18 06:27:25 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.287s  Peak RAM=6.684 MB
+2026-03-18 06:27:25 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.256s  Peak RAM=6.683 MB
+2026-03-18 06:27:25 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.305s  Peak RAM=6.684 MB
+2026-03-18 06:27:25 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.309s  Peak RAM=6.684 MB
+2026-03-18 06:27:25 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.310s  Peak RAM=6.685 MB
+2026-03-18 06:27:25 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.207s  Peak RAM=6.685 MB
+2026-03-18 06:27:25 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.204s  Peak RAM=6.687 MB
+2026-03-18 06:27:25 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.188s  Peak RAM=6.687 MB
+2026-03-18 06:27:25 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.197s  Peak RAM=6.687 MB
+2026-03-18 06:27:25 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.188s  Peak RAM=6.687 MB
+2026-03-18 06:27:25 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.168s  Peak RAM=6.689 MB
+2026-03-18 06:27:25 | INFO | --- noise=1% ---
+2026-03-18 06:27:25 | INFO | ============================================================
+2026-03-18 06:27:25 | INFO | Dataset  : Train_MinMaxScaler_data_BoTIoT.csv
+2026-03-18 06:27:25 | INFO | Scaler   : MinMaxScaler
+2026-03-18 06:27:25 | INFO | Noise    : 1%
+2026-03-18 06:27:25 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:27:25 | INFO | ============================================================
+2026-03-18 06:27:25 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:27:25 | INFO | Training size : 9,162  |  Testing size: 14,910  |  Features: 26
+2026-03-18 06:27:25 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:27:53 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.323s  Peak RAM=6.727 MB
+2026-03-18 06:27:53 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.248s  Peak RAM=6.728 MB
+2026-03-18 06:27:53 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.307s  Peak RAM=6.728 MB
+2026-03-18 06:27:53 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.302s  Peak RAM=6.729 MB
+2026-03-18 06:27:53 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.601s  Peak RAM=6.729 MB
+2026-03-18 06:27:53 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.446s  Peak RAM=6.729 MB
+2026-03-18 06:27:53 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.464s  Peak RAM=6.73 MB
+2026-03-18 06:27:53 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.513s  Peak RAM=6.73 MB
+2026-03-18 06:27:53 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.482s  Peak RAM=6.73 MB
+2026-03-18 06:27:53 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.260s  Peak RAM=6.733 MB
+2026-03-18 06:27:53 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.357s  Peak RAM=6.733 MB
+2026-03-18 06:27:53 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.308s  Peak RAM=6.734 MB
+2026-03-18 06:27:53 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.044s  Test=0.300s  Peak RAM=6.734 MB
+2026-03-18 06:27:53 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.398s  Peak RAM=6.734 MB
+2026-03-18 06:27:53 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.352s  Peak RAM=6.735 MB
+2026-03-18 06:27:53 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.402s  Peak RAM=6.737 MB
+2026-03-18 06:27:53 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.046s  Test=0.283s  Peak RAM=6.736 MB
+2026-03-18 06:27:53 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.261s  Peak RAM=6.736 MB
+2026-03-18 06:27:53 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.355s  Peak RAM=6.738 MB
+2026-03-18 06:27:53 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.317s  Peak RAM=6.737 MB
+2026-03-18 06:27:53 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.319s  Peak RAM=6.737 MB
+2026-03-18 06:27:53 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.264s  Peak RAM=6.738 MB
+2026-03-18 06:27:53 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.297s  Peak RAM=6.739 MB
+2026-03-18 06:27:53 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.363s  Peak RAM=6.74 MB
+2026-03-18 06:27:53 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.263s  Peak RAM=6.741 MB
+2026-03-18 06:27:53 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.439s  Peak RAM=6.74 MB
+2026-03-18 06:27:53 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.070s  Test=0.419s  Peak RAM=6.743 MB
+2026-03-18 06:27:53 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.475s  Peak RAM=6.742 MB
+2026-03-18 06:27:53 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.280s  Peak RAM=6.742 MB
+2026-03-18 06:27:53 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.268s  Peak RAM=6.743 MB
+2026-03-18 06:27:53 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.395s  Peak RAM=6.742 MB
+2026-03-18 06:27:53 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.313s  Peak RAM=6.744 MB
+2026-03-18 06:27:53 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.252s  Peak RAM=6.745 MB
+2026-03-18 06:27:53 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.303s  Peak RAM=6.745 MB
+2026-03-18 06:27:53 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.319s  Peak RAM=6.747 MB
+2026-03-18 06:27:53 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.296s  Peak RAM=6.746 MB
+2026-03-18 06:27:53 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.253s  Peak RAM=6.747 MB
+2026-03-18 06:27:53 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.273s  Peak RAM=6.747 MB
+2026-03-18 06:27:53 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.285s  Peak RAM=6.748 MB
+2026-03-18 06:27:53 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.322s  Peak RAM=6.747 MB
+2026-03-18 06:27:53 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.267s  Peak RAM=6.749 MB
+2026-03-18 06:27:53 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.279s  Peak RAM=6.75 MB
+2026-03-18 06:27:53 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.285s  Peak RAM=6.749 MB
+2026-03-18 06:27:53 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.225s  Peak RAM=6.749 MB
+2026-03-18 06:27:53 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.246s  Peak RAM=6.752 MB
+2026-03-18 06:27:53 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.233s  Peak RAM=6.752 MB
+2026-03-18 06:27:53 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.243s  Peak RAM=6.753 MB
+2026-03-18 06:27:53 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.230s  Peak RAM=6.752 MB
+2026-03-18 06:27:53 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.168s  Peak RAM=6.754 MB
+2026-03-18 06:27:53 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.155s  Peak RAM=6.754 MB
+2026-03-18 06:27:53 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.141s  Peak RAM=6.755 MB
+2026-03-18 06:27:53 | INFO | --- noise=3% ---
+2026-03-18 06:27:53 | INFO | ============================================================
+2026-03-18 06:27:53 | INFO | Dataset  : Train_MinMaxScaler_data_BoTIoT.csv
+2026-03-18 06:27:53 | INFO | Scaler   : MinMaxScaler
+2026-03-18 06:27:53 | INFO | Noise    : 3%
+2026-03-18 06:27:53 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:27:53 | INFO | ============================================================
+2026-03-18 06:27:53 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:27:53 | INFO | Training size : 9,344  |  Testing size: 14,728  |  Features: 26
+2026-03-18 06:27:53 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:28:21 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.549s  Peak RAM=6.86 MB
+2026-03-18 06:28:21 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.501s  Peak RAM=6.861 MB
+2026-03-18 06:28:21 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.446s  Peak RAM=6.861 MB
+2026-03-18 06:28:21 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.540s  Peak RAM=6.862 MB
+2026-03-18 06:28:21 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.532s  Peak RAM=6.862 MB
+2026-03-18 06:28:21 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.397s  Peak RAM=6.862 MB
+2026-03-18 06:28:21 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.403s  Peak RAM=6.864 MB
+2026-03-18 06:28:21 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.416s  Peak RAM=6.864 MB
+2026-03-18 06:28:21 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.322s  Peak RAM=6.865 MB
+2026-03-18 06:28:21 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.284s  Peak RAM=6.872 MB
+2026-03-18 06:28:21 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.334s  Peak RAM=6.865 MB
+2026-03-18 06:28:21 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.426s  Peak RAM=6.867 MB
+2026-03-18 06:28:21 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.428s  Peak RAM=6.87 MB
+2026-03-18 06:28:21 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.329s  Peak RAM=6.868 MB
+2026-03-18 06:28:21 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.460s  Peak RAM=6.867 MB
+2026-03-18 06:28:21 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.382s  Peak RAM=6.869 MB
+2026-03-18 06:28:21 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.284s  Peak RAM=6.871 MB
+2026-03-18 06:28:21 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.313s  Peak RAM=6.872 MB
+2026-03-18 06:28:21 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.060s  Test=0.419s  Peak RAM=6.869 MB
+2026-03-18 06:28:21 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.264s  Peak RAM=6.87 MB
+2026-03-18 06:28:21 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.295s  Peak RAM=6.871 MB
+2026-03-18 06:28:21 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.314s  Peak RAM=6.872 MB
+2026-03-18 06:28:21 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.297s  Peak RAM=6.874 MB
+2026-03-18 06:28:21 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.281s  Peak RAM=6.873 MB
+2026-03-18 06:28:21 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.407s  Peak RAM=6.873 MB
+2026-03-18 06:28:21 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.362s  Peak RAM=6.874 MB
+2026-03-18 06:28:21 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.323s  Peak RAM=6.875 MB
+2026-03-18 06:28:21 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.312s  Peak RAM=6.874 MB
+2026-03-18 06:28:21 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.266s  Peak RAM=6.877 MB
+2026-03-18 06:28:21 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.298s  Peak RAM=6.876 MB
+2026-03-18 06:28:21 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.480s  Peak RAM=6.876 MB
+2026-03-18 06:28:21 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.316s  Peak RAM=6.877 MB
+2026-03-18 06:28:21 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.287s  Peak RAM=6.878 MB
+2026-03-18 06:28:21 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.044s  Test=0.506s  Peak RAM=6.878 MB
+2026-03-18 06:28:21 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.288s  Peak RAM=6.88 MB
+2026-03-18 06:28:21 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.051s  Test=0.319s  Peak RAM=6.88 MB
+2026-03-18 06:28:21 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.056s  Test=0.268s  Peak RAM=6.881 MB
+2026-03-18 06:28:21 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.388s  Peak RAM=6.88 MB
+2026-03-18 06:28:21 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.354s  Peak RAM=6.883 MB
+2026-03-18 06:28:21 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.281s  Peak RAM=6.88 MB
+2026-03-18 06:28:21 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.084s  Test=0.279s  Peak RAM=6.881 MB
+2026-03-18 06:28:21 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.264s  Peak RAM=6.882 MB
+2026-03-18 06:28:21 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.248s  Peak RAM=6.884 MB
+2026-03-18 06:28:21 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.215s  Peak RAM=6.883 MB
+2026-03-18 06:28:21 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.240s  Peak RAM=6.884 MB
+2026-03-18 06:28:21 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.233s  Peak RAM=6.885 MB
+2026-03-18 06:28:21 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.259s  Peak RAM=6.887 MB
+2026-03-18 06:28:21 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.244s  Peak RAM=6.891 MB
+2026-03-18 06:28:21 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.205s  Peak RAM=6.886 MB
+2026-03-18 06:28:21 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.179s  Peak RAM=6.888 MB
+2026-03-18 06:28:21 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.188s  Peak RAM=6.888 MB
+2026-03-18 06:28:21 | INFO | --- noise=5% ---
+2026-03-18 06:28:21 | INFO | ============================================================
+2026-03-18 06:28:21 | INFO | Dataset  : Train_MinMaxScaler_data_BoTIoT.csv
+2026-03-18 06:28:21 | INFO | Scaler   : MinMaxScaler
+2026-03-18 06:28:21 | INFO | Noise    : 5%
+2026-03-18 06:28:21 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:28:21 | INFO | ============================================================
+2026-03-18 06:28:21 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:28:21 | INFO | Training size : 9,525  |  Testing size: 14,547  |  Features: 26
+2026-03-18 06:28:21 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:28:51 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.359s  Peak RAM=6.992 MB
+2026-03-18 06:28:51 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.331s  Peak RAM=6.997 MB
+2026-03-18 06:28:51 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.511s  Peak RAM=6.994 MB
+2026-03-18 06:28:51 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.369s  Peak RAM=6.995 MB
+2026-03-18 06:28:51 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.476s  Peak RAM=6.997 MB
+2026-03-18 06:28:51 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.449s  Peak RAM=6.999 MB
+2026-03-18 06:28:51 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.361s  Peak RAM=6.997 MB
+2026-03-18 06:28:51 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.052s  Test=0.327s  Peak RAM=6.998 MB
+2026-03-18 06:28:51 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.052s  Test=0.319s  Peak RAM=6.997 MB
+2026-03-18 06:28:51 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.494s  Peak RAM=6.998 MB
+2026-03-18 06:28:51 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.049s  Test=0.444s  Peak RAM=6.999 MB
+2026-03-18 06:28:51 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.439s  Peak RAM=7.001 MB
+2026-03-18 06:28:51 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.321s  Peak RAM=7.0 MB
+2026-03-18 06:28:51 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.415s  Peak RAM=7.0 MB
+2026-03-18 06:28:51 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.327s  Peak RAM=7.001 MB
+2026-03-18 06:28:51 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.284s  Peak RAM=7.003 MB
+2026-03-18 06:28:51 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.372s  Peak RAM=7.001 MB
+2026-03-18 06:28:51 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.396s  Peak RAM=7.003 MB
+2026-03-18 06:28:51 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.284s  Peak RAM=7.002 MB
+2026-03-18 06:28:51 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.279s  Peak RAM=7.004 MB
+2026-03-18 06:28:51 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.070s  Test=0.313s  Peak RAM=7.006 MB
+2026-03-18 06:28:51 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.273s  Peak RAM=7.004 MB
+2026-03-18 06:28:51 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.359s  Peak RAM=7.005 MB
+2026-03-18 06:28:51 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.289s  Peak RAM=7.004 MB
+2026-03-18 06:28:51 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.247s  Peak RAM=7.007 MB
+2026-03-18 06:28:51 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.261s  Peak RAM=7.008 MB
+2026-03-18 06:28:51 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.257s  Peak RAM=7.006 MB
+2026-03-18 06:28:51 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.367s  Peak RAM=7.008 MB
+2026-03-18 06:28:51 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.265s  Peak RAM=7.009 MB
+2026-03-18 06:28:51 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.350s  Peak RAM=7.009 MB
+2026-03-18 06:28:51 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.293s  Peak RAM=7.009 MB
+2026-03-18 06:28:51 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.365s  Peak RAM=7.01 MB
+2026-03-18 06:28:51 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.044s  Test=0.290s  Peak RAM=7.011 MB
+2026-03-18 06:28:51 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.380s  Peak RAM=7.012 MB
+2026-03-18 06:28:51 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.327s  Peak RAM=7.012 MB
+2026-03-18 06:28:51 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.425s  Peak RAM=7.011 MB
+2026-03-18 06:28:51 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.343s  Peak RAM=7.013 MB
+2026-03-18 06:28:51 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.286s  Peak RAM=7.014 MB
+2026-03-18 06:28:51 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.057s  Test=0.399s  Peak RAM=7.013 MB
+2026-03-18 06:28:51 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.352s  Peak RAM=7.014 MB
+2026-03-18 06:28:51 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.290s  Peak RAM=7.014 MB
+2026-03-18 06:28:51 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.277s  Peak RAM=7.016 MB
+2026-03-18 06:28:51 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.278s  Peak RAM=7.015 MB
+2026-03-18 06:28:51 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.240s  Peak RAM=7.017 MB
+2026-03-18 06:28:51 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.287s  Peak RAM=7.018 MB
+2026-03-18 06:28:51 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.318s  Peak RAM=7.017 MB
+2026-03-18 06:28:51 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.261s  Peak RAM=7.019 MB
+2026-03-18 06:28:51 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.279s  Peak RAM=7.018 MB
+2026-03-18 06:28:51 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.197s  Peak RAM=7.019 MB
+2026-03-18 06:28:51 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.198s  Peak RAM=7.019 MB
+2026-03-18 06:28:51 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.160s  Peak RAM=7.019 MB
+2026-03-18 06:28:51 | INFO | 
+>>> Processing data_BoTIoT | scaler=Normalizer
+2026-03-18 06:28:51 | INFO | --- noise=0% ---
+2026-03-18 06:28:51 | INFO | ============================================================
+2026-03-18 06:28:51 | INFO | Dataset  : Train_Normalizer_data_BoTIoT.csv
+2026-03-18 06:28:51 | INFO | Scaler   : Normalizer
+2026-03-18 06:28:51 | INFO | Noise    : 0%
+2026-03-18 06:28:51 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:28:51 | INFO | ============================================================
+2026-03-18 06:28:51 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:28:51 | INFO | Training size : 9,072  |  Testing size: 15,000  |  Features: 26
+2026-03-18 06:28:51 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:29:18 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.326s  Peak RAM=6.661 MB
+2026-03-18 06:29:18 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.378s  Peak RAM=6.661 MB
+2026-03-18 06:29:18 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.019s  Test=0.323s  Peak RAM=6.662 MB
+2026-03-18 06:29:18 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.298s  Peak RAM=6.663 MB
+2026-03-18 06:29:18 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.398s  Peak RAM=6.664 MB
+2026-03-18 06:29:18 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.466s  Peak RAM=6.664 MB
+2026-03-18 06:29:18 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.391s  Peak RAM=6.665 MB
+2026-03-18 06:29:18 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.361s  Peak RAM=6.667 MB
+2026-03-18 06:29:18 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.439s  Peak RAM=6.666 MB
+2026-03-18 06:29:18 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.322s  Peak RAM=6.668 MB
+2026-03-18 06:29:18 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.289s  Peak RAM=6.667 MB
+2026-03-18 06:29:18 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.264s  Peak RAM=6.667 MB
+2026-03-18 06:29:18 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.301s  Peak RAM=6.667 MB
+2026-03-18 06:29:18 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.051s  Test=0.369s  Peak RAM=6.668 MB
+2026-03-18 06:29:18 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.355s  Peak RAM=6.67 MB
+2026-03-18 06:29:18 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.289s  Peak RAM=6.669 MB
+2026-03-18 06:29:18 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.411s  Peak RAM=6.67 MB
+2026-03-18 06:29:18 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.302s  Peak RAM=6.671 MB
+2026-03-18 06:29:18 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.346s  Peak RAM=6.671 MB
+2026-03-18 06:29:18 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.319s  Peak RAM=6.67 MB
+2026-03-18 06:29:18 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.288s  Peak RAM=6.673 MB
+2026-03-18 06:29:18 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.267s  Peak RAM=6.673 MB
+2026-03-18 06:29:18 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.379s  Peak RAM=6.674 MB
+2026-03-18 06:29:18 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.345s  Peak RAM=6.673 MB
+2026-03-18 06:29:18 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.254s  Peak RAM=6.674 MB
+2026-03-18 06:29:18 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.376s  Peak RAM=6.674 MB
+2026-03-18 06:29:18 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.338s  Peak RAM=6.676 MB
+2026-03-18 06:29:18 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.291s  Peak RAM=6.676 MB
+2026-03-18 06:29:18 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.283s  Peak RAM=6.677 MB
+2026-03-18 06:29:18 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.242s  Peak RAM=6.677 MB
+2026-03-18 06:29:18 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.257s  Peak RAM=6.68 MB
+2026-03-18 06:29:18 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.309s  Peak RAM=6.678 MB
+2026-03-18 06:29:18 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.313s  Peak RAM=6.678 MB
+2026-03-18 06:29:18 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.056s  Test=0.267s  Peak RAM=6.68 MB
+2026-03-18 06:29:18 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.046s  Test=0.303s  Peak RAM=6.68 MB
+2026-03-18 06:29:18 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.232s  Peak RAM=6.68 MB
+2026-03-18 06:29:18 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.341s  Peak RAM=6.682 MB
+2026-03-18 06:29:18 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.397s  Peak RAM=6.682 MB
+2026-03-18 06:29:18 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.342s  Peak RAM=6.682 MB
+2026-03-18 06:29:18 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.362s  Peak RAM=6.683 MB
+2026-03-18 06:29:18 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.243s  Peak RAM=6.684 MB
+2026-03-18 06:29:18 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.238s  Peak RAM=6.684 MB
+2026-03-18 06:29:18 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.234s  Peak RAM=6.684 MB
+2026-03-18 06:29:18 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.214s  Peak RAM=6.684 MB
+2026-03-18 06:29:18 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.253s  Peak RAM=6.688 MB
+2026-03-18 06:29:18 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.247s  Peak RAM=6.684 MB
+2026-03-18 06:29:18 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.197s  Peak RAM=6.686 MB
+2026-03-18 06:29:18 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.167s  Peak RAM=6.686 MB
+2026-03-18 06:29:18 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.162s  Peak RAM=6.688 MB
+2026-03-18 06:29:18 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.155s  Peak RAM=6.688 MB
+2026-03-18 06:29:18 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.160s  Peak RAM=6.689 MB
+2026-03-18 06:29:18 | INFO | --- noise=1% ---
+2026-03-18 06:29:18 | INFO | ============================================================
+2026-03-18 06:29:18 | INFO | Dataset  : Train_Normalizer_data_BoTIoT.csv
+2026-03-18 06:29:18 | INFO | Scaler   : Normalizer
+2026-03-18 06:29:18 | INFO | Noise    : 1%
+2026-03-18 06:29:18 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:29:18 | INFO | ============================================================
+2026-03-18 06:29:18 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:29:18 | INFO | Training size : 9,162  |  Testing size: 14,910  |  Features: 26
+2026-03-18 06:29:18 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:29:45 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.339s  Peak RAM=6.727 MB
+2026-03-18 06:29:45 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.280s  Peak RAM=6.728 MB
+2026-03-18 06:29:45 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.415s  Peak RAM=6.729 MB
+2026-03-18 06:29:45 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.343s  Peak RAM=6.728 MB
+2026-03-18 06:29:45 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.396s  Peak RAM=6.731 MB
+2026-03-18 06:29:45 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.456s  Peak RAM=6.73 MB
+2026-03-18 06:29:45 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.262s  Peak RAM=6.73 MB
+2026-03-18 06:29:45 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.365s  Peak RAM=6.731 MB
+2026-03-18 06:29:45 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.326s  Peak RAM=6.733 MB
+2026-03-18 06:29:45 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.335s  Peak RAM=6.732 MB
+2026-03-18 06:29:45 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.296s  Peak RAM=6.733 MB
+2026-03-18 06:29:45 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.386s  Peak RAM=6.734 MB
+2026-03-18 06:29:45 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.280s  Peak RAM=6.735 MB
+2026-03-18 06:29:45 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.288s  Peak RAM=6.734 MB
+2026-03-18 06:29:45 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.401s  Peak RAM=6.735 MB
+2026-03-18 06:29:45 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.292s  Peak RAM=6.736 MB
+2026-03-18 06:29:45 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.509s  Peak RAM=6.736 MB
+2026-03-18 06:29:45 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.314s  Peak RAM=6.736 MB
+2026-03-18 06:29:45 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.442s  Peak RAM=6.737 MB
+2026-03-18 06:29:45 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.345s  Peak RAM=6.738 MB
+2026-03-18 06:29:45 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.050s  Test=0.333s  Peak RAM=6.738 MB
+2026-03-18 06:29:45 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.329s  Peak RAM=6.739 MB
+2026-03-18 06:29:45 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.351s  Peak RAM=6.739 MB
+2026-03-18 06:29:45 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.376s  Peak RAM=6.74 MB
+2026-03-18 06:29:45 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.277s  Peak RAM=6.741 MB
+2026-03-18 06:29:45 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.319s  Peak RAM=6.741 MB
+2026-03-18 06:29:45 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.361s  Peak RAM=6.741 MB
+2026-03-18 06:29:45 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.342s  Peak RAM=6.743 MB
+2026-03-18 06:29:45 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.400s  Peak RAM=6.741 MB
+2026-03-18 06:29:45 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.504s  Peak RAM=6.742 MB
+2026-03-18 06:29:45 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.384s  Peak RAM=6.743 MB
+2026-03-18 06:29:45 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.362s  Peak RAM=6.744 MB
+2026-03-18 06:29:45 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.629s  Peak RAM=6.745 MB
+2026-03-18 06:29:45 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.361s  Peak RAM=6.745 MB
+2026-03-18 06:29:45 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.330s  Peak RAM=6.749 MB
+2026-03-18 06:29:45 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.290s  Peak RAM=6.747 MB
+2026-03-18 06:29:45 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.335s  Peak RAM=6.75 MB
+2026-03-18 06:29:45 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.335s  Peak RAM=6.75 MB
+2026-03-18 06:29:45 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.054s  Test=0.318s  Peak RAM=6.748 MB
+2026-03-18 06:29:45 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.279s  Peak RAM=6.749 MB
+2026-03-18 06:29:45 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.267s  Peak RAM=6.749 MB
+2026-03-18 06:29:45 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.313s  Peak RAM=6.749 MB
+2026-03-18 06:29:45 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.318s  Peak RAM=6.75 MB
+2026-03-18 06:29:45 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.234s  Peak RAM=6.751 MB
+2026-03-18 06:29:45 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.302s  Peak RAM=6.752 MB
+2026-03-18 06:29:45 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.289s  Peak RAM=6.751 MB
+2026-03-18 06:29:45 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.225s  Peak RAM=6.753 MB
+2026-03-18 06:29:45 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.238s  Peak RAM=6.753 MB
+2026-03-18 06:29:45 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.193s  Peak RAM=6.754 MB
+2026-03-18 06:29:45 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.190s  Peak RAM=6.755 MB
+2026-03-18 06:29:45 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.154s  Peak RAM=6.754 MB
+2026-03-18 06:29:45 | INFO | --- noise=3% ---
+2026-03-18 06:29:45 | INFO | ============================================================
+2026-03-18 06:29:45 | INFO | Dataset  : Train_Normalizer_data_BoTIoT.csv
+2026-03-18 06:29:45 | INFO | Scaler   : Normalizer
+2026-03-18 06:29:45 | INFO | Noise    : 3%
+2026-03-18 06:29:45 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:29:45 | INFO | ============================================================
+2026-03-18 06:29:45 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:29:45 | INFO | Training size : 9,344  |  Testing size: 14,728  |  Features: 26
+2026-03-18 06:29:45 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:30:12 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.388s  Peak RAM=6.864 MB
+2026-03-18 06:30:12 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.019s  Test=0.373s  Peak RAM=6.86 MB
+2026-03-18 06:30:12 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.644s  Peak RAM=6.862 MB
+2026-03-18 06:30:12 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.078s  Test=0.526s  Peak RAM=6.862 MB
+2026-03-18 06:30:12 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.055s  Test=0.638s  Peak RAM=6.862 MB
+2026-03-18 06:30:12 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.519s  Peak RAM=6.863 MB
+2026-03-18 06:30:12 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.488s  Peak RAM=6.864 MB
+2026-03-18 06:30:12 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.440s  Peak RAM=6.865 MB
+2026-03-18 06:30:13 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.403s  Peak RAM=6.865 MB
+2026-03-18 06:30:13 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.469s  Peak RAM=6.866 MB
+2026-03-18 06:30:13 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.390s  Peak RAM=6.866 MB
+2026-03-18 06:30:13 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.335s  Peak RAM=6.866 MB
+2026-03-18 06:30:13 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.323s  Peak RAM=6.866 MB
+2026-03-18 06:30:13 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.371s  Peak RAM=6.869 MB
+2026-03-18 06:30:13 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.397s  Peak RAM=6.868 MB
+2026-03-18 06:30:13 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.367s  Peak RAM=6.868 MB
+2026-03-18 06:30:13 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.360s  Peak RAM=6.872 MB
+2026-03-18 06:30:13 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.381s  Peak RAM=6.869 MB
+2026-03-18 06:30:13 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.302s  Peak RAM=6.87 MB
+2026-03-18 06:30:13 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.045s  Test=0.346s  Peak RAM=6.871 MB
+2026-03-18 06:30:13 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.294s  Peak RAM=6.872 MB
+2026-03-18 06:30:13 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.357s  Peak RAM=6.872 MB
+2026-03-18 06:30:13 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.565s  Peak RAM=6.873 MB
+2026-03-18 06:30:13 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.379s  Peak RAM=6.875 MB
+2026-03-18 06:30:13 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.268s  Peak RAM=6.872 MB
+2026-03-18 06:30:13 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.058s  Test=0.381s  Peak RAM=6.874 MB
+2026-03-18 06:30:13 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.291s  Peak RAM=6.877 MB
+2026-03-18 06:30:13 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.312s  Peak RAM=6.875 MB
+2026-03-18 06:30:13 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.309s  Peak RAM=6.876 MB
+2026-03-18 06:30:13 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.318s  Peak RAM=6.878 MB
+2026-03-18 06:30:13 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.564s  Peak RAM=6.88 MB
+2026-03-18 06:30:13 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.387s  Peak RAM=6.877 MB
+2026-03-18 06:30:13 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.276s  Peak RAM=6.88 MB
+2026-03-18 06:30:13 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.384s  Peak RAM=6.879 MB
+2026-03-18 06:30:13 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.051s  Test=0.334s  Peak RAM=6.879 MB
+2026-03-18 06:30:13 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.295s  Peak RAM=6.88 MB
+2026-03-18 06:30:13 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.409s  Peak RAM=6.881 MB
+2026-03-18 06:30:13 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.370s  Peak RAM=6.88 MB
+2026-03-18 06:30:13 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.381s  Peak RAM=6.881 MB
+2026-03-18 06:30:13 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.337s  Peak RAM=6.881 MB
+2026-03-18 06:30:13 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.317s  Peak RAM=6.882 MB
+2026-03-18 06:30:13 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.299s  Peak RAM=6.887 MB
+2026-03-18 06:30:13 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.302s  Peak RAM=6.884 MB
+2026-03-18 06:30:13 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.222s  Peak RAM=6.883 MB
+2026-03-18 06:30:13 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.250s  Peak RAM=6.885 MB
+2026-03-18 06:30:13 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.190s  Peak RAM=6.885 MB
+2026-03-18 06:30:13 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.182s  Peak RAM=6.886 MB
+2026-03-18 06:30:13 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.208s  Peak RAM=6.887 MB
+2026-03-18 06:30:13 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.226s  Peak RAM=6.888 MB
+2026-03-18 06:30:13 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.197s  Peak RAM=6.888 MB
+2026-03-18 06:30:13 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.146s  Peak RAM=6.887 MB
+2026-03-18 06:30:13 | INFO | --- noise=5% ---
+2026-03-18 06:30:13 | INFO | ============================================================
+2026-03-18 06:30:13 | INFO | Dataset  : Train_Normalizer_data_BoTIoT.csv
+2026-03-18 06:30:13 | INFO | Scaler   : Normalizer
+2026-03-18 06:30:13 | INFO | Noise    : 5%
+2026-03-18 06:30:13 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:30:13 | INFO | ============================================================
+2026-03-18 06:30:13 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:30:13 | INFO | Training size : 9,525  |  Testing size: 14,547  |  Features: 26
+2026-03-18 06:30:13 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:30:40 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.547s  Peak RAM=6.993 MB
+2026-03-18 06:30:40 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.310s  Peak RAM=6.993 MB
+2026-03-18 06:30:40 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.366s  Peak RAM=6.994 MB
+2026-03-18 06:30:40 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.054s  Test=0.344s  Peak RAM=6.996 MB
+2026-03-18 06:30:40 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.339s  Peak RAM=6.995 MB
+2026-03-18 06:30:40 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.375s  Peak RAM=6.996 MB
+2026-03-18 06:30:40 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.330s  Peak RAM=6.996 MB
+2026-03-18 06:30:40 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.052s  Test=0.311s  Peak RAM=6.997 MB
+2026-03-18 06:30:40 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.527s  Peak RAM=6.998 MB
+2026-03-18 06:30:40 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.461s  Peak RAM=6.997 MB
+2026-03-18 06:30:40 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.381s  Peak RAM=6.998 MB
+2026-03-18 06:30:40 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.359s  Peak RAM=6.999 MB
+2026-03-18 06:30:40 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.315s  Peak RAM=7.001 MB
+2026-03-18 06:30:40 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.310s  Peak RAM=7.0 MB
+2026-03-18 06:30:40 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.385s  Peak RAM=7.0 MB
+2026-03-18 06:30:40 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.282s  Peak RAM=7.001 MB
+2026-03-18 06:30:40 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.267s  Peak RAM=7.001 MB
+2026-03-18 06:30:40 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.323s  Peak RAM=7.002 MB
+2026-03-18 06:30:40 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.326s  Peak RAM=7.003 MB
+2026-03-18 06:30:40 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.302s  Peak RAM=7.002 MB
+2026-03-18 06:30:40 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.323s  Peak RAM=7.004 MB
+2026-03-18 06:30:40 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.313s  Peak RAM=7.006 MB
+2026-03-18 06:30:40 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.354s  Peak RAM=7.006 MB
+2026-03-18 06:30:40 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.296s  Peak RAM=7.005 MB
+2026-03-18 06:30:40 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.369s  Peak RAM=7.005 MB
+2026-03-18 06:30:40 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.362s  Peak RAM=7.008 MB
+2026-03-18 06:30:40 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.323s  Peak RAM=7.007 MB
+2026-03-18 06:30:40 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.287s  Peak RAM=7.008 MB
+2026-03-18 06:30:40 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.295s  Peak RAM=7.008 MB
+2026-03-18 06:30:40 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.453s  Peak RAM=7.008 MB
+2026-03-18 06:30:40 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.399s  Peak RAM=7.01 MB
+2026-03-18 06:30:40 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.354s  Peak RAM=7.009 MB
+2026-03-18 06:30:40 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.272s  Peak RAM=7.011 MB
+2026-03-18 06:30:40 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.439s  Peak RAM=7.011 MB
+2026-03-18 06:30:40 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.466s  Peak RAM=7.011 MB
+2026-03-18 06:30:40 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.419s  Peak RAM=7.012 MB
+2026-03-18 06:30:40 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.275s  Peak RAM=7.013 MB
+2026-03-18 06:30:40 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.287s  Peak RAM=7.013 MB
+2026-03-18 06:30:40 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.331s  Peak RAM=7.014 MB
+2026-03-18 06:30:40 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.267s  Peak RAM=7.014 MB
+2026-03-18 06:30:40 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.058s  Test=0.296s  Peak RAM=7.015 MB
+2026-03-18 06:30:40 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.228s  Peak RAM=7.015 MB
+2026-03-18 06:30:40 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.292s  Peak RAM=7.015 MB
+2026-03-18 06:30:40 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.257s  Peak RAM=7.016 MB
+2026-03-18 06:30:40 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.208s  Peak RAM=7.017 MB
+2026-03-18 06:30:40 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.236s  Peak RAM=7.018 MB
+2026-03-18 06:30:40 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.189s  Peak RAM=7.017 MB
+2026-03-18 06:30:40 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.242s  Peak RAM=7.018 MB
+2026-03-18 06:30:40 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.211s  Peak RAM=7.019 MB
+2026-03-18 06:30:40 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.211s  Peak RAM=7.02 MB
+2026-03-18 06:30:40 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.160s  Peak RAM=7.02 MB
+2026-03-18 06:30:40 | INFO | 
+>>> Processing data_BoTIoT | scaler=QuantileTransformer
+2026-03-18 06:30:40 | INFO | --- noise=0% ---
+2026-03-18 06:30:40 | INFO | ============================================================
+2026-03-18 06:30:40 | INFO | Dataset  : Train_QuantileTransformer_data_BoTIoT.csv
+2026-03-18 06:30:40 | INFO | Scaler   : QuantileTransformer
+2026-03-18 06:30:40 | INFO | Noise    : 0%
+2026-03-18 06:30:40 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:30:40 | INFO | ============================================================
+2026-03-18 06:30:40 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:30:40 | INFO | Training size : 9,072  |  Testing size: 15,000  |  Features: 26
+2026-03-18 06:30:40 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:31:08 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.403s  Peak RAM=6.661 MB
+2026-03-18 06:31:08 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.365s  Peak RAM=6.662 MB
+2026-03-18 06:31:08 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.343s  Peak RAM=6.662 MB
+2026-03-18 06:31:08 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.354s  Peak RAM=6.662 MB
+2026-03-18 06:31:08 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.299s  Peak RAM=6.663 MB
+2026-03-18 06:31:08 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.274s  Peak RAM=6.664 MB
+2026-03-18 06:31:08 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.336s  Peak RAM=6.665 MB
+2026-03-18 06:31:08 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.337s  Peak RAM=6.666 MB
+2026-03-18 06:31:08 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.497s  Peak RAM=6.666 MB
+2026-03-18 06:31:08 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.391s  Peak RAM=6.666 MB
+2026-03-18 06:31:08 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.415s  Peak RAM=6.667 MB
+2026-03-18 06:31:08 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.430s  Peak RAM=6.668 MB
+2026-03-18 06:31:08 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.335s  Peak RAM=6.667 MB
+2026-03-18 06:31:08 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.252s  Peak RAM=6.668 MB
+2026-03-18 06:31:08 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.361s  Peak RAM=6.67 MB
+2026-03-18 06:31:08 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.328s  Peak RAM=6.669 MB
+2026-03-18 06:31:08 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.347s  Peak RAM=6.67 MB
+2026-03-18 06:31:08 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.399s  Peak RAM=6.672 MB
+2026-03-18 06:31:08 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.409s  Peak RAM=6.671 MB
+2026-03-18 06:31:08 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.306s  Peak RAM=6.671 MB
+2026-03-18 06:31:08 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.236s  Peak RAM=6.671 MB
+2026-03-18 06:31:08 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.057s  Test=0.321s  Peak RAM=6.673 MB
+2026-03-18 06:31:08 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.222s  Peak RAM=6.673 MB
+2026-03-18 06:31:08 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.043s  Test=0.367s  Peak RAM=6.673 MB
+2026-03-18 06:31:08 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.275s  Peak RAM=6.674 MB
+2026-03-18 06:31:08 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.301s  Peak RAM=6.675 MB
+2026-03-18 06:31:08 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.306s  Peak RAM=6.675 MB
+2026-03-18 06:31:08 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.259s  Peak RAM=6.677 MB
+2026-03-18 06:31:08 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.245s  Peak RAM=6.676 MB
+2026-03-18 06:31:08 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.065s  Test=0.221s  Peak RAM=6.677 MB
+2026-03-18 06:31:08 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.243s  Peak RAM=6.677 MB
+2026-03-18 06:31:08 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.255s  Peak RAM=6.678 MB
+2026-03-18 06:31:08 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.068s  Test=0.263s  Peak RAM=6.678 MB
+2026-03-18 06:31:08 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.065s  Test=0.250s  Peak RAM=6.679 MB
+2026-03-18 06:31:08 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.265s  Peak RAM=6.68 MB
+2026-03-18 06:31:08 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.296s  Peak RAM=6.68 MB
+2026-03-18 06:31:08 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.258s  Peak RAM=6.68 MB
+2026-03-18 06:31:08 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.275s  Peak RAM=6.682 MB
+2026-03-18 06:31:08 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.232s  Peak RAM=6.681 MB
+2026-03-18 06:31:08 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.080s  Test=0.346s  Peak RAM=6.683 MB
+2026-03-18 06:31:08 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.257s  Peak RAM=6.684 MB
+2026-03-18 06:31:08 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.243s  Peak RAM=6.683 MB
+2026-03-18 06:31:08 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.198s  Peak RAM=6.684 MB
+2026-03-18 06:31:08 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.178s  Peak RAM=6.684 MB
+2026-03-18 06:31:08 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.191s  Peak RAM=6.685 MB
+2026-03-18 06:31:08 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.153s  Peak RAM=6.685 MB
+2026-03-18 06:31:08 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.151s  Peak RAM=6.686 MB
+2026-03-18 06:31:08 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.173s  Peak RAM=6.687 MB
+2026-03-18 06:31:08 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.160s  Peak RAM=6.688 MB
+2026-03-18 06:31:08 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.134s  Peak RAM=6.688 MB
+2026-03-18 06:31:08 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.139s  Peak RAM=6.688 MB
+2026-03-18 06:31:08 | INFO | --- noise=1% ---
+2026-03-18 06:31:08 | INFO | ============================================================
+2026-03-18 06:31:08 | INFO | Dataset  : Train_QuantileTransformer_data_BoTIoT.csv
+2026-03-18 06:31:08 | INFO | Scaler   : QuantileTransformer
+2026-03-18 06:31:08 | INFO | Noise    : 1%
+2026-03-18 06:31:08 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:31:08 | INFO | ============================================================
+2026-03-18 06:31:08 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:31:08 | INFO | Training size : 9,162  |  Testing size: 14,910  |  Features: 26
+2026-03-18 06:31:08 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:31:35 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.491s  Peak RAM=6.728 MB
+2026-03-18 06:31:35 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.478s  Peak RAM=6.729 MB
+2026-03-18 06:31:35 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.079s  Test=0.418s  Peak RAM=6.728 MB
+2026-03-18 06:31:35 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.384s  Peak RAM=6.729 MB
+2026-03-18 06:31:35 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.501s  Peak RAM=6.73 MB
+2026-03-18 06:31:35 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.530s  Peak RAM=6.73 MB
+2026-03-18 06:31:35 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.419s  Peak RAM=6.73 MB
+2026-03-18 06:31:35 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.483s  Peak RAM=6.731 MB
+2026-03-18 06:31:35 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.046s  Test=0.299s  Peak RAM=6.732 MB
+2026-03-18 06:31:35 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.321s  Peak RAM=6.733 MB
+2026-03-18 06:31:35 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.351s  Peak RAM=6.732 MB
+2026-03-18 06:31:35 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.436s  Peak RAM=6.737 MB
+2026-03-18 06:31:35 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.334s  Peak RAM=6.736 MB
+2026-03-18 06:31:35 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.263s  Peak RAM=6.734 MB
+2026-03-18 06:31:35 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.325s  Peak RAM=6.737 MB
+2026-03-18 06:31:35 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.354s  Peak RAM=6.734 MB
+2026-03-18 06:31:35 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.389s  Peak RAM=6.737 MB
+2026-03-18 06:31:35 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.305s  Peak RAM=6.736 MB
+2026-03-18 06:31:35 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.306s  Peak RAM=6.736 MB
+2026-03-18 06:31:35 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.318s  Peak RAM=6.738 MB
+2026-03-18 06:31:35 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.336s  Peak RAM=6.739 MB
+2026-03-18 06:31:35 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.398s  Peak RAM=6.739 MB
+2026-03-18 06:31:35 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.276s  Peak RAM=6.74 MB
+2026-03-18 06:31:35 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.057s  Test=0.318s  Peak RAM=6.739 MB
+2026-03-18 06:31:35 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.493s  Peak RAM=6.74 MB
+2026-03-18 06:31:35 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.374s  Peak RAM=6.741 MB
+2026-03-18 06:31:35 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.056s  Test=0.360s  Peak RAM=6.743 MB
+2026-03-18 06:31:35 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.315s  Peak RAM=6.742 MB
+2026-03-18 06:31:35 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.044s  Test=0.257s  Peak RAM=6.742 MB
+2026-03-18 06:31:35 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.253s  Peak RAM=6.743 MB
+2026-03-18 06:31:35 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.065s  Test=0.287s  Peak RAM=6.743 MB
+2026-03-18 06:31:35 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.316s  Peak RAM=6.746 MB
+2026-03-18 06:31:35 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.256s  Peak RAM=6.745 MB
+2026-03-18 06:31:35 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.283s  Peak RAM=6.745 MB
+2026-03-18 06:31:35 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.071s  Test=0.445s  Peak RAM=6.745 MB
+2026-03-18 06:31:35 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.258s  Peak RAM=6.746 MB
+2026-03-18 06:31:35 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.400s  Peak RAM=6.748 MB
+2026-03-18 06:31:35 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.056s  Test=0.424s  Peak RAM=6.748 MB
+2026-03-18 06:31:35 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.070s  Test=0.261s  Peak RAM=6.75 MB
+2026-03-18 06:31:35 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.344s  Peak RAM=6.747 MB
+2026-03-18 06:31:35 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.263s  Peak RAM=6.748 MB
+2026-03-18 06:31:35 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.259s  Peak RAM=6.75 MB
+2026-03-18 06:31:35 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.244s  Peak RAM=6.749 MB
+2026-03-18 06:31:35 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.257s  Peak RAM=6.75 MB
+2026-03-18 06:31:35 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.219s  Peak RAM=6.753 MB
+2026-03-18 06:31:35 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.192s  Peak RAM=6.751 MB
+2026-03-18 06:31:35 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.202s  Peak RAM=6.752 MB
+2026-03-18 06:31:35 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.171s  Peak RAM=6.752 MB
+2026-03-18 06:31:35 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.171s  Peak RAM=6.755 MB
+2026-03-18 06:31:35 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.154s  Peak RAM=6.753 MB
+2026-03-18 06:31:35 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.159s  Peak RAM=6.756 MB
+2026-03-18 06:31:35 | INFO | --- noise=3% ---
+2026-03-18 06:31:35 | INFO | ============================================================
+2026-03-18 06:31:35 | INFO | Dataset  : Train_QuantileTransformer_data_BoTIoT.csv
+2026-03-18 06:31:35 | INFO | Scaler   : QuantileTransformer
+2026-03-18 06:31:35 | INFO | Noise    : 3%
+2026-03-18 06:31:35 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:31:35 | INFO | ============================================================
+2026-03-18 06:31:36 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:31:36 | INFO | Training size : 9,344  |  Testing size: 14,728  |  Features: 26
+2026-03-18 06:31:36 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:32:04 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.019s  Test=0.362s  Peak RAM=6.862 MB
+2026-03-18 06:32:04 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.045s  Test=0.518s  Peak RAM=6.86 MB
+2026-03-18 06:32:04 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.339s  Peak RAM=6.865 MB
+2026-03-18 06:32:04 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.474s  Peak RAM=6.863 MB
+2026-03-18 06:32:04 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.421s  Peak RAM=6.864 MB
+2026-03-18 06:32:04 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.069s  Test=0.438s  Peak RAM=6.864 MB
+2026-03-18 06:32:04 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.438s  Peak RAM=6.864 MB
+2026-03-18 06:32:04 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.470s  Peak RAM=6.865 MB
+2026-03-18 06:32:04 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.458s  Peak RAM=6.866 MB
+2026-03-18 06:32:04 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.306s  Peak RAM=6.869 MB
+2026-03-18 06:32:04 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.420s  Peak RAM=6.866 MB
+2026-03-18 06:32:04 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.309s  Peak RAM=6.866 MB
+2026-03-18 06:32:04 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.308s  Peak RAM=6.867 MB
+2026-03-18 06:32:04 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.264s  Peak RAM=6.868 MB
+2026-03-18 06:32:04 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.291s  Peak RAM=6.868 MB
+2026-03-18 06:32:04 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.046s  Test=0.397s  Peak RAM=6.868 MB
+2026-03-18 06:32:04 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.351s  Peak RAM=6.871 MB
+2026-03-18 06:32:04 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.420s  Peak RAM=6.87 MB
+2026-03-18 06:32:04 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.353s  Peak RAM=6.871 MB
+2026-03-18 06:32:04 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.377s  Peak RAM=6.871 MB
+2026-03-18 06:32:04 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.513s  Peak RAM=6.871 MB
+2026-03-18 06:32:04 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.251s  Peak RAM=6.874 MB
+2026-03-18 06:32:04 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.369s  Peak RAM=6.873 MB
+2026-03-18 06:32:04 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.368s  Peak RAM=6.872 MB
+2026-03-18 06:32:04 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.281s  Peak RAM=6.876 MB
+2026-03-18 06:32:04 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.301s  Peak RAM=6.874 MB
+2026-03-18 06:32:04 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.321s  Peak RAM=6.875 MB
+2026-03-18 06:32:04 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.323s  Peak RAM=6.875 MB
+2026-03-18 06:32:04 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.437s  Peak RAM=6.876 MB
+2026-03-18 06:32:04 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.457s  Peak RAM=6.876 MB
+2026-03-18 06:32:04 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.068s  Test=0.377s  Peak RAM=6.877 MB
+2026-03-18 06:32:04 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.357s  Peak RAM=6.877 MB
+2026-03-18 06:32:04 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.362s  Peak RAM=6.878 MB
+2026-03-18 06:32:04 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.335s  Peak RAM=6.878 MB
+2026-03-18 06:32:04 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.269s  Peak RAM=6.879 MB
+2026-03-18 06:32:04 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.073s  Test=0.301s  Peak RAM=6.88 MB
+2026-03-18 06:32:04 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.297s  Peak RAM=6.88 MB
+2026-03-18 06:32:04 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.075s  Test=0.356s  Peak RAM=6.881 MB
+2026-03-18 06:32:04 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.354s  Peak RAM=6.881 MB
+2026-03-18 06:32:04 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.285s  Peak RAM=6.882 MB
+2026-03-18 06:32:04 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.298s  Peak RAM=6.882 MB
+2026-03-18 06:32:04 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.285s  Peak RAM=6.882 MB
+2026-03-18 06:32:04 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.054s  Test=0.259s  Peak RAM=6.883 MB
+2026-03-18 06:32:04 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.215s  Peak RAM=6.885 MB
+2026-03-18 06:32:04 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.210s  Peak RAM=6.885 MB
+2026-03-18 06:32:04 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.269s  Peak RAM=6.885 MB
+2026-03-18 06:32:04 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.179s  Peak RAM=6.885 MB
+2026-03-18 06:32:04 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.193s  Peak RAM=6.886 MB
+2026-03-18 06:32:04 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.161s  Peak RAM=6.887 MB
+2026-03-18 06:32:04 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.156s  Peak RAM=6.887 MB
+2026-03-18 06:32:04 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.143s  Peak RAM=6.887 MB
+2026-03-18 06:32:04 | INFO | --- noise=5% ---
+2026-03-18 06:32:04 | INFO | ============================================================
+2026-03-18 06:32:04 | INFO | Dataset  : Train_QuantileTransformer_data_BoTIoT.csv
+2026-03-18 06:32:04 | INFO | Scaler   : QuantileTransformer
+2026-03-18 06:32:04 | INFO | Noise    : 5%
+2026-03-18 06:32:04 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:32:04 | INFO | ============================================================
+2026-03-18 06:32:05 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:32:05 | INFO | Training size : 9,525  |  Testing size: 14,547  |  Features: 26
+2026-03-18 06:32:05 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:32:32 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.409s  Peak RAM=6.992 MB
+2026-03-18 06:32:32 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.362s  Peak RAM=6.993 MB
+2026-03-18 06:32:32 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.392s  Peak RAM=6.994 MB
+2026-03-18 06:32:32 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.467s  Peak RAM=6.994 MB
+2026-03-18 06:32:32 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.318s  Peak RAM=6.995 MB
+2026-03-18 06:32:32 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.415s  Peak RAM=6.996 MB
+2026-03-18 06:32:32 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.511s  Peak RAM=6.996 MB
+2026-03-18 06:32:32 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.394s  Peak RAM=6.996 MB
+2026-03-18 06:32:32 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.491s  Peak RAM=6.997 MB
+2026-03-18 06:32:32 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.045s  Test=0.398s  Peak RAM=6.999 MB
+2026-03-18 06:32:32 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.434s  Peak RAM=6.998 MB
+2026-03-18 06:32:32 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.286s  Peak RAM=6.998 MB
+2026-03-18 06:32:32 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.283s  Peak RAM=6.999 MB
+2026-03-18 06:32:32 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.272s  Peak RAM=7.001 MB
+2026-03-18 06:32:32 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.362s  Peak RAM=7.001 MB
+2026-03-18 06:32:32 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.415s  Peak RAM=7.002 MB
+2026-03-18 06:32:32 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.343s  Peak RAM=7.002 MB
+2026-03-18 06:32:32 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.369s  Peak RAM=7.002 MB
+2026-03-18 06:32:32 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.286s  Peak RAM=7.002 MB
+2026-03-18 06:32:32 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.283s  Peak RAM=7.003 MB
+2026-03-18 06:32:32 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.279s  Peak RAM=7.003 MB
+2026-03-18 06:32:32 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.281s  Peak RAM=7.004 MB
+2026-03-18 06:32:32 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.054s  Test=0.315s  Peak RAM=7.004 MB
+2026-03-18 06:32:32 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.337s  Peak RAM=7.005 MB
+2026-03-18 06:32:32 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.070s  Test=0.382s  Peak RAM=7.006 MB
+2026-03-18 06:32:32 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.348s  Peak RAM=7.006 MB
+2026-03-18 06:32:32 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.228s  Peak RAM=7.007 MB
+2026-03-18 06:32:32 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.316s  Peak RAM=7.008 MB
+2026-03-18 06:32:32 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.362s  Peak RAM=7.008 MB
+2026-03-18 06:32:32 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.375s  Peak RAM=7.008 MB
+2026-03-18 06:32:32 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.323s  Peak RAM=7.009 MB
+2026-03-18 06:32:32 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.376s  Peak RAM=7.01 MB
+2026-03-18 06:32:32 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.376s  Peak RAM=7.012 MB
+2026-03-18 06:32:32 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.077s  Test=0.323s  Peak RAM=7.011 MB
+2026-03-18 06:32:32 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.346s  Peak RAM=7.01 MB
+2026-03-18 06:32:32 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.283s  Peak RAM=7.012 MB
+2026-03-18 06:32:32 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.272s  Peak RAM=7.013 MB
+2026-03-18 06:32:32 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.050s  Test=0.352s  Peak RAM=7.013 MB
+2026-03-18 06:32:32 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.080s  Test=0.276s  Peak RAM=7.013 MB
+2026-03-18 06:32:32 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.335s  Peak RAM=7.015 MB
+2026-03-18 06:32:32 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.260s  Peak RAM=7.015 MB
+2026-03-18 06:32:32 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.046s  Test=0.279s  Peak RAM=7.013 MB
+2026-03-18 06:32:32 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.252s  Peak RAM=7.016 MB
+2026-03-18 06:32:32 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.258s  Peak RAM=7.016 MB
+2026-03-18 06:32:32 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.186s  Peak RAM=7.018 MB
+2026-03-18 06:32:32 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.239s  Peak RAM=7.016 MB
+2026-03-18 06:32:32 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.178s  Peak RAM=7.018 MB
+2026-03-18 06:32:32 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.176s  Peak RAM=7.018 MB
+2026-03-18 06:32:32 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.166s  Peak RAM=7.018 MB
+2026-03-18 06:32:32 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.144s  Peak RAM=7.02 MB
+2026-03-18 06:32:32 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.150s  Peak RAM=7.019 MB
+2026-03-18 06:32:32 | INFO | 
+>>> Processing data_BoTIoT | scaler=RobustScaler
+2026-03-18 06:32:32 | INFO | --- noise=0% ---
+2026-03-18 06:32:32 | INFO | ============================================================
+2026-03-18 06:32:32 | INFO | Dataset  : Train_RobustScaler_data_BoTIoT.csv
+2026-03-18 06:32:32 | INFO | Scaler   : RobustScaler
+2026-03-18 06:32:32 | INFO | Noise    : 0%
+2026-03-18 06:32:32 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:32:32 | INFO | ============================================================
+2026-03-18 06:32:33 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:32:33 | INFO | Training size : 9,072  |  Testing size: 15,000  |  Features: 26
+2026-03-18 06:32:33 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:32:58 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.019s  Test=0.328s  Peak RAM=6.661 MB
+2026-03-18 06:32:58 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.391s  Peak RAM=6.662 MB
+2026-03-18 06:32:58 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.320s  Peak RAM=6.662 MB
+2026-03-18 06:32:58 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.293s  Peak RAM=6.663 MB
+2026-03-18 06:32:58 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.308s  Peak RAM=6.662 MB
+2026-03-18 06:32:58 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.400s  Peak RAM=6.664 MB
+2026-03-18 06:32:58 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.049s  Test=0.375s  Peak RAM=6.663 MB
+2026-03-18 06:32:58 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.436s  Peak RAM=6.664 MB
+2026-03-18 06:32:58 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.442s  Peak RAM=6.666 MB
+2026-03-18 06:32:58 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.455s  Peak RAM=6.667 MB
+2026-03-18 06:32:58 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.395s  Peak RAM=6.668 MB
+2026-03-18 06:32:58 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.363s  Peak RAM=6.667 MB
+2026-03-18 06:32:58 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.357s  Peak RAM=6.668 MB
+2026-03-18 06:32:58 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.376s  Peak RAM=6.669 MB
+2026-03-18 06:32:58 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.275s  Peak RAM=6.669 MB
+2026-03-18 06:32:58 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.295s  Peak RAM=6.669 MB
+2026-03-18 06:32:58 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.304s  Peak RAM=6.669 MB
+2026-03-18 06:32:58 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.353s  Peak RAM=6.67 MB
+2026-03-18 06:32:58 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.320s  Peak RAM=6.671 MB
+2026-03-18 06:32:58 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.291s  Peak RAM=6.672 MB
+2026-03-18 06:32:58 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.051s  Test=0.512s  Peak RAM=6.673 MB
+2026-03-18 06:32:58 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.047s  Test=0.449s  Peak RAM=6.673 MB
+2026-03-18 06:32:58 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.051s  Test=0.288s  Peak RAM=6.675 MB
+2026-03-18 06:32:58 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.371s  Peak RAM=6.674 MB
+2026-03-18 06:32:58 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.450s  Peak RAM=6.674 MB
+2026-03-18 06:32:58 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.278s  Peak RAM=6.675 MB
+2026-03-18 06:32:58 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.279s  Peak RAM=6.676 MB
+2026-03-18 06:32:58 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.071s  Test=0.304s  Peak RAM=6.677 MB
+2026-03-18 06:32:58 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.267s  Peak RAM=6.676 MB
+2026-03-18 06:32:58 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.318s  Peak RAM=6.677 MB
+2026-03-18 06:32:58 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.353s  Peak RAM=6.678 MB
+2026-03-18 06:32:58 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.072s  Test=0.319s  Peak RAM=6.679 MB
+2026-03-18 06:32:58 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.308s  Peak RAM=6.678 MB
+2026-03-18 06:32:58 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.307s  Peak RAM=6.679 MB
+2026-03-18 06:32:58 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.313s  Peak RAM=6.68 MB
+2026-03-18 06:32:58 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.310s  Peak RAM=6.68 MB
+2026-03-18 06:32:58 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.333s  Peak RAM=6.681 MB
+2026-03-18 06:32:58 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.048s  Test=0.330s  Peak RAM=6.683 MB
+2026-03-18 06:32:58 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.314s  Peak RAM=6.688 MB
+2026-03-18 06:32:58 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.290s  Peak RAM=6.682 MB
+2026-03-18 06:32:58 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.264s  Peak RAM=6.681 MB
+2026-03-18 06:32:58 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.293s  Peak RAM=6.686 MB
+2026-03-18 06:32:58 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.274s  Peak RAM=6.684 MB
+2026-03-18 06:32:58 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.241s  Peak RAM=6.687 MB
+2026-03-18 06:32:58 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.230s  Peak RAM=6.685 MB
+2026-03-18 06:32:58 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.255s  Peak RAM=6.685 MB
+2026-03-18 06:32:58 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.221s  Peak RAM=6.687 MB
+2026-03-18 06:32:58 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.171s  Peak RAM=6.687 MB
+2026-03-18 06:32:58 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.162s  Peak RAM=6.688 MB
+2026-03-18 06:32:58 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.160s  Peak RAM=6.687 MB
+2026-03-18 06:32:58 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.168s  Peak RAM=6.688 MB
+2026-03-18 06:32:58 | INFO | --- noise=1% ---
+2026-03-18 06:32:58 | INFO | ============================================================
+2026-03-18 06:32:58 | INFO | Dataset  : Train_RobustScaler_data_BoTIoT.csv
+2026-03-18 06:32:58 | INFO | Scaler   : RobustScaler
+2026-03-18 06:32:58 | INFO | Noise    : 1%
+2026-03-18 06:32:58 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:32:58 | INFO | ============================================================
+2026-03-18 06:32:58 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:32:58 | INFO | Training size : 9,162  |  Testing size: 14,910  |  Features: 26
+2026-03-18 06:32:58 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:33:23 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.323s  Peak RAM=6.728 MB
+2026-03-18 06:33:23 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.332s  Peak RAM=6.727 MB
+2026-03-18 06:33:23 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.022s  Test=0.320s  Peak RAM=6.729 MB
+2026-03-18 06:33:23 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.044s  Test=0.511s  Peak RAM=6.73 MB
+2026-03-18 06:33:23 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.530s  Peak RAM=6.729 MB
+2026-03-18 06:33:23 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.576s  Peak RAM=6.73 MB
+2026-03-18 06:33:23 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.508s  Peak RAM=6.73 MB
+2026-03-18 06:33:23 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.486s  Peak RAM=6.733 MB
+2026-03-18 06:33:23 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.375s  Peak RAM=6.734 MB
+2026-03-18 06:33:23 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.049s  Test=0.346s  Peak RAM=6.732 MB
+2026-03-18 06:33:23 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.313s  Peak RAM=6.732 MB
+2026-03-18 06:33:23 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.325s  Peak RAM=6.733 MB
+2026-03-18 06:33:23 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.260s  Peak RAM=6.734 MB
+2026-03-18 06:33:23 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.276s  Peak RAM=6.733 MB
+2026-03-18 06:33:23 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.311s  Peak RAM=6.735 MB
+2026-03-18 06:33:23 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.461s  Peak RAM=6.739 MB
+2026-03-18 06:33:23 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.393s  Peak RAM=6.734 MB
+2026-03-18 06:33:23 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.338s  Peak RAM=6.737 MB
+2026-03-18 06:33:23 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.258s  Peak RAM=6.737 MB
+2026-03-18 06:33:23 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.362s  Peak RAM=6.738 MB
+2026-03-18 06:33:23 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.349s  Peak RAM=6.739 MB
+2026-03-18 06:33:23 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.318s  Peak RAM=6.738 MB
+2026-03-18 06:33:23 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.297s  Peak RAM=6.739 MB
+2026-03-18 06:33:23 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.064s  Test=0.289s  Peak RAM=6.74 MB
+2026-03-18 06:33:23 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.262s  Peak RAM=6.74 MB
+2026-03-18 06:33:23 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.311s  Peak RAM=6.743 MB
+2026-03-18 06:33:23 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.414s  Peak RAM=6.741 MB
+2026-03-18 06:33:23 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.287s  Peak RAM=6.744 MB
+2026-03-18 06:33:23 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.285s  Peak RAM=6.742 MB
+2026-03-18 06:33:23 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.338s  Peak RAM=6.745 MB
+2026-03-18 06:33:23 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.306s  Peak RAM=6.744 MB
+2026-03-18 06:33:23 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.254s  Peak RAM=6.746 MB
+2026-03-18 06:33:24 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.423s  Peak RAM=6.746 MB
+2026-03-18 06:33:24 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.050s  Test=0.314s  Peak RAM=6.745 MB
+2026-03-18 06:33:24 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.278s  Peak RAM=6.746 MB
+2026-03-18 06:33:24 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.425s  Peak RAM=6.746 MB
+2026-03-18 06:33:24 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.273s  Peak RAM=6.747 MB
+2026-03-18 06:33:24 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.319s  Peak RAM=6.748 MB
+2026-03-18 06:33:24 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.392s  Peak RAM=6.748 MB
+2026-03-18 06:33:24 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.290s  Peak RAM=6.75 MB
+2026-03-18 06:33:24 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.074s  Test=0.334s  Peak RAM=6.751 MB
+2026-03-18 06:33:24 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.285s  Peak RAM=6.749 MB
+2026-03-18 06:33:24 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.240s  Peak RAM=6.752 MB
+2026-03-18 06:33:24 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.239s  Peak RAM=6.75 MB
+2026-03-18 06:33:24 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.198s  Peak RAM=6.751 MB
+2026-03-18 06:33:24 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.199s  Peak RAM=6.752 MB
+2026-03-18 06:33:24 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.177s  Peak RAM=6.753 MB
+2026-03-18 06:33:24 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.168s  Peak RAM=6.753 MB
+2026-03-18 06:33:24 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.159s  Peak RAM=6.755 MB
+2026-03-18 06:33:24 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.177s  Peak RAM=6.754 MB
+2026-03-18 06:33:24 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.151s  Peak RAM=6.754 MB
+2026-03-18 06:33:24 | INFO | --- noise=3% ---
+2026-03-18 06:33:24 | INFO | ============================================================
+2026-03-18 06:33:24 | INFO | Dataset  : Train_RobustScaler_data_BoTIoT.csv
+2026-03-18 06:33:24 | INFO | Scaler   : RobustScaler
+2026-03-18 06:33:24 | INFO | Noise    : 3%
+2026-03-18 06:33:24 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:33:24 | INFO | ============================================================
+2026-03-18 06:33:24 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:33:24 | INFO | Training size : 9,344  |  Testing size: 14,728  |  Features: 26
+2026-03-18 06:33:24 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:33:49 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.272s  Peak RAM=6.861 MB
+2026-03-18 06:33:49 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.020s  Test=0.400s  Peak RAM=6.862 MB
+2026-03-18 06:33:49 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.426s  Peak RAM=6.861 MB
+2026-03-18 06:33:49 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.402s  Peak RAM=6.863 MB
+2026-03-18 06:33:49 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.366s  Peak RAM=6.863 MB
+2026-03-18 06:33:49 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.046s  Test=0.508s  Peak RAM=6.863 MB
+2026-03-18 06:33:49 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.459s  Peak RAM=6.865 MB
+2026-03-18 06:33:49 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.505s  Peak RAM=6.864 MB
+2026-03-18 06:33:49 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.448s  Peak RAM=6.865 MB
+2026-03-18 06:33:49 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.373s  Peak RAM=6.865 MB
+2026-03-18 06:33:49 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.350s  Peak RAM=6.867 MB
+2026-03-18 06:33:49 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.355s  Peak RAM=6.868 MB
+2026-03-18 06:33:49 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.279s  Peak RAM=6.867 MB
+2026-03-18 06:33:49 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.255s  Peak RAM=6.868 MB
+2026-03-18 06:33:49 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.395s  Peak RAM=6.868 MB
+2026-03-18 06:33:49 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.343s  Peak RAM=6.869 MB
+2026-03-18 06:33:49 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.317s  Peak RAM=6.87 MB
+2026-03-18 06:33:49 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.311s  Peak RAM=6.869 MB
+2026-03-18 06:33:49 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.321s  Peak RAM=6.87 MB
+2026-03-18 06:33:49 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.322s  Peak RAM=6.871 MB
+2026-03-18 06:33:49 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.059s  Test=0.447s  Peak RAM=6.872 MB
+2026-03-18 06:33:49 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.061s  Test=0.392s  Peak RAM=6.871 MB
+2026-03-18 06:33:49 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.301s  Peak RAM=6.873 MB
+2026-03-18 06:33:49 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.353s  Peak RAM=6.873 MB
+2026-03-18 06:33:49 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.248s  Peak RAM=6.873 MB
+2026-03-18 06:33:49 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.340s  Peak RAM=6.875 MB
+2026-03-18 06:33:49 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.252s  Peak RAM=6.875 MB
+2026-03-18 06:33:49 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.349s  Peak RAM=6.876 MB
+2026-03-18 06:33:49 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.053s  Test=0.365s  Peak RAM=6.875 MB
+2026-03-18 06:33:49 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.266s  Peak RAM=6.875 MB
+2026-03-18 06:33:49 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.288s  Peak RAM=6.877 MB
+2026-03-18 06:33:49 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.321s  Peak RAM=6.877 MB
+2026-03-18 06:33:49 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.310s  Peak RAM=6.878 MB
+2026-03-18 06:33:49 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.410s  Peak RAM=6.878 MB
+2026-03-18 06:33:49 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.399s  Peak RAM=6.879 MB
+2026-03-18 06:33:49 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.268s  Peak RAM=6.879 MB
+2026-03-18 06:33:49 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.367s  Peak RAM=6.879 MB
+2026-03-18 06:33:49 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.287s  Peak RAM=6.881 MB
+2026-03-18 06:33:49 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.289s  Peak RAM=6.881 MB
+2026-03-18 06:33:49 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.399s  Peak RAM=6.883 MB
+2026-03-18 06:33:49 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.300s  Peak RAM=6.883 MB
+2026-03-18 06:33:49 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.301s  Peak RAM=6.882 MB
+2026-03-18 06:33:49 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.251s  Peak RAM=6.882 MB
+2026-03-18 06:33:49 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.242s  Peak RAM=6.884 MB
+2026-03-18 06:33:49 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.237s  Peak RAM=6.884 MB
+2026-03-18 06:33:49 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.216s  Peak RAM=6.886 MB
+2026-03-18 06:33:49 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.176s  Peak RAM=6.886 MB
+2026-03-18 06:33:49 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.168s  Peak RAM=6.885 MB
+2026-03-18 06:33:49 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.178s  Peak RAM=6.886 MB
+2026-03-18 06:33:49 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.164s  Peak RAM=6.887 MB
+2026-03-18 06:33:49 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.162s  Peak RAM=6.888 MB
+2026-03-18 06:33:49 | INFO | --- noise=5% ---
+2026-03-18 06:33:49 | INFO | ============================================================
+2026-03-18 06:33:49 | INFO | Dataset  : Train_RobustScaler_data_BoTIoT.csv
+2026-03-18 06:33:49 | INFO | Scaler   : RobustScaler
+2026-03-18 06:33:49 | INFO | Noise    : 5%
+2026-03-18 06:33:49 | INFO | nClusters: 51 values (50..300)
+2026-03-18 06:33:49 | INFO | ============================================================
+2026-03-18 06:33:49 | INFO | Loaded Raw Shape -> Train: (9072, 27), Test: (15000, 27)
+2026-03-18 06:33:49 | INFO | Training size : 9,525  |  Testing size: 14,547  |  Features: 26
+2026-03-18 06:33:49 | INFO | Firing up Parallel execution for 51 cluster configs...
+2026-03-18 06:34:15 | INFO | [ncluster=50/50] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.021s  Test=0.545s  Peak RAM=6.993 MB
+2026-03-18 06:34:15 | INFO | [ncluster=55/55] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.361s  Peak RAM=6.992 MB
+2026-03-18 06:34:15 | INFO | [ncluster=60/60] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.367s  Peak RAM=6.995 MB
+2026-03-18 06:34:15 | INFO | [ncluster=65/65] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.023s  Test=0.357s  Peak RAM=6.994 MB
+2026-03-18 06:34:15 | INFO | [ncluster=70/70] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.042s  Test=0.551s  Peak RAM=6.995 MB
+2026-03-18 06:34:15 | INFO | [ncluster=75/75] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.497s  Peak RAM=6.995 MB
+2026-03-18 06:34:15 | INFO | [ncluster=80/80] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.494s  Peak RAM=6.997 MB
+2026-03-18 06:34:15 | INFO | [ncluster=85/85] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.392s  Peak RAM=6.997 MB
+2026-03-18 06:34:15 | INFO | [ncluster=90/90] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.478s  Peak RAM=6.997 MB
+2026-03-18 06:34:15 | INFO | [ncluster=95/95] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.024s  Test=0.321s  Peak RAM=6.998 MB
+2026-03-18 06:34:15 | INFO | [ncluster=100/100] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.025s  Test=0.319s  Peak RAM=6.998 MB
+2026-03-18 06:34:15 | INFO | [ncluster=105/105] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.332s  Peak RAM=7.001 MB
+2026-03-18 06:34:15 | INFO | [ncluster=110/110] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.026s  Test=0.270s  Peak RAM=7.0 MB
+2026-03-18 06:34:15 | INFO | [ncluster=115/115] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.051s  Test=0.476s  Peak RAM=7.0 MB
+2026-03-18 06:34:15 | INFO | [ncluster=120/120] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.295s  Peak RAM=7.001 MB
+2026-03-18 06:34:15 | INFO | [ncluster=125/125] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.291s  Peak RAM=7.001 MB
+2026-03-18 06:34:15 | INFO | [ncluster=130/130] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.395s  Peak RAM=7.002 MB
+2026-03-18 06:34:15 | INFO | [ncluster=135/135] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.384s  Peak RAM=7.003 MB
+2026-03-18 06:34:15 | INFO | [ncluster=140/140] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.029s  Test=0.419s  Peak RAM=7.003 MB
+2026-03-18 06:34:15 | INFO | [ncluster=145/145] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.030s  Test=0.342s  Peak RAM=7.003 MB
+2026-03-18 06:34:15 | INFO | [ncluster=150/150] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.525s  Peak RAM=7.003 MB
+2026-03-18 06:34:15 | INFO | [ncluster=155/155] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.326s  Peak RAM=7.003 MB
+2026-03-18 06:34:15 | INFO | [ncluster=160/160] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.376s  Peak RAM=7.004 MB
+2026-03-18 06:34:15 | INFO | [ncluster=165/165] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.447s  Peak RAM=7.006 MB
+2026-03-18 06:34:15 | INFO | [ncluster=170/170] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.311s  Peak RAM=7.006 MB
+2026-03-18 06:34:15 | INFO | [ncluster=175/175] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.256s  Peak RAM=7.006 MB
+2026-03-18 06:34:15 | INFO | [ncluster=180/180] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.031s  Test=0.297s  Peak RAM=7.006 MB
+2026-03-18 06:34:15 | INFO | [ncluster=185/185] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.343s  Peak RAM=7.008 MB
+2026-03-18 06:34:15 | INFO | [ncluster=190/190] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.062s  Test=0.310s  Peak RAM=7.009 MB
+2026-03-18 06:34:15 | INFO | [ncluster=195/195] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.289s  Peak RAM=7.009 MB
+2026-03-18 06:34:15 | INFO | [ncluster=200/200] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.034s  Test=0.349s  Peak RAM=7.01 MB
+2026-03-18 06:34:15 | INFO | [ncluster=205/205] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.439s  Peak RAM=7.011 MB
+2026-03-18 06:34:15 | INFO | [ncluster=210/210] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.036s  Test=0.386s  Peak RAM=7.01 MB
+2026-03-18 06:34:15 | INFO | [ncluster=215/215] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.035s  Test=0.456s  Peak RAM=7.01 MB
+2026-03-18 06:34:15 | INFO | [ncluster=220/220] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.037s  Test=0.451s  Peak RAM=7.011 MB
+2026-03-18 06:34:15 | INFO | [ncluster=225/225] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.375s  Peak RAM=7.012 MB
+2026-03-18 06:34:15 | INFO | [ncluster=230/230] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.066s  Test=0.348s  Peak RAM=7.012 MB
+2026-03-18 06:34:15 | INFO | [ncluster=235/235] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.052s  Test=0.373s  Peak RAM=7.013 MB
+2026-03-18 06:34:15 | INFO | [ncluster=240/240] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.038s  Test=0.280s  Peak RAM=7.013 MB
+2026-03-18 06:34:15 | INFO | [ncluster=245/245] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.286s  Peak RAM=7.015 MB
+2026-03-18 06:34:15 | INFO | [ncluster=250/250] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.039s  Test=0.258s  Peak RAM=7.015 MB
+2026-03-18 06:34:15 | INFO | [ncluster=255/255] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.265s  Peak RAM=7.015 MB
+2026-03-18 06:34:15 | INFO | [ncluster=260/260] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.253s  Peak RAM=7.016 MB
+2026-03-18 06:34:15 | INFO | [ncluster=265/265] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.040s  Test=0.245s  Peak RAM=7.017 MB
+2026-03-18 06:34:15 | INFO | [ncluster=270/270] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.041s  Test=0.237s  Peak RAM=7.017 MB
+2026-03-18 06:34:15 | INFO | [ncluster=275/275] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.032s  Test=0.204s  Peak RAM=7.017 MB
+2026-03-18 06:34:15 | INFO | [ncluster=280/280] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.190s  Peak RAM=7.018 MB
+2026-03-18 06:34:15 | INFO | [ncluster=285/285] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.033s  Test=0.192s  Peak RAM=7.018 MB
+2026-03-18 06:34:15 | INFO | [ncluster=290/290] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.169s  Peak RAM=7.02 MB
+2026-03-18 06:34:15 | INFO | [ncluster=295/295] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.028s  Test=0.178s  Peak RAM=7.019 MB
+2026-03-18 06:34:15 | INFO | [ncluster=300/300] AUC-ROC=nan%  AUC-PR=0.00%  F1=0.0000  MCC=0.0000  Train=0.027s  Test=0.164s  Peak RAM=7.019 MB
+2026-03-18 06:34:15 | INFO | Results saved to: /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/noise/data_BoTIoT_memopt_20260318_031153.csv
+2026-03-18 06:34:15 | INFO | Log saved to    : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/logs/data_BoTIoT_memopt_20260318_031153.log
