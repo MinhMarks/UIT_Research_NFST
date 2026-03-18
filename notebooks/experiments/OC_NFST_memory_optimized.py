@@ -539,23 +539,23 @@ if __name__ == "__main__":
                'QuantileTransformer', 'RobustScaler']   # deduped
 
     # Notebook: for ncluster in range(1, 301, 3)
-    N_CLUSTERS_LIST = list(range(50, 301, 5))            # [1, 4, 7, ..., 298, 301]
+    N_CLUSTERS_LIST = list(range(1, 301, 3))            # [1, 4, 7, ..., 298, 301]
 
     # Notebook: for noise in [0, 1, 3, 5]  (adjust here as needed)
     NOISE_LIST = [0, 1, 3, 5]
 
     # ------------------------------------------------------------------
     RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+    experiment_name = f"Experiment_OC_NFST_MemOpt_{RUN_TIMESTAMP}"
+    
+    # Create the central experiment directory
+    exp_dir = os.path.join(_script_dir, 'outputs', experiment_name)
+    os.makedirs(exp_dir, exist_ok=True)
 
     for prefix in DATASETS:
-        outputs_dir = os.path.join(_script_dir, 'outputs/noise')
-        logs_dir    = os.path.join(_script_dir, 'logs')
-        os.makedirs(outputs_dir, exist_ok=True)
-        os.makedirs(logs_dir, exist_ok=True)
-
         # One CSV and one log file per dataset per run (timestamped)
-        out_path = os.path.join(outputs_dir, f"{prefix}_memopt_{RUN_TIMESTAMP}.csv")
-        log_path = os.path.join(logs_dir,    f"{prefix}_memopt_{RUN_TIMESTAMP}.log")
+        out_path = os.path.join(exp_dir, f"{prefix}_memopt_{RUN_TIMESTAMP}.csv")
+        log_path = os.path.join(exp_dir, f"{prefix}_memopt_{RUN_TIMESTAMP}.log")
 
         # Setup logger for this dataset
         ds_logger = setup_logger(log_path, name=f"nfst.{prefix}")
