@@ -279,7 +279,7 @@ class BoTIoT():
     df = df.dropna(axis='index', how='any')
     # Remove duplicated samples (rows)
     base_self.__print("Remove duplicated samples (rows).")
-    df = df.drop_duplicates(df.drop_duplicates(subset=df.columns, keep='first'))
+    df = df.drop_duplicates(subset=X.columns, keep='first')
     base_self.__data_df = df
     base_self.__fts_names = base_self.__data_df.columns
 

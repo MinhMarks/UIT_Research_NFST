@@ -51,10 +51,10 @@ SCALERS = {
 }
 
 DATASETS = [
-    ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign']),
-    ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign']),
-    ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal']),
-    ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal'])
+    ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign', 0, '0']),
+    ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign', 0, '0']),
+    ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']),
+    ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0'])
 ]
 
 def generate_datasets():
@@ -143,7 +143,7 @@ def generate_datasets():
         
         # Convert labels to strictly 0 (normal) and 1 (anomaly)
         train_df[label_col] = 0
-        test_df[label_col] = test_df[label_col].apply(lambda x: 0 if str(x).lower() in [n.lower() for n in normal_labels] or 'normal' in str(x).lower() or 'benign' in str(x).lower() else 1)
+        test_df[label_col] = test_df[label_col].apply(lambda x: 0 if str(x).lower() in [str(n).lower() for n in normal_labels] or 'normal' in str(x).lower() or 'benign' in str(x).lower() else 1)
         
         log.info(f"FINAL Train shape: {train_df.shape} (Normal ONLY)")
         log.info(f"FINAL Test  shape: {test_df.shape} (Normal: {len(test_normal_df)}, Anomaly: {len(test_anomaly_df)})")

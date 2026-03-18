@@ -206,88 +206,88 @@ class CICIoT2023():
         base_self.__fts_names.append('Binary_label')
     return base_self.__data_df
 
-    def __load_raw_default(base_self, dir_path, limit_cnt:sys.maxsize, frac=None):
-        base_self.__label_cnt = {}
-        tt_time = time.time()
-        df_ans = pd.DataFrame()
-        
-        # Check if dir_path is a zip file, or if the directory doesn't exist but the zip does
-        zip_path = None
-        if dir_path.endswith('.zip') and os.path.exists(dir_path):
-            zip_path = dir_path
-        elif not os.path.exists(dir_path) and os.path.exists(dir_path + '.zip'):
-            zip_path = dir_path + '.zip'
+  def __load_raw_default(base_self, dir_path, limit_cnt:sys.maxsize, frac=None):
+    base_self.__label_cnt = {}
+    tt_time = time.time()
+    df_ans = pd.DataFrame()
+    
+    # Check if dir_path is a zip file, or if the directory doesn't exist but the zip does
+    zip_path = None
+    if dir_path.endswith('.zip') and os.path.exists(dir_path):
+        zip_path = dir_path
+    elif not os.path.exists(dir_path) and os.path.exists(dir_path + '.zip'):
+        zip_path = dir_path + '.zip'
 
-        if zip_path:
-            import zipfile
-            base_self.__print(f"Reading directly from ZIP: {zip_path}")
-            with zipfile.ZipFile(zip_path, 'r') as z:
-                csv_files = [f for f in z.namelist() if f.endswith('.csv')]
-                for file_name in csv_files:
-                    base_self.__print("Begin stream file " + file_name)
-                    list_ss = []
-                    time_file = time.time()
-                    with z.open(file_name) as f:
-                        for chunk in pd.read_csv(f, index_col=None, names=base_self.__fts_names, header=0, chunksize=10000, low_memory=False):
-                            dfse = chunk[base_self.__target_variable].value_counts()
-                            for x in dfse.index:
-                                if x in base_self.__label_drop:
-                                    continue
-                                sub_set = chunk[chunk[base_self.__target_variable] == x]
-                                x_cnt = float(dfse[x])
-                                if x in base_self.__label_map:
-                                    x = base_self.__label_map[x]
-                                if x not in base_self.__label_cnt:
-                                    base_self.__label_cnt[x] = 0
-                                if limit_cnt == base_self.__label_cnt[x]:
-                                    continue
-                                max_cnt_chunk = min(int(limit_cnt * (x_cnt / base_self.__real_cnt[x]) + 1), sub_set.shape[0])
-                                if frac != None:
-                                    max_cnt_chunk = min(int(frac * x_cnt + 1), sub_set.shape[0])
-                                max_cnt_chunk = min(max_cnt_chunk, limit_cnt - base_self.__label_cnt[x])
-                                sub_set = sub_set.sample(n=max_cnt_chunk, replace=False, random_state=SEED)
-                                sub_set[base_self.__target_variable] = sub_set[base_self.__target_variable].apply(lambda y: base_self.__label_map[y] if y in base_self.__label_map else y)
-                                list_ss.append(sub_set)
-                                base_self.__label_cnt[x] += sub_set.shape[0]
-                    df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
-                    base_self.__print("Update label:")
-                    base_self.__print(base_self.__label_cnt)
-                    base_self.__print(f"Time load: {time.time() - time_file}")
-                    print(f"================================ Finish {file_name} ===================================")
-        else:
-            for root, _, files in os.walk(dir_path):
-                for file in files:
-                    base_self.__print("Begin file " + file)
-                    if not file.endswith(".csv"):
-                        continue
-                    list_ss = []
-                    time_file = time.time()
-                    for chunk in pd.read_csv(os.path.join(root,file), index_col=None, names=base_self.__fts_names, header=0, chunksize=10000, low_memory=False):
+    if zip_path:
+        import zipfile
+        base_self.__print(f"Reading directly from ZIP: {zip_path}")
+        with zipfile.ZipFile(zip_path, 'r') as z:
+            csv_files = [f for f in z.namelist() if f.endswith('.csv')]
+            for file_name in csv_files:
+                base_self.__print("Begin stream file " + file_name)
+                list_ss = []
+                time_file = time.time()
+                with z.open(file_name) as f:
+                    for chunk in pd.read_csv(f, index_col=None, names=base_self.__fts_names, header=0, chunksize=10000, low_memory=False):
                         dfse = chunk[base_self.__target_variable].value_counts()
                         for x in dfse.index:
                             if x in base_self.__label_drop:
-                              continue
+                                continue
                             sub_set = chunk[chunk[base_self.__target_variable] == x]
                             x_cnt = float(dfse[x])
                             if x in base_self.__label_map:
-                              x = base_self.__label_map[x]
+                                x = base_self.__label_map[x]
                             if x not in base_self.__label_cnt:
                                 base_self.__label_cnt[x] = 0
-                            if limit_cnt == base_self.__label_cnt[x] :
+                            if limit_cnt == base_self.__label_cnt[x]:
                                 continue
                             max_cnt_chunk = min(int(limit_cnt * (x_cnt / base_self.__real_cnt[x]) + 1), sub_set.shape[0])
                             if frac != None:
                                 max_cnt_chunk = min(int(frac * x_cnt + 1), sub_set.shape[0])
                             max_cnt_chunk = min(max_cnt_chunk, limit_cnt - base_self.__label_cnt[x])
-                            sub_set = sub_set.sample(n=max_cnt_chunk,replace = False, random_state = SEED)
+                            sub_set = sub_set.sample(n=max_cnt_chunk, replace=False, random_state=SEED)
                             sub_set[base_self.__target_variable] = sub_set[base_self.__target_variable].apply(lambda y: base_self.__label_map[y] if y in base_self.__label_map else y)
                             list_ss.append(sub_set)
                             base_self.__label_cnt[x] += sub_set.shape[0]
-                    df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
-                    base_self.__print("Update label:")
-                    base_self.__print(base_self.__label_cnt)
-                    base_self.__print(f"Time load: {time.time() - time_file}")
-                    print(f"================================ Finish {file} ===================================")
+                df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
+                base_self.__print("Update label:")
+                base_self.__print(base_self.__label_cnt)
+                base_self.__print(f"Time load: {time.time() - time_file}")
+                print(f"================================ Finish {file_name} ===================================")
+    else:
+        for root, _, files in os.walk(dir_path):
+            for file in files:
+                base_self.__print("Begin file " + file)
+                if not file.endswith(".csv"):
+                    continue
+                list_ss = []
+                time_file = time.time()
+                for chunk in pd.read_csv(os.path.join(root,file), index_col=None, names=base_self.__fts_names, header=0, chunksize=10000, low_memory=False):
+                    dfse = chunk[base_self.__target_variable].value_counts()
+                    for x in dfse.index:
+                        if x in base_self.__label_drop:
+                          continue
+                        sub_set = chunk[chunk[base_self.__target_variable] == x]
+                        x_cnt = float(dfse[x])
+                        if x in base_self.__label_map:
+                          x = base_self.__label_map[x]
+                        if x not in base_self.__label_cnt:
+                            base_self.__label_cnt[x] = 0
+                        if limit_cnt == base_self.__label_cnt[x] :
+                            continue
+                        max_cnt_chunk = min(int(limit_cnt * (x_cnt / base_self.__real_cnt[x]) + 1), sub_set.shape[0])
+                        if frac != None:
+                            max_cnt_chunk = min(int(frac * x_cnt + 1), sub_set.shape[0])
+                        max_cnt_chunk = min(max_cnt_chunk, limit_cnt - base_self.__label_cnt[x])
+                        sub_set = sub_set.sample(n=max_cnt_chunk,replace = False, random_state = SEED)
+                        sub_set[base_self.__target_variable] = sub_set[base_self.__target_variable].apply(lambda y: base_self.__label_map[y] if y in base_self.__label_map else y)
+                        list_ss.append(sub_set)
+                        base_self.__label_cnt[x] += sub_set.shape[0]
+                df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
+                base_self.__print("Update label:")
+                base_self.__print(base_self.__label_cnt)
+                base_self.__print(f"Time load: {time.time() - time_file}")
+                print(f"================================ Finish {file} ===================================")
     
     print("Total time load:", time.time() - tt_time)
     base_self.__data_df = df_ans

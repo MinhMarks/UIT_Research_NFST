@@ -273,8 +273,8 @@ if __name__ == "__main__":
 
     for prefix in dataset_prefixes:
         for scaler in scaler_names: 
-            train_file = f'../../Datascaled/NoiseOCData/Train_{scaler}_{prefix}'
-            test_file = f'../../Datascaled/NoiseOCData/Test_{scaler}_{prefix}'
+            train_file = os.path.join(current_dir, '..', '..', 'Datascaled', 'Official_OC_Data', f'Train_{scaler}_{prefix}')
+            test_file = os.path.join(current_dir, '..', '..', 'Datascaled', 'Official_OC_Data', f'Test_{scaler}_{prefix}')
             
             if not os.path.exists(train_file) or not os.path.exists(test_file):
                 print(f"File not found for {prefix}, {scaler}. Skipping...")
