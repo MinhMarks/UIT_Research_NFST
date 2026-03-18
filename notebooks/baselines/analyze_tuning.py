@@ -4,6 +4,7 @@ import seaborn as sns
 import numpy as np
 import argparse
 import os
+from datetime import datetime
 
 def analyze_tuning_impact(input_csv):
     """
@@ -25,8 +26,10 @@ def analyze_tuning_impact(input_csv):
         print("No valid AUCPR data found to analyze.")
         return
 
-    # Create an output directory
-    output_dir = "tuning_analysis_output"
+    # Create a timestamped output directory
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_dir = os.path.join(_script_dir, "tuning_analysis_output", f"Analysis_{RUN_TIMESTAMP}")
     os.makedirs(output_dir, exist_ok=True)
 
     # 1. Boxplot showing the variance of AUCPR for each model across all parameter configurations

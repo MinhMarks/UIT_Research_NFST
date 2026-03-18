@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import argparse
 import os
+from datetime import datetime
 
 def load_and_merge_data(baseline_csv, model_csv):
     """
@@ -141,5 +142,16 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    if args.output == "plots":
+        # Default case: create a timestamped folder inside notebooks/analysis/.../plots
+        experiment_name = f"Plots_{RUN_TIMESTAMP}"
+        final_output_dir = os.path.join(_script_dir, 'plots', experiment_name)
+    else:
+        # User specified a custom output dir
+        final_output_dir = args.output
+
     df_merged = load_and_merge_data(args.baseline, args.model)
-    plot_memory_comparison(df_merged, args.output)
+    plot_memory_comparison(df_merged, final_output_dir)

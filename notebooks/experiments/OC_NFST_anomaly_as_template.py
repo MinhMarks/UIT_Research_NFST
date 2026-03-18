@@ -555,16 +555,16 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------
     RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    for prefix in DATASETS:
-        outputs_dir = os.path.join(_script_dir, 'outputs/noise')
-        logs_dir    = os.path.join(_script_dir, 'logs')
-        os.makedirs(outputs_dir, exist_ok=True)
-        os.makedirs(logs_dir, exist_ok=True)
+    # Create a central timestamped experiment directory
+    experiment_name = f"Experiment_OC_NFST_AnomalyTemplate_{RUN_TIMESTAMP}"
+    exp_dir = os.path.join(_script_dir, 'outputs', experiment_name)
+    os.makedirs(exp_dir, exist_ok=True)
 
+    for prefix in DATASETS:
         # One CSV and one log file per dataset per run (timestamped)
         # [CHANGE 3] Suffix _anomaly_template để phân biệt với bản gốc
-        out_path = os.path.join(outputs_dir, f"{prefix}_anomaly_template_{RUN_TIMESTAMP}.csv")
-        log_path = os.path.join(logs_dir,    f"{prefix}_anomaly_template_{RUN_TIMESTAMP}.log")
+        out_path = os.path.join(exp_dir, f"{prefix}_anomaly_template.csv")
+        log_path = os.path.join(exp_dir, f"{prefix}_anomaly_template.log")
 
         # Setup logger for this dataset
         ds_logger = setup_logger(log_path, name=f"nfst.{prefix}")

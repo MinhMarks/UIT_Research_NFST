@@ -9,6 +9,7 @@ import seaborn as sns
 from sklearn.metrics import (matthews_corrcoef, f1_score, precision_score, 
                              recall_score, accuracy_score, roc_auc_score, 
                              average_precision_score)
+from datetime import datetime
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
@@ -126,8 +127,8 @@ def evaluate_predictions(y_true, y_prob):
     auc_pr = average_precision_score(y_true_flipped, 1 - y_prob)
     return auc_roc * 100, auc_pr * 100
 
-def plot_2d_projections(dataset_name, projected_data, y_test):
-    os.makedirs("plots", exist_ok=True)
+def plot_2d_projections(dataset_name, projected_data, y_test, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
     
     for ax, (method, X_proj) in zip(axes, projected_data.items()):
@@ -162,11 +163,11 @@ def plot_2d_projections(dataset_name, projected_data, y_test):
         
     plt.suptitle(f"Projected Space Distribution: {dataset_name}", fontweight='bold')
     plt.tight_layout()
-    plt.savefig(f"plots/Projection_2D_{dataset_name}.png", dpi=300)
+    plt.savefig(os.path.join(output_dir, f"Projection_2D_{dataset_name}.png"), dpi=300)
     plt.close()
 
 # ----------------- Pipeline -----------------
-def run_comparison():
+def run_comparison(output_dir):
     datasets = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
     scaler = 'MinMaxScaler'
     # Data directory can be set via the DATA_DIR environment variable for server deployments.
@@ -251,16 +252,17 @@ def run_comparison():
             })
             
         ds_name = ds.replace('data_', '').replace('.csv', '')
-        plot_2d_projections(ds_name, projected_data_for_plot, y_test)
+        plot_2d_projections(ds_name, projected_data_for_plot, y_test, output_dir)
             
     df_results = pd.DataFrame(results)
-    df_results.to_csv("svd_vs_gs_results.csv", index=False)
-    print("\nResults exported to svd_vs_gs_results.csv")
+    res_path = os.path.join(output_dir, "svd_vs_gs_results.csv")
+    df_results.to_csv(res_path, index=False)
+    print(f"\nResults exported to {res_path}")
     return df_results
 
 # ----------------- Plotting -----------------
-def generate_plots(df):
-    os.makedirs("plots", exist_ok=True)
+def generate_plots(df, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
     sns.set_theme(style="whitegrid", context="paper", font_scale=1.2)
     
     # 1. Performance (AUCPR & AUCROC)
@@ -274,7 +276,7 @@ def generate_plots(df):
     axes[1].set_ylabel('AUC-ROC (%)')
     
     plt.tight_layout()
-    plt.savefig('plots/SVD_vs_GS_Performance.png', dpi=300)
+    plt.savefig(os.path.join(output_dir, 'SVD_vs_GS_Performance.png'), dpi=300)
     plt.close()
 
     # 2. Memory Footprint
@@ -283,7 +285,7 @@ def generate_plots(df):
     ax.set_title('Peak RAM Usage (Training Phase)')
     ax.set_ylabel('Memory (MB) - Lower is Better')
     plt.tight_layout()
-    plt.savefig('plots/SVD_vs_GS_Memory.png', dpi=300)
+    plt.savefig(os.path.join(output_dir, 'SVD_vs_GS_Memory.png'), dpi=300)
     plt.close()
 
     # 3. Time Complexity
@@ -299,11 +301,17 @@ def generate_plots(df):
     axes[1].set_yscale('log')
     
     plt.tight_layout()
-    plt.savefig('plots/SVD_vs_GS_Time.png', dpi=300)
+    plt.savefig(os.path.join(output_dir, 'SVD_vs_GS_Time.png'), dpi=300)
     plt.close()
     
-    print("All comparison plots saved to the 'plots/' directory.")
+    print(f"All comparison plots saved to the '{output_dir}' directory.")
 
 if __name__ == "__main__":
-    df = run_comparison()
-    generate_plots(df)
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+    experiment_name = f"Comparison_SVD_GS_{RUN_TIMESTAMP}"
+    exp_dir = os.path.join(_script_dir, 'outputs', experiment_name)
+    os.makedirs(exp_dir, exist_ok=True)
+
+    df = run_comparison(exp_dir)
+    generate_plots(df, exp_dir)

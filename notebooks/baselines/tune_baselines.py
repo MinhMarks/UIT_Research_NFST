@@ -12,6 +12,7 @@ from sklearn.impute import SimpleImputer
 import traceback
 import random
 import torch
+from datetime import datetime
 
 # Fix seeds globally
 def set_seed(seed=42):
@@ -268,8 +269,15 @@ if __name__ == "__main__":
     scaler_names = ['QuantileTransformer', 'MinMaxScaler', 'Normalizer', 'RobustScaler']
     noise_levels = [0, 1, 3, 5]
     
-    output_all = "Tuned_Baseline_Results_All1.csv"
-    output_best = "Best_Baseline_Results_Per_Model1.csv"
+    RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+    experiment_name = f"Experiment_Baseline_Tuning_{RUN_TIMESTAMP}"
+    
+    # Create the central experiment directory inside notebooks/baselines/outputs
+    exp_dir = os.path.join(current_dir, 'outputs', experiment_name)
+    os.makedirs(exp_dir, exist_ok=True)
+
+    output_all = os.path.join(exp_dir, "Tuned_Baseline_Results_All.csv")
+    output_best = os.path.join(exp_dir, "Best_Baseline_Results_Per_Model.csv")
 
     for prefix in dataset_prefixes:
         for scaler in scaler_names: 

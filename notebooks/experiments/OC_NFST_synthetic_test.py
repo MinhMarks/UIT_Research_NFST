@@ -554,15 +554,14 @@ def run_experiment_synthetic(
 # ENTRY POINT — Sanity Check trên synthetic data
 # ============================================================================
 if __name__ == "__main__":
-    _script_dir  = os.path.dirname(os.path.abspath(__file__))
-    outputs_dir  = os.path.join(_script_dir, 'outputs')
-    logs_dir     = os.path.join(_script_dir, 'logs')
-    os.makedirs(outputs_dir, exist_ok=True)
-    os.makedirs(logs_dir, exist_ok=True)
-
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
     RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_path = os.path.join(outputs_dir, f"synthetic_sanity_{RUN_TIMESTAMP}.csv")
-    log_path = os.path.join(logs_dir,    f"synthetic_sanity_{RUN_TIMESTAMP}.log")
+    experiment_name = f"Experiment_OC_NFST_Synthetic_{RUN_TIMESTAMP}"
+    exp_dir = os.path.join(_script_dir, 'outputs', experiment_name)
+    os.makedirs(exp_dir, exist_ok=True)
+
+    out_path = os.path.join(exp_dir, "synthetic_sanity.csv")
+    log_path = os.path.join(exp_dir, "synthetic_sanity.log")
 
     log = setup_logger(log_path, name="nfst.synthetic")
     log.info("=" * 60)
