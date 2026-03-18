@@ -51,8 +51,8 @@ SCALERS = {
 }
 
 DATASETS = [
-    ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign', 0, '0']),
-    ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign', 0, '0']),
+    # ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign', 0, '0']),
+    # ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign', 0, '0']),
     ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']),
     ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0'])
 ]
