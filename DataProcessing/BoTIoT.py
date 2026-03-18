@@ -417,7 +417,14 @@ class BoTIoT():
         if os.path.exists(zip_file) == False:
           print("================ File Data Zip not found!!! Start downloading ====================")
           print("File Data Zip saved at:", base_self.__download(data_url, zip_file))
-          print("============================== End download data =================================")
+          print("============================== End download data ================================")
+          
+        import zipfile
+        if not zipfile.is_zipfile(zip_file):
+            print("================ Zip file not valid (possibly expired link)!!! Deleting... ===============")
+            os.remove(zip_file)
+            print(f"ERROR: Google Drive link expired. Please manually download BoTIoT.zip to {zip_file}")
+            sys.exit(1)
           
         # Note: Bypassing disk extraction to save memory. 
         # The __load_raw_default will stream directly from the zip.
