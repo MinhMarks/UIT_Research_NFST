@@ -155,22 +155,22 @@ FAST_PARAMS = {
     "IForest": {"n_estimators": 100},
     "PCA": {"n_components": 0.7},
     "OCSVM": {"nu": 0.1},
-    "AutoEncoder": {"hidden_neurons": [64, 32, 32, 64], "epochs": 20, "verbose": 0},
+    "AutoEncoder": {"hidden_neurons": [64, 32, 32, 64], "epochs": 20},
     "DIF": {"n_ensemble": 50, "n_estimators": 6},
     "NeuTraLAD": {"latent_dim": 32, "enc_hdim": 32, "num_epochs": 20},
     "DASVDD": {"code_size": 32, "num_epochs": 20},
     "LODA": {"n_bins": 50},
     "COPOD": {},
     "ECOD": {},
-    "VAE": {"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 20, "verbose": 0},
-    "DeepSVDD": {"hidden_neurons": [64, 32], "epochs": 20, "verbose": 0},
-    "LUNAR": {"n_endpoints": 10},
-    "AE1SVM": {"epochs": 20, "verbose": 0},
-    "DevNet": {"epochs": 20, "verbose": 0},
-    "ALAD": {"epochs": 20, "verbose": 0},
+    "VAE": {"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 20},
+    "DeepSVDD": {"hidden_neurons": [64, 32], "epochs": 20},
+    "LUNAR": {"n_neighbors": 5},
+    "AE1SVM": {"epochs": 20},
+    "DevNet": {"epochs": 20},
+    "ALAD": {"epochs": 20},
 }
 
-def get_model(model_name, params):
+def get_model(model_name, params, n_features):
     model_dict = {
         "CBLOF": CBLOF, "KNN": KNN, "IForest": IForest, "OCSVM": OCSVM,
         "LOF": LOF, "DeepSVDD": DeepSVDD, "HBOS": HBOS, "LODA": LODA,
@@ -179,24 +179,49 @@ def get_model(model_name, params):
         "VAE": VAE, "SO_GAAL": SO_GAAL, "MO_GAAL": MO_GAAL, "SUOD": SUOD,
     }
     
+    # Common flags to remove if they cause issues or aren't supported
+    params = params.copy()
+    
+    # Forced CPU for all torch-based baseline models to avoid CUDA fork issues
+    torch_models = ['AutoEncoder', 'VAE', 'DeepSVDD', 'AE1SVM', 'DevNet', 'ALAD']
+    if model_name in torch_models:
+        params['device'] = 'cpu'
+    
     if model_name == 'DASVDD': return DASVDD(**params, verbose=0)
     elif model_name == "DIF": return DIF(**params, verbose=0)
     elif model_name == "NeuTraLAD": return NeuTraLAD(**params, verbose=0)
+    elif model_name == "DeepSVDD": return DeepSVDD(n_features=n_features, **params)
     elif model_name == "SUOD":
         base_estimators = [HBOS(n_bins=10), COPOD(), ECOD()]
         return SUOD(base_estimators=base_estimators, n_jobs=1, rp_flag_global=True, bps_flag=False, verbose=False)
     
     model_class = model_dict.get(model_name)
     if model_class is None: return None
-    return model_class(**params)
+    
+    # Try initialization, remove problematic arguments if they fail
+    try:
+        return model_class(**params)
+    except TypeError as e:
+        # If 'hidden_neurons' failed for AutoEncoder, it's likely very old PyOD
+        msg = str(e).lower()
+        if 'hidden_neurons' in msg and 'unexpected' in msg:
+            params['hidden_layers'] = params.pop('hidden_neurons')
+        if 'encoder_neurons' in msg and 'unexpected' in msg:
+            params['encoder_layers'] = params.pop('encoder_neurons')
+            if 'decoder_neurons' in params:
+                 params['decoder_layers'] = params.pop('decoder_neurons')
+        if 'verbose' in msg and 'unexpected' in msg:
+            params.pop('verbose', None)
+        return model_class(**params)
 
 # ============================================================================
 # EXPERIMENT RUNNER
 # ============================================================================
 def run_single_model(model_name, X_train, y_train, X_test, y_test, dataset_name, noise, scaler):
     params = FAST_PARAMS.get(model_name, {})
+    n_features = X_train.shape[1]
     try:
-        model = get_model(model_name, params)
+        model = get_model(model_name, params, n_features)
         if model is None: return None
         
         tracemalloc.start()
