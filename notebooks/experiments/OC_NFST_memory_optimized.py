@@ -138,6 +138,26 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=1):
     return X_train, y_train, X_test, y_test
 
 
+def drop_metadata_features(df: pd.DataFrame, logger: logging.Logger):
+    """
+    Drop known non-informative BoTIoT/IoT features if they are present.
+    These features (like timestamps, IDs) can cause huge artificial distances
+    or perfectly inverted rankings in one-class models.
+    """
+    meta_cols = [
+        'pkSeqID', 'stime', 'ltime', 'seq', 'saddr', 'daddr', 'sport', 'dport',
+        'smac', 'dmac', 'soui', 'doui', 'sco', 'dco', 'state', 'flgs', 'proto'
+    ]
+    dropped = []
+    for col in meta_cols:
+        if col in df.columns:
+            df.drop(columns=[col], inplace=True)
+            dropped.append(col)
+    if dropped:
+        logger.info(f"Dropped metadata features: {dropped}")
+    return df
+
+
 # ============================================================================
 # CLUSTERING
 # ============================================================================
@@ -282,40 +302,44 @@ def faiss_test_score(null_test: np.ndarray, null_train: np.ndarray) -> np.ndarra
     return np.sqrt(np.maximum(distances[:, 0], 0.0))
 
 
-def _numpy_train_score(null_train: np.ndarray) -> np.ndarray:
-    """Numpy fallback for train_score (O(n²))."""
-    sq = np.sum(null_train ** 2, axis=1)
-    dist2 = sq[:, None] + sq[None, :] - 2 * (null_train @ null_train.T)
-    np.fill_diagonal(dist2, np.inf)
-    return np.sqrt(np.maximum(dist2.min(axis=1), 0.0))
-
-
-def _numpy_test_score(null_test: np.ndarray, null_train: np.ndarray) -> np.ndarray:
-    """Numpy fallback for test_score (O(n·m))."""
-    sq_te = np.sum(null_test  ** 2, axis=1, keepdims=True)
-    sq_tr = np.sum(null_train ** 2, axis=1)
-    cross = null_test @ null_train.T
-    dist2 = sq_te + sq_tr - 2 * cross
-    return np.sqrt(np.maximum(dist2.min(axis=1), 0.0))
-
-
-def compute_scores(null_train: np.ndarray, null_test: np.ndarray):
+def compute_dist_to_centers(X, W, centers):
     """
-    Compute y_proba matching the notebook exactly:
+    Compute distance to the null space relative to the NEAREST cluster center.
+    """
+    if FAISS_AVAILABLE:
+        d = centers.shape[1]
+        index = faiss.IndexFlatL2(d)
+        index.add(centers.astype('float32'))
+        _, nearest_idx = index.search(X.astype('float32'), 1)
+        nearest_centers = centers[nearest_idx.flatten()]
+    else:
+        # Fallback to numpy
+        nearest_centers = []
+        for i in range(0, len(X), 2000):
+            batch = X[i:i+2000]
+            dists = np.linalg.norm(batch[:, np.newaxis, :] - centers[np.newaxis, :, :], axis=2)
+            idx = np.argmin(dists, axis=1)
+            nearest_centers.append(centers[idx])
+        nearest_centers = np.vstack(nearest_centers)
+
+    diff = X - nearest_centers
+    projections = diff @ W
+    return np.sqrt(np.sum(projections**2, axis=1))
+
+
+def compute_scores(X_train, X_test, W, centers):
+    """
+    Compute y_proba matching the notebook exactly, but using cluster-center distance:
         y_proba[:, 1] = min(y_score / max(train_score), 1)
         y_proba[:, 0] = 1 - y_proba[:, 1]
 
     Returns y_proba (n_test, 2).
     """
-    null_train = np.ascontiguousarray(null_train, dtype=np.float32)
-    null_test  = np.ascontiguousarray(null_test,  dtype=np.float32)
+    X_train = np.ascontiguousarray(X_train, dtype=np.float32)
+    X_test  = np.ascontiguousarray(X_test,  dtype=np.float32)
 
-    if FAISS_AVAILABLE:
-        train_score = faiss_train_score(null_train)            # (n_train,)
-        y_score     = faiss_test_score(null_test, null_train)  # (n_test,)
-    else:
-        train_score = _numpy_train_score(null_train)
-        y_score     = _numpy_test_score(null_test, null_train)
+    train_score = compute_dist_to_centers(X_train, W, centers)
+    y_score     = compute_dist_to_centers(X_test, W, centers)
 
     max_train = np.max(train_score)
     y_proba = np.zeros((len(y_score), 2), dtype=np.float32)
@@ -418,6 +442,10 @@ def run_experiment(train_path: str, test_path: str,
 
     log.info(f"Loaded Raw Shape -> Train: {df_train.shape}, Test: {df_test.shape}")
 
+    # --- Feature cleaning specifically for BoTIoT/IoT metadata ---
+    df_train = drop_metadata_features(df_train, log)
+    df_test = drop_metadata_features(df_test, log)
+
     X_train, y_train, X_test, y_test = preprocess_data_noise(
         df_train, df_test, noise_pct
     )
@@ -439,19 +467,16 @@ def run_experiment(train_path: str, test_path: str,
         tracemalloc.start()
         try:
             # Cluster (k capped inside cluster_kmeans if n_clusters > n_train)
-            X_clustered, y_clustered, _ = cluster_kmeans(X_train, n_clusters)
+            # Cluster (k capped inside cluster_kmeans if n_clusters > n_train)
+            X_clustered, y_clustered, centers = cluster_kmeans(X_train, n_clusters)
             actual_k = len(np.unique(y_clustered))
 
             # Train: compute NPD projection matrix W
             W, train_time = calculate_NPD_optimized(X_clustered, y_clustered)
 
-            # Project training data into null space
-            null_train = project_to_null(X_train, W)   # (n_train, L)
-
-            # Score: FAISS-accelerated, matching notebook's learn() exactly
+            # Score: Cluster-center aware distance in null space
             t_test = time.time()
-            null_test = project_to_null(X_test, W)     # (n_test, L)
-            y_proba   = compute_scores(null_train, null_test)
+            y_proba = compute_scores(X_train, X_test, W, centers)
             test_time = time.time() - t_test
 
         except Exception as e:
