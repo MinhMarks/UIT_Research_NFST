@@ -556,8 +556,9 @@ if __name__ == "__main__":
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
 
     # --- Match the notebook's configuration exactly ---
-    DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT']
-
+    # DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT']
+    DATASETS = ['data_CICIoT2023', 'data_BoTIoT']
+    
     # Notebook: scaler_names = ['StandardScaler','MinMaxScaler','Normalizer',
     #                           'QuantileTransformer','RobustScaler','Normalizer']
     SCALERS = ['StandardScaler', 'MinMaxScaler', 'Normalizer',
