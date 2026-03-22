@@ -241,8 +241,8 @@ def calculate_NPD_optimized(X: np.ndarray, y: np.ndarray, epsilon: float = 1e-6)
     W = (Q @ B).astype(np.float32)                     # (d, L)
 
     training_time = time.time() - t0
-    print(f"  NPD computed: W shape={W.shape}, time={training_time:.4f}s")
-    return W, training_time
+    print(f"  NPD computed: W shape={W.shape}, Q shape={Q.shape}, time={training_time:.4f}s")
+    return W, Q, training_time
 
 
 # ============================================================================
@@ -302,9 +302,10 @@ def faiss_test_score(null_test: np.ndarray, null_train: np.ndarray) -> np.ndarra
     return np.sqrt(np.maximum(distances[:, 0], 0.0))
 
 
-def compute_dist_to_centers(X, W, centers):
+def compute_dist_to_centers(X, W, Q, centers, alpha=1.0):
     """
-    Compute distance to the null space relative to the NEAREST cluster center.
+    Compute total distance: distance IN Null space + alpha * distance OUTSIDE Normal subspace.
+    This fixes cases where anomalies have pure variance in dimensions orthogonal to Normal data.
     """
     if FAISS_AVAILABLE:
         d = centers.shape[1]
@@ -323,13 +324,21 @@ def compute_dist_to_centers(X, W, centers):
         nearest_centers = np.vstack(nearest_centers)
 
     diff = X - nearest_centers
+    
+    # Distance IN the null space
     projections = diff @ W
-    return np.sqrt(np.sum(projections**2, axis=1))
+    dist_null = np.sum(projections**2, axis=1)
+    
+    # Distance OUTSIDE the Normal Subspace (Reconstruction Error)
+    recon = diff - (diff @ Q) @ Q.T
+    dist_ortho = np.sum(recon**2, axis=1)
+    
+    return np.sqrt(dist_null + alpha * dist_ortho)
 
 
-def compute_scores(X_train, X_test, W, centers):
+def compute_scores(X_train, X_test, W, Q, centers):
     """
-    Compute y_proba matching the notebook exactly, but using cluster-center distance:
+    Compute y_proba matching the notebook exactly, but using total cluster-aware distance:
         y_proba[:, 1] = min(y_score / max(train_score), 1)
         y_proba[:, 0] = 1 - y_proba[:, 1]
 
@@ -338,8 +347,8 @@ def compute_scores(X_train, X_test, W, centers):
     X_train = np.ascontiguousarray(X_train, dtype=np.float32)
     X_test  = np.ascontiguousarray(X_test,  dtype=np.float32)
 
-    train_score = compute_dist_to_centers(X_train, W, centers)
-    y_score     = compute_dist_to_centers(X_test, W, centers)
+    train_score = compute_dist_to_centers(X_train, W, Q, centers)
+    y_score     = compute_dist_to_centers(X_test, W, Q, centers)
 
     max_train = np.max(train_score)
     y_proba = np.zeros((len(y_score), 2), dtype=np.float32)
@@ -471,12 +480,12 @@ def run_experiment(train_path: str, test_path: str,
             X_clustered, y_clustered, centers = cluster_kmeans(X_train, n_clusters)
             actual_k = len(np.unique(y_clustered))
 
-            # Train: compute NPD projection matrix W
-            W, train_time = calculate_NPD_optimized(X_clustered, y_clustered)
+            # Train: compute NPD projection matrix W and orthogonal basis Q
+            W, Q, train_time = calculate_NPD_optimized(X_clustered, y_clustered)
 
-            # Score: Cluster-center aware distance in null space
+            # Score: Cluster-center aware distance in null space + orthogonal space
             t_test = time.time()
-            y_proba = compute_scores(X_train, X_test, W, centers)
+            y_proba = compute_scores(X_train, X_test, W, Q, centers)
             test_time = time.time() - t_test
 
         except Exception as e:

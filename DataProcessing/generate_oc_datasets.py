@@ -53,8 +53,8 @@ SCALERS = {
 DATASETS = [
     # ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign', 0, '0']),
     # ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign', 0, '0']),
-    # ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']),
-    ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0'])
+    ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']) 
+    # ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0'])
 ]
 
 def generate_datasets():
@@ -126,8 +126,15 @@ def generate_datasets():
             log.warning(f"Not enough Anomaly samples! Needed {TEST_ANOMALY_SAMPLES}, got {len(df_anomaly)}")
             
         # Sample rigorously
-        n_train_norm = min(TRAIN_NORMAL_SAMPLES, len(df_normal))
-        n_test_norm = min(TEST_NORMAL_SAMPLES, len(df_normal) - n_train_norm)
+        total_normal = len(df_normal)
+        if total_normal < (TRAIN_NORMAL_SAMPLES + TEST_NORMAL_SAMPLES):
+            log.warning(f"Not enough Normal samples! Splitting available {total_normal} proportionally 80% Train / 20% Test.")
+            n_train_norm = int(total_normal * 0.8)
+            n_test_norm = total_normal - n_train_norm
+        else:
+            n_train_norm = TRAIN_NORMAL_SAMPLES
+            n_test_norm = TEST_NORMAL_SAMPLES
+            
         n_test_anom = min(TEST_ANOMALY_SAMPLES, len(df_anomaly))
         
         # Ensure we have exactly the needed splits (or as close as possible)
