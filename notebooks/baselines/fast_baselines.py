@@ -273,11 +273,11 @@ if __name__ == "__main__":
     logger.info("=" * 60)
     logger.info("FAST BASELINE EXPERIMENT (NO TUNING, PARALLEL)")
     logger.info("=" * 60)
+    # Single output file for the entire experiment
+    out_path = os.path.join(exp_dir, "all_fast_baseline_results.csv")
     
     for prefix in dataset_prefixes:
         for scaler in scaler_names:
-            out_path = os.path.join(exp_dir, f"{prefix.replace('.csv','')}_{scaler}_results.csv")
-            
             train_file = os.path.join(DATA_DIR, f'Train_{scaler}_{prefix}')
             test_file = os.path.join(DATA_DIR, f'Test_{scaler}_{prefix}')
             
