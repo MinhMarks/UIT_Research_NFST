@@ -56,7 +56,7 @@ def load_and_normalize(file_info):
         normalized_df['dataset'] = 'Unknown'
         
     normalized_df['source_file'] = os.path.basename(file_path)
-    normalized_df['model'] = df['model'] if 'model' in df.columns else 'Unknown'
+    normalized_df['model'] = df['model'] if 'model' in df.columns else 'LOC-NFST'
     
     # Flexible Noise mapping
     if 'noise_percentage' in df.columns: normalized_df['noise'] = df['noise_percentage'].astype(float)
