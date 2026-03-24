@@ -200,7 +200,7 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     for clq in cliques:
         if len(clq) == 1: continue
         name_list = list(names)
-        indices = [name_list.index(name) for name in clq if name in names.index] # Fix for name list/index
+        indices = [name_list.index(name) for name in clq if name in names] # Fixed membership test
         if not indices: continue
         min_idx = min(indices)
         max_idx = max(indices)
