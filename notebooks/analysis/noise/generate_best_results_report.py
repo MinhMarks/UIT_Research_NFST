@@ -136,7 +136,8 @@ def main():
     output_base_dir = os.path.join(_script_dir, "best_results_reports")
     os.makedirs(output_base_dir, exist_ok=True)
     
-    unique_combinations = full_df[['dataset', 'noise']].drop_duplicates()
+    # Sort unique combinations to have reports in a consistent order (Dataset, Noise)
+    unique_combinations = full_df[['dataset', 'noise']].drop_duplicates().sort_values(['dataset', 'noise'])
     
     for _, row in unique_combinations.iterrows():
         ds = row['dataset']
@@ -154,8 +155,11 @@ def main():
         best_per_model.to_csv(out_path, index=False)
         print(f"Generated report: {out_path}")
 
-    # Generate a summary showing the best result for each model across all dataset/noise combinations, sorted by dataset and model
+    # Generate a summary showing the best result for each model across all dataset/noise combinations, sorted by dataset, noise and model
     overall_best = full_df.sort_values(['dataset', 'noise', 'model', 'aucroc'], ascending=[True, True, True, False]).groupby(['dataset', 'noise', 'model']).first().reset_index()
+    # Enforce final sorting by dataset, noise (numeric), then model
+    overall_best = overall_best.sort_values(['dataset', 'noise', 'model'])
+    
     summary_path = os.path.join(_script_dir, "all_models_summary.csv")
     overall_best.to_csv(summary_path, index=False)
     print(f"Generated overall summary: {summary_path}")
