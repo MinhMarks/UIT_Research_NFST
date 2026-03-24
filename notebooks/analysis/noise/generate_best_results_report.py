@@ -136,8 +136,11 @@ def main():
     output_base_dir = os.path.join(_script_dir, "best_results_reports")
     os.makedirs(output_base_dir, exist_ok=True)
     
-    # Sort unique combinations to have reports in a consistent order (Dataset, Noise)
-    unique_combinations = full_df[['dataset', 'noise']].drop_duplicates().sort_values(['dataset', 'noise'])
+    # Sort unique combinations case-insensitively
+    unique_combinations = full_df[['dataset', 'noise']].drop_duplicates().sort_values(
+        ['dataset', 'noise'], 
+        key=lambda col: col.str.lower() if col.name == 'dataset' else col
+    )
     
     for _, row in unique_combinations.iterrows():
         ds = row['dataset']
@@ -145,9 +148,9 @@ def main():
         
         subset = full_df[(full_df['dataset'] == ds) & (full_df['noise'] == ns)]
         
-        # Get best result for EACH model in this group, sorted by model name
-        best_per_model = subset.sort_values(['model', 'aucroc'], ascending=[True, False]).groupby('model').first().reset_index()
-        best_per_model = best_per_model.sort_values('model')
+        # Get best result for EACH model in this group, sorted by AUCROC descending
+        best_per_model = subset.sort_values('aucroc', ascending=False).groupby('model').first().reset_index()
+        best_per_model = best_per_model.sort_values('aucroc', ascending=False)
         
         # Format for output
         out_filename = f"{ds}_Noise_{int(ns)}.csv"
@@ -155,10 +158,10 @@ def main():
         best_per_model.to_csv(out_path, index=False)
         print(f"Generated report: {out_path}")
 
-    # Generate a summary showing the best result for each model across all dataset/noise combinations, sorted by dataset, noise and model
-    overall_best = full_df.sort_values(['dataset', 'noise', 'model', 'aucroc'], ascending=[True, True, True, False]).groupby(['dataset', 'noise', 'model']).first().reset_index()
-    # Enforce final sorting by dataset, noise (numeric), then model
-    overall_best = overall_best.sort_values(['dataset', 'noise', 'model'])
+    # Generate a summary showing the best result for each model, sorted by dataset, noise and AUCROC
+    overall_best = full_df.sort_values(['dataset', 'noise', 'aucroc'], ascending=[True, True, False]).groupby(['dataset', 'noise', 'model']).first().reset_index()
+    # Final sort: primarily by dataset/noise, then by performance
+    overall_best = overall_best.sort_values(['dataset', 'noise', 'aucroc'], ascending=[True, True, False])
     
     summary_path = os.path.join(_script_dir, "all_models_summary.csv")
     overall_best.to_csv(summary_path, index=False)
