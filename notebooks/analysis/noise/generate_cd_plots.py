@@ -20,41 +20,41 @@ def normalize_dataset_name(name):
     if base.endswith('.csv'): base = base[:-4]
     return base
 
-def load_all_results(root_dir):
-    """Find and load all result CSVs in the project."""
+def find_csv_files(root_dir):
+    """Recursively find all CSV files and identify if they are results."""
     csv_files = glob.glob(os.path.join(root_dir, "**", "*.csv"), recursive=True)
-    all_dfs = []
-    
+    results = []
     for f in csv_files:
         try:
             if os.path.getsize(f) < 100: continue
             df = pd.read_csv(f)
             cols = [c.lower() for c in df.columns]
-            
             if 'aucroc' in cols and ('model' in cols or 'dataset' in cols):
-                df.columns = [c.lower() for c in df.columns]
-                
-                # Standardize columns
-                temp_df = pd.DataFrame()
-                temp_df['dataset'] = df['dataset'].apply(normalize_dataset_name) if 'dataset' in df.columns else 'Unknown'
-                temp_df['model'] = df['model'] if 'model' in df.columns else 'LOC-NFST'
-                
-                if 'noise_percentage' in df.columns: temp_df['noise'] = df['noise_percentage'].astype(float)
-                elif 'noise' in df.columns: temp_df['noise'] = df['noise'].astype(float)
-                else: temp_df['noise'] = 0.0
+                results.append(('unified', f))
+        except Exception: pass
+    return results
 
-                if 'scaler' in df.columns: temp_df['scaler'] = df['scaler']
-                elif 'scaled' in df.columns: temp_df['scaler'] = df['scaled']
-                else: temp_df['scaler'] = 'Unknown'
+def load_and_normalize(file_info):
+    _, file_path = file_info
+    df = pd.read_csv(file_path)
+    df.columns = [c.lower() for c in df.columns]
+    
+    norm_df = pd.DataFrame()
+    norm_df['dataset'] = df['dataset'].apply(normalize_dataset_name) if 'dataset' in df.columns else 'Unknown'
+    norm_df['model'] = df['model'] if 'model' in df.columns else 'LOC-NFST'
+    
+    # Standardize Noise
+    if 'noise_percentage' in df.columns: norm_df['noise'] = df['noise_percentage'].astype(float)
+    elif 'noise' in df.columns: norm_df['noise'] = df['noise'].astype(float)
+    else: norm_df['noise'] = 0.0
 
-                temp_df['aucroc'] = pd.to_numeric(df['aucroc'], errors='coerce')
-                temp_df = temp_df.dropna(subset=['aucroc'])
-                all_dfs.append(temp_df)
-        except Exception:
-            pass
-            
-    if not all_dfs: return pd.DataFrame()
-    return pd.concat(all_dfs, ignore_index=True)
+    # Standardize Scaler
+    if 'scaler' in df.columns: norm_df['scaler'] = df['scaler']
+    elif 'scaled' in df.columns: norm_df['scaler'] = df['scaled']
+    else: norm_df['scaler'] = 'Unknown'
+
+    norm_df['aucroc'] = pd.to_numeric(df['aucroc'], errors='coerce')
+    return norm_df.dropna(subset=['aucroc'])
 
 # ============================================================================
 # STATISTICAL PLOTTING (CD DIAGRAM)
@@ -175,13 +175,24 @@ def draw_cd_diagram(df_pivot, alpha=0.05, output_path='cd_diagram.png'):
 # ============================================================================
 def main():
     _script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.abspath(os.path.join(_script_dir, "..", "..", ".."))
     
-    print(">>> Loading all results...")
-    df = load_all_results(project_root)
-    if df.empty:
-        print("No results found. Please run experiments first.")
+    print("=== Critical Difference Plotter ===")
+    baseline_input = input("Enter path to Baseline Results (File or Dir): ").strip()
+    model_input = input("Enter path to Model Results (File or Dir): ").strip()
+
+    files = []
+    # Process inputs same way as generate_best_results_report.py
+    for inp in [baseline_input, model_input]:
+        if not inp: continue
+        if os.path.isfile(inp) and inp.endswith('.csv'): files.append(('unified', inp))
+        elif os.path.isdir(inp): files.extend(find_csv_files(inp))
+
+    if not files:
+        print("No results found.")
         return
+
+    all_data = [load_and_normalize(f) for f in files]
+    df = pd.concat(all_data, ignore_index=True)
 
     # Unify Model names (important for LOC-NFST)
     df['model'] = df['model'].replace({'ourmodel': 'LOC-NFST'})
