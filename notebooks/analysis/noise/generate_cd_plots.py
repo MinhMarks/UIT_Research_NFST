@@ -8,6 +8,7 @@ import operator
 import math
 import glob
 import networkx
+import seaborn as sns
 from scipy.stats import wilcoxon, friedmanchisquare
 
 # Standard font settings (with fallbacks for Linux/Notebook environments)
@@ -271,6 +272,53 @@ def wilcoxon_holm(alpha=0.05, df_perf=None):
     return p_values, average_ranks, n, average_value
 
 # ============================================================================
+# ALTERNATIVE VISUALIZATIONS
+# ============================================================================
+
+def plot_ranked_heatmap(average_ranks, df_perf, output_path):
+    """Draw a professional heatmap of AUC values by Dataset and Model."""
+    # Pivot to Matrix: Rows=Model, Cols=Dataset
+    pivot = df_perf.pivot(index='classifier_name', columns='dataset_name', values='accuracy')
+    # Sort by overall rank
+    pivot = pivot.reindex(average_ranks.index)
+    
+    plt.figure(figsize=(10, 14))
+    sns.set(style="white")
+    ax = sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu", cbar_kws={'label': 'AUCROC'})
+    
+    # Highlight LOC-NFST in Red
+    for label in ax.get_yticklabels():
+        if "LOC-NFST" in label.get_text():
+            label.set_color("red")
+            label.set_weight("bold")
+            
+    plt.title("Performance Matrix (AUCROC) - Ranked from Top to Bottom", size=15)
+    plt.xlabel("Dataset", size=12)
+    plt.ylabel("Model", size=12)
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.close()
+
+def plot_average_rank_bar(average_ranks, output_path):
+    """Draw a clean horizontal bar chart of average ranks."""
+    plt.figure(figsize=(10, 12))
+    colors = ['red' if "LOC-NFST" in m else 'skyblue' for m in average_ranks.index]
+    
+    ax = average_ranks.plot(kind='barh', color=colors, edgecolor='black')
+    ax.invert_yaxis() # Rank 1 at top
+    
+    plt.title("Overall Average Ranking (Lower is Better)", size=15)
+    plt.xlabel("Average Rank", size=12)
+    plt.ylabel("Model", size=12)
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    
+    # Add values on bars
+    for i, v in enumerate(average_ranks):
+        ax.text(v + 0.1, i, f"{v:.2f}", va='center', fontweight='bold')
+        
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.close()
+
+# ============================================================================
 # MAIN
 # ============================================================================
 
@@ -323,17 +371,29 @@ def main():
         print("Error: Not enough data for CD Diagram. Models must be present in all datasets.")
         return
 
-    print(f">>> Computing CD statistics for {len(valid_models)} models across {max_nb} datasets...")
+    print(f">>> Computing rankings for {len(valid_models)} models across {max_nb} datasets...")
     p_values, average_ranks, n, average_value = wilcoxon_holm(df_perf=df_perf)
 
-    # Plot
-    graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, p_values,
-                reverse=True, width=10, textspace=2, labels=True)
-    
-    plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=0.9)
-    cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
-    plt.savefig(cd_diag_path, bbox_inches='tight')
-    print(f"CD Diagram saved to {cd_diag_path}")
+    # 1. Performance Heatmap (Highly Recommended for 20+ models)
+    heatmap_path = os.path.join(output_dir, "rank_heatmap.png")
+    plot_ranked_heatmap(average_ranks, df_perf, heatmap_path)
+    print(f"Ranked Heatmap saved to {heatmap_path}")
+
+    # 2. Average Rank Bar Chart (Highly Recommended for 20+ models)
+    bar_path = os.path.join(output_dir, "rank_bar_chart.png")
+    plot_average_rank_bar(average_ranks, bar_path)
+    print(f"Rank Bar Chart saved to {bar_path}")
+
+    # 3. CD Diagram (Legacy - for comparison)
+    try:
+        graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, p_values,
+                    reverse=True, labels=True)
+        cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
+        plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)
+        plt.savefig(cd_diag_path, bbox_inches='tight', dpi=300)
+        print(f"CD Diagram (Legacy) saved to {cd_diag_path}")
+    except Exception as e:
+        print(f"Note: Standard CD Layout is too crowded for these models. Focus on Heatmap/Bar Chart.")
 
 if __name__ == "__main__":
     main()
