@@ -67,6 +67,16 @@ def load_and_normalize(file_info):
     else: norm_df['scaler'] = 'Unknown'
 
     norm_df['aucroc'] = pd.to_numeric(df['aucroc'], errors='coerce')
+    
+    # Load Time metrics for Pareto plot
+    if 'time_test' in df.columns: norm_df['time_test'] = pd.to_numeric(df['time_test'], errors='coerce')
+    elif 'time test' in df.columns: norm_df['time_test'] = pd.to_numeric(df['time test'], errors='coerce')
+    else: norm_df['time_test'] = 0.0
+
+    if 'time_train' in df.columns: norm_df['time_train'] = pd.to_numeric(df['time_train'], errors='coerce')
+    elif 'time train' in df.columns: norm_df['time_train'] = pd.to_numeric(df['time train'], errors='coerce')
+    else: norm_df['time_train'] = 0.0
+
     return norm_df.dropna(subset=['aucroc'])
 
 # ============================================================================
@@ -333,6 +343,80 @@ def plot_average_rank_bar(average_ranks, average_value, output_path):
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
+def plot_performance_profiles(df_perf, output_path):
+    """Draw Dolan-More Performance Profiles for 20+ models."""
+    # Data is Model, Dataset, AUCROC
+    pivot = df_perf.pivot(index='dataset_name', columns='classifier_name', values='accuracy')
+    
+    # Calculate performance ratios: r = max_auc_on_dataset / auc_of_model
+    # (Since AUC is "bigger is better", we use max/val)
+    max_perf = pivot.max(axis=1)
+    ratios = pivot.divide(max_perf, axis=0)
+    # Ratios >= 1.0. 1.0 is the best on that dataset.
+    
+    plt.figure(figsize=(12, 8))
+    
+    # Plot top 15 models or highlight specific ones to avoid rainbow mess
+    # But for 22 models, we can use a thin line style
+    tau_vals = np.linspace(1.0, 1.2, 100) # From 100% to 120% of best
+    
+    for model in ratios.columns:
+        # Calculate rho(tau) = fraction of datasets where ratio <= tau
+        rho = [ (ratios[model] <= t).mean() for t in tau_vals ]
+        
+        is_our = "LOC-NFST" in model
+        color = 'red' if is_our else None
+        alpha = 1.0 if is_our else 0.4
+        lw = 3 if is_our else 1.5
+        zorder = 10 if is_our else 1
+        
+        plt.plot(tau_vals, rho, label=model if is_our else None, 
+                 color=color, alpha=alpha, linewidth=lw, zorder=zorder)
+        
+    plt.title("Dolan-Moré Performance Profiles (Robustness Analysis)", size=16)
+    plt.xlabel(r"Performance Ratio $\tau$ (relative to best)", size=14)
+    plt.ylabel(r"Fraction of Datasets $\rho(\tau)$", size=14)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend(loc='lower right')
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.close()
+
+def plot_pareto_efficiency(df_best, output_path):
+    """Scatter plot of AUCROC vs inference time."""
+    # Group by model to get averages
+    summary = df_best.groupby('model').agg({
+        'aucroc': 'mean',
+        'time_test': 'mean'
+    })
+    
+    plt.figure(figsize=(12, 8))
+    
+    # Use log scale for time if differences are huge
+    plt.xscale('log')
+    
+    for model in summary.index:
+        x = summary.loc[model, 'time_test']
+        y = summary.loc[model, 'aucroc']
+        
+        is_our = "LOC-NFST" in model
+        color = 'red' if is_our else 'blue'
+        size = 200 if is_our else 80
+        alpha = 0.9 if is_our else 0.5
+        
+        plt.scatter(x, y, c=color, s=size, alpha=alpha, edgecolors='black')
+        
+        # Label only our model and 5 top competitors to keep it clean
+        if is_our or y > summary['aucroc'].quantile(0.8):
+            plt.text(x * 1.05, y, model, size=10, weight='bold' if is_our else 'normal')
+            
+    plt.title("Pareto Efficiency: Accuracy vs. Inference Time", size=16)
+    plt.xlabel("Average Inference Time (s) - Log Scale", size=14)
+    plt.ylabel("Average AUCROC (%)", size=14)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.close()
+
 # ============================================================================
 # MAIN
 # ============================================================================
@@ -342,7 +426,7 @@ def main():
     output_dir = os.path.join(_script_dir, "results")
     os.makedirs(output_dir, exist_ok=True)
     
-    print("=== Critical Difference Plotter (promt/main.py style) ===")
+    print("=== Advanced ML Results Plotter ===")
     baseline_input = input("Enter path to Baseline Results (File or Dir): ").strip()
     model_input = input("Enter path to Model Results (File or Dir): ").strip()
 
@@ -382,14 +466,17 @@ def main():
     valid_models = counts[counts == max_nb].index
     df_perf = df_perf[df_perf['classifier_name'].isin(valid_models)]
     
+    # Filter df_best for Pareto (only valid models)
+    df_best_valid = df_best[df_best['model'].isin(valid_models)]
+
     if df_perf.empty or len(df_perf['classifier_name'].unique()) < 2:
-        print("Error: Not enough data for CD Diagram. Models must be present in all datasets.")
+        print("Error: Not enough data for statistical analysis. Models must be present in all datasets.")
         return
 
     print(f">>> Computing rankings for {len(valid_models)} models across {max_nb} datasets...")
     p_values, average_ranks, n, average_value = wilcoxon_holm(df_perf=df_perf)
 
-    # 1. Performance Heatmap (Highly Recommended for 20+ models)
+    # 1. Performance Heatmap
     heatmap_path = os.path.join(output_dir, "rank_heatmap.png")
     plot_ranked_heatmap(average_ranks, df_perf, heatmap_path)
     print(f"Ranked Heatmap saved to {heatmap_path}")
@@ -399,7 +486,17 @@ def main():
     plot_average_rank_bar(average_ranks, average_value, bar_path)
     print(f"Rank Bar Chart saved to {bar_path}")
 
-    # 3. CD Diagram (Legacy - for comparison)
+    # 3. Performance Profiles (Advanced Robustness Analysis)
+    prof_path = os.path.join(output_dir, "performance_profiles.png")
+    plot_performance_profiles(df_perf, prof_path)
+    print(f"Performance Profiles saved to {prof_path}")
+
+    # 4. Pareto Efficiency Plot (Accuracy vs Speed)
+    pareto_path = os.path.join(output_dir, "pareto_efficiency.png")
+    plot_pareto_efficiency(df_best_valid, pareto_path)
+    print(f"Pareto Plot saved to {pareto_path}")
+
+    # 5. CD Diagram (Legacy)
     try:
         graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, p_values,
                     reverse=True, labels=True)
@@ -407,8 +504,8 @@ def main():
         plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)
         plt.savefig(cd_diag_path, bbox_inches='tight', dpi=300)
         print(f"CD Diagram (Legacy) saved to {cd_diag_path}")
-    except Exception as e:
-        print(f"Note: Standard CD Layout is too crowded for these models. Focus on Heatmap/Bar Chart.")
+    except Exception:
+        print(f"Note: Standard CD Layout is too crowded for these models. Focus on Heatmap/Bar Chart/Profiles.")
 
 if __name__ == "__main__":
     main()
