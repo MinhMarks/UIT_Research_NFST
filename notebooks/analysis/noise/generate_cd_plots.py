@@ -10,9 +10,9 @@ import glob
 import networkx
 from scipy.stats import wilcoxon, friedmanchisquare
 
-# Set font for publication quality
+# Standard font settings (with fallbacks for Linux/Notebook environments)
 matplotlib.rcParams['font.family'] = 'sans-serif'
-matplotlib.rcParams['font.sans-serif'] = 'Arial'
+matplotlib.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans', 'Helvetica', 'sans-serif']
 
 # ============================================================================
 # DATA NORMALIZATION (Consistent with generate_best_results_report.py)
