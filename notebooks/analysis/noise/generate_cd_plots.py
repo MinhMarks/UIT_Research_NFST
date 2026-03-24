@@ -86,6 +86,7 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
 
     cline = 0.4
     k = len(avranks)
+    linesblank = 0
     
     # DYNAMIC LAYOUT: Increase space for many models
     if k > 10:
