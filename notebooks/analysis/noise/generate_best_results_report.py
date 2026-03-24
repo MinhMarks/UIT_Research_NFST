@@ -49,14 +49,20 @@ def load_and_normalize(file_info):
     
     normalized_df = pd.DataFrame()
     
-    # Required columns with flexible mapping
     if 'dataset' in df.columns:
         normalized_df['dataset'] = df['dataset'].apply(normalize_dataset_name)
     else:
         normalized_df['dataset'] = 'Unknown'
         
     normalized_df['source_file'] = os.path.basename(file_path)
-    normalized_df['model'] = df['model'] if 'model' in df.columns else 'LOC-NFST'
+    
+    # Filter out DevNet as requested
+    df_models = df['model'] if 'model' in df.columns else pd.Series(['LOC-NFST']*len(df))
+    normalized_df['model'] = df_models
+    normalized_df['model'] = normalized_df['model'].replace({'ourmodel': 'LOC-NFST'})
+    
+    # Exclude DevNet
+    normalized_df = normalized_df[~normalized_df['model'].str.lower().str.contains('devnet')].copy()
     
     # Flexible Noise mapping
     if 'noise_percentage' in df.columns: normalized_df['noise'] = df['noise_percentage'].astype(float)

@@ -48,8 +48,14 @@ def load_and_normalize(file_info):
     
     norm_df = pd.DataFrame()
     norm_df['dataset'] = df['dataset'].apply(normalize_dataset_name) if 'dataset' in df.columns else 'Unknown'
-    norm_df['model'] = df['model'] if 'model' in df.columns else 'LOC-NFST'
+    
+    # Filter out DevNet as requested
+    df_models = df['model'] if 'model' in df.columns else pd.Series(['LOC-NFST']*len(df))
+    norm_df['model'] = df_models
     norm_df['model'] = norm_df['model'].replace({'ourmodel': 'LOC-NFST'})
+    
+    # Exclude DevNet (case-insensitive)
+    norm_df = norm_df[~norm_df['model'].str.lower().str.contains('devnet')].copy()
     
     if 'noise_percentage' in df.columns: norm_df['noise'] = df['noise_percentage'].astype(float)
     elif 'noise' in df.columns: norm_df['noise'] = df['noise'].astype(float)
@@ -160,11 +166,11 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_weight = "bold" if is_our else "normal"
         f_color = "red" if is_our else "black"
         
+        display_text = name
         if labels:
-            # Shift label further right to avoid overlap with name on the left
-            text(textspace + 1.2, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
-                 ha="right", va="center", size=label_size-2, color=f_color, alpha=0.7)
-        text(textspace - 0.2, chei, name, ha="right", va="center", size=label_size, weight=f_weight, color=f_color)
+            display_text += " ({0:.2f} / {1:.2f})".format(avg_value[i], avranks[i])
+            
+        text(textspace - 0.2, chei, display_text, ha="right", va="center", size=label_size, weight=f_weight, color=f_color)
 
     for i in range(math.ceil(k / 2), k):
         chei = cline + minnotsignificant + (k - i - 1) * space_between_names
@@ -175,11 +181,11 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_weight = "bold" if is_our else "normal"
         f_color = "red" if is_our else "black"
         
+        display_text = name
         if labels:
-            # Shift label further left to avoid overlap with name on the right
-            text(textspace + scalewidth - 1.2, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
-                 ha="left", va="center", size=label_size-2, color=f_color, alpha=0.7)
-        text(textspace + scalewidth + 0.2, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
+            display_text = "({0:.2f} / {1:.2f}) ".format(avg_value[i], avranks[i]) + display_text
+            
+        text(textspace + 0.2, chei, display_text, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
 
     # draw no significant lines (cliques)
     cliques = form_cliques(p_values, names)
