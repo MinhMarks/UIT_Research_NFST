@@ -27,19 +27,15 @@ def find_csv_files(root_dir):
     results = []
     for f in csv_files:
         try:
-            # Skip empty or non-result CSVs
             if os.path.getsize(f) < 100:
                 continue
             
             df = pd.read_csv(f)
             cols = [c.lower() for c in df.columns]
             
-            # Identify Baseline type
-            if 'model' in cols and 'parameters' in cols and 'aucroc' in cols:
-                results.append(('baseline', f))
-            # Identify NFST/Model type (different column names)
-            elif 'ncluster' in cols and 'aucroc' in cols and ('scaler' in cols or 'noise_percentage' in cols):
-                results.append(('model', f))
+            # More flexible detection: If it has ROC and Model, it's a result
+            if 'aucroc' in cols and ('model' in cols or 'dataset' in cols):
+                results.append(('unified', f))
         except Exception as e:
             print(f"Skipping {f} due to error: {e}")
     return results
@@ -48,33 +44,36 @@ def load_and_normalize(file_info):
     type_info, file_path = file_info
     df = pd.read_csv(file_path)
     
-    # Standardize column names to lower case for easier mapping
+    # Standardize column names to lower case
     df.columns = [c.lower() for c in df.columns]
     
     normalized_df = pd.DataFrame()
     
-    # Map common columns
-    normalized_df['dataset'] = df['dataset'].apply(normalize_dataset_name)
-    normalized_df['source_file'] = os.path.basename(file_path)
-    
-    if type_info == 'baseline':
-        normalized_df['model'] = df['model']
-        normalized_df['noise'] = df['noise'].astype(float)
-        normalized_df['scaler'] = df['scaled'] if 'scaled' in df.columns else 'Unknown'
-        normalized_df['params'] = df['parameters']
+    # Required columns with flexible mapping
+    if 'dataset' in df.columns:
+        normalized_df['dataset'] = df['dataset'].apply(normalize_dataset_name)
     else:
-        # For the proposed model, we can try to get the name from the filename or use a default
-        fname = os.path.basename(file_path).lower()
-        if 'anomaly_template' in fname:
-            normalized_df['model'] = 'NFST-AnomalyTemplate'
-        else:
-            normalized_df['model'] = 'NFST-MemOpt'
-            
-        normalized_df['noise'] = df['noise_percentage'].astype(float)
-        normalized_df['scaler'] = df['scaler'] if 'scaler' in df.columns else 'Unknown'
-        normalized_df['params'] = df['ncluster'].apply(lambda x: f"n_clusters={x}")
+        normalized_df['dataset'] = 'Unknown'
+        
+    normalized_df['source_file'] = os.path.basename(file_path)
+    normalized_df['model'] = df['model'] if 'model' in df.columns else 'Unknown'
+    
+    # Flexible Noise mapping
+    if 'noise_percentage' in df.columns: normalized_df['noise'] = df['noise_percentage'].astype(float)
+    elif 'noise' in df.columns: normalized_df['noise'] = df['noise'].astype(float)
+    else: normalized_df['noise'] = 0.0
 
-    # Performance metrics (ensure they exist)
+    # Flexible Scaler mapping
+    if 'scaler' in df.columns: normalized_df['scaler'] = df['scaler']
+    elif 'scaled' in df.columns: normalized_df['scaler'] = df['scaled']
+    else: normalized_df['scaler'] = 'Unknown'
+
+    # Flexible Parameters mapping
+    if 'parameters' in df.columns: normalized_df['params'] = df['parameters']
+    elif 'ncluster' in df.columns: normalized_df['params'] = df['ncluster'].apply(lambda x: f"n_clusters={x}")
+    else: normalized_df['params'] = 'Default'
+
+    # Performance metrics
     metrics = ['aucroc', 'aucpr', 'accuracy', 'mcc', 'f1 score', 'precision', 'recall']
     for m in metrics:
         if m in df.columns:
