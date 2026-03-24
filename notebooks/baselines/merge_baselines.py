@@ -5,7 +5,7 @@ import pandas as pd
 def merge_csvs():
     # Thư mục chứa các file csv hiện tại
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    output_dir = os.path.join(base_dir, 'outputs')
+    output_dir = os.path.join(base_dir, 'outputs/chaytay')
     
     print(f"Đang tìm kiếm tất cả các file CSV kết quả trong {output_dir}...")
     
