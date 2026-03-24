@@ -13,6 +13,13 @@ import traceback
 import random
 import torch
 from datetime import datetime
+from joblib import Parallel, delayed
+
+# --- Configuration Toggle ---
+USE_TUNING = True     # Set to False to skip hyperparameter search
+USE_PARALLEL = True    # Set to False if models crash (Stability Mode)
+N_JOBS = 4            # Number of parallel workers when tuning/running models
+# ----------------------------
 
 # Fix seeds globally
 def set_seed(seed=42):
@@ -191,47 +198,47 @@ def get_model(model_name, params):
         print(f"Warning: Could not initialize {model_name} with {params}: {e}. Retrying with default parameters.")
         return model_class()
 
-def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, output_file_all, output_file_best):
+def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, output_file_all, output_file_best, use_tuning=True):
     best_results = []
     
-    for model_name, param_list in PARAM_GRIDS.items():
-        print(f"\\n--- Tuning {model_name} on {dataset_name} ({scaler}, Noise: {noise_percentage}) ---")
+    # We will process models in parallel over model_name if USE_PARALLEL is True
+    # or sequentially otherwise. 
+    # To keep code clean, we define a helper for a single model run.
+    
+    def process_model(model_name, param_list):
+        print(f"\n--- Processing {model_name} on {dataset_name} ({scaler}, Noise: {noise_percentage}) ---")
         best_auc = -1
-        best_result_row = None
+        best_row = None
         
-        for params in param_list:
-            print(f"Testing params: {params}")
+        # Determine which parameters to test
+        params_to_test = param_list if use_tuning else [param_list[0]]
+        
+        for params in params_to_test:
+            if use_tuning: print(f"  Testing params: {params}")
             try:
                 model = get_model(model_name, params)
                 import tracemalloc
                 tracemalloc.start()
-                start_time = time.time()
+                t0 = time.time()
                 
-                if model_name == 'DevNet':
-                    model.fit(X_train, y_train)
-                else:
-                    model.fit(X_train)
+                if model_name == 'DevNet': model.fit(X_train, y_train)
+                else: model.fit(X_train)
                     
-                train_time = time.time() - start_time
-                current, peak_train = tracemalloc.get_traced_memory()
+                train_time = time.time() - t0
+                _, peak_train = tracemalloc.get_traced_memory()
                 tracemalloc.stop()
                 
                 tracemalloc.start()
-                start_time = time.time()
+                t1 = time.time()
                 y_pred = model.predict(X_test)
-                
-                if hasattr(model, "predict_proba"):
-                    y_probabilities = model.predict_proba(X_test)
-                else:
-                    y_probabilities = None
-                    
-                test_time = time.time() - start_time
-                current, peak_test = tracemalloc.get_traced_memory()
+                y_probs = model.predict_proba(X_test) if hasattr(model, "predict_proba") else None
+                test_time = time.time() - t1
+                _, peak_test = tracemalloc.get_traced_memory()
                 tracemalloc.stop()
                 
-                metrics = evaluate_model(y_test, y_pred, y_probabilities=y_probabilities)
+                metrics = evaluate_model(y_test, y_pred, y_probabilities=y_probs)
                 
-                result_row = {
+                row = {
                     "Dataset": dataset_name,
                     "Model": model_name,
                     "Parameters": str(params),
@@ -244,23 +251,37 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                     "Peak RAM Test (MB)": peak_test / 10**6
                 }
                 
-                # Save to All file
-                pd.DataFrame([result_row]).to_csv(output_file_all, mode='a', header=not os.path.exists(output_file_all), index=False)
+                # Save to All file (Atomic write if parallel)
+                pd.DataFrame([row]).to_csv(output_file_all, mode='a', header=not os.path.exists(output_file_all), index=False)
                 
-                # Check if best
-                current_auc = metrics.get("AUCROC") or 0
-                if current_auc > best_auc:
-                    best_auc = current_auc
-                    best_result_row = result_row
+                cur_auc = metrics.get("AUCROC") or 0
+                if cur_auc > best_auc:
+                    best_auc = cur_auc
+                    best_row = row
                     
             except Exception as e:
-                print(f"Error with {model_name} params {params}: {e}")
-                traceback.print_exc()
-                
-        # Save best result for this model/dataset
-        if best_result_row:
-            print(f"Best params for {model_name}: {best_result_row['Parameters']} (AUC: {best_result_row['AUCROC']})")
-            pd.DataFrame([best_result_row]).to_csv(output_file_best, mode='a', header=not os.path.exists(output_file_best), index=False)
+                print(f"  Error with {model_name}: {e}")
+        
+        if best_row:
+            pd.DataFrame([best_row]).to_csv(output_file_best, mode='a', header=not os.path.exists(output_file_best), index=False)
+            return best_row
+        return None
+
+    models_to_run = list(PARAM_GRIDS.items())
+    
+    if USE_PARALLEL and not use_tuning:
+        # High speed mode: Parallelize across MODELS (since each only has 1 param set)
+        Parallel(n_jobs=N_JOBS, backend="multiprocessing")(
+            delayed(process_model)(m, p) for m, p in models_to_run
+        )
+    else:
+        # Tuning mode or Stability mode: Sequential model processing
+        for m, p in models_to_run:
+            process_model(m, p)
+
+def run_tuning_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, output_file_all, output_file_best):
+    """Legacy wrapper for backward compatibility if needed, though we update the call site."""
+    return run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, output_file_all, output_file_best, use_tuning=USE_TUNING)
 
 if __name__ == "__main__": 
     # Use small subset for testing purposes first
@@ -305,4 +326,4 @@ if __name__ == "__main__":
                 X_test[np.isinf(X_test)] = np.nan
                 X_test = imputer.transform(X_test)
                 
-                run_experiment(X_train, y_train, X_test, y_test, prefix, noise, scaler, output_all, output_best) 
+                run_experiment(X_train, y_train, X_test, y_test, prefix, noise, scaler, output_all, output_best, use_tuning=USE_TUNING) 
