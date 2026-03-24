@@ -90,11 +90,11 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     
     # DYNAMIC LAYOUT: Increase space for many models
     if k > 10:
-        width = max(width, 10)
-        textspace = max(textspace, 2)
+        width = max(width, 14) # Increased from 10
+        textspace = max(textspace, 3) # Increased from 2
     
     scalewidth = width - 2 * textspace
-    space_between_names = 0.3 if k < 15 else 0.25 # Slightly tighter spacing for many models
+    space_between_names = 0.35 # Increased from 0.25
     
     def rankpos(rank):
         if not reverse: a = rank - lowv
@@ -105,9 +105,8 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     cline += distanceh
     
     # Adjust height dynamically based on number of models and cliques
-    # We estimate cliques might take up some space
-    minnotsignificant = max(2 * 0.2, linesblank)
-    height = cline + (math.ceil(k / 2) + 1) * space_between_names + minnotsignificant + 1.5 # Increased padding
+    minnotsignificant = 0.6 # Increased from max(2 * 0.2, linesblank)
+    height = cline + (math.ceil(k / 2) + 1) * space_between_names + minnotsignificant + 1.0
     
     fig = plt.figure(figsize=(width, height))
     fig.set_facecolor('white')
@@ -142,8 +141,9 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         if a == int(a): tick = bigtick
         line([(rankpos(a), cline - tick / 2), (rankpos(a), cline)], linewidth=2)
 
+    tick_size = 12 if k < 15 else 10 # Smaller tick labels for many models
     for a in range(lowv, highv + 1):
-        text(rankpos(a), cline - tick / 2 - 0.05, str(a), ha="center", va="bottom", size=16)
+        text(rankpos(a), cline - tick / 2 - 0.05, str(a), ha="center", va="bottom", size=tick_size)
 
     def filter_names(name): return name
 
@@ -161,8 +161,9 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_color = "red" if is_our else "black"
         
         if labels:
-            text(textspace + 0.5, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
-                 ha="right", va="center", size=label_size-2, color=f_color)
+            # Shift label further right to avoid overlap with name on the left
+            text(textspace + 1.2, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
+                 ha="right", va="center", size=label_size-2, color=f_color, alpha=0.7)
         text(textspace - 0.2, chei, name, ha="right", va="center", size=label_size, weight=f_weight, color=f_color)
 
     for i in range(math.ceil(k / 2), k):
@@ -175,8 +176,9 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_color = "red" if is_our else "black"
         
         if labels:
-            text(textspace + scalewidth - 0.5, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
-                 ha="left", va="center", size=label_size-2, color=f_color)
+            # Shift label further left to avoid overlap with name on the right
+            text(textspace + scalewidth - 1.2, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
+                 ha="left", va="center", size=label_size-2, color=f_color, alpha=0.7)
         text(textspace + scalewidth + 0.2, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
 
     # draw no significant lines (cliques)
