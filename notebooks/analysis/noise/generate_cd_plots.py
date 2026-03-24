@@ -177,9 +177,11 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_color = "red" if is_our else "black"
         
         if labels:
-            text(textspace + 2.0, chei - 0.1, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]), 
-                 ha="right", va="center", size=metric_size, color=f_color, alpha=0.7)
-        text(textspace - 0.3, chei, name, ha="right", va="center", size=label_size, weight=f_weight, color=f_color)
+            # Added bbox (white background) to prevent line crossing and increase zorder
+            text(textspace + 2.0, chei, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]), 
+                 ha="right", va="center", size=metric_size, color=f_color, zorder=20,
+                 bbox=dict(facecolor='white', edgecolor='none', alpha=0.9, pad=1.5))
+        text(textspace - 0.3, chei, name, ha="right", va="center", size=label_size, weight=f_weight, color=f_color, zorder=20)
 
     # BEST MODELS (Ranks 0 to k/2) -> RIGHT Side (Near 1 in reverse mode)
     for i in range(math.ceil(k / 2)):
@@ -193,9 +195,11 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_color = "red" if is_our else "black"
         
         if labels:
-            text(width - textspace - 2.0, chei - 0.1, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]), 
-                 ha="left", va="center", size=metric_size, color=f_color, alpha=0.7)
-        text(width - textspace + 0.3, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
+            # Added bbox (white background) to hide line behind text
+            text(width - textspace - 2.0, chei, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]), 
+                 ha="left", va="center", size=metric_size, color=f_color, zorder=20,
+                 bbox=dict(facecolor='white', edgecolor='none', alpha=0.9, pad=1.5))
+        text(width - textspace + 0.3, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color, zorder=20)
 
     # DRAW CLIQUES (Blue significance bars)
     try:
@@ -492,7 +496,7 @@ def main():
         graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, p_values,
                     reverse=True, labels=True)
         cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
-        plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)
+        # plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)
         plt.savefig(cd_diag_path, bbox_inches='tight', dpi=300)
         print(f"CD Diagram (Legacy) saved to {cd_diag_path}")
     except Exception:
