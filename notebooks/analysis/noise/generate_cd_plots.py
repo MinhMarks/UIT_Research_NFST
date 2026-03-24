@@ -86,9 +86,15 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
 
     cline = 0.4
     k = len(avranks)
-    linesblank = 0
+    
+    # DYNAMIC LAYOUT: Increase space for many models
+    if k > 10:
+        width = max(width, 10)
+        textspace = max(textspace, 2)
+    
     scalewidth = width - 2 * textspace
-
+    space_between_names = 0.3 if k < 15 else 0.25 # Slightly tighter spacing for many models
+    
     def rankpos(rank):
         if not reverse: a = rank - lowv
         else: a = highv - rank
@@ -96,9 +102,12 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
 
     distanceh = 0.25
     cline += distanceh
+    
+    # Adjust height dynamically based on number of models and cliques
+    # We estimate cliques might take up some space
     minnotsignificant = max(2 * 0.2, linesblank)
-    height = cline + ((k + 4) / 2) * 0.2 + minnotsignificant
-
+    height = cline + (math.ceil(k / 2) + 1) * space_between_names + minnotsignificant + 1.5 # Increased padding
+    
     fig = plt.figure(figsize=(width, height))
     fig.set_facecolor('white')
     ax = fig.add_axes([0, 0, 1, 1])
@@ -137,30 +146,46 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
 
     def filter_names(name): return name
 
-    space_between_names = 0.24
+    # Dynamic font size
+    label_size = 14 if k < 15 else 11
+    
     for i in range(math.ceil(k / 2)):
         chei = cline + minnotsignificant + i * space_between_names
         line([(rankpos(avranks[i]), cline), (rankpos(avranks[i]), chei), (textspace - 0.1, chei)], linewidth=linewidth)
+        
+        # Highlight our model
+        name = names[i]
+        is_our = "LOC-NFST" in name
+        f_weight = "bold" if is_our else "normal"
+        f_color = "red" if is_our else "black"
+        
         if labels:
-            text(textspace + 0.9, chei - 0.075, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), ha="right", va="center", size=12)
-        text(textspace - 0.2, chei, filter_names(names[i]), ha="right", va="center", size=16)
+            text(textspace + 0.5, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
+                 ha="right", va="center", size=label_size-2, color=f_color)
+        text(textspace - 0.2, chei, name, ha="right", va="center", size=label_size, weight=f_weight, color=f_color)
 
     for i in range(math.ceil(k / 2), k):
         chei = cline + minnotsignificant + (k - i - 1) * space_between_names
         line([(rankpos(avranks[i]), cline), (rankpos(avranks[i]), chei), (textspace + scalewidth + 0.1, chei)], linewidth=linewidth)
+        
+        name = names[i]
+        is_our = "LOC-NFST" in name
+        f_weight = "bold" if is_our else "normal"
+        f_color = "red" if is_our else "black"
+        
         if labels:
-            text(textspace + scalewidth - 0.8, chei - 0.075, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), ha="left", va="center", size=12)
-        text(textspace + scalewidth + 0.2, chei, filter_names(names[i]), ha="left", va="center", size=16)
+            text(textspace + scalewidth - 0.5, chei - 0.05, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
+                 ha="left", va="center", size=label_size-2, color=f_color)
+        text(textspace + scalewidth + 0.2, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
 
     # draw no significant lines (cliques)
     cliques = form_cliques(p_values, names)
     start = cline + 0.2
     side = -0.02
-    height_inc = 0.1
+    height_inc = 0.15 # Increased space between bars
     achieved_half = False
     for clq in cliques:
         if len(clq) == 1: continue
-        # Identify indices of clique members in sorted_names
         name_list = list(names)
         indices = [name_list.index(name) for name in clq if name in name_list]
         if not indices: continue
@@ -171,7 +196,7 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
             start = cline + 0.25
             achieved_half = True
         
-        line([(rankpos(avranks[min_idx]) - side, start), (rankpos(avranks[max_idx]) + side, start)], linewidth=linewidth_sign)
+        line([(rankpos(avranks[min_idx]) - side, start), (rankpos(avranks[max_idx]) + side, start)], linewidth=linewidth_sign, color='blue', alpha=0.7)
         start += height_inc
 
 def form_cliques(p_values, nnames):
