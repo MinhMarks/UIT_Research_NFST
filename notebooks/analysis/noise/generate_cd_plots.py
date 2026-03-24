@@ -1,12 +1,21 @@
 import os
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
-from scipy.stats import friedmanchisquare
+import operator
+import math
 import glob
+import networkx
+from scipy.stats import wilcoxon, friedmanchisquare
+
+# Set font for publication quality
+matplotlib.rcParams['font.family'] = 'sans-serif'
+matplotlib.rcParams['font.sans-serif'] = 'Arial'
 
 # ============================================================================
-# SETTINGS & PATHS
+# DATA NORMALIZATION (Consistent with generate_best_results_report.py)
 # ============================================================================
 KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT']
 
@@ -15,13 +24,11 @@ def normalize_dataset_name(name):
     name_lower = name.lower()
     for ds in KNOWN_DATASETS:
         if ds.lower() in name_lower: return ds
-    # Fallback to base name if no match
     base = os.path.basename(name)
     if base.endswith('.csv'): base = base[:-4]
     return base
 
 def find_csv_files(root_dir):
-    """Recursively find all CSV files and identify if they are results."""
     csv_files = glob.glob(os.path.join(root_dir, "**", "*.csv"), recursive=True)
     results = []
     for f in csv_files:
@@ -42,13 +49,12 @@ def load_and_normalize(file_info):
     norm_df = pd.DataFrame()
     norm_df['dataset'] = df['dataset'].apply(normalize_dataset_name) if 'dataset' in df.columns else 'Unknown'
     norm_df['model'] = df['model'] if 'model' in df.columns else 'LOC-NFST'
+    norm_df['model'] = norm_df['model'].replace({'ourmodel': 'LOC-NFST'})
     
-    # Standardize Noise
     if 'noise_percentage' in df.columns: norm_df['noise'] = df['noise_percentage'].astype(float)
     elif 'noise' in df.columns: norm_df['noise'] = df['noise'].astype(float)
     else: norm_df['noise'] = 0.0
 
-    # Standardize Scaler
     if 'scaler' in df.columns: norm_df['scaler'] = df['scaler']
     elif 'scaled' in df.columns: norm_df['scaler'] = df['scaled']
     else: norm_df['scaler'] = 'Unknown'
@@ -57,131 +63,187 @@ def load_and_normalize(file_info):
     return norm_df.dropna(subset=['aucroc'])
 
 # ============================================================================
-# STATISTICAL PLOTTING (CD DIAGRAM)
+# CD DIAGRAM LOGIC (Adopted from promt/main.py)
 # ============================================================================
-def draw_cd_diagram(df_pivot, alpha=0.05, output_path='cd_diagram.png'):
-    """
-    Draw a Critical Difference (CD) Diagram based on Nemenyi post-hoc test.
-    df_pivot: Rows = Datasets, Columns = Models, Values = AUCROC
-    """
-    n_datasets, n_models = df_pivot.shape
-    if n_datasets < 2 or n_models < 2:
-        print("Not enough data to draw CD diagram.")
-        return
 
-    # 1. Ranks (1 is best)
-    ranks = df_pivot.rank(axis=1, ascending=False)
-    avg_ranks = ranks.mean(axis=0).sort_values()
-    
-    # 2. Friedman Test
-    try:
-        stat, p = friedmanchisquare(*[df_pivot[col] for col in df_pivot.columns])
-        print(f"Friedman test: stat={stat:.3f}, p={p:.4e}")
-    except Exception as e:
-        print(f"Friedman test failed: {e}")
-        p = 1.0
+def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, lowv=None, highv=None,
+                width=8, textspace=1, reverse=False, filename=None, labels=False, **kwargs):
+    width = float(width)
+    textspace = float(textspace)
 
-    # 3. Nemenyi Critical Difference
-    # Studentized range statistic q_alpha for alpha=0.05
-    q_alphas = {
-        2: 1.960, 3: 2.344, 4: 2.569, 5: 2.728, 6: 2.850, 7: 2.949, 8: 3.031, 
-        9: 3.102, 10: 3.164, 11: 3.219, 12: 3.268, 13: 3.313, 14: 3.354, 15: 3.391,
-        16: 3.426, 17: 3.458, 18: 3.489, 19: 3.517, 20: 3.544
-    }
-    q = q_alphas.get(n_models, 3.6) # Fallback
-    cd = q * np.sqrt(n_models * (n_models + 1) / (6 * n_datasets))
-    print(f"CD value (alpha={alpha}): {cd:.3f}")
+    def nth(l, n):
+        n = lloc(l, n)
+        return [a[n] for a in l]
 
-    # 4. Plot
-    fig, ax = plt.subplots(figsize=(12, 5))
-    
-    # Range of ranks
-    low, high = 1, n_models
-    ax.set_xlim(low - 0.5, high + 0.5)
-    ax.set_ylim(-1.5, 1.5)
-    ax.set_xticks(np.arange(low, high + 1))
-    ax.set_xlabel('Average Rank (Lower is Better)')
-    ax.invert_xaxis() # Better models (rank 1) on the right usually, but we can do A-B style
-    
-    # Rank line
-    ax.axhline(0, color='black', linewidth=1.5)
-    
-    # Model markers and labels
-    model_ranks = avg_ranks.to_dict()
-    sorted_models = list(avg_ranks.index)
-    
-    for i, model in enumerate(sorted_models):
-        rank = model_ranks[model]
-        # Alternate sides for labels
-        side = 1 if i % 2 == 0 else -1
-        y_tick = 0.1 * side
-        y_text = 0.5 * side
+    def lloc(l, n):
+        if n < 0: return len(l[0]) + n
+        else: return n
+
+    if lowv is None:
+        lowv = min(1, int(math.floor(min(avranks))))
+    if highv is None:
+        highv = max(len(avranks), int(math.ceil(max(avranks))))
+
+    cline = 0.4
+    k = len(avranks)
+    linesblank = 0
+    scalewidth = width - 2 * textspace
+
+    def rankpos(rank):
+        if not reverse: a = rank - lowv
+        else: a = highv - rank
+        return textspace + scalewidth / (highv - lowv) * a
+
+    distanceh = 0.25
+    cline += distanceh
+    minnotsignificant = max(2 * 0.2, linesblank)
+    height = cline + ((k + 4) / 2) * 0.2 + minnotsignificant
+
+    fig = plt.figure(figsize=(width, height))
+    fig.set_facecolor('white')
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_axis_off()
+
+    hf = 1. / height
+    wf = 1. / width
+    def hfl(l): return [a * hf for a in l]
+    def wfl(l): return [a * wf for a in l]
+
+    ax.plot([0, 1], [0, 1], c="w")
+    ax.set_xlim(0, 1)
+    ax.set_ylim(1, 0)
+
+    def line(l, color='k', **kwargs):
+        ax.plot(wfl(nth(l, 0)), hfl(nth(l, 1)), color=color, **kwargs)
+
+    def text(x, y, s, *args, **kwargs):
+        ax.text(wf * x, hf * y, s, *args, **kwargs)
+
+    line([(textspace, cline), (width - textspace, cline)], linewidth=2)
+
+    bigtick = 0.3
+    smalltick = 0.15
+    linewidth = 2.0
+    linewidth_sign = 4.0
+
+    tick = None
+    for a in list(np.arange(lowv, highv, 0.5)) + [highv]:
+        tick = smalltick
+        if a == int(a): tick = bigtick
+        line([(rankpos(a), cline - tick / 2), (rankpos(a), cline)], linewidth=2)
+
+    for a in range(lowv, highv + 1):
+        text(rankpos(a), cline - tick / 2 - 0.05, str(a), ha="center", va="bottom", size=16)
+
+    def filter_names(name): return name
+
+    space_between_names = 0.24
+    for i in range(math.ceil(k / 2)):
+        chei = cline + minnotsignificant + i * space_between_names
+        line([(rankpos(avranks[i]), cline), (rankpos(avranks[i]), chei), (textspace - 0.1, chei)], linewidth=linewidth)
+        if labels:
+            text(textspace + 0.9, chei - 0.075, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), ha="right", va="center", size=12)
+        text(textspace - 0.2, chei, filter_names(names[i]), ha="right", va="center", size=16)
+
+    for i in range(math.ceil(k / 2), k):
+        chei = cline + minnotsignificant + (k - i - 1) * space_between_names
+        line([(rankpos(avranks[i]), cline), (rankpos(avranks[i]), chei), (textspace + scalewidth + 0.1, chei)], linewidth=linewidth)
+        if labels:
+            text(textspace + scalewidth - 0.8, chei - 0.075, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), ha="left", va="center", size=12)
+        text(textspace + scalewidth + 0.2, chei, filter_names(names[i]), ha="left", va="center", size=16)
+
+    # draw no significant lines (cliques)
+    cliques = form_cliques(p_values, names)
+    start = cline + 0.2
+    side = -0.02
+    height_inc = 0.1
+    achieved_half = False
+    for clq in cliques:
+        if len(clq) == 1: continue
+        # Identify indices of clique members in sorted_names
+        name_list = list(names)
+        indices = [name_list.index(name) for name in clq if name in name_list]
+        if not indices: continue
+        min_idx = min(indices)
+        max_idx = max(indices)
         
-        ax.plot([rank, rank], [0, y_tick], color='black', linewidth=1)
-        ax.text(rank, y_text, f"{model}\n({rank:.2f})", 
-                ha='center', va='center', fontsize=10, 
-                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="gray", alpha=0.8))
-        ax.plot([rank, rank], [y_tick, y_text*0.8], color='gray', linestyle=':', linewidth=0.8)
-
-    # CD bar
-    ax.plot([low, low + cd], [1.2, 1.2], color='red', linewidth=4)
-    ax.text(low + cd/2, 1.3, f"CD = {cd:.2f}", color='red', ha='center', fontweight='bold')
-
-    # Draw Cliques (Groups not significantly different)
-    # Find all groups where the max difference is < CD
-    def find_cliques(ranks_dict, cd_val):
-        sorted_items = sorted(ranks_dict.items(), key=lambda x: x[1])
-        cliques = []
-        for i in range(len(sorted_items)):
-            clique = [sorted_items[i]]
-            for j in range(i + 1, len(sorted_items)):
-                if abs(sorted_items[i][1] - sorted_items[j][1]) <= cd_val:
-                    clique.append(sorted_items[j])
-                else:
-                    break
-            if len(clique) > 1:
-                cliques.append(clique)
+        if min_idx >= len(names) / 2 and not achieved_half:
+            start = cline + 0.25
+            achieved_half = True
         
-        # Filter: only keep maximal cliques
-        maximal = []
-        for c in cliques:
-            is_sub = False
-            for m in cliques:
-                if c == m: continue
-                # Check if c is a subset of m
-                if all(item in m for item in c):
-                    is_sub = True
-                    break
-            if not is_sub:
-                maximal.append(c)
-        return maximal
+        line([(rankpos(avranks[min_idx]) - side, start), (rankpos(avranks[max_idx]) + side, start)], linewidth=linewidth_sign)
+        start += height_inc
 
-    cliques = find_cliques(model_ranks, cd)
-    y_bar = -0.3
-    for clique in cliques:
-        c_ranks = [item[1] for item in clique]
-        ax.plot([min(c_ranks), max(c_ranks)], [y_bar, y_bar], color='blue', linewidth=5, alpha=0.6)
-        y_bar -= 0.15
+def form_cliques(p_values, nnames):
+    m = len(nnames)
+    g_data = np.zeros((m, m), dtype=np.int64)
+    name_list = list(nnames)
+    for p in p_values:
+        if p[3] == False: # Not significant
+            if p[0] in name_list and p[1] in name_list:
+                i = name_list.index(p[0])
+                j = name_list.index(p[1])
+                g_data[min(i, j), max(i, j)] = 1
+    g = networkx.Graph(g_data)
+    return list(networkx.find_cliques(g))
 
-    ax.axis('off')
-    plt.title(f"Critical Difference Diagram (alpha={alpha})\nFriedman p-value: {p:.4e}", pad=30)
-    plt.tight_layout()
-    plt.savefig(output_path, dpi=300)
-    print(f"CD Diagram saved to {os.path.abspath(output_path)}")
-    plt.close()
+def wilcoxon_holm(alpha=0.05, df_perf=None):
+    classifiers = sorted(df_perf['classifier_name'].unique())
+    datasets = sorted(df_perf['dataset_name'].unique())
+    m = len(classifiers)
+    n = len(datasets)
+    
+    # Test Friedman first
+    friedman_p = friedmanchisquare(*(np.array(df_perf.loc[df_perf['classifier_name'] == c]['accuracy']) for c in classifiers))[1]
+    if friedman_p >= alpha:
+        print('Friedman test not significant. CD Diagram might not show meaningful results.')
+
+    p_values = []
+    for i in range(m - 1):
+        c1 = classifiers[i]
+        perf1 = np.array(df_perf.loc[df_perf['classifier_name'] == c1]['accuracy'], dtype=np.float64)
+        for j in range(i + 1, m):
+            c2 = classifiers[j]
+            perf2 = np.array(df_perf.loc[df_perf['classifier_name'] == c2]['accuracy'], dtype=np.float64)
+            p = wilcoxon(perf1, perf2, zero_method='pratt')[1]
+            p_values.append((c1, c2, p, False))
+    
+    k = len(p_values)
+    p_values.sort(key=operator.itemgetter(2))
+    for i in range(k):
+        new_alpha = float(alpha / (k - i))
+        if p_values[i][2] <= new_alpha:
+            p_values[i] = (p_values[i][0], p_values[i][1], p_values[i][2], True)
+        else: break
+            
+    # Compute ranks
+    # Pivot to get matrix: Rows = Dataset, Cols = Classifier
+    pivot = df_perf.pivot(index='dataset_name', columns='classifier_name', values='accuracy')
+    ranks_df = pivot.rank(ascending=False, axis=1)
+    average_ranks = ranks_df.mean(axis=0).sort_values(ascending=True) # Ascending: 1.0 is best
+    
+    average_value = df_perf.groupby('classifier_name').agg({'accuracy': 'mean'}).reset_index()
+    # Align average_value with sorted average_ranks
+    average_value.classifier_name = average_value.classifier_name.astype("category")
+    average_value.classifier_name = average_value.classifier_name.cat.set_categories(average_ranks.index)
+    average_value = average_value.sort_values(["classifier_name"])
+    
+    return p_values, average_ranks, n, average_value
 
 # ============================================================================
 # MAIN
 # ============================================================================
+
 def main():
     _script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(_script_dir, "results")
+    os.makedirs(output_dir, exist_ok=True)
     
-    print("=== Critical Difference Plotter ===")
+    print("=== Critical Difference Plotter (promt/main.py style) ===")
     baseline_input = input("Enter path to Baseline Results (File or Dir): ").strip()
     model_input = input("Enter path to Model Results (File or Dir): ").strip()
 
     files = []
-    # Process inputs same way as generate_best_results_report.py
     for inp in [baseline_input, model_input]:
         if not inp: continue
         if os.path.isfile(inp) and inp.endswith('.csv'): files.append(('unified', inp))
@@ -192,42 +254,46 @@ def main():
         return
 
     all_data = [load_and_normalize(f) for f in files]
-    df = pd.concat(all_data, ignore_index=True)
-
-    # Unify Model names (important for LOC-NFST)
-    df['model'] = df['model'].replace({'ourmodel': 'LOC-NFST'})
-
-    # Filter for Noise=0 (Clean comparison)
-    df_clean = df[df['noise'] == 0.0].copy()
-    print(f">>> Found {len(df_clean)} rows with Noise=0.0")
-    print("Dataset counts (Normalized):")
-    print(df_clean['dataset'].value_counts())
-    print("Model counts (Total rows):")
-    print(df_clean['model'].value_counts().head(5))
-    print(">>> Generating Best Scaler table...")
-    # Group by Model and Dataset, pick best scaler
-    best_scaler_idx = df_clean.groupby(['model', 'dataset'])['aucroc'].idxmax()
-    df_best_scalers = df_clean.loc[best_scaler_idx]
+    full_df = pd.concat(all_data, ignore_index=True)
     
-    # Pivot to show Scaler per (Model, Dataset)
-    scaler_pivot = df_best_scalers.pivot(index='model', columns='dataset', values='scaler')
+    # Pre-process: Filter Noise=0
+    df_clean = full_df[full_df['noise'] == 0.0].copy()
+    
+    # Best Scaler per (Model, Dataset)
+    best_idx = df_clean.groupby(['model', 'dataset'])['aucroc'].idxmax()
+    df_best = df_clean.loc[best_idx]
+    
+    # Save best scaler table
+    scaler_pivot = df_best.pivot(index='model', columns='dataset', values='scaler')
     scaler_pivot.to_csv(os.path.join(_script_dir, "best_scaler_per_model.csv"))
     print(f"Best scaler table saved to {os.path.join(_script_dir, 'best_scaler_per_model.csv')}")
 
-    # 2. CD DIAGRAM
-    print(">>> Generating CD Diagram...")
-    # Matrix of (Dataset x Model) using the best AUCROC found across scalers
-    aucroc_pivot = df_best_scalers.pivot(index='dataset', columns='model', values='aucroc')
+    # Prepare df_perf for Wilcoxon-Holm (columns: classifier_name, dataset_name, accuracy)
+    df_perf = df_best[['model', 'dataset', 'aucroc']].rename(
+        columns={'model': 'classifier_name', 'dataset': 'dataset_name', 'aucroc': 'accuracy'}
+    )
     
-    # Drop models with too many NaNs if any (Friedman needs complete rows)
-    aucroc_pivot = aucroc_pivot.dropna(axis=1) # Drop models not present in all datasets
+    # Keep only models present in ALL datasets for a fair ranking
+    counts = df_perf.groupby('classifier_name').size()
+    max_nb = counts.max()
+    valid_models = counts[counts == max_nb].index
+    df_perf = df_perf[df_perf['classifier_name'].isin(valid_models)]
     
-    if aucroc_pivot.shape[1] < 2:
-        print("Error: Need at least 2 models present in all 4 datasets to compute ranks.")
-        print(f"Available models after filtering: {aucroc_pivot.columns.tolist()}")
+    if df_perf.empty or len(df_perf['classifier_name'].unique()) < 2:
+        print("Error: Not enough data for CD Diagram. Models must be present in all datasets.")
         return
 
-    draw_cd_diagram(aucroc_pivot, output_path=os.path.join(_script_dir, "cd_diagram.png"))
+    print(f">>> Computing CD statistics for {len(valid_models)} models across {max_nb} datasets...")
+    p_values, average_ranks, n, average_value = wilcoxon_holm(df_perf=df_perf)
+
+    # Plot
+    graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, p_values,
+                reverse=True, width=10, textspace=2, labels=True)
+    
+    plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=0.9)
+    cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
+    plt.savefig(cd_diag_path, bbox_inches='tight')
+    print(f"CD Diagram saved to {cd_diag_path}")
 
 if __name__ == "__main__":
     main()
