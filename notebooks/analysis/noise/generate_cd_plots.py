@@ -298,23 +298,38 @@ def plot_ranked_heatmap(average_ranks, df_perf, output_path):
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
-def plot_average_rank_bar(average_ranks, output_path):
-    """Draw a clean horizontal bar chart of average ranks."""
-    plt.figure(figsize=(10, 12))
+def plot_average_rank_bar(average_ranks, average_value, output_path):
+    """Draw a clean horizontal bar chart of average ranks with AUCROC labels."""
+    plt.figure(figsize=(10, 14))
+    
+    # Merge rank and auc for labeling
+    # average_value should be aligned with average_ranks index
+    auc_map = average_value.set_index('classifier_name')['accuracy'].to_dict()
+    
     colors = ['red' if "LOC-NFST" in m else 'skyblue' for m in average_ranks.index]
     
-    ax = average_ranks.plot(kind='barh', color=colors, edgecolor='black')
+    ax = average_ranks.plot(kind='barh', color=colors, edgecolor='black', alpha=0.8)
     ax.invert_yaxis() # Rank 1 at top
     
-    plt.title("Overall Average Ranking (Lower is Better)", size=15)
-    plt.xlabel("Average Rank", size=12)
-    plt.ylabel("Model", size=12)
-    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.title("Overall Model Comparison (Ranked)", size=18, pad=20)
+    plt.xlabel("Average Rank (Lower is Better)", size=14)
+    plt.ylabel("Model", size=14)
+    plt.grid(axis='x', linestyle='--', alpha=0.5)
     
-    # Add values on bars
-    for i, v in enumerate(average_ranks):
-        ax.text(v + 0.1, i, f"{v:.2f}", va='center', fontweight='bold')
+    # Add Rank + AUCROC on the bars
+    for i, model in enumerate(average_ranks.index):
+        rank = average_ranks[model]
+        auc = auc_map.get(model, 0.0)
+        label = f"Rank: {rank:.2f} | AUC: {auc:.2f}%"
         
+        # Highlight color for text
+        is_our = "LOC-NFST" in model
+        txt_color = "red" if is_our else "black"
+        txt_weight = "bold" if is_our else "normal"
+        
+        ax.text(rank + 0.1, i, label, va='center', size=11, color=txt_color, fontweight=txt_weight)
+        
+    plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
@@ -379,9 +394,9 @@ def main():
     plot_ranked_heatmap(average_ranks, df_perf, heatmap_path)
     print(f"Ranked Heatmap saved to {heatmap_path}")
 
-    # 2. Average Rank Bar Chart (Highly Recommended for 20+ models)
+    # 2. Average Rank Bar Chart (With AUCROC)
     bar_path = os.path.join(output_dir, "rank_bar_chart.png")
-    plot_average_rank_bar(average_ranks, bar_path)
+    plot_average_rank_bar(average_ranks, average_value, bar_path)
     print(f"Rank Bar Chart saved to {bar_path}")
 
     # 3. CD Diagram (Legacy - for comparison)
