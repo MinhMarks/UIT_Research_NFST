@@ -104,7 +104,7 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
     if noise_count > 0 and len(X_train_noise) > 0:
         idx = np.random.choice(len(X_train_noise), size=min(noise_count, len(X_train_noise)), replace=False)
         X_train = np.vstack((X_train, X_train_noise[idx]))
-        y_train = np.concatenate((y_train, np.ones(len(idx))))
+        y_train = np.concatenate((y_train, np.zeros(len(idx))))
 
     X_test = test_data.iloc[:, :-1].to_numpy(dtype=np.float32)
     y_test = test_data.iloc[:, -1].to_numpy()
@@ -135,13 +135,13 @@ def evaluate_model(y_true, y_pred, y_probabilities=None):
             pass
             
     return {
-        "AUCROC": round(auc_roc * 100, 4), 
-        "AUCPR": round(auc_pr * 100, 4),
-        "Accuracy": round(accuracy * 100, 4), 
-        "MCC": round(mcc, 4), 
-        "F1 Score": round(f1, 4), 
-        "Precision": round(ppv, 4), 
-        "Recall": round(recall, 4)
+        "AUCROC": auc_roc * 100 if auc_roc else None, 
+        "AUCPR": auc_pr * 100 if auc_pr else None,
+        "Accuracy": accuracy * 100, 
+        "MCC": mcc, 
+        "F1 Score": f1, 
+        "Precision": ppv, 
+        "Recall": recall
     }
 
 # ============================================================================
@@ -243,11 +243,16 @@ def run_single_model(model_name, X_train, y_train, X_test, y_test, dataset_name,
         metrics = evaluate_model(y_test, y_pred, y_probabilities=y_probs)
         
         return {
-            "Dataset": dataset_name, "Model": model_name, "Parameters": str(params),
-            "Scaled": scaler, "Noise": noise, **metrics,
-            "Time Train": round(train_time, 4), "Time Test": round(test_time, 4),
-            "Peak RAM Train (MB)": round(peak_train / 1e6, 2),
-            "Peak RAM Test (MB)": round(peak_test / 1e6, 2)
+            "Dataset": dataset_name,
+            "Model": model_name,
+            "Parameters": str(params),
+            "Scaled": scaler,
+            "Noise": noise,
+            **metrics,
+            "Time Train": train_time,
+            "Time Test": test_time,
+            "Peak RAM Train (MB)": peak_train / 10**6,
+            "Peak RAM Test (MB)": peak_test / 10**6
         }
     except Exception as e:
         return {"error": f"Error with {model_name} on {dataset_name}: {e}"}
