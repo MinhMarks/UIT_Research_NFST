@@ -84,18 +84,13 @@ def load_and_normalize(file_info):
 # ============================================================================
 
 def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, lowv=None, highv=None,
-                width=None, textspace=None, reverse=False, filename=None, labels=False, **kwargs):
+                width=24, textspace=5, reverse=True, filename=None, labels=True, **kwargs):
     """
-    Exact implementation logic from promt/main.py with safer dimension defaults for many models.
+    Fixed logic: Best models go to the RIGHT (near 1), Worst models go to the LEFT (near 22).
+    This prevents lines from crossing the entire chart.
+    Matching 'main.py' style but with better side selection and scaling.
     """
     k = len(avranks)
-    
-    # SAFE DEFAULTS for many models (23 models)
-    if width is None:
-        width = 16 if k > 15 else 10
-    if textspace is None:
-        textspace = 3 if k > 15 else 1.5
-    
     width = float(width)
     textspace = float(textspace)
 
@@ -113,7 +108,6 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         highv = max(len(avranks), int(math.ceil(max(avranks))))
 
     cline = 0.4
-    linesblank = 0
     scalewidth = width - 2 * textspace
 
     def rankpos(rank):
@@ -124,13 +118,13 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     distanceh = 0.25
     cline += distanceh
     
-    # Dynamic spacing and height
-    space_between_names = 0.35 if k > 15 else 0.24
-    label_size = 12 if k > 15 else 16
-    metric_size = label_size - 4
+    # Higher spacing to prevent vertical overlap
+    space_between_names = 0.6 
+    label_size = 14
+    metric_size = 12
     
-    minnotsignificant = 0.6 if k > 15 else 0.4
-    height = cline + (math.ceil(k / 2) + 1) * space_between_names + minnotsignificant + 0.5
+    minnotsignificant = 0.8
+    height = cline + (math.ceil(k / 2) + 1) * space_between_names + minnotsignificant + 1.0
     
     fig = plt.figure(figsize=(width, height))
     fig.set_facecolor('white')
@@ -157,38 +151,41 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     bigtick = 0.3
     smalltick = 0.15
     linewidth = 2.0
-    linewidth_sign = 6.0 # Thicker significance bars
+    linewidth_sign = 6.0 
 
-    tick = None
     for a in list(np.arange(lowv, highv, 0.5)) + [highv]:
         tick = smalltick
         if a == int(a): tick = bigtick
         line([(rankpos(a), cline - tick / 2), (rankpos(a), cline)], linewidth=2)
 
     # Top scale font
-    tick_font = 10 if k > 15 else 16
+    tick_font = 14
     for a in range(lowv, highv + 1):
-        text(rankpos(a), cline - tick / 2 - 0.05, str(a), ha="center", va="bottom", size=tick_font)
+        text(rankpos(a), cline - 0.2, str(a), ha="center", va="bottom", size=tick_font)
 
-    for i in range(math.ceil(k / 2)):
-        chei = cline + minnotsignificant + i * space_between_names
-        line([(rankpos(avranks[i]), cline), (rankpos(avranks[i]), chei), (textspace - 0.1, chei)], linewidth=linewidth)
+    # WORST MODELS (Ranks k/2 to k) -> LEFT Side (Near 22 in reverse mode)
+    for i in range(math.ceil(k / 2), k):
+        idx = i # Original rank index
+        # We want to stack them from bottom UP (index k..k/2) or top DOWN.
+        # Let's stack them top down on the LEFT side.
+        chei = cline + minnotsignificant + (i - math.ceil(k / 2)) * space_between_names
+        line([(rankpos(avranks[idx]), cline), (rankpos(avranks[idx]), chei), (textspace - 0.1, chei)], linewidth=linewidth)
         
-        name = names[i]
+        name = names[idx]
         is_our = "LOC-NFST" in name
         f_weight = "bold" if is_our else "normal"
         f_color = "red" if is_our else "black"
         
         if labels:
-            # Metrics to the right of the textspace line
-            text(textspace + 1.2, chei - 0.075, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
-                 ha="right", va="center", size=metric_size, color=f_color, alpha=0.8)
-        # Name to the left of the line
+            text(textspace + 2.0, chei - 0.1, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]), 
+                 ha="right", va="center", size=metric_size, color=f_color, alpha=0.7)
         text(textspace - 0.3, chei, name, ha="right", va="center", size=label_size, weight=f_weight, color=f_color)
 
-    for i in range(math.ceil(k / 2), k):
-        chei = cline + minnotsignificant + (k - i - 1) * space_between_names
-        line([(rankpos(avranks[i]), cline), (rankpos(avranks[i]), chei), (textspace + scalewidth + 0.1, chei)], linewidth=linewidth)
+    # BEST MODELS (Ranks 0 to k/2) -> RIGHT Side (Near 1 in reverse mode)
+    for i in range(math.ceil(k / 2)):
+        idx = i
+        chei = cline + minnotsignificant + i * space_between_names
+        line([(rankpos(avranks[idx]), cline), (rankpos(avranks[idx]), chei), (width - textspace + 0.1, chei)], linewidth=linewidth)
         
         name = names[i]
         is_our = "LOC-NFST" in name
@@ -196,34 +193,28 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_color = "red" if is_our else "black"
         
         if labels:
-            # Metrics to the left of the textspace+scalewidth line
-            text(textspace + scalewidth - 1.2, chei - 0.075, "{0:.2f} / {1:.2f}".format(avg_value[i], avranks[i]), 
-                 ha="left", va="center", size=metric_size, color=f_color, alpha=0.8)
-        # Name to the right
-        text(textspace + scalewidth + 0.3, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
+            text(width - textspace - 2.0, chei - 0.1, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]), 
+                 ha="left", va="center", size=metric_size, color=f_color, alpha=0.7)
+        text(width - textspace + 0.3, chei, name, ha="left", va="center", size=label_size, weight=f_weight, color=f_color)
 
     # DRAW CLIQUES (Blue significance bars)
-    cliques = form_cliques(p_values, names)
-    start = cline + 0.2
-    side = -0.02
-    height_inc = 0.15 # Increased space between bars
-    achieved_half = False
-    for clq in cliques:
-        if len(clq) == 1: continue
+    try:
+        cliques = form_cliques(p_values, names)
+        start = cline + 0.2
+        side = -0.02
+        height_inc = 0.2
         name_list = list(names)
-        indices = [name_list.index(name) for name in clq if name in names] # Fixed membership test
-        if not indices: continue
-        min_idx = min(indices)
-        max_idx = max(indices)
-        
-        if min_idx >= len(names) / 2 and not achieved_half:
-            start = cline + 0.25
-            achieved_half = True
-        
-        # Use a clearly visible blue bar for significance
-        line([(rankpos(avranks[min_idx]) - side, start), (rankpos(avranks[max_idx]) + side, start)], 
-             linewidth=linewidth_sign, color='blue', alpha=0.6)
-        start += height_inc
+        for clq in cliques:
+            if len(clq) == 1: continue
+            valid_indices = [name_list.index(name) for name in clq if name in names]
+            if not valid_indices: continue
+            min_idx = min(valid_indices)
+            max_idx = max(valid_indices)
+            line([(rankpos(avranks[min_idx]) - side, start), (rankpos(avranks[max_idx]) + side, start)], 
+                 linewidth=linewidth_sign, color='blue', alpha=0.6)
+            start += height_inc
+    except Exception as e:
+        print(f"Warning drawing cliques: {e}")
 
 def form_cliques(p_values, nnames):
     m = len(nnames)
