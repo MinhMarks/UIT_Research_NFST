@@ -263,10 +263,14 @@ def run_single_model(model_name, X_train, y_train, X_test, y_test, dataset_name,
 if __name__ == "__main__":
     _default_data = os.path.normpath(os.path.join(project_root, 'Datascaled', 'Official_OC_Data'))
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
-    
     dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
     scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     noise_levels = [0, 1, 3, 5]
+    
+    # --- Acceleration Toggle ---
+    USE_PARALLEL = True  # Set to False if models crash (stability mode)
+    N_JOBS = 4           # Number of parallel workers
+    # ---------------------------
     
     RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
     exp_dir = os.path.join(current_dir, 'outputs', f"Experiment_FastBaseline_{RUN_TIMESTAMP}")
@@ -276,7 +280,7 @@ if __name__ == "__main__":
     logger = setup_logger(log_path)
     
     logger.info("=" * 60)
-    logger.info("FAST BASELINE EXPERIMENT (NO TUNING, PARALLEL)")
+    logger.info(f"FAST BASELINE EXPERIMENT (Parallel={USE_PARALLEL})")
     logger.info("=" * 60)
     # Single output file for the entire experiment
     out_path = os.path.join(exp_dir, "all_fast_baseline_results.csv")
@@ -306,13 +310,21 @@ if __name__ == "__main__":
                 X_train = imputer.fit_transform(X_train)
                 X_test = imputer.transform(X_test)
                 
-                # Run models in parallel using multiprocessing backend for better stability on some systems
-                # Reducing n_jobs to 4 to avoid overwhelming the system
+                # Run models
                 models_to_run = list(FAST_PARAMS.keys())
-                results = Parallel(n_jobs=4, backend="multiprocessing", verbose=10)(
-                    delayed(run_single_model)(m, X_train, y_train, X_test, y_test, prefix, noise, scaler) 
-                    for m in models_to_run
-                )
+                
+                if USE_PARALLEL:
+                    logger.info(f"Running {len(models_to_run)} models in PARALLEL (n_jobs={N_JOBS})...")
+                    results = Parallel(n_jobs=N_JOBS, backend="multiprocessing", verbose=10)(
+                        delayed(run_single_model)(m, X_train, y_train, X_test, y_test, prefix, noise, scaler) 
+                        for m in models_to_run
+                    )
+                else:
+                    logger.info(f"Running {len(models_to_run)} models SEQUENTIALLY (Stability Mode)...")
+                    results = []
+                    for m in models_to_run:
+                        res = run_single_model(m, X_train, y_train, X_test, y_test, prefix, noise, scaler)
+                        results.append(res)
                 
                 valid_results = []
                 for res in results:
