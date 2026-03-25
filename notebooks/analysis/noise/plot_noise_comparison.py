@@ -165,8 +165,9 @@ def generate_noise_comparison_chart(files, output_path):
     print(f"Saved grouped noise comparison chart to {output_path}")
 
 def main():
+
     _script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_script_dir))), "pictures")
+    output_dir = os.path.join(_script_dir, "results")
     os.makedirs(output_dir, exist_ok=True)
     
     print("=== Noise Comparison Chart Generator ===")
