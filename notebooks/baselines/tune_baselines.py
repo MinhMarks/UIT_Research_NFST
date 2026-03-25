@@ -16,8 +16,8 @@ from datetime import datetime
 from joblib import Parallel, delayed
 
 # --- Configuration Toggle ---
-USE_TUNING = True     # Set to False to skip hyperparameter search
-USE_PARALLEL = True    # Set to False if models crash (Stability Mode)
+USE_TUNING = False     # Set to False to skip hyperparameter search
+USE_PARALLEL = False    # Set to False if models crash (Stability Mode)
 N_JOBS = 4            # Number of parallel workers when tuning/running models
 # ----------------------------
 
@@ -286,9 +286,13 @@ def run_tuning_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_
 if __name__ == "__main__": 
     # Use small subset for testing purposes first
     # Change these back to full lists for real experiment
-    dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
-    scaler_names = ['QuantileTransformer', 'MinMaxScaler', 'Normalizer', 'RobustScaler']
-    noise_levels = [0, 1, 3, 5]
+    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
+    # scaler_names = ['QuantileTransformer', 'MinMaxScaler', 'Normalizer', 'RobustScaler']
+    # noise_levels = [0, 1, 3, 5]
+
+    dataset_prefixes = ['data_ToNIoT.csv']
+    scaler_names = ['QuantileTransformer']
+    noise_levels = [0]
     
     RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
     experiment_name = f"Experiment_Baseline_Tuning_{RUN_TIMESTAMP}"

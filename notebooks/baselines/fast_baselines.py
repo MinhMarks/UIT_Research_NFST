@@ -263,12 +263,17 @@ def run_single_model(model_name, X_train, y_train, X_test, y_test, dataset_name,
 if __name__ == "__main__":
     _default_data = os.path.normpath(os.path.join(project_root, 'Datascaled', 'Official_OC_Data'))
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
-    dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
-    scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
-    noise_levels = [0, 1, 3, 5]
+    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
+    dataset_prefixes = ['data_ToNIoT.csv']
+    
+    # scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+    scaler_names = ['QuantileTransformer']
+    
+    # noise_levels = [0, 1, 3, 5]
+    noise_levels = [0]
     
     # --- Acceleration Toggle ---
-    USE_PARALLEL = True  # Set to False if models crash (stability mode)
+    USE_PARALLEL = False  # Set to False if models crash (stability mode)
     N_JOBS = 4           # Number of parallel workers
     # ---------------------------
     

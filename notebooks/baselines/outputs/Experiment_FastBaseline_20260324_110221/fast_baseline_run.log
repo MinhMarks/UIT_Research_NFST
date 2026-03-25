@@ -1,0 +1,29 @@
+2026-03-24 11:02:21 | INFO | ============================================================
+2026-03-24 11:02:21 | INFO | FAST BASELINE EXPERIMENT (Parallel=False)
+2026-03-24 11:02:21 | INFO | ============================================================
+2026-03-24 11:02:21 | INFO | 
+Processing Dataset: data_ToNIoT.csv | Scaler: StandardScaler
+2026-03-24 11:02:22 | INFO | --- Noise: 0% ---
+2026-03-24 11:02:22 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-03-24 11:07:36 | INFO |   CBLOF: AUCROC=89.09754741229315%  Train=2.3867640495300293s
+2026-03-24 11:07:36 | INFO |   KNN: AUCROC=98.38408910278882%  Train=0.8390731811523438s
+2026-03-24 11:07:36 | INFO |   LOF: AUCROC=96.77698429465774%  Train=0.7631444931030273s
+2026-03-24 11:07:36 | INFO |   HBOS: AUCROC=84.36688798293547%  Train=5.163869619369507s
+2026-03-24 11:07:36 | INFO |   IForest: AUCROC=77.90101626975743%  Train=1.0463159084320068s
+2026-03-24 11:07:36 | INFO |   PCA: AUCROC=35.59766710545561%  Train=0.024030685424804688s
+2026-03-24 11:07:36 | INFO |   OCSVM: AUCROC=20.561369960472884%  Train=13.6410813331604s
+2026-03-24 11:07:36 | ERROR | Error with AutoEncoder on data_ToNIoT.csv: AutoEncoder.__init__() got an unexpected keyword argument 'epochs'
+2026-03-24 11:07:36 | INFO |   DIF: AUCROC=88.1233073026501%  Train=4.0366668701171875s
+2026-03-24 11:07:36 | INFO |   NeuTraLAD: AUCROC=97.56753876936341%  Train=49.741363286972046s
+2026-03-24 11:07:36 | INFO |   DASVDD: AUCROC=28.316872621453093%  Train=26.947959661483765s
+2026-03-24 11:07:36 | INFO |   LODA: AUCROC=32.16442254885041%  Train=0.3875257968902588s
+2026-03-24 11:07:36 | INFO |   COPOD: AUCROC=55.20805522085324%  Train=0.3022184371948242s
+2026-03-24 11:07:36 | INFO |   ECOD: AUCROC=44.70543486924941%  Train=0.14528608322143555s
+2026-03-24 11:07:36 | ERROR | Error with VAE on data_ToNIoT.csv: VAE.__init__() got an unexpected keyword argument 'epochs'
+2026-03-24 11:07:36 | ERROR | Error with DeepSVDD on data_ToNIoT.csv: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-03-24 11:07:36 | ERROR | Error with LUNAR on data_ToNIoT.csv: LUNAR.__init__() got an unexpected keyword argument 'n_neighbors'
+2026-03-24 11:07:36 | ERROR | Error with AE1SVM on data_ToNIoT.csv: AE1SVM.__init__() got an unexpected keyword argument 'device'
+2026-03-24 11:07:36 | INFO |   DevNet: AUCROC=65.4249742492027%  Train=7.9499194622039795s
+2026-03-24 11:07:36 | INFO |   ALAD: AUCROC=47.62416408255836%  Train=3.773052930831909s
+2026-03-24 11:07:36 | INFO | --- Noise: 1% ---
+2026-03-24 11:07:36 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
