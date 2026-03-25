@@ -85,8 +85,11 @@ def generate_noise_comparison_chart(files, output_path):
         print("No noise data available for 1%, 3%, or 5%. Exiting plot generation.")
         return
 
-    # 1. Average AUCROC for each model / noise level across all datasets
-    avg_df = combined_df.groupby(['model', 'noise'])['aucroc'].mean().reset_index()
+    # 1. First find the BEST configuration (Max AUCROC) for each model on each dataset at each noise level
+    best_per_dataset = combined_df.groupby(['model', 'dataset', 'noise'])['aucroc'].max().reset_index()
+    
+    # 2. Average AUCROC for each model / noise level across the datasets
+    avg_df = best_per_dataset.groupby(['model', 'noise'])['aucroc'].mean().reset_index()
     
     # 2. To find the top 4 baselines, robust approach: rank by average auc across all 3 noise levels
     overall_avg = avg_df.groupby('model')['aucroc'].mean().reset_index()
@@ -167,8 +170,11 @@ def main():
     os.makedirs(output_dir, exist_ok=True)
     
     print("=== Noise Comparison Chart Generator ===")
-    baseline_input = input("Enter path to Baseline Results (File or Dir): ").strip()
-    model_input = input("Enter path to Model Results (File or Dir): ").strip()
+    baseline_input = input("Enter path to Baseline Results (File or Dir) [default: notebooks]: ").strip()
+    model_input = input("Enter path to Model Results (File or Dir) [default: notebooks]: ").strip()
+
+    if not baseline_input: baseline_input = r"d:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\notebooks"
+    if not model_input: model_input = r"d:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\notebooks"
 
     files = []
     for inp in [baseline_input, model_input]:
