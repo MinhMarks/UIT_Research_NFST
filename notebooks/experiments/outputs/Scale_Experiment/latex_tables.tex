@@ -1,0 +1,39 @@
+% --- TRAINING TABLE ---
+\begin{table}[!ht]
+\caption{Training runtime performance (in seconds) of LOC-NFST for different values of \( N \) and \( d \).}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\( N \backslash d \) & \( 10^{1} \) & \( 10^{2} \) & \( 10^{3} \) & \( 10^{4} \) \\
+\hline
+\( 10^{2} \) & \( 3.7364 \) & \( 1.1458 \) & \( 0.3072 \) & \( 17.4152 \) \\
+\( 10^{3} \) & \( 0.1634 \) & \( 0.0744 \) & \( 1.7760 \) & \( 27.1744 \) \\
+\( 10^{4} \) & \( 0.2442 \) & \( 0.3740 \) & \( 9.3397 \) & OoM \\
+\( 10^{5} \) & \( 2.6381 \) & \( 12.7560 \) & \( 136.3571 \) & OoM \\
+\( 10^{6} \) & \( 6.1686 \) & \( 108.2132 \) & OoM & OoM \\
+\hline
+\end{tabular}%
+}
+\label{tab:scale_train_time}
+\end{table}
+
+% --- INFERENCE TABLE ---
+\begin{table}[!ht]
+\caption{Total inference runtime performance (in seconds) of LOC-NFST for different values of \( N \) and \( d \).}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\( N \backslash d \) & \( 10^{1} \) & \( 10^{2} \) & \( 10^{3} \) & \( 10^{4} \) \\
+\hline
+\( 10^{2} \) & \( 0.0259 \) & \( 0.1394 \) & \( 4.44 \times 10^{-3} \) & \( 0.0394 \) \\
+\( 10^{3} \) & \( 1.01 \times 10^{-3} \) & \( 9.49 \times 10^{-4} \) & \( 1.51 \times 10^{-3} \) & \( 0.1521 \) \\
+\( 10^{4} \) & \( 0.0441 \) & \( 2.00 \times 10^{-3} \) & \( 0.0373 \) & OoM \\
+\( 10^{5} \) & \( 0.0228 \) & \( 0.5523 \) & \( 1.7484 \) & OoM \\
+\( 10^{6} \) & \( 0.1536 \) & \( 0.0725 \) & OoM & OoM \\
+\hline
+\end{tabular}%
+}
+\label{tab:scale_infer_time}
+\end{table}
