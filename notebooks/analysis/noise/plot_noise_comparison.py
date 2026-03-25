@@ -64,8 +64,7 @@ def load_and_normalize(file_info):
     return norm_df.dropna(subset=['aucroc'])
 
 
-def generate_noise_comparison_chart(root_dir, output_path):
-    files = find_csv_files(root_dir)
+def generate_noise_comparison_chart(files, output_path):
     print(f"Found {len(files)} CSV files")
     
     all_data = []
@@ -82,6 +81,10 @@ def generate_noise_comparison_chart(root_dir, output_path):
     combined_df = combined_df[combined_df['noise'].isin([1.0, 3.0, 5.0])]
     print(f"Loaded {len(combined_df)} rows for noise 1%, 3%, 5%.")
     
+    if len(combined_df) == 0:
+        print("No noise data available for 1%, 3%, or 5%. Exiting plot generation.")
+        return
+
     # 1. Average AUCROC for each model / noise level across all datasets
     avg_df = combined_df.groupby(['model', 'noise'])['aucroc'].mean().reset_index()
     
@@ -91,14 +94,18 @@ def generate_noise_comparison_chart(root_dir, output_path):
     baselines = overall_avg[overall_avg['model'] != 'LOC-NFST']
     top_4_baselines = baselines.sort_values(by='aucroc', ascending=False).head(4)['model'].tolist()
     
-    print(f"Top 4 baselines: {top_4_baselines}")
-    
     # Target models
     target_models = ['LOC-NFST'] + top_4_baselines
+    print(f"Plotting for Target Models: {target_models}")
     
     # Filter dataset
     plot_df = avg_df[avg_df['model'].isin(target_models)].copy()
     
+    # Ensure there are actually target models to plot
+    if len(plot_df) == 0:
+        print("No data available for the target models.")
+        return
+
     # Set up the plot
     plt.figure(figsize=(10, 6))
     
@@ -107,10 +114,13 @@ def generate_noise_comparison_chart(root_dir, output_path):
     plot_df = plot_df.sort_values(['noise', 'model'])
     
     # Palette configuration
-    # LOC-NFST is red, baselines are distinct colors (e.g. blues/greens/oranges)
-    # Reusing standard Seaborn 'deep' palette but enforcing Red for index 0
-    palette = sns.color_palette("deep", 5)
-    palette = [(0.85, 0.15, 0.15)] + list(palette[1:5])
+    # Create enough colors
+    num_models = len(plot_df['model'].unique())
+    palette = sns.color_palette("deep", num_models)
+    
+    # Ensure LOC-NFST is red if it exists in the data
+    if 'LOC-NFST' in plot_df['model'].values:
+        palette = [(0.85, 0.15, 0.15)] + list(palette[1:num_models])
     
     ax = sns.barplot(
         data=plot_df,
@@ -136,16 +146,13 @@ def generate_noise_comparison_chart(root_dir, output_path):
     plt.xticks(fontsize=12, fontweight='bold')
     plt.yticks(fontsize=12)
     
-    # Customing x-labels
-    ax.set_xticklabels([f"{int(x)}%" for x in sorted(plot_df['noise'].unique())])
-
     # Annotate bars
     for container in ax.containers:
         ax.bar_label(container, fmt='%.1f', padding=3, fontsize=10, fontweight='bold')
 
     # Legend
     plt.legend(title='Model', title_fontsize='13', fontsize='12', loc='lower center', 
-               bbox_to_anchor=(0.5, -0.25), ncol=5, frameon=True, borderaxespad=0.)
+               bbox_to_anchor=(0.5, -0.25), ncol=num_models, frameon=True, borderaxespad=0.)
 
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
@@ -154,7 +161,27 @@ def generate_noise_comparison_chart(root_dir, output_path):
     plt.close()
     print(f"Saved grouped noise comparison chart to {output_path}")
 
+def main():
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_script_dir))), "pictures")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    print("=== Noise Comparison Chart Generator ===")
+    baseline_input = input("Enter path to Baseline Results (File or Dir): ").strip()
+    model_input = input("Enter path to Model Results (File or Dir): ").strip()
+
+    files = []
+    for inp in [baseline_input, model_input]:
+        if not inp: continue
+        if os.path.isfile(inp) and inp.endswith('.csv'): files.append(('unified', inp))
+        elif os.path.isdir(inp): files.extend(find_csv_files(inp))
+
+    if not files:
+        print("No results found.")
+        return
+
+    output_path = os.path.join(output_dir, "noise_levels_grouped.png")
+    generate_noise_comparison_chart(files, output_path)
+
 if __name__ == '__main__':
-    root = r'd:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\notebooks'
-    out = r'd:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\pictures\noise_levels_grouped.png'
-    generate_noise_comparison_chart(root, out)
+    main()
