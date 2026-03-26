@@ -121,7 +121,7 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     tick_font   = 15
 
     minnotsignificant = 0.5      # gap between axis and first label row
-    height = cline + minnotsignificant + (math.ceil(k / 2) + 1) * space_between_names + 0.8
+    height = cline + minnotsignificant + (math.ceil(k / 2)) * space_between_names + 0.3
 
     fig = plt.figure(figsize=(width, height))
     fig.set_facecolor('white')
@@ -167,65 +167,27 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
              ha="center", va="bottom", size=tick_font)
 
     # ── Build label rows ───────────────────────────────────────────────────────
-    # Split models into LEFT side (worse, higher rank) and RIGHT side (better, lower rank)
-    # Keep original ordering (already sorted by avranks from wilcoxon_holm)
-    right_indices = list(range(math.ceil(k / 2)))          # ranks 0..ceil(k/2)-1  → RIGHT
-    left_indices  = list(range(math.ceil(k / 2), k))       # ranks ceil(k/2)..k-1  → LEFT
+    # RIGHT side: best models (rank 1, 2, ...) — top of right column = best
+    #   → As you go down, rankpos moves LEFT (toward center). No crossing.
+    # LEFT side: worst models (rank k, k-1, ...) — top of left column = worst
+    #   → As you go down, rankpos moves RIGHT (toward center). No crossing.
+    # CRITICAL: left must be REVERSED so worst (leftmost tick) is at top.
+    right_indices = list(range(math.ceil(k / 2)))               # [0,1,...,n/2-1] best→middle
+    left_indices  = list(range(k - 1, math.ceil(k / 2) - 1, -1))  # [k-1,...,n/2] worst→middle
 
-    # ── Helper: assign drop-point y-levels to avoid overlapping verticals ──────
-    # min_px_gap: minimum horizontal distance (in rank units) between two rank
-    # marks before we start staggering their intermediate y drop point.
-    min_rank_gap = 0.35   # rank units
-    # Stagger amount: when ranks are close, the intermediate y point is shifted
-    # by this fraction of space_between_names per collision level
-    stagger_frac = 0.45
+    def label_y(slot):
+        return cline + minnotsignificant + slot * space_between_names
 
-    def assign_drop_ys(indices):
-        """
-        For each model in 'indices' (ordered as they appear in the label column),
-        compute the y-coordinate where the vertical connector bends to horizontal.
-        Models whose rank positions are very close get a slightly different drop y
-        so the vertical segments don't overlap.
-        """
-        n = len(indices)
-        label_ys = [cline + minnotsignificant + slot * space_between_names
-                    for slot in range(n)]
-        drop_ys = list(label_ys)   # default: drop straight to label height
 
-        # Scan for rank positions that are too close
-        rank_pos_list = [rankpos(avranks[idx]) for idx in indices]
-
-        for j in range(1, n):
-            gap = abs(rank_pos_list[j] - rank_pos_list[j - 1])
-            if gap < min_rank_gap * scalewidth / (highv - lowv):
-                # Stagger: pull the drop y UP by stagger_frac so it diverges before bending
-                stagger = stagger_frac * space_between_names
-                drop_ys[j] = max(drop_ys[j] - stagger, cline + 0.05)
-
-        return label_ys, drop_ys
-
-    left_label_ys,  left_drop_ys  = assign_drop_ys(left_indices)
-    right_label_ys, right_drop_ys = assign_drop_ys(right_indices)
 
     # ── Draw LEFT side connectors and labels ───────────────────────────────────
+    # left_indices: worst (leftmost tick) first → no connector crossings
     for slot, idx in enumerate(left_indices):
-        rpos   = rankpos(avranks[idx])
-        lbl_y  = left_label_ys[slot]
-        drop_y = left_drop_ys[slot]
+        rpos  = rankpos(avranks[idx])
+        lbl_y = label_y(slot)
 
-        # L-shape: down from axis to drop_y, then left to margin, then down to label y
-        if abs(drop_y - lbl_y) < 0.01:
-            # Simple case: no stagger needed
-            line([(rpos, cline), (rpos, lbl_y), (textspace - 0.1, lbl_y)],
-                 linewidth=linewidth)
-        else:
-            # Staggered: vertical to drop_y, small horizontal detour, then down to label y
-            detour_x = rpos - (scalewidth / (highv - lowv)) * 0.25   # nudge left slightly
-            line([(rpos,    cline),
-                  (rpos,    drop_y),
-                  (detour_x, drop_y),
-                  (detour_x, lbl_y),
-                  (textspace - 0.1, lbl_y)], linewidth=linewidth)
+        line([(rpos, cline), (rpos, lbl_y), (textspace - 0.1, lbl_y)],
+             linewidth=linewidth)
 
         name    = names[idx]
         is_our  = "LOC-NFST" in name
@@ -242,21 +204,13 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
              color=f_color, zorder=20)
 
     # ── Draw RIGHT side connectors and labels ──────────────────────────────────
+    # right_indices: best (rightmost tick) first → no connector crossings
     for slot, idx in enumerate(right_indices):
-        rpos   = rankpos(avranks[idx])
-        lbl_y  = right_label_ys[slot]
-        drop_y = right_drop_ys[slot]
+        rpos  = rankpos(avranks[idx])
+        lbl_y = label_y(slot)
 
-        if abs(drop_y - lbl_y) < 0.01:
-            line([(rpos, cline), (rpos, lbl_y), (width - textspace + 0.1, lbl_y)],
-                 linewidth=linewidth)
-        else:
-            detour_x = rpos + (scalewidth / (highv - lowv)) * 0.25
-            line([(rpos,    cline),
-                  (rpos,    drop_y),
-                  (detour_x, drop_y),
-                  (detour_x, lbl_y),
-                  (width - textspace + 0.1, lbl_y)], linewidth=linewidth)
+        line([(rpos, cline), (rpos, lbl_y), (width - textspace + 0.1, lbl_y)],
+             linewidth=linewidth)
 
         name    = names[idx]
         is_our  = "LOC-NFST" in name
