@@ -1,116 +1,120 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
+import numpy as np
+
+# Set academic style
+plt.rcParams.update({
+    'font.size': 14,
+    'axes.labelsize': 15,
+    'xtick.labelsize': 14,
+    'ytick.labelsize': 14,
+    'legend.fontsize': 13,
+    'font.family': 'serif',
+    'axes.grid': True,
+    'grid.alpha': 0.3,
+    'grid.linestyle': '--'
+})
 
 def clean_value(val):
-    if pd.isna(val):
+    if pd.isna(val) or val == '':
         return 0.0
     if isinstance(val, str):
-        val = val.replace('"', '').replace(',', '.')
-    return float(val)
+        # Remove quotes and whitespace
+        val = val.replace('"', '').strip()
+        # Replace comma with dot
+        val = val.replace(',', '.')
+    try:
+        return float(val)
+    except ValueError:
+        return 0.0
 
-def process_anomaly_file(filepath, label):
-    if not os.path.exists(filepath):
-        print(f"Warning: File {filepath} not found.")
-        return pd.DataFrame()
-
-    # The actual header is on row index 2 (line 3)
-    df = pd.read_csv(filepath, skiprows=2)
+def plot_anomaly_type(csv_path, output_path, type_label):
+    # Load data, skipping the first two header rows (Anomaly Type title and empty row)
+    # The actual header is on the 3rd row (index 2)
+    df = pd.read_csv(csv_path, skiprows=2)
     
-    # Drop empty rows
-    df = df.dropna(subset=['Model'])
+    # Clean the column names (remove empty ones if any)
+    df = df.dropna(axis=1, how='all')
     
-    # Clean the Average column
-    if 'Average' not in df.columns:
-        print(f"Error: 'Average' column not found in {filepath}")
-        return pd.DataFrame()
-        
-    df['Average_Num'] = df['Average'].apply(clean_value)
+    # Map "OurModel" to "LOC-NFST"
+    df['Model'] = df['Model'].replace('OurModel', 'LOC-NFST')
     
-    # Rename OurModel to LOC-NFST
-    df.loc[df['Model'] == 'OurModel', 'Model'] = 'LOC-NFST'
-    
-    # Isolate Proposed Model
-    proposed_df = df[df['Model'] == 'LOC-NFST']
-    
-    # Identify Top 4 Baselines (exclude proposed)
-    baselines_df = df[df['Model'] != 'LOC-NFST']
-    top4_baselines = baselines_df.nlargest(4, 'Average_Num')
-    
-    # Combine
-    combined = pd.concat([proposed_df, top4_baselines])
-    combined['Anomaly Type'] = label
-    
-    return combined
-
-def main():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    
-    files = {
-        'Cluster': os.path.join(script_dir, 'cluster.csv'),
-        'Global': os.path.join(script_dir, 'global.csv'),
-        'Local': os.path.join(script_dir, 'local.csv')
-    }
-    
-    sns.set_theme(style="whitegrid", context="paper", font_scale=1.2)
-    
-    for label, filepath in files.items():
-        df = process_anomaly_file(filepath, label)
-        if df.empty:
-            continue
+    # Clean numeric columns
+    metric_cols = ['BoTIoT', 'CICIoT2023', 'NBaIoT', 'ToNIoT', 'Average']
+    for col in metric_cols:
+        if col in df.columns:
+            df[col] = df[col].apply(clean_value)
             
-        # Ensure it's sorted by Average_Num descending
-        df = df.sort_values(by='Average_Num', ascending=False)
-        
-        plt.figure(figsize=(10, 6))
-        
-        # Color proposed model distinctly
-        colors = ['dodgerblue' if m == 'LOC-NFST' else 'salmon' for m in df['Model']]
-        
-        ax = sns.barplot(
-            data=df,
-            x='Model',
-            y='Average_Num',
-            palette=colors,
-            edgecolor='black'
-        )
-        
-        # Add exact percentages on top
-        for p in ax.patches:
-            if p.get_height() > 0:
-                ax.annotate(f'{p.get_height():.2f}%', 
-                            (p.get_x() + p.get_width() / 2., p.get_height()), 
-                            ha = 'center', va = 'center', 
-                            xytext = (0, 10), 
-                            textcoords = 'offset points',
-                            fontsize=11, fontweight='bold')
-        
-        # Dynamic Y-Axis Scale
-        y_min = df['Average_Num'].min()
-        y_max = df['Average_Num'].max()
-        val_range = y_max - y_min
-        
-        # Give enough padding (e.g., 5-10% of range, but min 1.0 unit) for top labels
-        padding = max(val_range * 0.2, 1.0)
-        
-        y_lower = max(0, y_min - padding * 0.5)
-        y_upper = min(105, y_max + padding)
-        
-        plt.ylim(y_lower, y_upper)
-        
-        plt.title(f'Top Performing Algorithms: {label} Anomalies', fontweight='bold', fontsize=16)
-        plt.ylabel('Average Detection Score (%)', fontweight='bold', fontsize=13)
-        plt.xlabel('Algorithm', fontweight='bold', fontsize=13)
-        plt.xticks(rotation=15)
-        
-        plt.tight_layout()
-        
-        output_path = os.path.join(script_dir, f"Anomaly_Type_{label}.png")
-        plt.savefig(output_path, dpi=300)
-        plt.close()
-        
-        print(f"Saved independent chart for {label} to: {output_path}")
+    # Sort by Average AUCROC and take Top 5
+    # Ensure LOC-NFST is included even if not in Top 5 (though it usually is)
+    df_sorted = df.sort_values('Average', ascending=False)
+    top_5 = df_sorted.head(5).copy()
+    
+    if 'LOC-NFST' not in top_5['Model'].values:
+        our_model_row = df[df['Model'] == 'LOC-NFST']
+        if not our_model_row.empty:
+            top_5 = pd.concat([top_5.iloc[:4], our_model_row])
+    
+    # Re-sort Top 5 for aesthetic bar ranking (Descending)
+    top_5 = top_5.sort_values('Average', ascending=False)
+    
+    # Set up the plot
+    plt.figure(figsize=(10, 6))
+    
+    # Define colors: LOC-NFST is charcoal/gray, baselines are muted blue
+    colors = ['#5C5C5C' if m == 'LOC-NFST' else '#2E6DA4' for m in top_5['Model']]
+    
+    ax = sns.barplot(
+        data=top_5,
+        x='Model',
+        y='Average',
+        palette=colors,
+        hue='Model',
+        legend=False
+    )
+    
+    # Add value labels on top of bars
+    for p in ax.patches:
+        h = p.get_height()
+        if h > 0:
+            ax.annotate(
+                f'{h:.2f}%',
+                (p.get_x() + p.get_width() / 2., h),
+                ha='center', va='bottom',
+                xytext=(0, 5), textcoords='offset points',
+                fontsize=13, fontweight='bold'
+            )
+            
+    # Refine axes
+    plt.ylabel('Average AUC-ROC (%)', fontsize=15)
+    plt.xlabel('Algorithm', fontsize=15)
+    plt.ylim(0, 115) # Leave space for labels
+    
+    # Draw a line at 100%
+    plt.axhline(y=100, color='gray', linestyle=':', alpha=0.5)
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300)
+    plt.close()
+    print(f"Saved {type_label} plot to {output_path}")
 
 if __name__ == "__main__":
-    main()
+    base_dir = r"d:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\notebooks\analysis\anomaly\draft"
+    out_dir = r"d:\UIT\Research\Duongcpmputer\LOC-NFST\UIT_Research_NFST\notebooks\analysis\anomaly\plots"
+    os.makedirs(out_dir, exist_ok=True)
+    
+    configs = [
+        ('local.csv', 'Anomaly_Type_Local.png', 'Local Anomaly'),
+        ('cluster.csv', 'Anomaly_Type_Cluster.png', 'Cluster Anomaly'),
+        ('global.csv', 'Anomaly_Type_Global.png', 'Global Anomaly')
+    ]
+    
+    for csv_file, out_file, label in configs:
+        csv_path = os.path.join(base_dir, csv_file)
+        out_path = os.path.join(out_dir, out_file)
+        if os.path.exists(csv_path):
+            plot_anomaly_type(csv_path, out_path, label)
+        else:
+            print(f"Warning: {csv_path} not found.")

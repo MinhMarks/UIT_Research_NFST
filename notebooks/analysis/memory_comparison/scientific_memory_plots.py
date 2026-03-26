@@ -34,7 +34,7 @@ def load_and_merge_data(baseline_csv, model_csv):
         
         # If neither 'Method' nor 'Model' was present, assign the proposed method's name
         if 'Model' not in df_model.columns:
-            df_model['Model'] = 'XXX'
+            df_model['Model'] = 'LOC-NFST'
             
         # If 'Dataset' is missing, add a fallback to prevent dropping during groupby
         if 'Dataset' not in df_model.columns:
@@ -108,47 +108,72 @@ def plot_memory_comparison(df, output_dir):
     plt.savefig(os.path.join(output_dir, "Scatter_Efficiency_Tradeoff.png"), dpi=300)
     plt.close()
 
-    # 3. Bar Chart: Training Time vs Test Time (Grouped)
+    # 3. Bar Chart: Training Time vs Test Time — vertical, top-15 models
     if 'Time Train' in best_runs.columns and 'Time Test' in best_runs.columns:
-        plt.figure(figsize=(12, 6))
-        
-        # Melt the dataframe into long-form for side-by-side bars
-        time_cols = ['Model', 'Time Train', 'Time Test']
-        df_time = best_runs[time_cols].melt(id_vars='Model', var_name='Phase', value_name='Time')
-        
-        # Cleaner Phase names for legend
-        df_time['Phase'] = df_time['Phase'].replace({'Time Train': 'Train Time', 'Time Test': 'Inference Time'})
 
-        # Grouped bar plot (Horizontal)
-        ax = sns.barplot(
-            data=df_time, 
-            y='Model', 
-            x='Time', 
-            hue='Phase',
-            palette={'Train Time': 'skyblue', 'Inference Time': 'navy'}
+        # Keep proposed model + top-(N-1) baselines by AUCPR
+        TOP_N = 15
+        proposed_rows = best_runs[best_runs['Type'] == 'Proposed Model']
+        baseline_rows = best_runs[best_runs['Type'] == 'Baseline']
+        top_baselines = baseline_rows.nlargest(TOP_N - len(proposed_rows), 'AUCPR')
+        top_runs = pd.concat([proposed_rows, top_baselines]).drop_duplicates('Model')
+
+        time_cols = ['Model', 'Time Train', 'Time Test', 'Type']
+        df_time = top_runs[time_cols].melt(
+            id_vars=['Model', 'Type'], var_name='Phase', value_name='Time'
         )
-        
-        # Add numeric labels on the end of each bar
-        for p in ax.patches:
-            if p.get_width() > 0:
-                ax.annotate(f'{p.get_width():.2f}s', 
-                            (p.get_width(), p.get_y() + p.get_height() / 2.), 
-                            ha = 'left', va = 'center', 
-                            xytext = (5, 0), 
-                            textcoords = 'offset points',
-                            fontsize=9, fontweight='bold')
+        df_time['Phase'] = df_time['Phase'].replace({
+            'Time Train': 'Train Time', 'Time Test': 'Inference Time'
+        })
 
-        plt.title('Computational Time Complexity (Horizontal Grouped)', fontweight='bold')
-        plt.xlabel('Seconds (Log Scale)')
-        
-        # Refine log scale limits
-        plt.xscale('log')
-        curr_xmin, curr_xmax = plt.xlim()
-        plt.xlim(curr_xmin, curr_xmax * 10) 
-        
-        plt.ylabel('Algorithm')
-        plt.legend(title='Execution Phase', loc='lower right')
-        plt.grid(True, which="both", ls="-", alpha=0.2)
+        # Tag each row: LOC-NFST gets distinct orange tones, baselines get blue tones
+        df_time['Group'] = df_time.apply(
+            lambda r: f"LOC-NFST {r['Phase']}" if r['Type'] == 'Proposed Model'
+                      else f"Baseline {r['Phase']}",
+            axis=1
+        )
+
+        COLOR_PALETTE = {
+            'LOC-NFST Train Time':      '#5C5C5C',   # dark gray   (proposed, train)
+            'LOC-NFST Inference Time':  '#A8A8A8',   # light gray  (proposed, infer)
+            'Baseline Train Time':      '#2E6DA4',   # muted blue  (baseline, train)
+            'Baseline Inference Time':  '#A8C4E0',   # pale blue   (baseline, infer)
+        }
+
+        n_models = top_runs['Model'].nunique()
+        fig_w = max(9, n_models * 0.6)   # tighter horizontal space
+        plt.figure(figsize=(fig_w, 7))
+
+        model_order = top_runs.sort_values('Time Train', ascending=True)['Model'].tolist()
+        ax = sns.barplot(
+            data=df_time,
+            x='Model',
+            y='Time',
+            hue='Group',
+            palette=COLOR_PALETTE,
+            order=model_order,
+            hue_order=list(COLOR_PALETTE.keys()),
+            width=0.85,   # wider bars within their category bin
+        )
+
+        # Value labels on top of each bar (currently disabled as requested)
+        # for p in ax.patches:
+        #     h = p.get_height()
+        #     ...
+
+        # Bold LOC-NFST tick label
+        for lbl in ax.get_xticklabels():
+            if 'LOC-NFST' in lbl.get_text():
+                lbl.set_fontweight('bold')
+
+        # plt.title('Computational Time Complexity (Top 15 Models)', fontweight='bold')
+        plt.ylabel('Seconds (Log Scale)', fontsize=15)
+        plt.xlabel('Algorithm', fontsize=15)
+        plt.yscale('log')
+        plt.xticks(rotation=40, ha='right', fontsize=14)
+        plt.yticks(fontsize=13)
+        plt.legend(title='Model & Phase', loc='upper left', fontsize=11, frameon=True)
+        plt.grid(True, which='both', ls='--', alpha=0.3, axis='y')
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, "Bar_Time_Complexity.png"), dpi=300)
         plt.close()
@@ -205,7 +230,7 @@ def plot_radar_summary(df, output_dir):
     proposed = proposed_all.loc[[proposed_all['AUCROC'].idxmax()]]
 
     # ── 2. Average of top-15 baselines per metric ─────────────────────────────
-    top_n = 15
+    top_n = 22
     top15_avg = {}
     for metric in metrics_to_plot:
         top15_avg[metric] = baselines[metric].nlargest(top_n).mean()
@@ -220,54 +245,100 @@ def plot_radar_summary(df, output_dir):
     angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
     angles += angles[:1]
 
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(12, 12))
     ax = plt.subplot(111, polar=True)
 
-    plt.xticks(angles[:-1], labels, color='grey', size=11)
-    ax.set_rlabel_position(0)
-    plt.yticks([25, 50, 75, 100], ["25", "50", "75", "100"], color="grey", size=8)
-    plt.ylim(0, 115)
+    # ── Draw axis labels manually at fixed radius outside all data ────────────
+    # Hide the default xtick labels (they sit too close to outer ring)
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels([])   # clear default labels
+    ax.tick_params(axis='x', pad=0)  # no padding needed
 
-    # ── Plot each model with non-overlapping vertex labels ────────────────────
-    # Stagger radial offsets per model so labels never pile up at the same point
-    radial_offsets = [10, 20]   # proposed gets +10, baseline avg gets +20
+    label_radius = 145   # place labels well outside ylim=115
+    for angle, lbl in zip(angles[:-1], labels):
+        # Convert polar to unit direction vector
+        x_unit = np.cos(angle - np.pi / 2)
+        y_unit = np.sin(angle - np.pi / 2)   # matplotlib polar: 0=top, CCW+
 
-    for model_idx, (_, row) in enumerate(plot_df.iterrows()):
-        values = row[metrics_to_plot].values.flatten().tolist()
-        values += values[:1]
+        # Horizontal alignment based on x direction
+        if x_unit > 0.25:    ha = 'left'
+        elif x_unit < -0.25: ha = 'right'
+        else:                ha = 'center'
 
-        if row['Type'] == 'Proposed Model':
-            linewidth, linestyle, alpha, color = 4, 'solid',  0.4, 'dodgerblue'
-        else:
-            linewidth, linestyle, alpha, color = 3, 'dashed', 0.2, 'salmon'
+        # Vertical alignment based on y direction  
+        if y_unit > 0.25:    va = 'bottom'
+        elif y_unit < -0.25: va = 'top'
+        else:                va = 'center'
 
-        ax.plot(angles, values, linewidth=linewidth, linestyle=linestyle,
-                label=row['Model'], color=color)
-        ax.fill(angles, values, alpha=alpha, color=color)
+        ax.text(angle, label_radius, lbl,
+                ha=ha, va=va, size=19, color='#444444', fontweight='bold',
+                multialignment='center')
 
-        # Annotate each vertex with a per-model radial offset to avoid overlap
-        r_off = radial_offsets[model_idx % len(radial_offsets)]
-        for angle, val in zip(angles[:-1], values[:-1]):
-            r_lbl = min(val + r_off, 113)
-            x_cart = np.cos(angle - np.pi / 2)
-            ha = 'center'
-            if x_cart > 0.3:   ha = 'left'
-            elif x_cart < -0.3: ha = 'right'
+    ax.set_rlabel_position(30)
+    plt.yticks([25, 50, 75, 100], ["25", "50", "75", "100"], color="grey", size=9)
+    plt.ylim(0, 130)
 
+    # ── Collect all model values before annotating ────────────────────────────
+    all_values = []
+    all_colors = []
+    for _, row in plot_df.iterrows():
+        vals = row[metrics_to_plot].values.flatten().tolist()
+        color = 'dodgerblue' if row['Type'] == 'Proposed Model' else 'salmon'
+        all_values.append(vals)
+        all_colors.append(color)
+
+    # ── Draw lines and fills ─────────────────────────────────────────────────
+    styles = [
+        dict(linewidth=4, linestyle='solid',  alpha=0.4, label=plot_df.iloc[0]['Model']),
+        dict(linewidth=3, linestyle='dashed', alpha=0.2, label=plot_df.iloc[1]['Model'] if len(plot_df) > 1 else ''),
+    ]
+    for i, (vals, color) in enumerate(zip(all_values, all_colors)):
+        v = vals + vals[:1]
+        st = styles[i] if i < len(styles) else styles[-1]
+        ax.plot(angles, v, linewidth=st['linewidth'], linestyle=st['linestyle'],
+                label=st['label'], color=color)
+        ax.fill(angles, v, alpha=st['alpha'], color=color)
+
+
+    # ── Draw one combined annotation per vertex (no overlap possible) ─────────
+    # Each vertex gets a stacked text: line 0 = proposed, line 1 = baseline avg
+    # Placed at a fixed r just outside the outermost data point
+    for vi, angle in enumerate(angles[:-1]):
+        x_unit = np.cos(angle - np.pi / 2)
+        y_unit = np.sin(angle - np.pi / 2)
+
+        # ha/va based on direction
+        ha = 'center'
+        if x_unit > 0.25:    ha = 'left'
+        elif x_unit < -0.25: ha = 'right'
+        va = 'center'
+        if y_unit > 0.25:    va = 'bottom'
+        elif y_unit < -0.25: va = 'top'
+
+        # Radial position: just beyond the maximum value at this vertex
+        max_val = max(v[vi] for v in all_values)
+        r_base = max_val + 6
+
+        # Draw each model's value stacked vertically (offset in points)
+        # Model 0 just above center, model 1 just below
+        v_offsets = [+9, -9]  # points offset in y
+        for mi, (vals, color) in enumerate(zip(all_values, all_colors)):
+            val = vals[vi]
             ax.annotate(
                 f"{val:.1f}",
-                xy=(angle, val),
-                xytext=(angle, r_lbl),
+                xy=(angle, r_base),
+                xycoords='data',
+                xytext=(0, v_offsets[mi]),
+                textcoords='offset points',
                 ha=ha, va='center',
-                fontsize=8, fontweight='bold', color=color,
-                bbox=dict(boxstyle='round,pad=0.15', fc='white', ec='none', alpha=0.75),
+                fontsize=11, fontweight='bold', color=color,
+                bbox=dict(boxstyle='round,pad=0.15', fc='white', ec='none', alpha=0.85),
             )
 
-    plt.title('Holistic Model Comparison: Proposed vs Top 15 Baselines Average',
-              size=15, color='black', y=1.1, fontweight='bold')
-    plt.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
+    # No title, place legend ABOVE the radar circle
+    plt.legend(loc='lower center', bbox_to_anchor=(0.5, 1.12), ncol=2, fontsize=12, frameon=True)
     
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0, 1, 0.96]) # leave space at top for legend
     plt.savefig(os.path.join(output_dir, "Radar_Comparison.png"), dpi=300)
     plt.close()
     print(f"Radar Comparison Chart saved to: {output_dir}/Radar_Comparison.png")
