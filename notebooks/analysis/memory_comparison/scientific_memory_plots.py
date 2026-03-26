@@ -241,6 +241,32 @@ def plot_radar_summary(df, output_dir):
         ax.plot(angles, values, linewidth=linewidth, linestyle=linestyle, label=row['Model'], color=color)
         ax.fill(angles, values, alpha=alpha, color=color)
 
+        # ── Annotate values at each vertex ───────────────────────────────────
+        annotation_color = color
+        for angle, val, label_txt in zip(angles, values[:-1], labels):
+            # Offset slightly outward from the data point for readability
+            offset = 8  # in data units (0-110 scale)
+            r_label = val + offset
+            # Clamp so label stays within ylim
+            r_label = min(r_label, 108)
+
+            # Determine horizontal alignment based on angle quadrant
+            x_cart = np.cos(angle - np.pi / 2)
+            ha = 'center'
+            if x_cart > 0.3:  ha = 'left'
+            elif x_cart < -0.3: ha = 'right'
+
+            ax.annotate(
+                f"{val:.1f}",
+                xy=(angle, val),
+                xytext=(angle, r_label),
+                ha=ha, va='center',
+                fontsize=8,
+                fontweight='bold',
+                color=annotation_color,
+                bbox=dict(boxstyle='round,pad=0.15', fc='white', ec='none', alpha=0.7),
+            )
+
     plt.title('Holistic Model Comparison: Proposed vs Top 10 Baselines Average', size=15, color='black', y=1.1, fontweight='bold')
     plt.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
     
