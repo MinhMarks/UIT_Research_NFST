@@ -212,6 +212,7 @@ def plot_sensitivity(df_filtered, best_scalers):
     ax.legend(loc='lower right', fontsize=10, framealpha=0.85)
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f'))
     ax.grid(axis='y', linestyle='--', alpha=0.45)
+    ax.set_ylim(50, 105)  # Focus range: 50-105% for readability
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     
