@@ -106,7 +106,7 @@ def run_scale_experiment(N, d, k=10):
 
     try:
         X_train = np.random.randn(N, d).astype(np.float32)
-        N_test = min(20000, max(100, int(N * 0.2))) # Cap test size to prevent artificial inflation
+        N_test = N  # Same scale as training to reflect true inference complexity
         X_test = np.random.randn(N_test, d).astype(np.float32)
         
         # --- TRAIN TIME ---
