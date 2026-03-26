@@ -1,11 +1,11 @@
 """
-Sensitivity Analysis: AUCROC vs n_cluster
+Sensitivity Analysis: Metric vs n_cluster
 ==========================================
-Shows how the AUCROC score of LOC-NFST fluctuates as the n_cluster
-hyperparameter changes. Filters only noise=0 and selects the best
-scaler per dataset (highest max AUCROC across all n_clusters).
+Shows how the selected metric (AUCROC or AUCPR) of LOC-NFST fluctuates
+as the n_cluster hyperparameter changes. Filters only noise=0 and
+selects the best scaler per dataset.
 
-Output: A line-plot saved to pictures/Sensitivity_nCluster.png
+Output: A line-plot saved to results/Sensitivity_nCluster_{METRIC}.png
 """
 
 import os
@@ -23,8 +23,13 @@ import seaborn as sns
 # ---------------------------------------------------------------------------
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 _project_root = os.path.normpath(os.path.join(_script_dir, '..', '..', '..'))
-OUTPUT_DIR = os.path.normpath(os.path.join(_project_root, 'pictures'))
+OUTPUT_DIR = os.path.normpath(os.path.join(_script_dir, 'results'))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# ---------------------------------------------------------------------------
+# >>> CONFIGURATION: change METRIC to 'AUCPR' to switch metric <<<
+METRIC = 'AUCROC'   # Options: 'AUCROC'  |  'AUCPR'
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # DATA LOADING  (reuses same convention as generate_cd_plots.py)
@@ -89,39 +94,54 @@ def load_nfst_data(search_root):
         if 'dataset' in df.columns:
             df['dataset'] = df['dataset'].apply(normalize_dataset_name)
         
+        metric_col = METRIC.lower()   # 'aucroc' or 'aucpr'
+        if metric_col not in df.columns:
+            # Try loading from the original col name (e.g. 'aucpr' might be 'auc_pr')
+            for c in df.columns:
+                if 'aucpr' in c or 'auc_pr' in c:
+                    df.rename(columns={c: 'aucpr'}, inplace=True)
+                    break
         df['aucroc'] = pd.to_numeric(df.get('aucroc', np.nan), errors='coerce')
+        if 'aucpr' in df.columns:
+            df['aucpr'] = pd.to_numeric(df['aucpr'], errors='coerce')
+        else:
+            df['aucpr'] = np.nan
         df['noise'] = pd.to_numeric(df.get('noise', 0), errors='coerce').fillna(0)
         df['ncluster'] = pd.to_numeric(df.get('ncluster', np.nan), errors='coerce')
         df['scaler'] = df.get('scaler', 'Unknown').astype(str)
         
         frames.append(df)
     
-    combined = pd.concat(frames, ignore_index=True).dropna(subset=['aucroc', 'ncluster'])
+    combined = pd.concat(frames, ignore_index=True).dropna(subset=['ncluster'])
+    # Drop rows where the selected metric is NaN
+    metric_col = METRIC.lower()
+    if metric_col in combined.columns:
+        combined = combined.dropna(subset=[metric_col])
+    else:
+        raise ValueError(f"Metric '{METRIC}' column not found in results CSVs.")
     return combined
 
 def select_best_scaler(df):
     """
     For each (dataset, scaler) pair filtered at noise=0,
-    compute the max AUCROC across all n_cluster values.
+    compute the max of the selected METRIC across all n_cluster values.
     Then pick the scaler with the highest max per dataset.
     """
+    metric_col = METRIC.lower()
     df_zero = df[df['noise'] == 0.0].copy()
     
-    # Max AUCROC per (dataset, scaler)
-    best = (df_zero.groupby(['dataset', 'scaler'])['aucroc']
+    best = (df_zero.groupby(['dataset', 'scaler'])[metric_col]
                    .max()
                    .reset_index()
-                   .rename(columns={'aucroc': 'max_aucroc'}))
+                   .rename(columns={metric_col: 'max_metric'}))
     
-    # Which scaler gives highest max per dataset?
-    idx = best.groupby('dataset')['max_aucroc'].idxmax()
+    idx = best.groupby('dataset')['max_metric'].idxmax()
     best_scalers = best.loc[idx].set_index('dataset')['scaler'].to_dict()
     
-    print("\nBest Scaler per Dataset:")
+    print(f"\nBest Scaler per Dataset (by {METRIC}):")
     for ds, sc in best_scalers.items():
         print(f"  {ds:<12} ->  {sc}")
     
-    # Filter original data keeping only the best scaler rows at noise=0
     rows = []
     for ds, sc in best_scalers.items():
         mask = (df_zero['dataset'] == ds) & (df_zero['scaler'] == sc)
@@ -148,21 +168,22 @@ def plot_sensitivity(df_filtered, best_scalers):
     fig, ax = plt.subplots(figsize=(11, 5))
     
     for i, ds in enumerate(datasets):
+        metric_col = METRIC.lower()
         sub = df_filtered[df_filtered['dataset'] == ds].copy()
-        # Average AUCROC per n_cluster (multiple seeds/params may exist)
-        per_cluster = (sub.groupby('ncluster')['aucroc']
+        # Average metric per n_cluster
+        per_cluster = (sub.groupby('ncluster')[metric_col]
                           .mean()
                           .reset_index()
                           .sort_values('ncluster'))
         
         x = per_cluster['ncluster'].values
-        y = per_cluster['aucroc'].values
+        y = per_cluster[metric_col].values
         
-        # Raw band (std)
-        std_per_cluster = (sub.groupby('ncluster')['aucroc']
+        # Std band
+        std_per_cluster = (sub.groupby('ncluster')[metric_col]
                               .std()
                               .reset_index()
-                              .sort_values('ncluster')['aucroc']
+                              .sort_values('ncluster')[metric_col]
                               .fillna(0)
                               .values)
         
@@ -185,8 +206,8 @@ def plot_sensitivity(df_filtered, best_scalers):
     
     # --- Styling ---
     ax.set_xlabel("Number of Clusters (k)", fontsize=13)
-    ax.set_ylabel("AUCROC (%)", fontsize=13)
-    ax.set_title("Sensitivity of LOC-NFST AUCROC to Number of Clusters\n(noise = 0%, best scaler per dataset)", fontsize=13, pad=12)
+    ax.set_ylabel(f"{METRIC} (%)", fontsize=13)
+    ax.set_title(f"Sensitivity of LOC-NFST {METRIC} to Number of Clusters\n(noise = 0%, best scaler per dataset)", fontsize=13, pad=12)
     
     ax.legend(loc='lower right', fontsize=10, framealpha=0.85)
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f'))
@@ -196,7 +217,7 @@ def plot_sensitivity(df_filtered, best_scalers):
     
     plt.tight_layout()
     
-    out_path = os.path.join(OUTPUT_DIR, 'Sensitivity_nCluster.png')
+    out_path = os.path.join(OUTPUT_DIR, f'Sensitivity_nCluster_{METRIC}.png')
     plt.savefig(out_path, dpi=300, bbox_inches='tight')
     plt.close()
     print(f"\n[+] Plot saved to: {out_path}")
@@ -207,7 +228,7 @@ def plot_sensitivity(df_filtered, best_scalers):
 # ---------------------------------------------------------------------------
 if __name__ == '__main__':
     # Search the outputs folder of OC_NFST experiments (adjust if needed)
-    experiments_dir = os.path.normpath(os.path.join(_script_dir, '..', '..', 'experiments', 'outputs'))
+    experiments_dir = os.path.normpath(os.path.join(_script_dir, 'exp'))
     
     if not os.path.exists(experiments_dir):
         # Fallback: ask user to point us to the right folder
