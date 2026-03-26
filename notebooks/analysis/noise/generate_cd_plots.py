@@ -116,8 +116,8 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     cline += distanceh
 
     space_between_names = 0.65   # vertical gap between consecutive labels
-    label_size  = 15
-    metric_size = 13
+    label_size  = 25
+    metric_size = 24
     tick_font   = 15
 
     minnotsignificant = 0.5      # gap between axis and first label row
@@ -572,7 +572,7 @@ def main():
                     reverse=True, labels=True)
         cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
         # plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)
-        plt.savefig(cd_diag_path, bbox_inches='tight', dpi=300)
+        plt.savefig(cd_diag_path, bbox_inches='tight', pad_inches=0.05, dpi=300)
         print(f"CD Diagram (Legacy) saved to {cd_diag_path}")
     except Exception:
         print(f"Note: Standard CD Layout is too crowded for these models. Focus on Heatmap/Bar Chart/Profiles.")
