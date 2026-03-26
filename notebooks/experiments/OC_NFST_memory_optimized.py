@@ -463,30 +463,35 @@ def run_experiment(train_path: str, test_path: str,
     csv_header_written = os.path.exists(out_path) if out_path else False
 
     def _process_one_cluster(n_clusters):
-        # ---- Track peak RAM for this specific n_clusters run ----
+        # ---- Track peak RAM for TRAINING ----
         tracemalloc.start()
         try:
-            # Cluster (k capped inside cluster_kmeans if n_clusters > n_train)
-            # Cluster (k capped inside cluster_kmeans if n_clusters > n_train)
             X_clustered, y_clustered, centers = cluster_kmeans(X_train, n_clusters)
             actual_k = len(np.unique(y_clustered))
 
             # Train: compute NPD projection matrix W
             W, train_time = calculate_NPD_optimized(X_clustered, y_clustered)
+        except Exception as e:
+            tracemalloc.stop()
+            return {"error": f"[ERROR ncluster={n_clusters}] (train): {e}"}
 
-            # Score: Cluster-center aware distance in null space
+        _, peak_bytes_train = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        peak_mb_train = round(peak_bytes_train / 1e6, 3)
+
+        # ---- Track peak RAM for INFERENCE ----
+        tracemalloc.start()
+        try:
             t_test = time.time()
             y_proba = compute_scores(X_train, X_test, W, centers)
             test_time = time.time() - t_test
-
         except Exception as e:
             tracemalloc.stop()
-            return {"error": f"[ERROR ncluster={n_clusters}]: {e}"}
+            return {"error": f"[ERROR ncluster={n_clusters}] (test): {e}"}
 
-        # Peak RAM at the highest point within this n_clusters run
-        _, peak_bytes = tracemalloc.get_traced_memory()
+        _, peak_bytes_test = tracemalloc.get_traced_memory()
         tracemalloc.stop()
-        peak_mb = round(peak_bytes / 1e6, 3)
+        peak_mb_test = round(peak_bytes_test / 1e6, 3)
 
         try:
             metrics = evaluate(y_test, y_proba)
@@ -497,24 +502,34 @@ def run_experiment(train_path: str, test_path: str,
         auc_pr   = metrics["AUCPR"]
 
         result = {
-            "scaler":              scaler_name,
-            "Dataset":             os.path.basename(train_path),
-            "nCluster":            actual_k,      # actual clusters (may be < requested)
-            "nCluster_requested":  n_clusters,    # what was requested
-            "noise_percentage":    noise_pct,
-            "AUCROC":              metrics["AUCROC"],
-            "AUCPR":               metrics["AUCPR"],
-            "Accuracy":            metrics["Accuracy"],
-            "MCC":                 metrics["MCC"],
-            "F1 Score":            metrics["F1 Score"],
-            "Precision":           metrics["Precision"],
-            "Recall":              metrics["Recall"],
-            "Threshold (Youden)":  metrics["Threshold"],
-            "Time Train":          round(train_time, 4),
-            "Time Test":           round(test_time, 4),
-            "Peak RAM Train (MB)": peak_mb,
+            "scaler":               scaler_name,
+            "Dataset":              os.path.basename(train_path),
+            "nCluster":             actual_k,
+            "nCluster_requested":   n_clusters,
+            "noise_percentage":     noise_pct,
+            "AUCROC":               metrics["AUCROC"],
+            "AUCPR":                metrics["AUCPR"],
+            "Accuracy":             metrics["Accuracy"],
+            "MCC":                  metrics["MCC"],
+            "F1 Score":             metrics["F1 Score"],
+            "Precision":            metrics["Precision"],
+            "Recall":               metrics["Recall"],
+            "Threshold (Youden)":   metrics["Threshold"],
+            "Time Train":           round(train_time, 4),
+            "Time Test":            round(test_time, 4),
+            "Peak RAM Train (MB)":  peak_mb_train,
+            "Peak RAM Test (MB)":   peak_mb_test,
         }
-        return {"result": result, "log_msg": f"[ncluster={actual_k}/{n_clusters}] AUC-ROC={auc_roc:.2f}%  AUC-PR={auc_pr:.2f}%  F1={metrics['F1 Score']:.4f}  MCC={metrics['MCC']:.4f}  Train={train_time:.3f}s  Test={test_time:.3f}s  Peak RAM={peak_mb} MB"}
+        return {
+            "result": result,
+            "log_msg": (
+                f"[ncluster={actual_k}/{n_clusters}] "
+                f"AUC-ROC={auc_roc:.2f}%  AUC-PR={auc_pr:.2f}%  "
+                f"F1={metrics['F1 Score']:.4f}  MCC={metrics['MCC']:.4f}  "
+                f"Train={train_time:.3f}s  Test={test_time:.3f}s  "
+                f"Peak RAM Train={peak_mb_train} MB  Peak RAM Test={peak_mb_test} MB"
+            )
+        }
 
     # Run in parallel using all available cores, maximizing RAM utilization for speed (-1 jobs)
     log.info(f"Firing up Parallel execution for {len(n_clusters_list)} cluster configs...")
