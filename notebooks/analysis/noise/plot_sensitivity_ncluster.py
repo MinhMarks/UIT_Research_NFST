@@ -207,7 +207,8 @@ def plot_sensitivity(df_filtered, best_scalers):
     # --- Styling ---
     ax.set_xlabel("Number of Clusters (k)", fontsize=13)
     ax.set_ylabel(f"{METRIC} (%)", fontsize=13)
-    ax.set_title(f"Sensitivity of LOC-NFST {METRIC} to Number of Clusters\n(noise = 0%, best scaler per dataset)", fontsize=13, pad=12)
+    # ax.set_title(f"Sensitivity of LOC-NFST {METRIC} to Number of Clusters\n(noise = 0%, best scaler per dataset)", fontsize=13, pad=12)
+    ax.set_title(f"", fontsize=13, pad=12)
     
     ax.legend(loc='lower right', fontsize=10, framealpha=0.85)
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f'))
