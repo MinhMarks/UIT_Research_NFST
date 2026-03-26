@@ -86,10 +86,13 @@ def load_and_normalize(file_info):
 def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, lowv=None, highv=None,
                 width=24, textspace=5, reverse=True, filename=None, labels=True, **kwargs):
     """
-    CD Diagram with staggered connector lines to avoid overlapping.
-    Best models → RIGHT side. Worst models → LEFT side.
-    When two model ranks are close, connectors drop at slightly different
-    horizontal positions (stagger_offset) so the vertical segments never collide.
+    CD Diagram matching reference image style:
+    - Horizontal axis at top with integer rank ticks
+    - Models split: top-half (better) on RIGHT, bottom-half (worse) on LEFT
+    - Each connector: straight vertical drop from rank mark on axis,
+      then horizontal run to the label margin
+    - When two rank positions on same side are too close, use different
+      intermediate drop heights so vertical segments don't collide
     """
     k = len(avranks)
     width = float(width)
@@ -101,38 +104,33 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
 
     def lloc(l, n):
         if n < 0: return len(l[0]) + n
-        else: return n
+        return n
 
     if lowv is None:
         lowv = min(1, int(math.floor(min(avranks))))
     if highv is None:
         highv = max(len(avranks), int(math.ceil(max(avranks))))
 
-    cline = 0.4
-    scalewidth = width - 2 * textspace
-
-    def rankpos(rank):
-        if not reverse: a = rank - lowv
-        else: a = highv - rank
-        return textspace + scalewidth / (highv - lowv) * a
-
+    cline = 0.4           # y-position of the rank axis
     distanceh = 0.25
     cline += distanceh
 
-    space_between_names = 0.65
-    label_size = 15
+    space_between_names = 0.65   # vertical gap between consecutive labels
+    label_size  = 15
     metric_size = 13
+    tick_font   = 15
 
-    minnotsignificant = 0.8
-    height = cline + (math.ceil(k / 2) + 1) * space_between_names + minnotsignificant + 1.2
+    minnotsignificant = 0.5      # gap between axis and first label row
+    height = cline + minnotsignificant + (math.ceil(k / 2) + 1) * space_between_names + 0.8
 
     fig = plt.figure(figsize=(width, height))
     fig.set_facecolor('white')
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
 
-    hf = 1. / height
-    wf = 1. / width
+    hf = 1.0 / height
+    wf = 1.0 / width
+
     def hfl(l): return [a * hf for a in l]
     def wfl(l): return [a * wf for a in l]
 
@@ -140,119 +138,161 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     ax.set_xlim(0, 1)
     ax.set_ylim(1, 0)
 
-    def line(l, color='k', **kwargs):
-        ax.plot(wfl(nth(l, 0)), hfl(nth(l, 1)), color=color, **kwargs)
+    scalewidth = width - 2 * textspace
+
+    def rankpos(rank):
+        a = (highv - rank) if reverse else (rank - lowv)
+        return textspace + scalewidth / (highv - lowv) * a
+
+    def line(pts, color='k', **kwargs):
+        ax.plot(wfl([p[0] for p in pts]), hfl([p[1] for p in pts]), color=color, **kwargs)
 
     def text(x, y, s, *args, **kwargs):
         ax.text(wf * x, hf * y, s, *args, **kwargs)
 
+    # ── Draw main horizontal axis ──────────────────────────────────────────────
     line([(textspace, cline), (width - textspace, cline)], linewidth=2.5)
 
-    bigtick = 0.3
+    bigtick = 0.30
     smalltick = 0.15
     linewidth = 2.0
     linewidth_sign = 6.0
 
     for a in list(np.arange(lowv, highv, 0.5)) + [highv]:
-        tick = smalltick
-        if a == int(a): tick = bigtick
+        tick = bigtick if a == int(a) else smalltick
         line([(rankpos(a), cline - tick / 2), (rankpos(a), cline)], linewidth=2)
 
-    tick_font = 15
     for a in range(lowv, highv + 1):
-        text(rankpos(a), cline - 0.25, str(a), ha="center", va="bottom", size=tick_font)
+        text(rankpos(a), cline - 0.28, str(a),
+             ha="center", va="bottom", size=tick_font)
 
-    # ── STAGGER LOGIC ──────────────────────────────────────────────────────────
-    # For each half (left/right), sort models by their rank position.
-    # When two ranks are closer than `min_gap`, offset the drop point slightly
-    # so the vertical segments don't overlap.
-    min_gap = 0.4   # rank units threshold to trigger staggering
-    stagger_step = 0.18  # horizontal shift per stagger level (in rank units)
+    # ── Build label rows ───────────────────────────────────────────────────────
+    # Split models into LEFT side (worse, higher rank) and RIGHT side (better, lower rank)
+    # Keep original ordering (already sorted by avranks from wilcoxon_holm)
+    right_indices = list(range(math.ceil(k / 2)))          # ranks 0..ceil(k/2)-1  → RIGHT
+    left_indices  = list(range(math.ceil(k / 2), k))       # ranks ceil(k/2)..k-1  → LEFT
 
-    def stagger_offsets(indices):
+    # ── Helper: assign drop-point y-levels to avoid overlapping verticals ──────
+    # min_px_gap: minimum horizontal distance (in rank units) between two rank
+    # marks before we start staggering their intermediate y drop point.
+    min_rank_gap = 0.35   # rank units
+    # Stagger amount: when ranks are close, the intermediate y point is shifted
+    # by this fraction of space_between_names per collision level
+    stagger_frac = 0.45
+
+    def assign_drop_ys(indices):
         """
-        Given a list of model indices (already ordered for display),
-        compute a stagger offset for each so their drop-down verticals don't collide.
+        For each model in 'indices' (ordered as they appear in the label column),
+        compute the y-coordinate where the vertical connector bends to horizontal.
+        Models whose rank positions are very close get a slightly different drop y
+        so the vertical segments don't overlap.
         """
-        offsets = [0.0] * len(indices)
-        for j in range(1, len(indices)):
-            gap = abs(avranks[indices[j]] - avranks[indices[j-1]])
-            if gap < min_gap:
-                # Accumulate offset in alternating direction or same direction
-                offsets[j] = offsets[j-1] + stagger_step
-            else:
-                offsets[j] = 0.0
-        return offsets
+        n = len(indices)
+        label_ys = [cline + minnotsignificant + slot * space_between_names
+                    for slot in range(n)]
+        drop_ys = list(label_ys)   # default: drop straight to label height
 
-    # LEFT side — worst models (higher rank number in ascending rank = worse)
-    left_indices = list(range(math.ceil(k / 2), k))
-    left_offsets = stagger_offsets(left_indices)
+        # Scan for rank positions that are too close
+        rank_pos_list = [rankpos(avranks[idx]) for idx in indices]
 
+        for j in range(1, n):
+            gap = abs(rank_pos_list[j] - rank_pos_list[j - 1])
+            if gap < min_rank_gap * scalewidth / (highv - lowv):
+                # Stagger: pull the drop y UP by stagger_frac so it diverges before bending
+                stagger = stagger_frac * space_between_names
+                drop_ys[j] = max(drop_ys[j] - stagger, cline + 0.05)
+
+        return label_ys, drop_ys
+
+    left_label_ys,  left_drop_ys  = assign_drop_ys(left_indices)
+    right_label_ys, right_drop_ys = assign_drop_ys(right_indices)
+
+    # ── Draw LEFT side connectors and labels ───────────────────────────────────
     for slot, idx in enumerate(left_indices):
-        chei = cline + minnotsignificant + slot * space_between_names
-        # rankpos gives a pixel X. Stagger by shifting the drop point left/right.
-        rpos = rankpos(avranks[idx])
-        # For left side: stagger moves slightly to the LEFT (larger rank = further left already)
-        drop_x = rpos - left_offsets[slot]
+        rpos   = rankpos(avranks[idx])
+        lbl_y  = left_label_ys[slot]
+        drop_y = left_drop_ys[slot]
 
-        line([(rpos, cline), (drop_x, cline + 0.05),
-              (drop_x, chei), (textspace - 0.1, chei)], linewidth=linewidth)
+        # L-shape: down from axis to drop_y, then left to margin, then down to label y
+        if abs(drop_y - lbl_y) < 0.01:
+            # Simple case: no stagger needed
+            line([(rpos, cline), (rpos, lbl_y), (textspace - 0.1, lbl_y)],
+                 linewidth=linewidth)
+        else:
+            # Staggered: vertical to drop_y, small horizontal detour, then down to label y
+            detour_x = rpos - (scalewidth / (highv - lowv)) * 0.25   # nudge left slightly
+            line([(rpos,    cline),
+                  (rpos,    drop_y),
+                  (detour_x, drop_y),
+                  (detour_x, lbl_y),
+                  (textspace - 0.1, lbl_y)], linewidth=linewidth)
 
-        name = names[idx]
-        is_our = "LOC-NFST" in name
-        f_weight = "bold" if is_our else "normal"
+        name    = names[idx]
+        is_our  = "LOC-NFST" in name
         f_color = "red" if is_our else "black"
+        f_weight = "bold" if is_our else "normal"
 
         if labels:
-            text(textspace + 2.2, chei, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]),
+            text(textspace + 2.3, lbl_y,
+                 "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]),
                  ha="right", va="center", size=metric_size, color=f_color, zorder=20,
                  bbox=dict(facecolor='white', edgecolor='none', alpha=0.95, pad=1.5))
-        text(textspace - 0.3, chei, name, ha="right", va="center",
-             size=label_size, weight=f_weight, color=f_color, zorder=20)
+        text(textspace - 0.3, lbl_y, name,
+             ha="right", va="center", size=label_size, weight=f_weight,
+             color=f_color, zorder=20)
 
-    # RIGHT side — best models (lower rank number = better)
-    right_indices = list(range(math.ceil(k / 2)))
-    right_offsets = stagger_offsets(right_indices)
-
+    # ── Draw RIGHT side connectors and labels ──────────────────────────────────
     for slot, idx in enumerate(right_indices):
-        chei = cline + minnotsignificant + slot * space_between_names
-        rpos = rankpos(avranks[idx])
-        # For right side: stagger moves slightly to the RIGHT
-        drop_x = rpos + right_offsets[slot]
+        rpos   = rankpos(avranks[idx])
+        lbl_y  = right_label_ys[slot]
+        drop_y = right_drop_ys[slot]
 
-        line([(rpos, cline), (drop_x, cline + 0.05),
-              (drop_x, chei), (width - textspace + 0.1, chei)], linewidth=linewidth)
+        if abs(drop_y - lbl_y) < 0.01:
+            line([(rpos, cline), (rpos, lbl_y), (width - textspace + 0.1, lbl_y)],
+                 linewidth=linewidth)
+        else:
+            detour_x = rpos + (scalewidth / (highv - lowv)) * 0.25
+            line([(rpos,    cline),
+                  (rpos,    drop_y),
+                  (detour_x, drop_y),
+                  (detour_x, lbl_y),
+                  (width - textspace + 0.1, lbl_y)], linewidth=linewidth)
 
-        name = names[idx]
-        is_our = "LOC-NFST" in name
-        f_weight = "bold" if is_our else "normal"
+        name    = names[idx]
+        is_our  = "LOC-NFST" in name
         f_color = "red" if is_our else "black"
+        f_weight = "bold" if is_our else "normal"
 
         if labels:
-            text(width - textspace - 2.2, chei, "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]),
+            text(width - textspace - 2.3, lbl_y,
+                 "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]),
                  ha="left", va="center", size=metric_size, color=f_color, zorder=20,
                  bbox=dict(facecolor='white', edgecolor='none', alpha=0.95, pad=1.5))
-        text(width - textspace + 0.3, chei, name, ha="left", va="center",
-             size=label_size, weight=f_weight, color=f_color, zorder=20)
+        text(width - textspace + 0.3, lbl_y, name,
+             ha="left", va="center", size=label_size, weight=f_weight,
+             color=f_color, zorder=20)
 
-    # DRAW CLIQUES (Blue significance bars)
+    # ── Draw significance cliques (blue bars) ─────────────────────────────────
     try:
         cliques = form_cliques(p_values, names)
-        start = cline + 0.2
-        side = -0.02
+        start = cline + 0.22
+        side  = -0.02
         height_inc = 0.22
         name_list = list(names)
         for clq in cliques:
             if len(clq) == 1: continue
-            valid_indices = [name_list.index(name) for name in clq if name in names]
-            if not valid_indices: continue
-            min_idx = min(valid_indices)
-            max_idx = max(valid_indices)
-            line([(rankpos(avranks[min_idx]) - side, start), (rankpos(avranks[max_idx]) + side, start)],
+            valid_idx = [name_list.index(n) for n in clq if n in name_list]
+            if not valid_idx: continue
+            lo, hi = min(valid_idx), max(valid_idx)
+            line([(rankpos(avranks[lo]) - side, start),
+                  (rankpos(avranks[hi]) + side, start)],
                  linewidth=linewidth_sign, color='blue', alpha=0.6)
             start += height_inc
     except Exception as e:
         print(f"Warning drawing cliques: {e}")
+
+
+
 
 
 def form_cliques(p_values, nnames):
