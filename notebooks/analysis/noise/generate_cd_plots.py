@@ -16,8 +16,10 @@ matplotlib.rcParams['font.family'] = 'sans-serif'
 matplotlib.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans', 'Helvetica', 'sans-serif']
 
 # ============================================================================
-# DATA NORMALIZATION (Consistent with generate_best_results_report.py)
+# NEW CONFIGURATION (Request 27/03)
 # ============================================================================
+BASELINE_SCALER = 'MinMaxScaler' # Scaler for baselines (None for best, or 'MinMaxScaler', etc.)
+EXCLUDE_MODELS_LIST = ['DEVNET'] # Models to remove from all results
 KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT']
 
 def normalize_dataset_name(name):
@@ -470,6 +472,17 @@ def main():
     # Pre-process: Filter Noise=0
     df_clean = full_df[full_df['noise'] == 0.0].copy()
     
+    # Exclude unwanted models
+    if EXCLUDE_MODELS_LIST:
+        print(f"Excluding models: {EXCLUDE_MODELS_LIST}...")
+        df_clean = df_clean[~df_clean['model'].isin(EXCLUDE_MODELS_LIST)]
+        
+    # SCALER FILTER FOR BASELINES (Request 27/03)
+    if BASELINE_SCALER:
+        print(f"Filtering baselines for scaler: {BASELINE_SCALER}...")
+        is_ours = df_clean['model'] == 'LOC-NFST'
+        df_clean = df_clean[is_ours | (df_clean['scaler'] == BASELINE_SCALER)]
+        
     # Best Scaler per (Model, Dataset)
     best_idx = df_clean.groupby(['model', 'dataset'])['aucroc'].idxmax()
     df_best = df_clean.loc[best_idx]

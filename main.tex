@@ -1077,40 +1077,52 @@ Further, Critical Difference (CD) diagrams in Figure~\ref{fig:cd_map} compare XX
 
 \subsubsection{Robustness Against Contamination and Anomaly Types (RQ2)}
 \label{ssubsec:RQ2}
+This section evaluates the detection performance of the proposed XXX algorithm across various anomaly types and noise levels, comparing it against several baseline methods on the CICIoT benchmark. The results are visualized in Figure~\ref{fig:noise_vs_tp}, where Figure~\ref{fig:noise_levels} shows performance under contamination and Figure~\ref{fig:overall_avg} presents the overall mean performance across all anomaly categories. A detailed categorical breakdown is further provided in Table~\ref{tab:anomaly_types_detailed}.
 
-This section evaluates the detection performance of the proposed XXX algorithm across various anomaly types and noise levels, comparing it against several baseline methods. The performance is quantified using the Area Under the Receiver Operating Characteristic Curve (AUC-ROC), a widely accepted metric for assessing the ability of a model to distinguish between normal and anomalous instances. The results are visualized in Figure~\ref{fig:noise_vs_tp}, which comprises two subfigures: Figure~\ref{fig:noise_levels} for noise level analysis and Figure~\ref{fig:type_levels} for anomaly type analysis.
+Noise Level Analysis: Figure~\ref{fig:noise_levels} illustrates the average AUC-ROC performance under different noise levels (1\%, 3\%, and 5\%), representing the proportion of corrupted traffic that tests the algorithms' robustness. XXX maintains exceptional stability, achieving near-perfect scores even at 5\% noise levels. In contrast, several complex baselines like DeepSVDD show significant sensitivity to contamination.
 
-Noise Level and Anomaly Type Analysis: Figure~\ref{fig:noise_levels} illustrates the average AUC-ROC performance under different noise levels (1\%, 3\%, and 5\%), representing the proportion of corrupted data that tests the algorithms' robustness. XXX (AVG-Rank: 1.00) leads with scores around 90\% at 1\% noise, dropping slightly to 85\% at 5\% noise, showcasing exceptional stability. KNN (AVG-Rank: 2.83) follows with a strong 88\% at 1\% noise, declining to 83\% at 5\% noise, indicating good adaptability with a noticeable drop. In contrast, DeepSVDD (AVG-Rank: 8.17) lags with scores around 75\% across noise levels, reflecting lower robustness.  \\
-Figure~\ref{fig:type_levels} compares performance across Global Type, Cluster Type, and Local Type anomaly patterns. XXX (AVG-Rank: 1.50) excels with near 100\% for Global and Cluster Types and 92.5\% for Local Type, demonstrating versatility. LOF (AVG-Rank: 6.58) achieves around 100\% for Global and Cluster Types but drops to 90\% for Local Type, while KNN (AVG-Rank: 7.58) reaches 100\% for Global Type but falls to 82.5\% for Local Type, showing weakness in localized anomalies.\\
-Detailed Insights: The bar plots collectively demonstrate that XXX outperforms the baseline methods across both noise levels and anomaly types, as reflected in its lowest average ranks (1.00 for noise levels and 1.50 for anomaly types). This superiority is attributed to its robust feature selection and transformation process, which effectively mitigates the impact of noise and adapts to various anomaly patterns. 
-
+Anomaly Type Performance: Figure~\ref{fig:overall_avg} and Table~\ref{tab:anomaly_types_detailed} emphasize the performance of XXX across Global, Cluster, and Local anomaly structures. While many top models achieve ceiling performance (near 100\%) on Global and Cluster types, XXX distinguishes itself through its superior handling of Localized anomalies (99.83%), where traditional methods like IForest and PCA experience noticeable drops to roughly 90\%. Overall, XXX achieves a state-of-the-art average AUC-ROC of 99.94\%, outperforming the best-in-class baselines.
 \begin{figure*}[!ht]
 \centering
 \begin{subfigure}{0.48\textwidth}    
     \includegraphics[width=\linewidth]{pictures/noise_levels.png} 
-    \caption{Noise Levels: Average AUC-ROC performance across different noise percentages for XXX and top baseline methods.}
+    \caption{Noise Levels: Average AUC-ROC performance across 1\%, 3\%, and 5\% contamination.}
     \label{fig:noise_levels}
 \end{subfigure}\hfill
 \begin{subfigure}{0.48\textwidth}
-    \includegraphics[width=\linewidth]{pictures/Anomaly_Type_Cluster.png} 
-    \caption{Anomaly Types: Cluster Type AUC-ROC performance.}
-    \label{fig:type_cluster}
+    \includegraphics[width=\linewidth]{pictures/Anomaly_Type_Overall_Average.png} 
+    \caption{Overall Average: Mean AUC-ROC across Global, Cluster, and Local anomaly types.}
+    \label{fig:overall_avg}
 \end{subfigure}
-
-\vspace{0.4em}
-\begin{subfigure}{0.48\textwidth}
-    \includegraphics[width=\linewidth]{pictures/Anomaly_Type_Global.png} 
-    \caption{Anomaly Types: Global Type AUC-ROC performance.}
-    \label{fig:type_global}
-\end{subfigure}\hfill
-\begin{subfigure}{0.48\textwidth}
-    \includegraphics[width=\linewidth]{pictures/Anomaly_Type_Local.png} 
-    \caption{Anomaly Types: Local Type AUC-ROC performance.}
-    \label{fig:type_local}
-\end{subfigure}
-\caption{AUC-ROC performance comparison of XXX and the top six baseline methods across different noise levels and anomaly types.}
+\caption{Robustness comparison of XXX and top baseline methods under varying noise levels and anomaly structures on the CICIoT dataset.}
 \label{fig:noise_vs_tp}
 \end{figure*}
+
+\begin{table}[h]
+\centering
+\caption{Detailed AUC-ROC (\%) performance of XXX and baseline models across different anomaly types on the CICIoT dataset.}
+\label{tab:anomaly_types_detailed}
+\adjustbox{width=\columnwidth}{
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Cluster} & \textbf{Global} & \textbf{Local} & \textbf{Average} \\
+\midrule
+\textbf{XXX} & \textbf{99.98} & \textbf{100.00} & \textbf{99.83} & \textbf{99.94} \\
+LOF & 100.00 & 100.00 & 98.91 & 99.64 \\
+ECOD & 99.92 & 100.00 & 98.27 & 99.40 \\
+LUNAR & 100.00 & 100.00 & 98.09 & 99.36 \\
+AutoEncoder & 100.00 & 100.00 & 97.45 & 99.15 \\
+KNN & 100.00 & 100.00 & 95.91 & 98.64 \\
+DASVDD & 100.00 & 100.00 & 95.37 & 98.46 \\
+CBLOF & 100.00 & 100.00 & 94.61 & 98.20 \\
+VAE & 100.00 & 100.00 & 94.01 & 98.00 \\
+OCSVM & 100.00 & 100.00 & 93.77 & 97.92 \\
+IForest & 100.00 & 100.00 & 90.15 & 96.71 \\
+PCA & 100.00 & 100.00 & 89.75 & 96.58 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
 
 For further details on rankings, parameter configurations, and additional experimental results, please see Section~\ref{exp:more_detail}.
 
