@@ -16,9 +16,15 @@ from datetime import datetime
 from joblib import Parallel, delayed
 
 # --- Configuration Toggle ---
-USE_TUNING = False     # Set to False to skip hyperparameter search
+USE_TUNING = True     # Set to False to skip hyperparameter search
 USE_PARALLEL = False    # Set to False if models crash (Stability Mode)
 N_JOBS = 4            # Number of parallel workers when tuning/running models
+
+# Define which models to explicitly run. If empty, runs all models in PARAM_GRIDS.
+# MODELS_TO_RUN = ["OCKMeans"]
+
+# Define which models to explicitly run. If empty, runs all models in PARAM_GRIDS.
+MODELS_TO_RUN = ["LUNAR", "KNN", "LOF", "IForest", "AutoEncoder", "OCKMeans"]
 # ----------------------------
 
 # Fix seeds globally
@@ -71,6 +77,28 @@ from baseline_model.dasvdd_wrapper import DASVDD
 from baseline_model.neutralad_wrapper import NeuTraLAD
 from baseline_model.dif_wrapper import DIF
 
+from sklearn.cluster import KMeans as SKL_KMeans
+from pyod.models.base import BaseDetector
+from sklearn.utils.validation import check_is_fitted
+
+class OCKMeans(BaseDetector):
+    def __init__(self, n_clusters=8, contamination=0.1):
+        super(OCKMeans, self).__init__(contamination=contamination)
+        self.n_clusters = n_clusters
+
+    def fit(self, X, y=None):
+        self.model_ = SKL_KMeans(n_clusters=self.n_clusters, random_state=42)
+        self.model_.fit(X)
+        X_trans = self.model_.transform(X)
+        self.decision_scores_ = np.min(X_trans, axis=1)
+        self._process_decision_scores()
+        return self
+
+    def decision_function(self, X):
+        check_is_fitted(self, ['model_'])
+        X_trans = self.model_.transform(X)
+        return np.min(X_trans, axis=1)
+
 def preprocess_data_noise(train_data, test_data, noise_percentage=10):
     X_train_total = train_data.iloc[:, :-1].to_numpy()
     y_train_total = train_data.iloc[:, -1].to_numpy()
@@ -113,11 +141,14 @@ def evaluate_model(y_true, y_pred, y_scores=None, y_probabilities=None):
             # Xác suất của lớp 0 nguyên bản nay trở thành xác suất của lớp 1 sau khi lật
             auc_roc = roc_auc_score(y_true_flipped, y_probabilities[:, 0])
             auc_pr = average_precision_score(y_true_flipped, y_probabilities[:, 0])
-        except Exception:
-            pass
+        except Exception as auc_err:
+            # Báo lỗi rõ ràng thay vì nuốt im lặng
+            print(f"  [WARNING] AUCROC/AUCPR computation failed: {auc_err}")
+    else:
+        print("  [WARNING] y_probabilities is None — AUCROC/AUCPR will not be computed.")
             
-    return {"AUCROC": auc_roc * 100 if auc_roc else None, 
-            "AUCPR": auc_pr * 100 if auc_pr else None,
+    return {"AUCROC": auc_roc * 100 if auc_roc is not None else None, 
+            "AUCPR": auc_pr * 100 if auc_pr is not None else None,
             "Accuracy": accuracy * 100, 
             "MCC": mcc, 
             "F1 Score": f1, 
@@ -134,11 +165,18 @@ PARAM_GRIDS = {
     "IForest": [{"n_estimators": 50}, {"n_estimators": 100}, {"n_estimators": 200}],
     "PCA": [{"n_components": 0.5}, {"n_components": 0.7}, {"n_components": 0.9}],
     "OCSVM": [{"nu": 0.1}, {"nu": 0.5}], # Standard nu
-    "AutoEncoder": [{"hidden_neurons": [64, 32, 32, 64], "epochs": 50}, {"hidden_neurons": [128, 64, 64, 128], "epochs": 50}],
+    # PyOD >= 2.x renamed: hidden_neurons → hidden_neuron_list, epochs → epoch_num
+    # hidden_neuron_list chỉ cần nửa encoder; PyOD tự build decoder bằng cách reverse lại
+    "AutoEncoder": [
+        {"hidden_neuron_list": [32, 16], "epoch_num": 50, "contamination": 0.05},
+        {"hidden_neuron_list": [64, 32], "epoch_num": 50, "contamination": 0.05},
+        {"hidden_neuron_list": [128, 64], "epoch_num": 50, "contamination": 0.05}
+    ],
     "DIF": [{"n_ensemble": 50, "n_estimators": 6}, {"n_ensemble": 100, "n_estimators": 10}],
     "NeuTraLAD": [{"latent_dim": 32, "enc_hdim": 32}, {"latent_dim": 64, "enc_hdim": 64}],
     "DASVDD": [{"code_size": 32}, {"code_size": 64}],
     "LODA": [{"n_bins": 10}, {"n_bins": 50}],
+    "OCKMeans": [{"n_clusters": 5}, {"n_clusters": 10}, {"n_clusters": 20}, {"n_clusters": 50}],
     
     # Models without obvious fast tuning parameters left default
     "ALAD": [{}],
@@ -149,7 +187,7 @@ PARAM_GRIDS = {
     "MO_GAAL": [{}],
     "SUOD": [{}],
     "DeepSVDD": [{"hidden_neurons": [64, 32]}],
-    "LUNAR": [{"n_endpoints": 10}],
+    "LUNAR": [{"n_endpoints": 5}, {"n_endpoints": 10}, {"n_endpoints": 20}],
     "AE1SVM": [{}],
     "DevNet": [{}]
 }
@@ -176,6 +214,7 @@ def get_model(model_name, params):
         "SO_GAAL": SO_GAAL,
         "MO_GAAL": MO_GAAL,
         "SUOD": SUOD,
+        "OCKMeans": OCKMeans,
     }
     
     if model_name == 'DASVDD':
@@ -254,7 +293,14 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                 # Save to All file (Atomic write if parallel)
                 pd.DataFrame([row]).to_csv(output_file_all, mode='a', header=not os.path.exists(output_file_all), index=False)
                 
-                cur_auc = metrics.get("AUCROC") or 0
+                # AUCROC là metric chính để chọn best config.
+                # Nếu None (đã in warning ở evaluate_model), raise lỗi để không âm thầm bỏ qua.
+                cur_auc = metrics.get("AUCROC")
+                if cur_auc is None:
+                    raise ValueError(
+                        f"AUCROC is None for {model_name} with params {params}. "
+                        "Check evaluate_model warnings above for the root cause."
+                    )
                 if cur_auc > best_auc:
                     best_auc = cur_auc
                     best_row = row
@@ -267,7 +313,11 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
             return best_row
         return None
 
-    models_to_run = list(PARAM_GRIDS.items())
+    models_to_run = []
+    for m, p in PARAM_GRIDS.items():
+        if MODELS_TO_RUN and m not in MODELS_TO_RUN:
+            continue
+        models_to_run.append((m, p))
     
     if USE_PARALLEL and not use_tuning:
         # High speed mode: Parallelize across MODELS (since each only has 1 param set)

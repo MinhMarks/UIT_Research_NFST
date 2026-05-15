@@ -1,0 +1,6 @@
+Trong '\subsubsection{Detection Performance on IoT Benchmarks (RQ1)}', tôi có viết : 
+'For fairness, we also include tuned variants of representative top-performing methods from each category, as detailed in the Appendix.'
+
+Tôi muốn bạn bổ sung khả năng lựa model nào được chạy trong file thực nghiệm baseline tôi gửi, và chắc chắn là có một số config tuning sẵn cho từng model, model nào được chọn sẽ thực thi trên các lựa chọn tuning từ trước. Còn các cài đặt khác thì vẫn như thường. Sau khi chạy xong thì tôi sẽ bỏ kết quả vào appendix tương ứng được nhắc trong đoạn tui gửi( hiện tại chưa có khúc appendix đó). 
+
+Tôi muốn các model sau phải có ít nhất 3 bộ tham số nhé : LUNAR, KNN, LOF, IForest, AutoEncoder. 

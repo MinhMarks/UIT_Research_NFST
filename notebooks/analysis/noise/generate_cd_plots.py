@@ -18,7 +18,7 @@ matplotlib.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sa
 # ============================================================================
 # NEW CONFIGURATION (Request 27/03)
 # ============================================================================
-BASELINE_SCALER = 'MinMaxScaler' # Scaler for baselines (None for best, or 'MinMaxScaler', etc.)
+BASELINE_SCALER = 'QuantileTransformer' # Scaler for baselines (None for best, or 'MinMaxScaler', etc.)
 EXCLUDE_MODELS_LIST = ['DEVNET'] # Models to remove from all results
 KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT']
 
@@ -85,8 +85,8 @@ def load_and_normalize(file_info):
 # CD DIAGRAM LOGIC (Adopted from promt/main.py)
 # ============================================================================
 
-def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, lowv=None, highv=None,
-                width=24, textspace=5, reverse=True, filename=None, labels=True, **kwargs):
+def graph_ranks(avranks, names, avg_value, p_values=None, cd=None, cdmethod=None, lowv=None, highv=None,
+                width=33, textspace= 0, reverse=True, filename=None, labels=True, **kwargs):
     """
     CD Diagram matching reference image style:
     - Horizontal axis at top with integer rank ticks
@@ -117,10 +117,10 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
     distanceh = 0.25
     cline += distanceh
 
-    space_between_names = 0.65   # vertical gap between consecutive labels
-    label_size  = 25
-    metric_size = 24
-    tick_font   = 15
+    space_between_names = 3.0   # vertical gap between consecutive labels
+    label_size  = 75
+    metric_size = 62
+    tick_font   = 48
 
     minnotsignificant = 0.5      # gap between axis and first label row
     height = cline + minnotsignificant + (math.ceil(k / 2)) * space_between_names + 0.3
@@ -153,16 +153,16 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         ax.text(wf * x, hf * y, s, *args, **kwargs)
 
     # ── Draw main horizontal axis ──────────────────────────────────────────────
-    line([(textspace, cline), (width - textspace, cline)], linewidth=2.5)
+    line([(textspace, cline), (width - textspace, cline)], linewidth=5)
 
     bigtick = 0.30
     smalltick = 0.15
-    linewidth = 2.0
-    linewidth_sign = 6.0
+    linewidth = 13
+    linewidth_sign = 9.0
 
     for a in list(np.arange(lowv, highv, 0.5)) + [highv]:
         tick = bigtick if a == int(a) else smalltick
-        line([(rankpos(a), cline - tick / 2), (rankpos(a), cline)], linewidth=2)
+        line([(rankpos(a), cline - tick / 2), (rankpos(a), cline)], linewidth=4)
 
     for a in range(lowv, highv + 1):
         text(rankpos(a), cline - 0.28, str(a),
@@ -188,7 +188,7 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         rpos  = rankpos(avranks[idx])
         lbl_y = label_y(slot)
 
-        line([(rpos, cline), (rpos, lbl_y), (textspace - 0.1, lbl_y)],
+        line([(rpos, cline), (rpos, lbl_y), (textspace - 2.0, lbl_y)],
              linewidth=linewidth)
 
         name    = names[idx]
@@ -197,11 +197,11 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_weight = "bold" if is_our else "normal"
 
         if labels:
-            text(textspace + 2.3, lbl_y,
+            text(textspace + 2.0, lbl_y,
                  "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]),
                  ha="right", va="center", size=metric_size, color=f_color, zorder=20,
                  bbox=dict(facecolor='white', edgecolor='none', alpha=0.95, pad=1.5))
-        text(textspace - 0.3, lbl_y, name,
+        text(textspace - 4.1, lbl_y, name,
              ha="right", va="center", size=label_size, weight=f_weight,
              color=f_color, zorder=20)
 
@@ -211,7 +211,7 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         rpos  = rankpos(avranks[idx])
         lbl_y = label_y(slot)
 
-        line([(rpos, cline), (rpos, lbl_y), (width - textspace + 0.1, lbl_y)],
+        line([(rpos, cline), (rpos, lbl_y), (width - textspace + 2.0, lbl_y)],
              linewidth=linewidth)
 
         name    = names[idx]
@@ -220,49 +220,61 @@ def graph_ranks(avranks, names, avg_value, p_values, cd=None, cdmethod=None, low
         f_weight = "bold" if is_our else "normal"
 
         if labels:
-            text(width - textspace - 2.3, lbl_y,
+            text(width - textspace - 2.0, lbl_y,
                  "{0:.2f} / {1:.2f}".format(avg_value[idx], avranks[idx]),
                  ha="left", va="center", size=metric_size, color=f_color, zorder=20,
                  bbox=dict(facecolor='white', edgecolor='none', alpha=0.95, pad=1.5))
-        text(width - textspace + 0.3, lbl_y, name,
+        text(width - textspace + 4.1, lbl_y, name,
              ha="left", va="center", size=label_size, weight=f_weight,
              color=f_color, zorder=20)
 
     # ── Draw significance cliques (blue bars) ─────────────────────────────────
-    try:
-        cliques = form_cliques(p_values, names)
-        start = cline + 0.22
-        side  = -0.02
-        height_inc = 0.22
-        name_list = list(names)
-        for clq in cliques:
-            if len(clq) == 1: continue
-            valid_idx = [name_list.index(n) for n in clq if n in name_list]
-            if not valid_idx: continue
-            lo, hi = min(valid_idx), max(valid_idx)
-            line([(rankpos(avranks[lo]) - side, start),
-                  (rankpos(avranks[hi]) + side, start)],
-                 linewidth=linewidth_sign, color='blue', alpha=0.6)
-            start += height_inc
-    except Exception as e:
-        print(f"Warning drawing cliques: {e}")
+    # if cd is not None:
+    #     start = cline + 0.22
+    #     side  = -0.02
+    #     height_inc = 0.22
+        
+    #     # Calculate maximal cliques using Critical Difference
+    #     cliques = []
+    #     k_len = len(avranks)
+    #     for i in range(k_len):
+    #         max_j = i
+    #         for j in range(i+1, k_len):
+    #             if avranks[j] - avranks[i] <= cd:
+    #                 max_j = j
+    #         if max_j > i:
+    #             cliques.append((i, max_j))
+                
+    #     # Filter valid subsets
+    #     valid_cliques = []
+    #     for c in cliques:
+    #         is_subset = False
+    #         for vc in valid_cliques:
+    #             if c[0] >= vc[0] and c[1] <= vc[1]:
+    #                 is_subset = True
+    #                 break
+    #         if not is_subset:
+    #             valid_cliques.append(c)
 
+    #     for lo, hi in valid_cliques:
+    #         line([(rankpos(avranks[lo]) - side, start),
+    #               (rankpos(avranks[hi]) + side, start)],
+    #              linewidth=linewidth_sign, color='red', alpha=0.9)
+    #         start += height_inc
+            
+    #     # Draw the physical CD bar at top right
+    #     cd_y = cline - 0.7
+    #     cd_x0 = rankpos(lowv)
+    #     cd_x1 = rankpos(lowv + cd) 
 
+    #     # Shift it to far right or far left so it doesn't collide with the rank axis text
+    #     offset = scalewidth / (highv - lowv) * cd
+    #     bar_start_x = textspace + scalewidth - offset if reverse else textspace
 
-
-
-def form_cliques(p_values, nnames):
-    m = len(nnames)
-    g_data = np.zeros((m, m), dtype=np.int64)
-    name_list = list(nnames)
-    for p in p_values:
-        if p[3] == False: # Not significant
-            if p[0] in name_list and p[1] in name_list:
-                i = name_list.index(p[0])
-                j = name_list.index(p[1])
-                g_data[min(i, j), max(i, j)] = 1
-    g = networkx.Graph(g_data)
-    return list(networkx.find_cliques(g))
+    #     text(bar_start_x + offset/2, cd_y - 0.2, f"CD = {cd:.2f}", ha='center', va='bottom', size=20, weight='bold', color='maroon')
+    #     line([(bar_start_x, cd_y), (bar_start_x + offset, cd_y)], linewidth=4, color='maroon')
+    #     line([(bar_start_x, cd_y - 0.08), (bar_start_x, cd_y + 0.08)], linewidth=4, color='maroon')
+    #     line([(bar_start_x + offset, cd_y - 0.08), (bar_start_x + offset, cd_y + 0.08)], linewidth=4, color='maroon')
 
 def wilcoxon_holm(alpha=0.05, df_perf=None):
     classifiers = sorted(df_perf['classifier_name'].unique())
@@ -270,10 +282,14 @@ def wilcoxon_holm(alpha=0.05, df_perf=None):
     m = len(classifiers)
     n = len(datasets)
     
-    # Test Friedman first
-    friedman_p = friedmanchisquare(*(np.array(df_perf.loc[df_perf['classifier_name'] == c]['accuracy']) for c in classifiers))[1]
-    if friedman_p >= alpha:
-        print('Friedman test not significant. CD Diagram might not show meaningful results.')
+    # Test Friedman first (Requires at least 3 models)
+    if m >= 3:
+        friedman_p = friedmanchisquare(*(np.array(df_perf.loc[df_perf['classifier_name'] == c]['accuracy']) for c in classifiers))[1]
+        if friedman_p >= alpha:
+            print('Friedman test not significant. CD Diagram might not show meaningful results.')
+    else:
+        print(f'Fewer than 3 models detected ({m}). Skipping Friedman test.')
+        friedman_p = 0.0 # Standardize for 2-model comparisons
 
     p_values = []
     for i in range(m - 1):
@@ -315,12 +331,17 @@ def plot_ranked_heatmap(average_ranks, df_perf, output_path):
     """Draw a professional heatmap of AUC values by Dataset and Model."""
     # Pivot to Matrix: Rows=Model, Cols=Dataset
     pivot = df_perf.pivot(index='classifier_name', columns='dataset_name', values='accuracy')
-    # Sort by overall rank
-    pivot = pivot.reindex(average_ranks.index)
-    
-    plt.figure(figsize=(10, 14))
+    # Dynamic Figure Size Calculation (Reduce white space)
+    height = max(8, len(average_ranks) * 0.4)
+    plt.figure(figsize=(10, height))
     sns.set(style="white")
-    ax = sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu", cbar_kws={'label': 'AUCROC'})
+    ax = sns.heatmap(pivot, annot=True, fmt=".2f", cmap="YlGnBu", 
+                     annot_kws={"size": 11}, # Increased annotation size
+                     cbar_kws={'label': 'AUCROC'})
+    
+    # Increase model name font size
+    ax.tick_params(axis='y', labelsize=12)
+    ax.tick_params(axis='x', labelsize=10)
     
     # Highlight LOC-NFST in Red
     for label in ax.get_yticklabels():
@@ -328,15 +349,18 @@ def plot_ranked_heatmap(average_ranks, df_perf, output_path):
             label.set_color("red")
             label.set_weight("bold")
             
-    plt.title("Performance Matrix (AUCROC) - Ranked from Top to Bottom", size=15)
+    plt.title("Performance Matrix (AUCROC) - Ranked from Top to Bottom", size=15, pad=20)
     plt.xlabel("Dataset", size=12)
     plt.ylabel("Model", size=12)
+    plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
 def plot_average_rank_bar(average_ranks, average_value, output_path):
     """Draw a clean horizontal bar chart of average ranks with AUCROC labels."""
-    plt.figure(figsize=(10, 14))
+    # Dynamic Figure Size Calculation (Reduce white space)
+    height = max(8, len(average_ranks) * 0.45)
+    plt.figure(figsize=(10, height))
     
     # Merge rank and auc for labeling
     # average_value should be aligned with average_ranks index
@@ -344,8 +368,12 @@ def plot_average_rank_bar(average_ranks, average_value, output_path):
     
     colors = ['red' if "LOC-NFST" in m else 'skyblue' for m in average_ranks.index]
     
-    ax = average_ranks.plot(kind='barh', color=colors, edgecolor='black', alpha=0.8)
+    ax = average_ranks.plot(kind='barh', color=colors, edgecolor='black', alpha=0.8, width=0.8) # Adjust width for spacing
     ax.invert_yaxis() # Rank 1 at top
+    
+    # Increase font sizes
+    ax.tick_params(axis='y', labelsize=14)
+    ax.tick_params(axis='x', labelsize=12)
     
     plt.title("Overall Model Comparison (Ranked)", size=18, pad=20)
     plt.xlabel("Average Rank (Lower is Better)", size=14)
@@ -511,7 +539,32 @@ def main():
         return
 
     print(f">>> Computing rankings for {len(valid_models)} models across {max_nb} datasets...")
-    p_values, average_ranks, n, average_value = wilcoxon_holm(df_perf=df_perf)
+    
+    # Nemenyi Component Re-injection
+    pivot = df_perf.pivot(index='dataset_name', columns='classifier_name', values='accuracy')
+    ranks_df = pivot.rank(ascending=False, axis=1) # AUC: higher is better
+    average_ranks = ranks_df.mean(axis=0).sort_values(ascending=True) # Ascending: 1.0 is best
+    
+    average_value = df_perf.groupby('classifier_name').agg({'accuracy': 'mean'}).reset_index()
+    average_value['classifier_name'] = average_value['classifier_name'].astype("category")
+    average_value['classifier_name'] = average_value['classifier_name'].cat.set_categories(average_ranks.index)
+    average_value = average_value.sort_values(["classifier_name"])
+    
+    n_datasets = ranks_df.shape[0]  
+    k_models = ranks_df.shape[1]  
+    
+    # Critical values for Nemenyi test alpha=0.05
+    q_values = {
+        2: 1.960, 3: 2.343, 4: 2.569, 5: 2.728, 6: 2.850,
+        7: 2.949, 8: 3.031, 9: 3.102, 10: 3.164, 11: 3.219,
+        12: 3.268, 13: 3.313, 14: 3.354, 15: 3.391, 16: 3.426,
+        17: 3.458, 18: 3.489, 19: 3.517, 20: 3.544,
+        21: 3.569, 22: 3.593, 23: 3.616, 24: 3.637,
+        25: 3.658, 26: 3.678, 27: 3.696, 28: 3.714
+    }
+    q = q_values.get(k_models, 3.8) # Approx fallback
+    cd = q * math.sqrt((k_models * (k_models + 1)) / (6.0 * n_datasets))
+    print(f"Calculated Nemenyi CD for k={k_models}, n={n_datasets}: {cd:.4f}")
 
     # 1. Performance Heatmap
     heatmap_path = os.path.join(output_dir, "rank_heatmap.png")
@@ -533,9 +586,9 @@ def main():
     plot_pareto_efficiency(df_best_valid, pareto_path)
     print(f"Pareto Plot saved to {pareto_path}")
 
-    # 5. CD Diagram (Legacy)
+    # 5. CD Diagram
     try:
-        graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, p_values,
+        graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, cd=cd,
                     reverse=True, labels=True)
         cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
         # plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)

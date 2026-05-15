@@ -1,0 +1,13 @@
+	Dataset	Model	Parameters	Scaled	Noise	AUCROC
+1	data_ToNIoT.csv	AutoEncoder	{'hidden_neuron_list': [32, 16], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	64.28734023606897
+2	data_ToNIoT.csv	AutoEncoder	{'hidden_neuron_list': [64, 32], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	81.66683417905323
+3	data_ToNIoT.csv	AutoEncoder	{'hidden_neuron_list': [128, 64], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	79.98281313240358
+4	data_N_BaIoT.csv	AutoEncoder	{'hidden_neuron_list': [32, 16], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	95.11863423910619
+5	data_N_BaIoT.csv	AutoEncoder	{'hidden_neuron_list': [64, 32], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	93.250680077718
+6	data_N_BaIoT.csv	AutoEncoder	{'hidden_neuron_list': [128, 64], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	93.90209931230604
+7	data_CICIoT2023.csv	AutoEncoder	{'hidden_neuron_list': [32, 16], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	93.99806827101939
+8	data_CICIoT2023.csv	AutoEncoder	{'hidden_neuron_list': [64, 32], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	95.25832973479967
+9	data_CICIoT2023.csv	AutoEncoder	{'hidden_neuron_list': [128, 64], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	95.74295725690101
+10	data_BoTIoT.csv	AutoEncoder	{'hidden_neuron_list': [32, 16], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	99.28422681371865
+11	data_BoTIoT.csv	AutoEncoder	{'hidden_neuron_list': [64, 32], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	99.69721242902526
+12	data_BoTIoT.csv	AutoEncoder	{'hidden_neuron_list': [128, 64], 'epoch_num': 50, 'contamination': 0.05}	QuantileTransformer	0	99.88085125766935

@@ -1,0 +1,11 @@
+Đoạn setting cho RQ2 đang hơi dài, hãy chuyển một phần vào nội dung vào appendix và chỉ giữ lại các ý cần thiết. 
+
+Đoạn setting cho RQ3 đang chưa đủ ý, chúng tôi làm cái Bar_Time_Complexity.png và Radar_Comparison.png thì thực nghiệm trên bộ 4 datasets có đề cập, còn 2 bảng thì trên synthetic data. 
+
+Ở các đoạn so sánh miêu tả biểu đồ, hãy cố gắng cho người đọc thấy được sự chênh lệch của proposed model và các model baseline bên dưới, dùng phép hiệu rồi các con số cụ thể để so sánh, đừng chỉ nói chung chung là tốt hơn hay kém hơn. Và tập chung vào so sánh proposed 
+
+Với hãy thống nhất các khái niệm nhé, đừng ở trên diễn ra theo một từ ở dưới theo một từ. 
+
+Với có vài đoạn đang bi overclaim, hãy giảm bớt các tính từ mang tính cảm tính (Adjective Inflation) và sử dụng các từ mang tính thận trọng hơn (hedging) như "effectively minimizes" hoặc "consistently maintains".
+
+    

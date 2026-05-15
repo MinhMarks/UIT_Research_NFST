@@ -1,0 +1,15 @@
+\begin{table}[!ht]
+\centering
+\caption{Best LOC-NFST performance per dataset (noise = 0\%).}
+\begin{tabular}{lccccccc}
+\hline
+\textbf{Dataset} & \textbf{AUC-ROC} (\%) & \textbf{AUC-PR} (\%) & \textbf{MCC} & \textbf{ACC} (\%) & \textbf{F1} & \textbf{Precision} & \textbf{Recall} \\
+\hline
+BoTIoT & 98.64 & 89.72 & 0.8118 & 95.59 & 0.8254 & 0.7212 & 0.9647 \\
+ToN-IoT & 99.85 & 99.83 & 0.9831 & 99.15 & 0.9915 & 0.9944 & 0.9887 \\
+N-BaIoT & 98.77 & 98.42 & 0.9281 & 96.39 & 0.9644 & 0.9506 & 0.9785 \\
+CICIoT2023 & 95.87 & 94.52 & 0.8371 & 91.72 & 0.9204 & 0.8866 & 0.9568 \\
+\hline
+\end{tabular}
+\label{tab:best_results}
+\end{table}

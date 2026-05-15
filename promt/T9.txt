@@ -1,0 +1,6 @@
+Bạn có đang nhìn thấy các đoạn triển khai kết quả thực nghiệm theo cấu trúc từng câu Research Question hiện tại đang thiếu một câu trả lời trực tiếp cho câu hỏi được đặt ra tương ứng ở research question phía trên không. 
+Ví dụ ở RQ1, bạn có thể thấy các đoạn triển khai kết quả thực nghiệm nhưng chưa có câu trả lời trực tiếp cho câu hỏi "How well does LOC-NFST perform on IoT intrusion detection tasks?"
+
+Tôi muốn bạn bổ sung thêm các câu trả lời trực tiếp cho từng câu Research Question, sao cho sau khi đọc xong phần triển khai kết quả thực nghiệm, người đọc có thể hiểu được câu trả lời cho câu hỏi đó là gì. 
+
+Đồng thời tìm thêm các lỗi reviewer có thể bắt bẻ. 

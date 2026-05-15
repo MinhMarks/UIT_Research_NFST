@@ -28,7 +28,28 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # >>> CONFIGURATION: change METRIC to 'AUCPR' to switch metric <<<
-METRIC = 'AUCROC'   # Options: 'AUCROC'  |  'AUCPR'
+METRIC = 'AUCROC'      # Options: 'AUCROC'  |  'AUCPR'
+START_K = 2            # Plot from this k value onwards
+END_K = None           # Plot up to this k value (None = no upper limit)
+DEFAULT_K = 105        # Selected default k to highlight
+SHOW_RAW_LINE      = True   # Show raw (pre-smoothing) dotted line
+SHOW_SMOOTHED_LINE = False   # Show smoothed (rolling-average) bold line
+SHOW_STD_BAND      = False  # Show shaded ±std band around the mean (can be noisy)
+
+# High-contrast qualitative palette ─ distinct across colour-vision types
+QUAL_COLORS = [
+    '#E63946',  # Vivid red
+    '#1D6FA4',  # Strong blue
+    '#2A9D5C',  # Emerald green
+    '#F4A300',  # Deep amber
+    '#7B2D8B',  # Purple
+    '#E08C00',  # Dark orange
+    '#17BECF',  # Teal
+    '#8C564B',  # Earthy brown
+]
+# Only use clearly distinct line styles ─ NO dots to avoid confusion with raw dotted line
+LINESTYLES = ['-', '--', '-.']
+MARKERS    = ['o', 's', '^', 'D', 'v', 'p', '*', 'h']
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
@@ -162,8 +183,12 @@ def plot_sensitivity(df_filtered, best_scalers):
     datasets = sorted(df_filtered['dataset'].unique())
     n_ds = len(datasets)
     
-    # Choose color palette
-    palette = sns.color_palette("tab10", n_ds)
+    # High-contrast qualitative palette is defined at module level (QUAL_COLORS etc.)
+
+    # Filter data by START_K and END_K
+    df_filtered = df_filtered[df_filtered['ncluster'] >= START_K].copy()
+    if END_K is not None:
+        df_filtered = df_filtered[df_filtered['ncluster'] <= END_K].copy()
     
     fig, ax = plt.subplots(figsize=(11, 5))
     
@@ -190,19 +215,38 @@ def plot_sensitivity(df_filtered, best_scalers):
         # Smooth mean line
         x_s, y_s = smooth_curve(x, y, window=7)
         
-        color = palette[i]
+        color = QUAL_COLORS[i % len(QUAL_COLORS)]
+        ls    = LINESTYLES[i % len(LINESTYLES)]
+        mk    = MARKERS[i % len(MARKERS)]
         sc_label = best_scalers.get(ds, '')
         
-        # Shaded std band
-        ax.fill_between(x, y - std_per_cluster, y + std_per_cluster,
-                        alpha=0.12, color=color)
+        # Shaded std band (optional)
+        if SHOW_STD_BAND:
+            ax.fill_between(x, y - std_per_cluster, y + std_per_cluster,
+                            alpha=0.10, color=color)
         
-        # Raw dotted line
-        ax.plot(x, y, linestyle=':', linewidth=0.8, color=color, alpha=0.5)
+        # Raw line — primary when SHOW_SMOOTHED_LINE is off, secondary otherwise
+        if SHOW_RAW_LINE:
+            raw_alpha = 1.0 if not SHOW_SMOOTHED_LINE else 0.3
+            raw_lw    = 2.2 if not SHOW_SMOOTHED_LINE else 1.0
+            raw_ms    = 6   if not SHOW_SMOOTHED_LINE else 4
+            raw_label = ds  if not SHOW_SMOOTHED_LINE else None
+            ax.plot(x, y, linestyle=ls, linewidth=raw_lw, color=color, alpha=raw_alpha,
+                    marker=mk, markevery=max(1, len(x)//12), markersize=raw_ms,
+                    label=raw_label, zorder=1 if SHOW_SMOOTHED_LINE else 5)
         
-        # Smooth mean line (bold)
-        ax.plot(x_s, y_s, linewidth=2.0, color=color,
-                label=f"{ds} ({sc_label})")
+        # Smooth mean line — primary when enabled (always gets the label)
+        if SHOW_SMOOTHED_LINE:
+            ax.plot(x_s, y_s, linewidth=2.2, color=color, linestyle=ls,
+                    marker=mk, markevery=max(1, len(x_s)//12), markersize=6,
+                    label=ds, zorder=5)
+        elif not SHOW_RAW_LINE:
+            # Neither line shown — still register in legend with invisible line
+            ax.plot([], [], color=color, linestyle=ls, label=ds)
+
+    # --- Highlight Default K ---
+    ax.axvline(x=DEFAULT_K, color='gray', linestyle='--', alpha=0.7, linewidth=1.5,
+               label=f"Default k={DEFAULT_K}")
     
     # --- Styling ---
     ax.set_xlabel("Number of Clusters (k)", fontsize=13)
@@ -213,7 +257,32 @@ def plot_sensitivity(df_filtered, best_scalers):
     ax.legend(loc='lower right', fontsize=10, framealpha=0.85)
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f'))
     ax.grid(axis='y', linestyle='--', alpha=0.45)
-    ax.set_ylim(50, 105)  # Focus range: 50-105% for readability
+    
+    # Dynamic Y-min to avoid large white space at the bottom
+    # Get the overall minimum value including shaded regions
+    all_mins = []
+    for i, ds in enumerate(datasets):
+        metric_col = METRIC.lower()
+        sub = df_filtered[df_filtered['dataset'] == ds]
+        per_cluster = sub.groupby('ncluster')[metric_col].mean()
+        std_per_cluster = sub.groupby('ncluster')[metric_col].std().fillna(0)
+        all_mins.append((per_cluster - std_per_cluster).min())
+    
+    lowest_metric = min(all_mins) if all_mins else 50
+    # User suggestion: if high, start at 70. Otherwise 50 or lower if data drops.
+    if lowest_metric > 80:
+        y_min = 70
+    elif lowest_metric > 60:
+        y_min = 50
+    else:
+        y_min = int(np.floor(lowest_metric / 10) * 10 - 10)
+        y_min = max(0, y_min)
+        
+    ax.set_ylim(y_min, 108)  # Set limit first
+    ax.set_yticks(range(int(y_min), 101, 10)) # Then set explicit ticks
+    ax.yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f'))
+    ax.grid(axis='y', linestyle='--', alpha=0.45)
+    
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     
@@ -224,6 +293,50 @@ def plot_sensitivity(df_filtered, best_scalers):
     plt.close()
     print(f"\n[+] Plot saved to: {out_path}")
     return out_path
+
+def save_sensitivity_data(df_filtered, best_scalers):
+    """Save the filtered and aggregated data to CSV and LaTeX for further analysis."""
+    metric_col = METRIC.lower()
+    
+    # 1. Save summary data (Aggregated by Dataset and nCluster)
+    summary_list = []
+    datasets = sorted(df_filtered['dataset'].unique())
+    
+    for ds in datasets:
+        sub = df_filtered[df_filtered['dataset'] == ds].copy()
+        per_cluster = (sub.groupby('ncluster')[metric_col]
+                          .agg(['mean', 'std', 'count'])
+                          .reset_index()
+                          .sort_values('ncluster'))
+        per_cluster['dataset'] = ds
+        per_cluster['best_scaler'] = best_scalers.get(ds, 'Unknown')
+        summary_list.append(per_cluster)
+    
+    df_summary = pd.concat(summary_list, ignore_index=True)
+    
+    # Reorder columns for readability
+    cols = ['dataset', 'best_scaler', 'ncluster', 'mean', 'std', 'count']
+    df_summary = df_summary[cols].rename(columns={'mean': f'{METRIC}_mean', 'std': f'{METRIC}_std'})
+    
+    csv_out = os.path.join(OUTPUT_DIR, f'Sensitivity_Numerical_Summary_{METRIC}.csv')
+    df_summary.to_csv(csv_out, index=False)
+    print(f"[+] Summary data saved to: {csv_out}")
+    
+    # 2. Save a LaTeX table of the same data (pivot format for the paper)
+    # Let's pick some representative n_cluster values for the LaTeX table to keep it readable
+    pivot_ds = df_summary.pivot(index='dataset', columns='ncluster', values=f'{METRIC}_mean')
+    
+    # Select a subset of clusters for the TeX table if there are too many
+    if len(pivot_ds.columns) > 10:
+        # Pick 10 evenly spaced ones
+        cols_to_keep = pivot_ds.columns[np.linspace(0, len(pivot_ds.columns)-1, 10).astype(int)]
+        pivot_ds = pivot_ds[cols_to_keep]
+    
+    tex_out = os.path.join(OUTPUT_DIR, f'Sensitivity_Numerical_Summary_{METRIC}.tex')
+    pivot_ds.to_latex(tex_out, float_format="%.2f")
+    print(f"[+] LaTeX table saved to: {tex_out}")
+    
+    return csv_out, tex_out
 
 # ---------------------------------------------------------------------------
 # MAIN
@@ -249,3 +362,4 @@ if __name__ == '__main__':
     print(f"Rows after filtering (noise=0, best scaler): {len(df_filtered):,}")
     
     plot_sensitivity(df_filtered, best_scalers)
+    save_sensitivity_data(df_filtered, best_scalers)

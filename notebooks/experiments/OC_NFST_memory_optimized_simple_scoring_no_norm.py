@@ -1,8 +1,8 @@
 """
-OC-NFST Memory-Optimized Version
-==================================
+LOC-NFST Memory-Optimized & Simple Scoring Version
+====================================================
 
-Optimizations applied (compared to OC-NSFT_FAISS_learn.py):
+Optimizations and structural simplifications applied:
 
 1. [float32 throughout]  All matrices use float32 instead of float64.
    → Cuts RAM consumption by ~50% for P_t, P_w, S_w, U, W.
@@ -19,6 +19,17 @@ Optimizations applied (compared to OC-NSFT_FAISS_learn.py):
 5. [Incremental S_w computation]  S_w is accumulated cluster-by-cluster
    instead of building the full P_w matrix (d × N). This reduces the
    peak memory from O(d × N) to O(d × max_cluster_size).
+
+6. [Decoupled Inference RAM Optimization] Removed `X_train` from inference ops.
+   Previously, scoring re-projected all training sets leading to heavily skewed 
+   inference peak RAM measurements. Now, inference is fully autonomous.
+
+7. [Explicit Null-Space Centroids (Simplified Scoring)] 
+   Proximity distances are no longer mapped through backward original-space alignment. 
+   Instead, representative centers (`null_centers`) are constructed by explicitly 
+   projecting `X_train` to the null space and then taking the average for each class.
+   For inference, the anomaly score relies exclusively on the nearest distance to 
+   these precise `null_centers` and transformed cleanly via `y_proba = 1 / (1 + distance)`.
 """
 
 import os
@@ -31,7 +42,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 from scipy.linalg import null_space
-from sklearn.cluster import KMeans, MiniBatchKMeans
+from sklearn.cluster import KMeans
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
     roc_auc_score, average_precision_score, roc_curve,
@@ -161,21 +172,14 @@ def drop_metadata_features(df: pd.DataFrame, logger: logging.Logger):
 # ============================================================================
 # CLUSTERING
 # ============================================================================
-def cluster_kmeans(data: np.ndarray, k: int, use_minibatch: bool = False):
+def cluster_kmeans(data: np.ndarray, k: int):
     """K-Means clustering. Returns sorted data & labels.
     
     Bug fix: k is capped to n_samples so KMeans never crashes when
     n_clusters_list contains values larger than the training set size.
     """
     k = min(k, len(data))          # cap k so KMeans never gets k > n_samples
-    
-    if use_minibatch:
-        # MiniBatchKMeans for massive datasets (faster, uses less memory)
-        kmeans = MiniBatchKMeans(n_clusters=k, random_state=42, n_init='auto', batch_size=2048)
-    else:
-        # Standard KMeans for highest accuracy
-        kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
-        
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
     labels = kmeans.fit_predict(data)
     sorted_idx = np.argsort(labels)
     return data[sorted_idx], labels[sorted_idx], kmeans.cluster_centers_.astype(np.float32)
@@ -309,50 +313,30 @@ def faiss_test_score(null_test: np.ndarray, null_train: np.ndarray) -> np.ndarra
     return np.sqrt(np.maximum(distances[:, 0], 0.0))
 
 
-def compute_dist_to_centers(X, W, centers):
+def compute_scores(X_test, W, null_centers):
     """
-    Compute distance to the null space relative to the NEAREST cluster center.
+    Compute scores simply: Project test points to the null space, 
+    and find the minimum distance from the point to the projected centers.
     """
-    if FAISS_AVAILABLE:
-        d = centers.shape[1]
-        index = faiss.IndexFlatL2(d)
-        index.add(centers.astype('float32'))
-        _, nearest_idx = index.search(X.astype('float32'), 1)
-        nearest_centers = centers[nearest_idx.flatten()]
-    else:
-        # Fallback to numpy
-        nearest_centers = []
-        for i in range(0, len(X), 2000):
-            batch = X[i:i+2000]
-            dists = np.linalg.norm(batch[:, np.newaxis, :] - centers[np.newaxis, :, :], axis=2)
-            idx = np.argmin(dists, axis=1)
-            nearest_centers.append(centers[idx])
-        nearest_centers = np.vstack(nearest_centers)
-
-    diff = X - nearest_centers
-    projections = diff @ W
-    return np.sqrt(np.sum(projections**2, axis=1))
-
-
-def compute_scores(X_train, X_test, W, centers):
-    """
-    Compute y_proba matching the notebook exactly, but using cluster-center distance:
-        y_proba[:, 1] = min(y_score / max(train_score), 1)
-        y_proba[:, 0] = 1 - y_proba[:, 1]
-
-    Returns y_proba (n_test, 2).
-    """
-    X_train = np.ascontiguousarray(X_train, dtype=np.float32)
     X_test  = np.ascontiguousarray(X_test,  dtype=np.float32)
 
-    train_score = compute_dist_to_centers(X_train, W, centers)
-    y_score     = compute_dist_to_centers(X_test, W, centers)
+    # 1. Project to null-space
+    null_test  = project_to_null(X_test, W)
 
-    max_train = np.max(train_score)
+    # 2. Distance to nearest singular/center in null space
+    if FAISS_AVAILABLE:
+        y_score = faiss_test_score(null_test, null_centers)   # Dist from test to nearest projected center
+    else:
+        # Fallback numpy (slower)
+        dists_test = np.linalg.norm(null_test[:, np.newaxis, :] - null_centers[np.newaxis, :, :], axis=2)
+        y_score = np.min(dists_test, axis=1)
+
+    # 3. Convert distance to an anomaly probability score [0, 1] without relying on train data
+    # Normal data has distance ~ 0 => y_proba[:, 0] ~ 1.0
     y_proba = np.zeros((len(y_score), 2), dtype=np.float32)
-    y_proba[:, 1] = np.minimum(y_score / (max_train + 1e-10), 1.0)
-    y_proba[:, 0] = 1.0 - y_proba[:, 1]
-    y_proba = np.nan_to_num(y_proba, nan=1.0)
+    y_proba[:, 0] = 1.0 / (1.0 + y_score)
+    y_proba[:, 1] = 1.0 - y_proba[:, 0]
+    
     return y_proba
 
 
@@ -421,7 +405,6 @@ def run_experiment(train_path: str, test_path: str,
                    noise_pct: float = 1.0,
                    scaler_name: str = "unknown",
                    out_path: str = None,
-                   use_minibatch: bool = False,
                    logger: logging.Logger = None):
     """
     Full NFST pipeline with memory optimizations.
@@ -440,7 +423,6 @@ def run_experiment(train_path: str, test_path: str,
     log.info(f"Scaler   : {scaler_name}")
     log.info(f"Noise    : {noise_pct}%")
     log.info(f"nClusters: {len(n_clusters_list)} values ({n_clusters_list[0]}..{n_clusters_list[-1]})")
-    log.info(f"K-Means  : {'MiniBatchKMeans' if use_minibatch else 'Standard KMeans'}")
     log.info("=" * 60)
 
     # --- Direct Feed Optimization ---
@@ -475,11 +457,22 @@ def run_experiment(train_path: str, test_path: str,
         # ---- Track peak RAM for TRAINING ----
         tracemalloc.start()
         try:
-            X_clustered, y_clustered, centers = cluster_kmeans(X_train, n_clusters, use_minibatch=use_minibatch)
+            X_clustered, y_clustered, centers = cluster_kmeans(X_train, n_clusters)
             actual_k = len(np.unique(y_clustered))
 
             # Train: compute NPD projection matrix W
-            W, train_time = calculate_NPD_optimized(X_clustered, y_clustered)
+            W, train_score_time_start = calculate_NPD_optimized(X_clustered, y_clustered)
+            
+            # Create null_centers: chiếu toàn bộ X_train sang null-space, sau đó lấy trung bình theo từng class
+            t_center_start = time.time()
+            null_train = project_to_null(X_clustered, W)
+            null_centers = np.array([
+                np.mean(null_train[y_clustered == cls], axis=0)
+                for cls in np.unique(y_clustered)
+            ], dtype=np.float32)
+
+            train_time = train_score_time_start + (time.time() - t_center_start)
+            
         except Exception as e:
             tracemalloc.stop()
             return {"error": f"[ERROR ncluster={n_clusters}] (train): {e}"}
@@ -492,7 +485,7 @@ def run_experiment(train_path: str, test_path: str,
         tracemalloc.start()
         try:
             t_test = time.time()
-            y_proba = compute_scores(X_train, X_test, W, centers)
+            y_proba = compute_scores(X_test, W, null_centers)
             test_time = time.time() - t_test
         except Exception as e:
             tracemalloc.stop()
@@ -571,10 +564,6 @@ def run_experiment(train_path: str, test_path: str,
 # ENTRY POINT
 # ============================================================================
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="OC-NFST Memory-Optimized Pipeline")
-    parser.add_argument('--minibatch', action='store_true', help="Use MiniBatchKMeans (faster) instead of standard KMeans")
-    args, _ = parser.parse_known_args()
 
     # Adjust this path via DATA_DIR env variable for server deployment
     _script_dir  = os.path.dirname(os.path.abspath(__file__))
@@ -642,7 +631,6 @@ if __name__ == "__main__":
                     noise_pct=noise,
                     scaler_name=scaler,
                     out_path=out_path,
-                    use_minibatch=args.minibatch,
                     logger=ds_logger,
                 )
 
