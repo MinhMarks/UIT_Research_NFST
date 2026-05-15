@@ -53,9 +53,10 @@ SCALERS = {
     'RobustScaler': RobustScaler()
 }
 
+DATASETS = [
     # ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign', 0, '0']),
     # ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign', 0, '0']),
-    ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']), 
+    # ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']), 
     # ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0']),
     ('EdgeIIoTset', EdgeIIoTset, 'label', ['Normal', 'normal', 0, '0']),
     ('FiveGNIDD', FiveGNIDD, 'label', ['Normal', 'normal', 0, '0']),
@@ -201,6 +202,18 @@ def generate_datasets():
             X_test_scaled.to_csv(test_path, index=False)
             
         log.info(f"Successfully generated all scaled CSVs for {prefix}!")
+        
+        # Free up disk space by deleting the dataset zip file
+        zip_path_1 = os.path.join(RAW_DATA_DIR, f"{prefix}.zip")
+        zip_path_2 = os.path.join(os.getcwd(), f"{prefix}.zip")
+        
+        for z_path in [zip_path_1, zip_path_2]:
+            if os.path.exists(z_path):
+                try:
+                    os.remove(z_path)
+                    log.info(f"Deleted raw zip file to save disk space: {z_path}")
+                except Exception as e:
+                    log.warning(f"Could not delete {z_path}: {e}")
 
 if __name__ == "__main__":
     generate_datasets()

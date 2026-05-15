@@ -206,6 +206,29 @@ class IoTID20():
     import shutil
     import requests
     
+    # Check if it's a Kaggle URL
+    if "kaggle.com" in url:
+        print("Detected Kaggle URL. Attempting to use specialized libraries...")
+        # Try kagglehub first (Modern)
+        try:
+            import kagglehub
+            dataset_handle = url.split("datasets/")[1].split("?")[0]
+            print(f"Downloading from Kaggle via kagglehub: {dataset_handle}")
+            path = kagglehub.dataset_download(dataset_handle)
+            print(f"Kagglehub downloaded data to: {path}")
+            return path
+        except ImportError:
+            # Try opendatasets (Popular in tutorials)
+            try:
+                import opendatasets as od
+                print(f"Downloading from Kaggle via opendatasets: {url}")
+                od.download(url, data_dir=os.path.dirname(filename))
+                return filename
+            except ImportError:
+                print("ERROR: To download from Kaggle, please install kagglehub (pip install kagglehub) or opendatasets.")
+                print("Alternatively, provide a direct Google Drive download link.")
+                raise RuntimeError("Kaggle download libraries not found.")
+
     r = requests.get(url, stream=True, allow_redirects=True, verify = False)
     if r.status_code != 200:
       r.raise_for_status()  # Will only raise for 4xx codes, so...
