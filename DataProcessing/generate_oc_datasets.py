@@ -34,6 +34,9 @@ try:
     from CICIoT2023 import CICIoT2023
     from N_BaIoT import N_BaIoT
     from ToNIoT import ToNIoT
+    from EdgeIIoTset import EdgeIIoTset
+    from FiveGNIDD import FiveGNIDD
+    from IoTID20 import IoTID20
 except ImportError as e:
     log.error(f"Cannot import RawData classes: {e}. Make sure PYTHONPATH is correctly set.")
     sys.exit(1)
@@ -50,11 +53,13 @@ SCALERS = {
     'RobustScaler': RobustScaler()
 }
 
-DATASETS = [
     # ('ToNIoT', ToNIoT, 'label', ['normal', 'Normal', 'Benign', 0, '0']),
     # ('N_BaIoT', N_BaIoT, 'class', ['benign', 'Benign', 0, '0']),
-    ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']) 
-    # ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0'])
+    ('BoTIoT', BoTIoT, 'subcategory', ['Normal', 'normal', 0, '0']), 
+    # ('CICIoT2023', CICIoT2023, 'label', ['BenignTraffic', 'Benign', 'normal', 'Normal', 0, '0']),
+    ('EdgeIIoTset', EdgeIIoTset, 'label', ['Normal', 'normal', 0, '0']),
+    ('FiveGNIDD', FiveGNIDD, 'label', ['Normal', 'normal', 0, '0']),
+    ('IoTID20', IoTID20, 'label', ['Normal', 'normal', 0, '0'])
 ]
 
 def generate_datasets():
