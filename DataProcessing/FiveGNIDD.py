@@ -5,6 +5,7 @@ import sys
 import os
 from tqdm.auto import tqdm
 import time 
+import zipfile
 SEED = 42
 
 class FiveGNIDD():
@@ -82,8 +83,8 @@ class FiveGNIDD():
     base_self.__ds_fts = base_self.__fts_names
     base_self.__ds_label = base_self.__label_true_name
     base_self.__ds_paper_link = "https://ieee-dataport.org/documents/5g-nidd"
-    base_self.__ds_link = "https://etsin.fairdata.fi/dataset/f0d8b8a5-d5e1-4c28-984a-9c74828b80b7"
-    base_self.__csv_link = "https://etsin.fairdata.fi/dataset/f0d8b8a5-d5e1-4c28-984a-9c74828b80b7" 
+    base_self.__ds_link = "https://www.kaggle.com/datasets/siddharthm83/5gnidd-dataset"
+    base_self.__csv_link = "https://www.kaggle.com/datasets/siddharthm83/5gnidd-dataset" 
     # base_self._ds_name = ""
 
 
@@ -442,11 +443,10 @@ class FiveGNIDD():
           print("File Data Zip saved at:", base_self.__download(data_url, zip_file))
           print("============================== End download data ================================")
           
-        import zipfile
         if not zipfile.is_zipfile(zip_file):
             print("================ Zip file not valid (possibly expired link)!!! Deleting... ===============")
             os.remove(zip_file)
-            print(f"ERROR: Google Drive link expired. Please manually download FiveGNIDD.zip to {zip_file}")
+            print(f"ERROR: Download link failed. Please install kagglehub or manually download FiveGNIDD.zip to {zip_file}")
             sys.exit(1)
           
         # Note: Bypassing disk extraction to save memory. 

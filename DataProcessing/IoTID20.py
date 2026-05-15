@@ -5,6 +5,7 @@ import sys
 import os
 from tqdm.auto import tqdm
 import time 
+import zipfile
 SEED = 42
 
 class IoTID20():
@@ -434,7 +435,7 @@ class IoTID20():
         if not zipfile.is_zipfile(zip_file):
             print("================ Zip file not valid (possibly expired link)!!! Deleting... ===============")
             os.remove(zip_file)
-            print(f"ERROR: Google Drive link expired. Please manually download IoTID20.zip to {zip_file}")
+            print(f"ERROR: Download link failed. Please install kagglehub or manually download IoTID20.zip to {zip_file}")
             sys.exit(1)
           
         # Note: Bypassing disk extraction to save memory. 
