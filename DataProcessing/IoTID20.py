@@ -280,7 +280,12 @@ class IoTID20():
 
     base_self.__print("Remove all null, nan, inf values (rows).")
     df = df.replace([np.inf, -np.inf], np.nan)
-    df = df.dropna(axis='index', how='any')
+    # Fill NaN with column median (numeric) to avoid losing all rows
+    feat_cols = [c for c in df.columns if c not in base_self.__label_fts_names]
+    num_cols = df[feat_cols].select_dtypes(include=[np.number]).columns
+    df[num_cols] = df[num_cols].fillna(df[num_cols].median())
+    # Only drop rows where ALL feature values are still NaN
+    df = df.dropna(subset=feat_cols, how='all')
     # Remove duplicated samples (rows)
     base_self.__print("Remove duplicated samples (rows).")
     df = df.drop_duplicates(subset=X.columns, keep='first')
