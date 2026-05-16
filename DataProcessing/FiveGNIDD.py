@@ -91,7 +91,7 @@ class FiveGNIDD():
 
   def __print(base_self, str) -> None:
     if base_self.__PRINT_ABLE:
-      print(str)
+      print(str, flush=True)
 
   def __add_mode_features(base_self, dataset, FLAG_GENERATING: bool = False) -> pd.DataFrame:
     pass
@@ -141,7 +141,7 @@ class FiveGNIDD():
         """Read a CSV, auto-detect label column, and sample proportionally."""
         list_ss = []
         base_self.__print(f"DEBUG: Opening file {f}")
-        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='c', on_bad_lines='warn')
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='python', on_bad_lines='warn')
         real_label_col = base_self.__target_variable
         for chunk in peek_iter:
             if real_label_col not in chunk.columns:

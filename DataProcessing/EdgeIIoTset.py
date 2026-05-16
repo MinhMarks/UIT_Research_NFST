@@ -109,7 +109,7 @@ class EdgeIIoTset():
 
   def __print(base_self, str) -> None:
     if base_self.__PRINT_ABLE:
-      print(str)
+      print(str, flush=True)
 
   def __add_mode_features(base_self, dataset, FLAG_GENERATING: bool = False) -> pd.DataFrame:
     pass
@@ -160,8 +160,8 @@ class EdgeIIoTset():
         """Read a CSV, auto-detect label column, and sample proportionally."""
         list_ss = []
         base_self.__print(f"DEBUG: Opening file {f}")
-        # Peek at first chunk to find the real label column name
-        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='c', on_bad_lines='warn')
+        # Use engine='python' to avoid Segmentation Faults on complex/large CSVs
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='python', on_bad_lines='warn')
         real_label_col = base_self.__target_variable  # default = 'label'
         for chunk in peek_iter:
             # Find the label column: try exact match, then case-insensitive
