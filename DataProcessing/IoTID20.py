@@ -24,6 +24,7 @@ class IoTID20():
     base_self.__data_df = pd.DataFrame()
     base_self.__target_variable = "label"
     base_self.__label_fts_names = ['label']
+    base_self.__kaggle_path = None  # Stores path returned by kagglehub after download
     
     # Danh sách 79 features (generic naming)
     base_self.__fts_names = [
@@ -125,37 +126,51 @@ class IoTID20():
     elif not os.path.exists(dir_path) and os.path.exists(dir_path + '.zip'):
         zip_path = dir_path + '.zip'
 
+    def _read_and_sample(f):
+        """Read a CSV, auto-detect label column, and sample proportionally."""
+        list_ss = []
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=10000, low_memory=False)
+        real_label_col = base_self.__target_variable
+        for chunk in peek_iter:
+            if real_label_col not in chunk.columns:
+                candidates = [c for c in chunk.columns if c.lower() == 'label' or c.lower() == 'attack' or c.lower() == 'class']
+                real_label_col = candidates[0] if candidates else chunk.columns[-1]
+                base_self.__print(f"Auto-detected label column: '{real_label_col}'")
+            dfse = chunk[real_label_col].value_counts()
+            for x in dfse.index:
+                if x in base_self.__label_drop:
+                    continue
+                sub_set = chunk[chunk[real_label_col] == x]
+                x_cnt = float(dfse[x])
+                mapped_x = base_self.__label_map.get(x, x)
+                if mapped_x not in base_self.__label_cnt:
+                    base_self.__label_cnt[mapped_x] = 0
+                if mapped_x not in base_self.__real_cnt:
+                    base_self.__real_cnt[mapped_x] = int(x_cnt) + 1
+                if limit_cnt == base_self.__label_cnt[mapped_x]:
+                    continue
+                max_cnt_chunk = min(int(limit_cnt * (x_cnt / base_self.__real_cnt[mapped_x]) + 1), sub_set.shape[0])
+                if frac is not None:
+                    max_cnt_chunk = min(int(frac * x_cnt + 1), sub_set.shape[0])
+                max_cnt_chunk = min(max_cnt_chunk, limit_cnt - base_self.__label_cnt[mapped_x])
+                sub_set = sub_set.sample(n=max_cnt_chunk, replace=False, random_state=SEED).copy()
+                sub_set[real_label_col] = sub_set[real_label_col].apply(lambda y: base_self.__label_map.get(y, y))
+                list_ss.append(sub_set)
+                base_self.__label_cnt[mapped_x] += sub_set.shape[0]
+        if list_ss and real_label_col != base_self.__target_variable:
+            for s in list_ss:
+                s.rename(columns={real_label_col: base_self.__target_variable}, inplace=True)
+        return list_ss
+
     if zip_path:
-        import zipfile
         base_self.__print(f"Reading directly from ZIP: {zip_path}")
         with zipfile.ZipFile(zip_path, 'r') as z:
             csv_files = [f for f in z.namelist() if f.endswith('.csv')]
             for file_name in csv_files:
                 base_self.__print("Begin stream file " + file_name)
-                list_ss = []
                 time_file = time.time()
                 with z.open(file_name) as f:
-                    for chunk in pd.read_csv(f, index_col=None, names=base_self.__fts_names, header=0, chunksize=10000, low_memory=False):
-                        dfse = chunk[base_self.__target_variable].value_counts()
-                        for x in dfse.index:
-                            if x in base_self.__label_drop:
-                                continue
-                            sub_set = chunk[chunk[base_self.__target_variable] == x]
-                            x_cnt = float(dfse[x])
-                            if x in base_self.__label_map:
-                                x = base_self.__label_map[x]
-                            if x not in base_self.__label_cnt:
-                                base_self.__label_cnt[x] = 0
-                            if limit_cnt == base_self.__label_cnt[x]:
-                                continue
-                            max_cnt_chunk = min(int(limit_cnt * (x_cnt / base_self.__real_cnt[x]) + 1), sub_set.shape[0])
-                            if frac != None:
-                                max_cnt_chunk = min(int(frac * x_cnt + 1), sub_set.shape[0])
-                            max_cnt_chunk = min(max_cnt_chunk, limit_cnt - base_self.__label_cnt[x])
-                            sub_set = sub_set.sample(n=max_cnt_chunk, replace=False, random_state=SEED)
-                            sub_set[base_self.__target_variable] = sub_set[base_self.__target_variable].apply(lambda y: base_self.__label_map[y] if y in base_self.__label_map else y)
-                            list_ss.append(sub_set)
-                            base_self.__label_cnt[x] += sub_set.shape[0]
+                    list_ss = _read_and_sample(f)
                 df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
                 base_self.__print("Update label:")
                 base_self.__print(base_self.__label_cnt)
@@ -167,29 +182,9 @@ class IoTID20():
                 base_self.__print("Begin file " + file)
                 if not file.endswith(".csv"):
                     continue
-                list_ss = []
                 time_file = time.time()
-                for chunk in pd.read_csv(os.path.join(root,file), index_col=None, names=base_self.__fts_names, header=0, chunksize=10000, low_memory=False):
-                    dfse = chunk[base_self.__target_variable].value_counts()
-                    for x in dfse.index:
-                        if x in base_self.__label_drop:
-                          continue
-                        sub_set = chunk[chunk[base_self.__target_variable] == x]
-                        x_cnt = float(dfse[x])
-                        if x in base_self.__label_map:
-                          x = base_self.__label_map[x]
-                        if x not in base_self.__label_cnt:
-                            base_self.__label_cnt[x] = 0
-                        if limit_cnt == base_self.__label_cnt[x] :
-                            continue
-                        max_cnt_chunk = min(int(limit_cnt * (x_cnt / base_self.__real_cnt[x]) + 1), sub_set.shape[0])
-                        if frac != None:
-                            max_cnt_chunk = min(int(frac * x_cnt + 1), sub_set.shape[0])
-                        max_cnt_chunk = min(max_cnt_chunk, limit_cnt - base_self.__label_cnt[x])
-                        sub_set = sub_set.sample(n=max_cnt_chunk,replace = False, random_state = SEED)
-                        sub_set[base_self.__target_variable] = sub_set[base_self.__target_variable].apply(lambda y: base_self.__label_map[y] if y in base_self.__label_map else y)
-                        list_ss.append(sub_set)
-                        base_self.__label_cnt[x] += sub_set.shape[0]
+                with open(os.path.join(root, file), 'rb') as f:
+                    list_ss = _read_and_sample(f)
                 df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
                 base_self.__print("Update label:")
                 base_self.__print(base_self.__label_cnt)
@@ -210,16 +205,14 @@ class IoTID20():
     # Check if it's a Kaggle URL
     if "kaggle.com" in url:
         print("Detected Kaggle URL. Attempting to use specialized libraries...")
-        # Try kagglehub first (Modern)
         try:
             import kagglehub
             dataset_handle = url.split("datasets/")[1].split("?")[0]
             print(f"Downloading from Kaggle via kagglehub: {dataset_handle}")
             path = kagglehub.dataset_download(dataset_handle)
             print(f"Kagglehub downloaded data to: {path}")
-            return path
+            return str(path)  # Return the cache path directly
         except ImportError:
-            # Try opendatasets (Popular in tutorials)
             try:
                 import opendatasets as od
                 print(f"Downloading from Kaggle via opendatasets: {url}")
@@ -227,7 +220,6 @@ class IoTID20():
                 return filename
             except ImportError:
                 print("ERROR: To download from Kaggle, please install kagglehub (pip install kagglehub) or opendatasets.")
-                print("Alternatively, provide a direct Google Drive download link.")
                 raise RuntimeError("Kaggle download libraries not found.")
 
     r = requests.get(url, stream=True, allow_redirects=True, verify = False)
@@ -419,20 +411,27 @@ class IoTID20():
     
     if load_type=="raw":
       zip_file = os.path.join(datadir,  (base_self.__ds_name + ".zip"))
-      datadir = os.path.join(datadir,  base_self.__ds_name)
+      datadir_ds = os.path.join(datadir,  base_self.__ds_name)
       data_url = base_self.__ds_link
-      if os.path.exists(datadir) == True:
+      if os.path.exists(datadir_ds) == True:
         print("Data already!!! No need to download.")
         return
       else:
         print("================= Folder Data not found!!! Start downloading =====================")
         if os.path.exists(zip_file) == False:
           print("================ File Data Zip not found!!! Start downloading ====================")
-          print("File Data Zip saved at:", base_self.__download(data_url, zip_file))
+          downloaded_path = str(base_self.__download(data_url, zip_file))
+          print("File Data Zip saved at:", downloaded_path)
           print("============================== End download data ================================")
           
+          # kagglehub returns a directory path (already extracted), not a .zip
+          if os.path.isdir(downloaded_path):
+            print(f"Kaggle dataset extracted to: {downloaded_path}")
+            base_self.__kaggle_path = downloaded_path
+            return  # Skip zip validation entirely
+          
         import zipfile
-        if not zipfile.is_zipfile(zip_file):
+        if os.path.exists(zip_file) and not zipfile.is_zipfile(zip_file):
             print("================ Zip file not valid (possibly expired link)!!! Deleting... ===============")
             os.remove(zip_file)
             print(f"ERROR: Download link failed. Please install kagglehub or manually download IoTID20.zip to {zip_file}")
@@ -481,7 +480,11 @@ class IoTID20():
     if load_type=="raw":
       if path is None:
         datadir = base_self.__data_dir
-        datapath = os.path.join(datadir, base_self.__ds_name)
+        # If kagglehub already downloaded to cache, use that path directly
+        if base_self.__kaggle_path is not None and os.path.isdir(base_self.__kaggle_path):
+          datapath = base_self.__kaggle_path
+        else:
+          datapath = os.path.join(datadir, base_self.__ds_name)
       else:
         datapath = path
       # Support implicit zip fall-through
