@@ -156,11 +156,11 @@ class EdgeIIoTset():
     elif not os.path.exists(dir_path) and os.path.exists(dir_path + '.zip'):
         zip_path = dir_path + '.zip'
 
-    def _read_and_sample(f, is_file_obj=False):
+    def _read_and_sample(f):
         """Read a CSV, auto-detect label column, and sample proportionally."""
         list_ss = []
         # Peek at first chunk to find the real label column name
-        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=10000, low_memory=False)
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=10000, engine='c')
         real_label_col = base_self.__target_variable  # default = 'label'
         for chunk in peek_iter:
             # Find the label column: try exact match, then case-insensitive
@@ -217,8 +217,7 @@ class EdgeIIoTset():
                 if not file.endswith(".csv"):
                     continue
                 time_file = time.time()
-                with open(os.path.join(root, file), 'rb') as f:
-                    list_ss = _read_and_sample(f)
+                list_ss = _read_and_sample(os.path.join(root, file))
                 df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
                 base_self.__print("Update label:")
                 base_self.__print(base_self.__label_cnt)
