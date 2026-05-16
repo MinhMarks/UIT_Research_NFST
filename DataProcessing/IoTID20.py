@@ -129,7 +129,8 @@ class IoTID20():
     def _read_and_sample(f):
         """Read a CSV, auto-detect label column, and sample proportionally."""
         list_ss = []
-        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=10000, engine='c')
+        base_self.__print(f"DEBUG: Opening file {f}")
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='c', on_bad_lines='warn')
         real_label_col = base_self.__target_variable
         for chunk in peek_iter:
             if real_label_col not in chunk.columns:
@@ -177,13 +178,15 @@ class IoTID20():
                 base_self.__print(f"Time load: {time.time() - time_file}")
                 base_self.__print(f"================================ Finish {file_name} ===================================")
     else:
+        base_self.__print(f"DEBUG: Scanning directory {dir_path}")
         for root, _, files in os.walk(dir_path):
             for file in files:
-                base_self.__print("Begin file " + file)
                 if not file.endswith(".csv"):
                     continue
+                file_full_path = os.path.join(root, file)
+                base_self.__print(f"Begin file: {file_full_path}")
                 time_file = time.time()
-                list_ss = _read_and_sample(os.path.join(root, file))
+                list_ss = _read_and_sample(file_full_path)
                 df_ans = CustomMerger().fit_transform([df_ans] + list_ss)
                 base_self.__print("Update label:")
                 base_self.__print(base_self.__label_cnt)
