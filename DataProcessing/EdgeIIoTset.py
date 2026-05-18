@@ -353,7 +353,7 @@ class EdgeIIoTset():
         for col in object_columns:
             if col in base_self.__label_fts_names:
                 continue
-            df[col] = df[col].astype("string")
+            df[col] = df[col].astype(str)
             df[col] = encoder.fit_transform(df[col])
     base_self.__data_df = df
      
