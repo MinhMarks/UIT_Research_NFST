@@ -336,11 +336,11 @@ def run_tuning_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_
 if __name__ == "__main__": 
     # Use small subset for testing purposes first
     # Change these back to full lists for real experiment
-    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
-    # scaler_names = ['QuantileTransformer', 'MinMaxScaler', 'Normalizer', 'RobustScaler']
+    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
+    # scaler_names = ['QuantileTransformer', 'MinMaxScaler', 'Normalizer', 'RobustScaler', 'StandardScaler']
     # noise_levels = [0, 1, 3, 5]
 
-    dataset_prefixes = ['data_ToNIoT.csv']
+    dataset_prefixes = ['data_EdgeIIoTset.csv', 'data_IoTID20.csv']
     scaler_names = ['QuantileTransformer']
     noise_levels = [0]
     

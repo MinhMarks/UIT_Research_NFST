@@ -263,8 +263,8 @@ def run_single_model(model_name, X_train, y_train, X_test, y_test, dataset_name,
 if __name__ == "__main__":
     _default_data = os.path.normpath(os.path.join(project_root, 'Datascaled', 'Official_OC_Data'))
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
-    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
-    dataset_prefixes = ['data_ToNIoT.csv']
+    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
+    dataset_prefixes = ['data_EdgeIIoTset.csv', 'data_IoTID20.csv']
     
     # scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     scaler_names = ['QuantileTransformer']

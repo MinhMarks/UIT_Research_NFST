@@ -264,8 +264,8 @@ if __name__ == "__main__":
         
     models_list = ['PMKFN', 'DRLAD']
     
-    dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
-    # dataset_prefixes = ['data_ToNIoT.csv']
+    dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
+    # dataset_prefixes = ['data_EdgeIIoTset.csv', 'data_IoTID20.csv']
     
     scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     

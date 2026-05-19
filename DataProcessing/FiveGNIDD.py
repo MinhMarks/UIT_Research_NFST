@@ -262,7 +262,8 @@ class FiveGNIDD():
       base_self.__print("Drop columns:", drop_cols)
       df = df.drop(columns=drop_cols, axis=1)
     base_self.__print(f"Start cleanning data for {base_self.__ds_name}")
-    X = df.drop(base_self.__label_fts_names, axis=1)
+    actual_labels = [c for c in base_self.__label_fts_names if c in df.columns]
+    X = df.drop(columns=actual_labels, errors='ignore')
 
     # Remove zero features (columns)
     base_self.__print("Remove zero features (columns).")
@@ -286,7 +287,8 @@ class FiveGNIDD():
       X = X.drop(constant_cols, axis=1)
 
     # Concatenate the target variable and the reduced features DataFrame
-    y = df[base_self.__label_fts_names]
+    actual_labels = [c for c in base_self.__label_fts_names if c in df.columns]
+    y = df[actual_labels]
     y.reset_index(drop=True, inplace=True)
     X.reset_index(drop=True, inplace=True)
     df = pd.concat([X, y], axis=1)
@@ -371,11 +373,12 @@ class FiveGNIDD():
         
     df = base_self.__data_df
     base_self.__print(f"Use SelectKBest to select the {no_fts} best features.")
-    X = df.drop(columns=base_self.__label_fts_names, axis='columns')
+    actual_labels = [c for c in base_self.__label_fts_names if c in df.columns]
+    X = df.drop(columns=actual_labels, axis='columns', errors='ignore')
     y = df[base_self.__target_variable]
     selected_features = selector.fit_transform(X, y)
     selected_indices = selector.get_support(indices=True)     
-    seleted_fts_names = list(X.columns[selected_indices]) + base_self.__label_fts_names
+    seleted_fts_names = list(X.columns[selected_indices]) + actual_labels
     base_self.__print(f"Selected {no_fts} features: {seleted_fts_names}")
     base_self.__data_df = base_self.__data_df[seleted_fts_names]
     base_self.__fts_names = seleted_fts_names

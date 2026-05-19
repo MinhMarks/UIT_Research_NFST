@@ -219,7 +219,7 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, anomaly_mode,
             process_model(m, p)
 
 if __name__ == "__main__": 
-    dataset_prefixes = ['BoTIoT', 'CICIoT2023', 'ToNIoT', 'N_BaIoT']
+    dataset_prefixes = ['BoTIoT', 'CICIoT2023', 'ToNIoT', 'N_BaIoT', 'EdgeIIoTset', 'IoTID20', 'FiveGNIDD']
     scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     anomaly_modes = ['local', 'cluster', 'global']
     

@@ -3,7 +3,7 @@ import pandas as pd
 import glob
 from datetime import datetime
 
-KNOWN_DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT']
+KNOWN_DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT', 'data_EdgeIIoTset', 'data_IoTID20', 'data_FiveGNIDD']
 
 def normalize_dataset_name(name):
     """Extract known dataset name from string like 'Train_StandardScaler_data_CICIoT2023.csv'."""

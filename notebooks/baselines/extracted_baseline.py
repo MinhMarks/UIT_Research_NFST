@@ -351,7 +351,7 @@ def run_experiment(X_train, y_train, X_test, y_test, name, noise_percentage, sca
 
 if __name__ == "__main__": 
     
-    dataset_prefixes =  ['data_ToNIoT.csv', 'data_N_BaIoT.csv' , 'data_CICIoT2023.csv', 'data_BoTIoT.csv']
+    dataset_prefixes =  ['data_ToNIoT.csv', 'data_N_BaIoT.csv' , 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
     
     # scaler_names = ['MinMaxScaler'] 'StandardScaler', 
     scaler_names = ['QuantileTransformer', 'MinMaxScaler','Normalizer','RobustScaler']
