@@ -23,7 +23,7 @@ class EdgeIIoTset():
     base_self.__PRINT_ABLE = print_able
     base_self.__data_df = pd.DataFrame()
     base_self.__target_variable = "label"
-    base_self.__label_fts_names = ['label']
+    base_self.__label_fts_names = ['label', 'Attack_label', 'Attack_type']
     base_self.__kaggle_path = None  # Stores path returned by kagglehub after download
     
     # Danh sách 42 features (generic naming)

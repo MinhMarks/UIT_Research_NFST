@@ -163,7 +163,7 @@ def generate_datasets():
         
         # Ensure data is clean numeric before scaling
         # Drop any leftover label columns besides label_col
-        label_fts_names_to_drop = [c for c in ['attack', 'category', 'subcategory', 'Binary_label', 'Category_label', 'Default_label'] if c in train_df.columns and c != label_col]
+        label_fts_names_to_drop = [c for c in ['attack', 'category', 'subcategory', 'Binary_label', 'Category_label', 'Default_label', 'Attack_label', 'Attack_type'] if c in train_df.columns and c != label_col]
         train_df = train_df.drop(columns=label_fts_names_to_drop, errors='ignore')
         test_df  = test_df.drop(columns=label_fts_names_to_drop, errors='ignore')
         
