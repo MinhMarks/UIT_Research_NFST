@@ -107,6 +107,8 @@ The main contributions of this work are as follows:
 \section{Related Work}
 \label{sec:relatework}
 
+specicy or general 
+    
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\linewidth]{pictures/relatedWorks.pdf}
@@ -114,29 +116,33 @@ The main contributions of this work are as follows:
     \label{fig:relatedWorks}
 \end{figure}
 
-Intrusion Detection Systems (IDSs) are essential for securing IoT networks against threats such as distributed denial-of-service attacks, botnet activity, and probing. Due to the heterogeneous and partially labeled nature of IoT traffic, anomaly detection has emerged as a practical paradigm for identifying deviations from normal behavior~\cite{samara2022survey}. Compared with signature-based approaches, it is inherently better suited to open-world settings where attack patterns are incomplete or unseen.
+Intrusion Detection Systems (IDSs) are essential for securing IoT networks against threats such as distributed denial-of-service attacks, botnet activity, and probing. Because IoT network flows are typically represented as tabular features, a wide range of general-purpose Anomaly Detection (AD) algorithms have been widely adopted as standard baselines in IoT security~\cite{samara2022survey}. To contextualize our proposed approach within this intersection of general AD and specialized IoT security, we structure this section into three parts. First, we review general AD models that have been adopted for IoT IDS. Second, we focus on the specific mathematical family of One-Class Novelty Detection (OCND) and Null-Space methods. Finally, we examine literature addressing the practical non-ideal assumptions---namely, heterogeneous anomaly structures and data contamination---that our method explicitly aims to resolve.
 
-\subsection{Anomaly Detection for IoT Intrusion Detection}
+\subsection{General Anomaly Detection Models in IoT Security}
 
-Existing approaches can be broadly divided into shallow and deep methods.  
-Shallow models, including density-based (e.g., LOF), statistical (e.g., ECOD), and ensemble-based methods (e.g., Isolation Forest), are computationally efficient and easy to deploy~\cite{KNN,9338429,IForest}. However, their limited representational capacity often fails to capture the heterogeneous and multimodal structure of benign IoT traffic, leading to unstable performance.
+While specialized signature-based IDSs exist, the necessity to detect zero-day attacks has led the community to formulate IoT intrusion detection as an anomaly detection problem. Existing approaches evaluated in this domain can be broadly categorized into shallow and deep methods.  
 
-Deep methods improve expressiveness through reconstruction-based models (e.g., Autoencoders), compactness-driven objectives (e.g., DeepSVDD), and adversarial frameworks (e.g., ALAD)~\cite{Autoencoder,ALAD}. While effective in modeling complex distributions, they introduce significant computational overhead and require careful tuning, limiting their practicality in resource-constrained environments. This reflects a fundamental trade-off between representation power and deployment efficiency.
+Shallow AD models, including density-based (e.g., LOF), statistical (e.g., ECOD), and ensemble-based methods (e.g., Isolation Forest), are domain-agnostic algorithms extensively applied to IoT traffic~\cite{KNN,9338429,IForest}. Their primary advantage is computational efficiency, making them easy to deploy on edge devices. However, because these methods were designed for general structured data, their limited representational capacity often fails to capture the highly heterogeneous and multimodal nature of benign IoT traffic, leading to unstable detection rates in complex networks.
+
+To address this, Deep Learning (DL) methods have been introduced to improve expressiveness. Techniques such as reconstruction-based models (e.g., Autoencoders), compactness-driven objectives (e.g., DeepSVDD), and adversarial frameworks (e.g., ALAD) excel at modeling complex data distributions~\cite{Autoencoder,ALAD,DeepSVDD}. While highly effective in domains like computer vision or general tabular data, their direct application to IoT intrusion detection introduces significant computational overhead. They require extensive tuning and hardware resources, limiting their practicality in resource-constrained IoT edge environments. This creates a fundamental trade-off between representation power and deployment efficiency.
+
+IoT-specific architectures improve deployment feasibility through online ensemble learning (e.g., Kitsune), distributed self-learning profiles (e.g., DÏoT), and lightweight gateway-centric designs (e.g., Passban)~\cite{mirsky2018kitsune,nguyen2019diot,passban2018}. While effective in operating directly on resource-constrained edge nodes, they often demand raw packet-level sequential processing and complex continuous online updates, precluding their direct evaluation as baselines on standard static, flow-level tabular datasets. This reflects a fundamental architectural divergence between continuous sequence-based monitoring systems and offline tabular novelty detection.
 
 \subsection{One-Class Novelty Detection and Null-Space Methods}
 
-In open-world IoT security, intrusion detection is often formulated as a one-class novelty detection (OCND) problem, where models are trained on benign data only. Classical methods such as One-Class SVM estimate a decision boundary, while DeepSVDD learns a compact latent representation of normality~\cite{shin2005one,DeepSVDD}.
-However, these approaches rely on a global notion of normality, implicitly assuming that benign data forms a single coherent structure. This assumption is often violated in IoT environments, where normal traffic spans multiple operating regimes. As a result, such models may either overfit to dominant patterns or miss locally structured anomalies.
+To avoid overfitting to known attack patterns, IoT intrusion detection is increasingly formulated as a One-Class Novelty Detection (OCND) problem, where models are trained exclusively on benign data. Classical general-purpose OCND methods, such as One-Class SVM~\cite{shin2005one}, estimate a tight decision boundary, while DL counterparts like DeepSVDD~\cite{DeepSVDD} learn a compact latent representation. However, these traditional approaches typically rely on a global notion of normality, implicitly assuming that the training data forms a single coherent structure. In IoT networks, normal traffic spans multiple operating regimes. Consequently, applying global OCND models often results in either overfitting to dominant patterns or failing to detect locally structured anomalies.
 
-Null-space-based methods provide an alternative perspective. Kernel NFST projects data into a discriminative null space by collapsing intra-class variance and measuring deviations in the projected space~\cite{bodesheim2013kernel}. Extensions such as nNFST further improve structure preservation for intrusion detection~\cite{nguyen2025nnfst}. Nevertheless, these methods are primarily designed for supervised or multiclass settings and do not naturally extend to benign-only learning, nor do they explicitly address contamination or scalability.
+As an alternative, null-space-based methods provide a distinct mathematical perspective. Methods like Kernel NFST project data into a discriminative null space by collapsing intra-class variance and measuring deviations in the projected space~\cite{bodesheim2013kernel}. Recent adaptations, such as nNFST, have extended this concept specifically to improve structure preservation for network intrusion detection~\cite{nguyen2025nnfst}. Nevertheless, these methods are primarily designed for supervised or multiclass settings. They do not naturally extend to the benign-only learning paradigm, nor do they explicitly address the scalability required for large-scale IoT traffic analysis.
 
 \subsection{Robust Detection under Non-Ideal Assumptions}
 
-Recent studies have explored anomaly detection under more realistic conditions, including heterogeneous anomaly structures and imperfect supervision. Empirical evidence shows that anomalies may appear as global shifts, clustered deviations, or subtle local irregularities, and no single global scoring mechanism performs consistently across all cases~\cite{han2022adbench,KANG2019772}.
+Moving beyond idealized algorithmic settings, recent studies have begun to address the non-ideal conditions inherent in real-world IoT environments: heterogeneous anomaly structures and imperfect supervision. 
 
-Another line of work focuses on robustness to contaminated nominal data. Methods such as DIF and DASVDD aim to mitigate sensitivity to noisy supervision~\cite{DIF,DASVDD}. However, these approaches typically introduce additional complexity or optimization overhead, limiting scalability and deployment in IoT scenarios~\cite{Rahman2025IoTIDSSurvey,beggel2019robust,jodelka2021adaptive}.
+Empirical evidence across various domains indicates that anomalies do not follow a single pattern; they may manifest as global shifts, clustered deviations, or subtle local irregularities~\cite{han2022adbench,KANG2019772}. In IoT traffic, relying on a single global scoring mechanism often fails to detect this diverse spectrum of attacks consistently.
 
-\textbf{Summary.} Existing methods address representation, robustness, and efficiency largely in isolation. There remains a lack of a unified framework that simultaneously captures heterogeneous benign structure, maintains robustness under slight contamination, and operates efficiently at scale. This gap motivates the proposed approach.
+Concurrently, another line of research focuses on model robustness against contaminated nominal data, as real-world IoT datasets inevitably contain undetected malicious traffic (label noise). General robust AD methods, such as DIF~\cite{DIF} and DASVDD~\cite{DASVDD}, aim to mitigate sensitivity to such noisy supervision. However, adapting these approaches to IoT scenarios typically introduces complex optimization overheads, severely hindering scalability and rapid deployment~\cite{Rahman2025IoTIDSSurvey,beggel2019robust,jodelka2021adaptive}.
+
+\textbf{Summary.} Currently, the literature addresses representation power, robustness, and computational efficiency largely in isolation. There remains a critical gap for a unified, lightweight framework that simultaneously captures the multimodal structure of benign IoT traffic, maintains robustness under slight contamination, and operates efficiently at the network edge. This unmet need directly motivates the proposed approach.
 
 \section{Problem Formulation}
 
@@ -302,32 +308,33 @@ Let \(\mathcal{D}_{\text{train}} = \{x_1, \ldots, x_n\}\) be a set of benign tra
 \subsection{Structure-Inducing Pseudo-Class Construction}
 \label{subsec:pseudoclass_XXX}
 
-Although benign-only intrusion detection is formulated as a single-class problem, benign traffic in practice often exhibits multiple latent modes and heterogeneous behaviors. Modeling such data as one homogeneous distribution therefore obscures its intrinsic structure. To address this issue, XXX introduces a lightweight pseudo-class construction mechanism that partitions benign samples into coarse groups. The goal is not to obtain an exact clustering result, but rather to derive a stable and computationally efficient approximation of the underlying multi-modal structure. This induced multi-group representation serves as a simple structural surrogate for benign behavior and helps avoid the degeneracies that often arise in single-class discriminative learning.
+\noindent {\textbf{Insight.}} XXX applies a lightweight pseudo-class construction mechanism that partitions benign samples into coarse groups. The objective is not to recover an exact clustering structure, but rather to obtain a computationally efficient approximation that captures the underlying multi-modal distribution. In addition, this mechanism mitigates the degeneracy issue of NFST under one-class training settings.
 
-Formally, the benign training set is partitioned into \(c\) pseudo-classes (\(c \ge 2\)) by K-means:
+Formally, we divide the benign training set into \(c\) pseudo-classes (\(c \ge 2\)), where \(C_j\) denotes the \(j\)-th pseudo-class and \(n_j = |C_j|\):
 \[
-\mathcal{D}_{\text{train}}=\bigcup_{j=1}^{c} C_j,
+\mathcal{D}_{\text{train}} = \bigcup_{j=1}^{c} C_j,
 \qquad
-C_j\cap C_\ell = \varnothing \text{ for } j\neq \ell,
+C_j \cap C_\ell = \varnothing \quad \text{for } j \neq \ell .
 \]
-where \(C_j\) denotes the \(j\)-th pseudo-class and \(n_j = |C_j|\). The corresponding pseudo-class centroids and global mean are defined as
+The corresponding centroids and mean are defined:
 \[
 \mu_j=\frac{1}{n_j}\sum_{x_i\in C_j}x_i,
 \qquad
 \mu=\frac{1}{n}\sum_{i=1}^{n}x_i .
 \]
 
-This partitioning provides a coarse structural approximation of benign traffic and also creates the prerequisite condition for defining a non-trivial between-class scatter matrix, as summarized below.
+% This partitioning provides a coarse structural approximation of benign traffic and also creates the prerequisite condition for defining a non-trivial between-class scatter matrix, as summarized below.
 
-\begin{proposition}[Necessity of multiple groups for non-trivial between-class scatter]
+\begin{proposition}[Non-trivial between-class scatter]
 Let the dataset be partitioned into \(c\) groups \(\{C_j\}_{j=1}^{c}\) with group means \(\mu_j\) and global mean \(\mu\). A non-trivial between-class scatter can arise only if at least two groups with distinct means exist.
 \end{proposition}
 
-\begin{proof}
-If the dataset consists of a single group (\(c=1\)), then the group mean coincides with the global mean, and no deviation between group-level and global statistics can exist. Consequently, the between-group variation is zero. In contrast, when the data are partitioned into multiple groups with different means, at least one group mean differs from the global mean, yielding non-zero between-group variation. Therefore, a non-trivial between-class scatter requires at least two groups with distinct means.
-\end{proof}
+Fig.~\ref{fig:pseudoclass_effect} illustrate, pseudo-class construction transforms a single heterogeneous benign distribution into multiple representative modes. This induced structure captures the latent multi-modal organization of benign behavior and provides the structural basis for defining meaningful between-group variation. Then, based on this multi-group structure, we define the within-class and between-class scatter matrices:
+% \begin{proof}
+% If the dataset consists of a single group (\(c=1\)), then the group mean coincides with the global mean, and no deviation between group-level and global statistics can exist. Consequently, the between-group variation is zero. In contrast, when the data are partitioned into multiple groups with different means, at least one group mean differs from the global mean, yielding non-zero between-group variation. Therefore, a non-trivial between-class scatter requires at least two groups with distinct means.
+% \end{proof}
 
-As illustrated in Fig.~\ref{fig:pseudoclass_effect}, pseudo-class construction transforms a single heterogeneous benign distribution into multiple representative modes. This induced structure captures the latent multi-modal organization of benign behavior and provides the structural basis for defining meaningful between-group variation.
+
 
 \begin{figure}[!ht]
     \centering
@@ -351,7 +358,7 @@ As illustrated in Fig.~\ref{fig:pseudoclass_effect}, pseudo-class construction t
     \label{fig:pseudoclass_effect}
 \end{figure}
 
-Based on this induced multi-group structure, the within-class and between-class scatter matrices are defined as
+% Based on this induced multi-group structure, the within-class and between-class scatter matrices are defined as
 \begin{equation}
 S_w=
 \sum_{j=1}^{c}\sum_{x_i\in C_j}(x_i-\mu_j)(x_i-\mu_j)^\top,
@@ -395,10 +402,15 @@ S_b=
 \end{algorithmic}
 \end{algorithm}
 
-Overall, pseudo-class construction acts as a lightweight structure-inducing approximation that exposes the latent multi-modal organization of benign data. By introducing coarse group structure, it enables the formulation of meaningful within-class and between-class statistics, thereby providing a principled foundation for subsequent representation learning even in the absence of explicit class labels.
+% Overall, pseudo-class construction acts as a lightweight structure-inducing approximation that exposes the latent multi-modal organization of benign data. By introducing coarse group structure, it enables the formulation of meaningful within-class and between-class statistics, thereby providing a principled foundation for subsequent representation learning even in the absence of explicit class labels.
 
-\subsection{Spectral Relaxation of NFST via Near-Null Directions}
+\subsection{Full Spectral Relaxation of the NFST Null Space}
 \label{subsec:projection_XXX}
+
+\non {\textbf{Insight.}} \noindent \textbf{Insight.}
+\noindent \textbf{Insight.}
+Classical NFST relies on the existence of exact null directions of the within-class scatter matrix. However, in practical high-dimensional tabular settings, the within-class scatter matrix is often numerically full-rank, causing the exact null-space assumption to break down. To address this limitation, we propose a spectral relaxation that constructs a near-null subspace from the low-energy eigenspectrum of the within-class scatter operator. This relaxation guarantees the existence of a valid solution even when the exact null space is absent.
+
 
 Let the centered data matrix be
 \[
