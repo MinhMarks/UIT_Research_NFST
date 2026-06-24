@@ -24,7 +24,7 @@ N_JOBS = 4            # Number of parallel workers when tuning/running models
 # MODELS_TO_RUN = ["OCKMeans"]
 
 # Define which models to explicitly run. If empty, runs all models in PARAM_GRIDS.
-MODELS_TO_RUN = ["LUNAR", "KNN", "LOF", "IForest", "AutoEncoder", "OCKMeans"]
+MODELS_TO_RUN = ["LUNAR"] # , "KNN", "LOF", "IForest", "AutoEncoder", "OCKMeans"]
 # ----------------------------
 
 # Fix seeds globally
@@ -91,6 +91,7 @@ class OCKMeans(BaseDetector):
         self.model_.fit(X)
         X_trans = self.model_.transform(X)
         self.decision_scores_ = np.min(X_trans, axis=1)
+        self._classes = 2 # Required for PyOD predict_proba
         self._process_decision_scores()
         return self
 
@@ -168,28 +169,28 @@ PARAM_GRIDS = {
     # PyOD >= 2.x renamed: hidden_neurons → hidden_neuron_list, epochs → epoch_num
     # hidden_neuron_list chỉ cần nửa encoder; PyOD tự build decoder bằng cách reverse lại
     "AutoEncoder": [
-        {"hidden_neuron_list": [32, 16], "epoch_num": 50, "contamination": 0.05},
-        {"hidden_neuron_list": [64, 32], "epoch_num": 50, "contamination": 0.05},
-        {"hidden_neuron_list": [128, 64], "epoch_num": 50, "contamination": 0.05}
+        {"hidden_neuron_list": [32, 16], "epoch_num": 50, "contamination": 0.05, "batch_size": 64, "device": "cpu"},
+        {"hidden_neuron_list": [64, 32], "epoch_num": 50, "contamination": 0.05, "batch_size": 64, "device": "cpu"},
+        {"hidden_neuron_list": [128, 64], "epoch_num": 50, "contamination": 0.05, "batch_size": 64, "device": "cpu"}
     ],
     "DIF": [{"n_ensemble": 50, "n_estimators": 6}, {"n_ensemble": 100, "n_estimators": 10}],
-    "NeuTraLAD": [{"latent_dim": 32, "enc_hdim": 32}, {"latent_dim": 64, "enc_hdim": 64}],
+    "NeuTraLAD": [{"latent_dim": 32, "enc_hdim": 32, "batch_size": 64, "device": "cpu"}, {"latent_dim": 64, "enc_hdim": 64, "batch_size": 64, "device": "cpu"}],
     "DASVDD": [{"code_size": 32}, {"code_size": 64}],
     "LODA": [{"n_bins": 10}, {"n_bins": 50}],
     "OCKMeans": [{"n_clusters": 5}, {"n_clusters": 10}, {"n_clusters": 20}, {"n_clusters": 50}],
     
     # Models without obvious fast tuning parameters left default
-    "ALAD": [{}],
+    "ALAD": [{"batch_size": 64, "device": "cpu"}],
     "COPOD": [{}],
     "ECOD": [{}],
-    "VAE": [{"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 50}],
+    "VAE": [{"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 50, "batch_size": 64, "device": "cpu"}],
     "SO_GAAL": [{}],
     "MO_GAAL": [{}],
     "SUOD": [{}],
-    "DeepSVDD": [{"hidden_neurons": [64, 32]}],
-    "LUNAR": [{"n_endpoints": 5}, {"n_endpoints": 10}, {"n_endpoints": 20}],
-    "AE1SVM": [{}],
-    "DevNet": [{}]
+    "DeepSVDD": [{"hidden_neurons": [64, 32], "batch_size": 64, "device": "cpu"}],
+    "LUNAR": [{"n_neighbours": 5}, {"n_neighbours": 10}, {"n_neighbours": 20}],
+    "AE1SVM": [{"batch_size": 64, "device": "cpu"}],
+    "DevNet": [{"batch_size": 64, "device": "cpu"}]
 }
 
 def get_model(model_name, params):
@@ -231,11 +232,26 @@ def get_model(model_name, params):
     if model_class is None:
         raise ValueError(f"Model {model_name} not found.")
     
+    original_is_available = torch.cuda.is_available
+    if model_name == "LUNAR":
+        torch.cuda.is_available = lambda: False
+        
     try:
         return model_class(**params)
     except Exception as e:
         print(f"Warning: Could not initialize {model_name} with {params}: {e}. Retrying with default parameters.")
-        return model_class()
+        fallback_params = {}
+        if 'device' in params:
+            fallback_params['device'] = params['device']
+        if 'batch_size' in params:
+            fallback_params['batch_size'] = params['batch_size']
+        try:
+            return model_class(**fallback_params)
+        except Exception as e2:
+            print(f"Fallback also failed: {e2}. Returning default.")
+            return model_class()
+    finally:
+        torch.cuda.is_available = original_is_available
 
 def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, output_file_all, output_file_best, use_tuning=True):
     best_results = []
@@ -256,6 +272,8 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
             if use_tuning: print(f"  Testing params: {params}")
             try:
                 model = get_model(model_name, params)
+                if model_name == "LUNAR" and hasattr(model, "device"):
+                    model.device = "cpu"
                 import tracemalloc
                 tracemalloc.start()
                 t0 = time.time()
@@ -307,6 +325,17 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                     
             except Exception as e:
                 print(f"  Error with {model_name}: {e}")
+            finally:
+                if 'model' in locals():
+                    del model
+                if 'y_pred' in locals():
+                    del y_pred
+                if 'y_probs' in locals():
+                    del y_probs
+                import gc
+                gc.collect()
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
         
         if best_row:
             pd.DataFrame([best_row]).to_csv(output_file_best, mode='a', header=not os.path.exists(output_file_best), index=False)

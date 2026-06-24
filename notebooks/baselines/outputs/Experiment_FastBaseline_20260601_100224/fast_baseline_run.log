@@ -1,0 +1,905 @@
+2026-06-01 10:02:24 | INFO | ============================================================
+2026-06-01 10:02:24 | INFO | FAST BASELINE EXPERIMENT (Parallel=False)
+2026-06-01 10:02:24 | INFO | ============================================================
+2026-06-01 10:02:24 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: StandardScaler
+2026-06-01 10:02:27 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:28 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:28 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | INFO | --- Noise: 1% ---
+2026-06-01 10:02:28 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:28 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | INFO | --- Noise: 3% ---
+2026-06-01 10:02:28 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:28 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | INFO | --- Noise: 5% ---
+2026-06-01 10:02:28 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:28 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:28 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: MinMaxScaler
+2026-06-01 10:02:31 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:31 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:31 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | INFO | --- Noise: 1% ---
+2026-06-01 10:02:31 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:31 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | INFO | --- Noise: 3% ---
+2026-06-01 10:02:31 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:31 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:31 | INFO | --- Noise: 5% ---
+2026-06-01 10:02:32 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:32 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:32 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: Normalizer
+2026-06-01 10:02:35 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:35 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:35 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:35 | INFO | --- Noise: 1% ---
+2026-06-01 10:02:36 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:36 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | INFO | --- Noise: 3% ---
+2026-06-01 10:02:36 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:36 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | INFO | --- Noise: 5% ---
+2026-06-01 10:02:36 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:36 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:36 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: QuantileTransformer
+2026-06-01 10:02:40 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:41 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:41 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | INFO | --- Noise: 1% ---
+2026-06-01 10:02:41 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:41 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | INFO | --- Noise: 3% ---
+2026-06-01 10:02:41 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:41 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | INFO | --- Noise: 5% ---
+2026-06-01 10:02:41 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:41 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:41 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: RobustScaler
+2026-06-01 10:02:45 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:45 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:45 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | INFO | --- Noise: 1% ---
+2026-06-01 10:02:45 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:45 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | INFO | --- Noise: 3% ---
+2026-06-01 10:02:45 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:45 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:45 | INFO | --- Noise: 5% ---
+2026-06-01 10:02:46 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:46 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:46 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: StandardScaler
+2026-06-01 10:02:54 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:54 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:54 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | INFO | --- Noise: 1% ---
+2026-06-01 10:02:54 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:54 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:54 | INFO | --- Noise: 3% ---
+2026-06-01 10:02:55 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:55 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | INFO | --- Noise: 5% ---
+2026-06-01 10:02:55 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:55 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:55 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: MinMaxScaler
+2026-06-01 10:02:59 | INFO | --- Noise: 0% ---
+2026-06-01 10:02:59 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:02:59 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:02:59 | INFO | --- Noise: 1% ---
+2026-06-01 10:03:00 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:00 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | INFO | --- Noise: 3% ---
+2026-06-01 10:03:00 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:00 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:00 | INFO | --- Noise: 5% ---
+2026-06-01 10:03:01 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:01 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:01 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: Normalizer
+2026-06-01 10:03:04 | INFO | --- Noise: 0% ---
+2026-06-01 10:03:04 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:04 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:04 | INFO | --- Noise: 1% ---
+2026-06-01 10:03:05 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:05 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | INFO | --- Noise: 3% ---
+2026-06-01 10:03:05 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:05 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | INFO | --- Noise: 5% ---
+2026-06-01 10:03:05 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:05 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:05 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: QuantileTransformer
+2026-06-01 10:03:08 | INFO | --- Noise: 0% ---
+2026-06-01 10:03:08 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:08 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:08 | INFO | --- Noise: 1% ---
+2026-06-01 10:03:09 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:09 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | INFO | --- Noise: 3% ---
+2026-06-01 10:03:09 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:09 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:09 | INFO | --- Noise: 5% ---
+2026-06-01 10:03:10 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:10 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:10 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: RobustScaler
+2026-06-01 10:03:15 | INFO | --- Noise: 0% ---
+2026-06-01 10:03:15 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:15 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:15 | INFO | --- Noise: 1% ---
+2026-06-01 10:03:16 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:16 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | INFO | --- Noise: 3% ---
+2026-06-01 10:03:16 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:16 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | INFO | --- Noise: 5% ---
+2026-06-01 10:03:16 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:03:16 | ERROR | Error with CBLOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with KNN on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LOF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with HBOS on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with IForest on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with PCA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with OCSVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with AutoEncoder on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DIF on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DASVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LODA on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with COPOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with ECOD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with VAE on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DeepSVDD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with LUNAR on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with AE1SVM on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with DevNet on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | ERROR | Error with ALAD on data_IoTID20.csv: name 'CBLOF' is not defined
+2026-06-01 10:03:16 | INFO | 
+All results saved to: /home/jupyter-iec_duongnt/New Project/NFST/GMM-nfst/notebooks/baselines/outputs/Experiment_FastBaseline_20260601_100224

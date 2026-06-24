@@ -1,0 +1,31 @@
+2026-05-19 11:36:42 | INFO | ============================================================
+2026-05-19 11:36:42 | INFO | FAST BASELINE EXPERIMENT (Parallel=False)
+2026-05-19 11:36:42 | INFO | ============================================================
+2026-05-19 11:36:42 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: QuantileTransformer
+2026-05-19 11:36:42 | INFO | --- Noise: 0% ---
+2026-05-19 11:36:42 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-05-19 12:15:43 | INFO |   CBLOF: AUCROC=99.99990165297805%  Train=5.990623474121094s
+2026-05-19 12:15:43 | INFO |   KNN: AUCROC=100.0%  Train=2.7937393188476562s
+2026-05-19 12:15:43 | INFO |   LOF: AUCROC=99.99477148537409%  Train=2.5375187397003174s
+2026-05-19 12:15:43 | INFO |   HBOS: AUCROC=99.99999677550748%  Train=10.552401781082153s
+2026-05-19 12:15:43 | INFO |   IForest: AUCROC=99.149722280908%  Train=2.1173906326293945s
+2026-05-19 12:15:43 | INFO |   PCA: AUCROC=99.29280268762741%  Train=0.06490278244018555s
+2026-05-19 12:15:43 | INFO |   OCSVM: AUCROC=99.99426362780173%  Train=42.95466470718384s
+2026-05-19 12:15:43 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: AutoEncoder.__init__() got an unexpected keyword argument 'epochs'
+2026-05-19 12:15:43 | ERROR | Error with DIF on data_EdgeIIoTset.csv: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+2026-05-19 12:15:43 | INFO |   NeuTraLAD: AUCROC=100.0%  Train=1004.9408466815948s
+2026-05-19 12:15:43 | INFO |   DASVDD: AUCROC=100.0%  Train=720.6643998622894s
+2026-05-19 12:15:43 | INFO |   LODA: AUCROC=79.37482861822241%  Train=2.2349965572357178s
+2026-05-19 12:15:43 | INFO |   COPOD: AUCROC=96.3034417717271%  Train=1.3430664539337158s
+2026-05-19 12:15:43 | INFO |   ECOD: AUCROC=97.97660353368268%  Train=0.7809751033782959s
+2026-05-19 12:15:43 | ERROR | Error with VAE on data_EdgeIIoTset.csv: VAE.__init__() got an unexpected keyword argument 'epochs'
+2026-05-19 12:15:43 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-05-19 12:15:43 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: LUNAR.__init__() got an unexpected keyword argument 'n_neighbors'
+2026-05-19 12:15:43 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: AE1SVM.__init__() got an unexpected keyword argument 'device'
+2026-05-19 12:15:43 | INFO |   DevNet: AUCROC=8.54094953952957%  Train=307.78893399238586s
+2026-05-19 12:15:43 | INFO |   ALAD: AUCROC=54.0186745517117%  Train=40.536115884780884s
+2026-05-19 12:15:43 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: QuantileTransformer
+2026-05-19 12:15:44 | INFO | --- Noise: 0% ---
+2026-05-19 12:15:44 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...

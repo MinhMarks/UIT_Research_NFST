@@ -182,12 +182,18 @@ def main():
         'data_CICIoT2023': 'StandardScaler',
         'data_ToNIoT': 'RobustScaler',
         'data_N_BaIoT': 'Normalizer',
-        'data_BoTIoT': 'StandardScaler'
+        'data_BoTIoT': 'StandardScaler',
+        'data_EdgeIIoTset': 'MinMaxScaler',
+        'data_IoTID20': 'StandardScaler',
     }
     EPSILON_LIST = [1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 2e-6, 4e-6, 1e-8, 1e-10, 0.0]
     K = 120
 
-    DATA_DIR = r"d:\project (1)\GMM-nfst\Datascaled\NoiseOCData"
+    _script_dir = os.path.dirname(os.path.abspath(__file__))
+    _default_data = os.path.normpath(
+        os.path.join(_script_dir, '..', '..', 'Datascaled', 'Official_OC_Data')
+    )
+    DATA_DIR = os.environ.get('DATA_DIR', _default_data)
 
     out_path = "outputs/ablation_epsilon_recon_results.csv"
     if os.path.exists(out_path):

@@ -20,4 +20,6 @@ Results/
 
 *.csv
 *.png
-*.zip 
+*.zip
+*.pcap
+*.json 

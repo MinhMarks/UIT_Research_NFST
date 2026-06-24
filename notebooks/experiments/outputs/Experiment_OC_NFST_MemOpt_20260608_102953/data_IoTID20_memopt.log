@@ -1,0 +1,21 @@
+2026-06-08 10:29:53 | INFO | Run started at 20260608_102953
+2026-06-08 10:29:53 | INFO | Dataset prefix : data_IoTID20
+2026-06-08 10:29:53 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-06-08 10:29:53 | INFO | N_CLUSTERS     : range(1, 301, 3) — 76 values
+2026-06-08 10:29:53 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-06-08 10:29:53 | INFO | CSV output     : /home/jupyter-iec_duongnt/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/Experiment_OC_NFST_MemOpt_20260608_102953/data_IoTID20_memopt.csv
+2026-06-08 10:29:53 | INFO | Log file       : /home/jupyter-iec_duongnt/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/Experiment_OC_NFST_MemOpt_20260608_102953/data_IoTID20_memopt.log
+2026-06-08 10:29:53 | INFO | ------------------------------------------------------------
+2026-06-08 10:29:53 | INFO | 
+>>> Processing data_IoTID20 | scaler=StandardScaler
+2026-06-08 10:29:53 | INFO | --- noise=0% ---
+2026-06-08 10:29:53 | INFO | ============================================================
+2026-06-08 10:29:53 | INFO | Dataset  : Train_StandardScaler_data_IoTID20.csv
+2026-06-08 10:29:53 | INFO | Scaler   : StandardScaler
+2026-06-08 10:29:53 | INFO | Noise    : 0%
+2026-06-08 10:29:53 | INFO | nClusters: 76 values (75..300)
+2026-06-08 10:29:53 | INFO | K-Means  : Standard KMeans
+2026-06-08 10:29:53 | INFO | ============================================================
+2026-06-08 10:29:54 | INFO | Loaded Raw Shape -> Train: (30878, 92), Test: (22720, 92)
+2026-06-08 10:29:54 | INFO | Training size : 30,878  |  Testing size: 22,720  |  Features: 91
+2026-06-08 10:29:54 | INFO | Firing up Parallel execution for 76 cluster configs...

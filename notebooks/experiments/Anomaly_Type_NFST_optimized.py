@@ -322,7 +322,8 @@ if __name__ == "__main__":
     _default_data = os.path.normpath(os.path.join(_script_dir, '..', '..', 'Datascaled', 'Official_Anomaly_Data'))
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
 
-    DATASETS = ['BoTIoT', 'CICIoT2023', 'ToNIoT', 'N_BaIoT']
+    # DATASETS = ['BoTIoT', 'CICIoT2023', 'ToNIoT', 'N_BaIoT']
+    DATASETS = [ 'EdgeIIoTset', 'IoTID20']
     SCALERS = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     ANOMALY_MODES = ['local', 'cluster', 'global']
     

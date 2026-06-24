@@ -584,8 +584,8 @@ if __name__ == "__main__":
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
 
     # --- Match the notebook's configuration exactly ---
-    # DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT']
-    DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT', 'data_EdgeIIoTset', 'data_IoTID20', 'data_FiveGNIDD']
+    DATASETS = [ 'data_IoTID20']
+    # DATASETS = ['data_CICIoT2023', 'data_ToNIoT', 'data_N_BaIoT', 'data_BoTIoT', 'data_EdgeIIoTset', 'data_IoTID20', 'data_FiveGNIDD']
     
     # Notebook: scaler_names = ['StandardScaler','MinMaxScaler','Normalizer',
     #                           'QuantileTransformer','RobustScaler','Normalizer']
@@ -593,7 +593,7 @@ if __name__ == "__main__":
                'QuantileTransformer', 'RobustScaler']   # deduped
 
     # Notebook: for ncluster in range(1, 301, 3)
-    N_CLUSTERS_LIST = list(range(1, 301, 3))            # [1, 4, 7, ..., 298, 301]
+    N_CLUSTERS_LIST = list(range(75, 301, 3))            # [1, 4, 7, ..., 298, 301]
 
     # Notebook: for noise in [0, 1, 3, 5]  (adjust here as needed)
     NOISE_LIST = [0, 1, 3, 5]

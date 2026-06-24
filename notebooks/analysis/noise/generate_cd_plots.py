@@ -20,7 +20,7 @@ matplotlib.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sa
 # ============================================================================
 BASELINE_SCALER = 'QuantileTransformer' # Scaler for baselines (None for best, or 'MinMaxScaler', etc.)
 EXCLUDE_MODELS_LIST = ['DEVNET'] # Models to remove from all results
-KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT']
+KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT', 'IoTID20', 'EdgeIIoTset'] 
 
 def normalize_dataset_name(name):
     if not isinstance(name, str): return str(name)
@@ -472,6 +472,155 @@ def plot_pareto_efficiency(df_best, output_path):
     plt.close()
 
 # ============================================================================
+# LATEX TABLE GENERATOR
+# ============================================================================
+
+def generate_latex_noise_table(full_df, valid_models, df_best, output_path):
+    """Generates LaTeX table for noise robustness analysis using best scalers."""
+    # Filter for noise > 0
+    noise_levels = [0.0]
+    df_noise = full_df[full_df['noise'].isin(noise_levels)].copy()
+    
+    if df_noise.empty:
+        print("No noise data (1%, 3%, 5%) found for LaTeX table generation.")
+        return
+        
+    # Only keep models valid across all datasets (consistent with CD Chart)
+    if valid_models is not None:
+        df_noise = df_noise[df_noise['model'].isin(valid_models)]
+        
+    # Only keep the specific scaler chosen per model/dataset at noise=0
+    if df_best is not None and not df_best.empty:
+        best_scalers = df_best[['model', 'dataset', 'scaler']].copy()
+        
+        # Fill NaN scalers to prevent pandas merge from dropping them
+        df_noise['scaler'] = df_noise['scaler'].fillna('NONE')
+        best_scalers['scaler'] = best_scalers['scaler'].fillna('NONE')
+        
+        df_noise = pd.merge(df_noise, best_scalers, on=['model', 'dataset', 'scaler'], how='inner')
+        
+    # Standardize dataset names for display
+    display_datasets = {
+        'BoTIoT': 'BoT-IoT',
+        'CICIoT': 'CICIoT2023',
+        'N_BaIoT': 'N-BaIoT',
+        'ToNIoT': 'ToN-IoT'
+    }
+    
+    # We want Mean AUC-ROC
+    agg_df = df_noise.groupby(['model', 'dataset', 'noise'])['aucroc'].max().reset_index()
+    
+    # Include all available datasets in the results
+    datasets_in_data = sorted(agg_df['dataset'].unique())
+    # Ensure known datasets have their display names, others use their original names
+    for d in datasets_in_data:
+        if d not in display_datasets:
+            display_datasets[d] = d
+        
+    # Get all unique models
+    models = sorted(agg_df['model'].unique())
+    # Ensure LOC-NFST is first
+    if 'LOC-NFST' in models:
+        models.remove('LOC-NFST')
+        models.insert(0, 'LOC-NFST')
+        
+    # Prepare data structure: columns_data[(dataset, noise)] = list of (model, val)
+    columns_data = {} 
+    
+    for ds in datasets_in_data:
+        for nl in noise_levels:
+            col_key = (ds, nl)
+            columns_data[col_key] = []
+            for m in models:
+                val_series = agg_df[(agg_df['model'] == m) & (agg_df['dataset'] == ds) & (agg_df['noise'] == nl)]['aucroc']
+                if not val_series.empty:
+                    val = val_series.iloc[0]
+                    if val <= 1.0: val *= 100
+                else:
+                    val = np.nan
+                columns_data[col_key].append((m, val))
+                
+    # Formatting LaTeX
+    latex_lines = []
+    latex_lines.append("\\begin{sidewaystable}[htbp]")
+    num_ds = len(datasets_in_data)
+    latex_lines.append(f"\\caption{{Robustness analysis under imperfect supervision: Mean AUC-ROC (\\%) performance across {num_ds} IoT benchmarks under 1\\%, 3\\%, and 5\\% training contamination levels. \\textcolor{{red}}{{\\textbf{{Red bold}}}} and \\textcolor{{blue}}{{\\textit{{blue italic}}}} values indicate the best and second-best performers, respectively.}}")
+    latex_lines.append("\\centering")
+    latex_lines.append("\\small")
+    latex_lines.append("\\setlength{\\tabcolsep}{3.5pt}")
+    
+    col_format = "l " + " ".join(["ccc"] * len(datasets_in_data))
+    latex_lines.append(f"\\begin{{tabular}}{{{col_format}}}")
+    latex_lines.append("\\toprule")
+    
+    # Header row 1
+    header1 = "\\multirow{2.5}{*}{\\textbf{Model}}"
+    for ds in datasets_in_data:
+        header1 += f" & \\multicolumn{{3}}{{c}}{{\\textbf{{{display_datasets.get(ds, ds)}}}}}"
+    header1 += " \\\\"
+    latex_lines.append(header1)
+    
+    # cmidrules
+    cmid_lines = []
+    current_col = 2
+    for _ in datasets_in_data:
+        cmid_lines.append(f"\\cmidrule(lr){{{current_col}-{current_col+2}}}")
+        current_col += 3
+    latex_lines.append(" ".join(cmid_lines))
+    
+    # Header row 2
+    header2 = ""
+    for _ in datasets_in_data:
+        header2 += " & 1\\% & 3\\% & 5\\%"
+    header2 += " \\\\"
+    latex_lines.append(header2)
+    latex_lines.append("\\midrule")
+    
+    # Find top 1 and top 2 per column
+    top1_per_col = {}
+    top2_per_col = {}
+    
+    for ds in datasets_in_data:
+        for nl in noise_levels:
+            col_key = (ds, nl)
+            vals = [v for m, v in columns_data[col_key] if not np.isnan(v)]
+            if vals:
+                sorted_vals = sorted(list(set(vals)), reverse=True)
+                top1_per_col[col_key] = sorted_vals[0] if len(sorted_vals) > 0 else None
+                top2_per_col[col_key] = sorted_vals[1] if len(sorted_vals) > 1 else None
+            else:
+                top1_per_col[col_key] = None
+                top2_per_col[col_key] = None
+
+    # Data rows
+    for m in models:
+        m_display = "\\textbf{LOC-NFST (Our)}" if m == 'LOC-NFST' else m.replace('_', '\\_')
+        row_str = f"{m_display}"
+        for ds in datasets_in_data:
+            for nl in noise_levels:
+                col_key = (ds, nl)
+                val = next((v for mod, v in columns_data[col_key] if mod == m), np.nan)
+                if np.isnan(val):
+                    val_str = "-"
+                else:
+                    val_str = f"{val:.2f}"
+                    if top1_per_col[col_key] is not None and abs(val - top1_per_col[col_key]) < 1e-5:
+                        val_str = f"\\textcolor{{red}}{{\\textbf{{{val_str}}}}}"
+                    elif top2_per_col[col_key] is not None and abs(val - top2_per_col[col_key]) < 1e-5:
+                        val_str = f"\\textcolor{{blue}}{{\\textit{{{val_str}}}}}"
+                row_str += f" & {val_str}"
+        row_str += " \\\\"
+        latex_lines.append(row_str)
+        
+    latex_lines.append("\\bottomrule")
+    latex_lines.append("\\end{tabular}")
+    latex_lines.append("\\label{tab:model_noise_perf}")
+    latex_lines.append("\\end{sidewaystable}")
+    
+    with open(output_path, "w") as f:
+        f.write("\n".join(latex_lines))
+
+# ============================================================================
 # MAIN
 # ============================================================================
 
@@ -497,19 +646,23 @@ def main():
     all_data = [load_and_normalize(f) for f in files]
     full_df = pd.concat(all_data, ignore_index=True)
     
-    # Pre-process: Filter Noise=0
+    # Pre-process: Filter Noise=0 for standard diagrams
     df_clean = full_df[full_df['noise'] == 0.0].copy()
     
     # Exclude unwanted models
     if EXCLUDE_MODELS_LIST:
         print(f"Excluding models: {EXCLUDE_MODELS_LIST}...")
         df_clean = df_clean[~df_clean['model'].isin(EXCLUDE_MODELS_LIST)]
+        full_df = full_df[~full_df['model'].isin(EXCLUDE_MODELS_LIST)] # Also exclude for latex table
         
     # SCALER FILTER FOR BASELINES (Request 27/03)
     if BASELINE_SCALER:
         print(f"Filtering baselines for scaler: {BASELINE_SCALER}...")
         is_ours = df_clean['model'] == 'LOC-NFST'
         df_clean = df_clean[is_ours | (df_clean['scaler'] == BASELINE_SCALER)]
+        
+        is_ours_full = full_df['model'] == 'LOC-NFST'
+        full_df = full_df[is_ours_full | (full_df['scaler'] == BASELINE_SCALER)]
         
     # Best Scaler per (Model, Dataset)
     best_idx = df_clean.groupby(['model', 'dataset'])['aucroc'].idxmax()
@@ -536,66 +689,69 @@ def main():
 
     if df_perf.empty or len(df_perf['classifier_name'].unique()) < 2:
         print("Error: Not enough data for statistical analysis. Models must be present in all datasets.")
-        return
+    else:
+        print(f">>> Computing rankings for {len(valid_models)} models across {max_nb} datasets...")
+        
+        # Nemenyi Component Re-injection
+        pivot = df_perf.pivot(index='dataset_name', columns='classifier_name', values='accuracy')
+        ranks_df = pivot.rank(ascending=False, axis=1) # AUC: higher is better
+        average_ranks = ranks_df.mean(axis=0).sort_values(ascending=True) # Ascending: 1.0 is best
+        
+        average_value = df_perf.groupby('classifier_name').agg({'accuracy': 'mean'}).reset_index()
+        average_value['classifier_name'] = average_value['classifier_name'].astype("category")
+        average_value['classifier_name'] = average_value['classifier_name'].cat.set_categories(average_ranks.index)
+        average_value = average_value.sort_values(["classifier_name"])
+        
+        n_datasets = ranks_df.shape[0]  
+        k_models = ranks_df.shape[1]  
+        
+        # Critical values for Nemenyi test alpha=0.05
+        q_values = {
+            2: 1.960, 3: 2.343, 4: 2.569, 5: 2.728, 6: 2.850,
+            7: 2.949, 8: 3.031, 9: 3.102, 10: 3.164, 11: 3.219,
+            12: 3.268, 13: 3.313, 14: 3.354, 15: 3.391, 16: 3.426,
+            17: 3.458, 18: 3.489, 19: 3.517, 20: 3.544,
+            21: 3.569, 22: 3.593, 23: 3.616, 24: 3.637,
+            25: 3.658, 26: 3.678, 27: 3.696, 28: 3.714
+        }
+        q = q_values.get(k_models, 3.8) # Approx fallback
+        cd = q * math.sqrt((k_models * (k_models + 1)) / (6.0 * n_datasets))
+        print(f"Calculated Nemenyi CD for k={k_models}, n={n_datasets}: {cd:.4f}")
 
-    print(f">>> Computing rankings for {len(valid_models)} models across {max_nb} datasets...")
-    
-    # Nemenyi Component Re-injection
-    pivot = df_perf.pivot(index='dataset_name', columns='classifier_name', values='accuracy')
-    ranks_df = pivot.rank(ascending=False, axis=1) # AUC: higher is better
-    average_ranks = ranks_df.mean(axis=0).sort_values(ascending=True) # Ascending: 1.0 is best
-    
-    average_value = df_perf.groupby('classifier_name').agg({'accuracy': 'mean'}).reset_index()
-    average_value['classifier_name'] = average_value['classifier_name'].astype("category")
-    average_value['classifier_name'] = average_value['classifier_name'].cat.set_categories(average_ranks.index)
-    average_value = average_value.sort_values(["classifier_name"])
-    
-    n_datasets = ranks_df.shape[0]  
-    k_models = ranks_df.shape[1]  
-    
-    # Critical values for Nemenyi test alpha=0.05
-    q_values = {
-        2: 1.960, 3: 2.343, 4: 2.569, 5: 2.728, 6: 2.850,
-        7: 2.949, 8: 3.031, 9: 3.102, 10: 3.164, 11: 3.219,
-        12: 3.268, 13: 3.313, 14: 3.354, 15: 3.391, 16: 3.426,
-        17: 3.458, 18: 3.489, 19: 3.517, 20: 3.544,
-        21: 3.569, 22: 3.593, 23: 3.616, 24: 3.637,
-        25: 3.658, 26: 3.678, 27: 3.696, 28: 3.714
-    }
-    q = q_values.get(k_models, 3.8) # Approx fallback
-    cd = q * math.sqrt((k_models * (k_models + 1)) / (6.0 * n_datasets))
-    print(f"Calculated Nemenyi CD for k={k_models}, n={n_datasets}: {cd:.4f}")
+        # 1. Performance Heatmap
+        heatmap_path = os.path.join(output_dir, "rank_heatmap.png")
+        plot_ranked_heatmap(average_ranks, df_perf, heatmap_path)
+        print(f"Ranked Heatmap saved to {heatmap_path}")
 
-    # 1. Performance Heatmap
-    heatmap_path = os.path.join(output_dir, "rank_heatmap.png")
-    plot_ranked_heatmap(average_ranks, df_perf, heatmap_path)
-    print(f"Ranked Heatmap saved to {heatmap_path}")
+        # 2. Average Rank Bar Chart (With AUCROC)
+        bar_path = os.path.join(output_dir, "rank_bar_chart.png")
+        plot_average_rank_bar(average_ranks, average_value, bar_path)
+        print(f"Rank Bar Chart saved to {bar_path}")
 
-    # 2. Average Rank Bar Chart (With AUCROC)
-    bar_path = os.path.join(output_dir, "rank_bar_chart.png")
-    plot_average_rank_bar(average_ranks, average_value, bar_path)
-    print(f"Rank Bar Chart saved to {bar_path}")
+        # 3. Performance Profiles (Advanced Robustness Analysis)
+        prof_path = os.path.join(output_dir, "performance_profiles.png")
+        plot_performance_profiles(df_perf, prof_path)
+        print(f"Performance Profiles saved to {prof_path}")
 
-    # 3. Performance Profiles (Advanced Robustness Analysis)
-    prof_path = os.path.join(output_dir, "performance_profiles.png")
-    plot_performance_profiles(df_perf, prof_path)
-    print(f"Performance Profiles saved to {prof_path}")
+        # 4. Pareto Efficiency Plot (Accuracy vs Speed)
+        pareto_path = os.path.join(output_dir, "pareto_efficiency.png")
+        plot_pareto_efficiency(df_best_valid, pareto_path)
+        print(f"Pareto Plot saved to {pareto_path}")
 
-    # 4. Pareto Efficiency Plot (Accuracy vs Speed)
-    pareto_path = os.path.join(output_dir, "pareto_efficiency.png")
-    plot_pareto_efficiency(df_best_valid, pareto_path)
-    print(f"Pareto Plot saved to {pareto_path}")
+        # 5. CD Diagram
+        try:
+            graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, cd=cd,
+                        reverse=True, labels=True)
+            cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
+            plt.savefig(cd_diag_path, bbox_inches='tight', pad_inches=0.05, dpi=300)
+            print(f"CD Diagram (Legacy) saved to {cd_diag_path}")
+        except Exception:
+            print(f"Note: Standard CD Layout is too crowded for these models. Focus on Heatmap/Bar Chart/Profiles.")
 
-    # 5. CD Diagram
-    try:
-        graph_ranks(average_ranks.values, average_ranks.index, average_value['accuracy'].values, cd=cd,
-                    reverse=True, labels=True)
-        cd_diag_path = os.path.join(output_dir, "cd_diagram_custom.png")
-        # plt.title("Critical Difference Diagram (Wilcoxon-Holm)", y=1.05)
-        plt.savefig(cd_diag_path, bbox_inches='tight', pad_inches=0.05, dpi=300)
-        print(f"CD Diagram (Legacy) saved to {cd_diag_path}")
-    except Exception:
-        print(f"Note: Standard CD Layout is too crowded for these models. Focus on Heatmap/Bar Chart/Profiles.")
+    # 6. Generate LaTeX Noise Table
+    latex_path = os.path.join(output_dir, "noise_robustness_table.tex")
+    generate_latex_noise_table(full_df, valid_models, df_best, latex_path)
+    print(f"LaTeX Noise Table saved to {latex_path}")
 
 if __name__ == "__main__":
     main()

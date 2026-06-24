@@ -4,6 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.patheffects as path_effects
 
 # ============================================================================
 # CONFIGURATION & STYLING
@@ -21,7 +22,7 @@ DPI = 300
 # NEW CONFIGURATION (Request 27/03)
 N_TOP = 5                 # Number of top baseline models to show
 N_BOTTOM = 3              # Number of bottom baseline models to show
-TARGET_DATASET = ['CICIoT', 'ToNIoT', 'N_BaIoT'] # Dataset to filter for (Set to None for all)
+TARGET_DATASET = ['CICIoT', 'ToNIoT', 'N_BaIoT','EdgeIIoTset', 'IoTID20'] # Dataset to filter for (Set to None for all)
 METRIC_NAME = 'aucroc'    # Primary metric to use ('aucroc' or 'aucpr')
 EXCLUDE_MODELS = ['DEVNET', 'MO_GAAL', 'DIF', 'LOF'] # Models to remove from all results
 PROPOSED_SCALER = '' # Scaler for proposed model (None for best, or 'MinMaxScaler', etc.)
@@ -481,7 +482,7 @@ def plot_special_anomaly_comparison(merged):
         print("Warning: No data for 'local' mode with selected models.")
         return
 
-    plt.figure(figsize=(10, 8)) # Increased height for legend
+    plt.figure(figsize=(10, 6)) # Reduced height from 8 to 6
     sns.set_style("whitegrid", {'grid.linestyle': '--'})
     
     # Palette: Red for LOC-NFST, fading Blues for baselines based on rank
@@ -502,36 +503,46 @@ def plot_special_anomaly_comparison(merged):
         y=metric,
         hue='clean_model',
         palette=palette,
-        edgecolor='none',
+        edgecolor='black',
+        linewidth=1.2,
         alpha=0.9,
         legend=False,
         width=0.55
     )
     
+    # Apply less dense premium texture hatches to each bar (single characters for less density)
+    hatches = ['/', '\\', 'x', '.', '|', '-', '+', 'o']
+    for i, bar in enumerate(ax.patches):
+        bar.set_hatch(hatches[i % len(hatches)])
+        bar.set_edgecolor('black')
+        bar.set_linewidth(1.5)
+    
     # REMOVED HORIZONTAL AVERAGE LINES AS REQUESTED
-
+ 
     # Styling
     plt.xlabel('Model', fontsize=FONT_SIZE_AXES, fontweight='bold')
     plt.ylabel('AUC-ROC (%)' if metric == 'aucroc' else 'AUC-PR (%)', fontsize=FONT_SIZE_AXES, fontweight='bold')
     plt.xticks(fontsize=FONT_SIZE_TICKS, fontweight='bold')
     
-    # Y-ticks every 2.5% steps
+    # Y-ticks every 2.5% steps, stopping exactly at 100%
     y_min_val = max(0, local_data[metric].min() - 10)
     y_start = np.floor(y_min_val / 2.5) * 2.5
-    plt.yticks(np.arange(y_start, 102.5, 2.5), fontsize=FONT_SIZE_TICKS)
+    plt.yticks(np.arange(y_start, 100.1, 2.5), fontsize=FONT_SIZE_TICKS)
     
-    # labels on bars - Inside column, larger font, white color for contrast
+    # labels on bars - Inside column, larger font, white color with black outline for high contrast
     for container in ax.containers:
-        ax.bar_label(container, fmt='%.1f', padding=-65, fontsize=26, fontweight='bold', 
-                     rotation=90, label_type='edge', color='white',
-                     zorder=20)
+        texts = ax.bar_label(container, fmt='%.1f', padding=-65, fontsize=26, fontweight='bold', 
+                             rotation=90, label_type='edge', color='white',
+                             zorder=20)
+        for t in texts:
+            t.set_path_effects([path_effects.withStroke(linewidth=3.5, foreground='black')])
         
     if ax.get_legend(): ax.get_legend().remove()
     
     # Horizontal grid lines every 2.5%
     plt.grid(axis='y', linestyle='--', alpha=0.7, color='gray')
     
-    plt.ylim(y_start, 105) 
+    plt.ylim(y_start, 101.5) # Limit chart slightly above 100% (from 105 down to 101.5)
     plt.tight_layout()
     
     save_path = os.path.join(_script_dir, "plots", "Special_Anomaly_Comparison.png")

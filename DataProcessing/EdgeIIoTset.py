@@ -161,7 +161,7 @@ class EdgeIIoTset():
         list_ss = []
         base_self.__print(f"DEBUG: Opening file {f}")
         # Use engine='python' to avoid Segmentation Faults on complex/large CSVs
-        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='python', on_bad_lines='warn')
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, on_bad_lines='warn')
         real_label_col = base_self.__target_variable  # default = 'label'
         for chunk in peek_iter:
             # Find the label column: try exact match, then case-insensitive
@@ -255,6 +255,10 @@ class EdgeIIoTset():
                 import opendatasets as od
                 print(f"Downloading from Kaggle via opendatasets: {url}")
                 od.download(url, data_dir=os.path.dirname(filename))
+                dataset_slug = url.split('/')[-1].split('?')[0]
+                downloaded_dir = os.path.join(os.path.dirname(filename), dataset_slug)
+                if os.path.isdir(downloaded_dir):
+                    return downloaded_dir
                 return filename
             except ImportError:
                 print("ERROR: To download from Kaggle, please install kagglehub (pip install kagglehub) or opendatasets.")

@@ -30,8 +30,8 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # >>> CONFIGURATION: change METRIC to 'AUCPR' to switch metric <<<
 METRIC = 'AUCROC'      # Options: 'AUCROC'  |  'AUCPR'
 START_K = 2            # Plot from this k value onwards
-END_K = None           # Plot up to this k value (None = no upper limit)
-DEFAULT_K = 105        # Selected default k to highlight
+END_K = 175            # Plot up to this k value (None = no upper limit)
+DEFAULT_K = 75        # Selected default k to highlight
 SHOW_RAW_LINE      = True   # Show raw (pre-smoothing) dotted line
 SHOW_SMOOTHED_LINE = False   # Show smoothed (rolling-average) bold line
 SHOW_STD_BAND      = False  # Show shaded ±std band around the mean (can be noisy)
@@ -55,7 +55,7 @@ MARKERS    = ['o', 's', '^', 'D', 'v', 'p', '*', 'h']
 # ---------------------------------------------------------------------------
 # DATA LOADING  (reuses same convention as generate_cd_plots.py)
 # ---------------------------------------------------------------------------
-KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT']
+KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT', 'EdgeIIoTset', 'IoTID20']
 
 def normalize_dataset_name(name):
     if not isinstance(name, str): return str(name)

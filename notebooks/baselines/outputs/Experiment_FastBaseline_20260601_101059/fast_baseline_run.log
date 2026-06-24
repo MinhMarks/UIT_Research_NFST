@@ -1,0 +1,455 @@
+2026-06-01 10:10:59 | INFO | ============================================================
+2026-06-01 10:10:59 | INFO | FAST BASELINE EXPERIMENT (Parallel=False)
+2026-06-01 10:10:59 | INFO | ============================================================
+2026-06-01 10:10:59 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: StandardScaler
+2026-06-01 10:11:02 | INFO | --- Noise: 0% ---
+2026-06-01 10:11:02 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:02 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:02 | INFO | --- Noise: 1% ---
+2026-06-01 10:11:03 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:03 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | INFO | --- Noise: 3% ---
+2026-06-01 10:11:03 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:03 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | INFO | --- Noise: 5% ---
+2026-06-01 10:11:03 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:03 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:03 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: MinMaxScaler
+2026-06-01 10:11:06 | INFO | --- Noise: 0% ---
+2026-06-01 10:11:06 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:06 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | INFO | --- Noise: 1% ---
+2026-06-01 10:11:06 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:06 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:06 | INFO | --- Noise: 3% ---
+2026-06-01 10:11:07 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:07 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | INFO | --- Noise: 5% ---
+2026-06-01 10:11:07 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:07 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:07 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: Normalizer
+2026-06-01 10:11:10 | INFO | --- Noise: 0% ---
+2026-06-01 10:11:11 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:11 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | INFO | --- Noise: 1% ---
+2026-06-01 10:11:11 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:11 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | INFO | --- Noise: 3% ---
+2026-06-01 10:11:11 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:11 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | INFO | --- Noise: 5% ---
+2026-06-01 10:11:11 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:11 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:11 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: QuantileTransformer
+2026-06-01 10:11:14 | INFO | --- Noise: 0% ---
+2026-06-01 10:11:14 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:14 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:14 | INFO | --- Noise: 1% ---
+2026-06-01 10:11:15 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:15 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | INFO | --- Noise: 3% ---
+2026-06-01 10:11:15 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:15 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:15 | INFO | --- Noise: 5% ---
+2026-06-01 10:11:16 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:16 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:16 | INFO | 
+Processing Dataset: data_EdgeIIoTset.csv | Scaler: RobustScaler
+2026-06-01 10:11:20 | INFO | --- Noise: 0% ---
+2026-06-01 10:11:21 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:21 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:21 | INFO | --- Noise: 1% ---
+2026-06-01 10:11:22 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:22 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | INFO | --- Noise: 3% ---
+2026-06-01 10:11:22 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:22 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:22 | INFO | --- Noise: 5% ---
+2026-06-01 10:11:23 | INFO | Running 20 models SEQUENTIALLY (Stability Mode)...
+2026-06-01 10:11:23 | ERROR | Error with CBLOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with KNN on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with LOF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with HBOS on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with IForest on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with PCA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with OCSVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with AutoEncoder on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with DIF on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with NeuTraLAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with DASVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with LODA on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with COPOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with ECOD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with VAE on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with DeepSVDD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with LUNAR on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with AE1SVM on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with DevNet on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | ERROR | Error with ALAD on data_EdgeIIoTset.csv: name 'ECOD' is not defined
+2026-06-01 10:11:23 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: StandardScaler

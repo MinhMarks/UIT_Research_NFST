@@ -163,9 +163,16 @@ def generate_datasets():
         
         # Ensure data is clean numeric before scaling
         # Drop any leftover label columns besides label_col
-        label_fts_names_to_drop = [c for c in ['attack', 'category', 'subcategory', 'Binary_label', 'Category_label', 'Default_label', 'Attack_label', 'Attack_type'] if c in train_df.columns and c != label_col]
+        label_fts_names_to_drop = [c for c in ['attack', 'category', 'subcategory', 'Binary_label', 'Category_label', 'Default_label', 'Attack_label', 'Attack_type', 'Label', 'Cat', 'Sub_Cat'] if c in train_df.columns and c != label_col]
         train_df = train_df.drop(columns=label_fts_names_to_drop, errors='ignore')
         test_df  = test_df.drop(columns=label_fts_names_to_drop, errors='ignore')
+        
+        # Also drop any remaining non-numeric columns
+        non_numeric_cols = train_df.select_dtypes(exclude=[np.number]).columns.tolist()
+        if non_numeric_cols:
+            log.info(f"Dropping remaining non-numeric columns: {non_numeric_cols}")
+            train_df = train_df.drop(columns=non_numeric_cols, errors='ignore')
+            test_df  = test_df.drop(columns=non_numeric_cols, errors='ignore')
         
         # Separate X and Y
         y_train = train_df.pop(label_col)

@@ -9,7 +9,12 @@ from scipy.linalg import null_space
 from sklearn.cluster import KMeans
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve, matthews_corrcoef, f1_score, precision_score, recall_score, accuracy_score
-import faiss
+try:
+    import faiss
+    FAISS_AVAILABLE = True
+except ImportError:
+    FAISS_AVAILABLE = False
+    print("[WARNING] faiss not installed. Falling back to numpy scoring.")
 
 # ============================================================================
 # Core Functions
@@ -107,11 +112,20 @@ def calculate_NPD_optimized_ablation(X: np.ndarray, y: np.ndarray, epsilon: floa
     return W, training_time, rank_Pt
 
 def compute_dist_to_centers(X, W, centers):
-    d = centers.shape[1]
-    index = faiss.IndexFlatL2(d)
-    index.add(centers.astype('float32'))
-    _, nearest_idx = index.search(X.astype('float32'), 1)
-    nearest_centers = centers[nearest_idx.flatten()]
+    if FAISS_AVAILABLE:
+        d = centers.shape[1]
+        index = faiss.IndexFlatL2(d)
+        index.add(centers.astype('float32'))
+        _, nearest_idx = index.search(X.astype('float32'), 1)
+        nearest_centers = centers[nearest_idx.flatten()]
+    else:
+        nearest_centers = []
+        for i in range(0, len(X), 2000):
+            batch = X[i:i+2000]
+            dists = np.linalg.norm(batch[:, np.newaxis, :] - centers[np.newaxis, :, :], axis=2)
+            idx = np.argmin(dists, axis=1)
+            nearest_centers.append(centers[idx])
+        nearest_centers = np.vstack(nearest_centers)
 
     diff = X - nearest_centers
     projections = diff @ W
@@ -151,12 +165,14 @@ def evaluate(y_true: np.ndarray, y_proba: np.ndarray):
 # ============================================================================
 def main():
     DATASET_CONFIGS = {
-        'data_CICIoT2023': 'StandardScaler',
-        'data_ToNIoT': 'RobustScaler',
-        'data_N_BaIoT': 'Normalizer'
+        # 'data_CICIoT2023': 'StandardScaler',
+        # 'data_ToNIoT': 'RobustScaler',
+        # 'data_N_BaIoT': 'Normalizer', 
+        # "data_EdgeIIoTset": "MinMaxScaler", 
+        "data_IoTID20": "StandardScaler",
     }
     EPSILON_LIST = [5.0, 0.5, 0.05, 0.035, 0.01, 0.001, 0.0001, 2e-06, 1e-10, 0.0]
-    K = 120
+    K =150
 
     _script_dir  = os.path.dirname(os.path.abspath(__file__))
     _default_data = os.path.normpath(
@@ -189,7 +205,7 @@ def main():
         df_train = drop_metadata_features(df_train)
         df_test = drop_metadata_features(df_test)
         
-        X_train, y_train, X_test, y_test = preprocess_data_noise(df_train, df_test, noise_percentage=5)
+        X_train, y_train, X_test, y_test = preprocess_data_noise(df_train, df_test, noise_percentage=0)
         
         # Impute
         

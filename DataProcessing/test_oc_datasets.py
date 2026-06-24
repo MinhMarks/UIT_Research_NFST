@@ -9,7 +9,7 @@ def test_datasets():
         print(f"❌ Error: Data directory not found at {data_dir}")
         return
 
-    datasets = ['ToNIoT', 'N_BaIoT', 'BoTIoT', 'CICIoT2023']
+    datasets = ['ToNIoT', 'N_BaIoT', 'BoTIoT', 'CICIoT2023', 'EdgeIIoTset', 'IoTID20']
     scalers = ['QuantileTransformer', 'StandardScaler', 'MinMaxScaler', 'RobustScaler', 'Normalizer']
     
     print("==========================================================")

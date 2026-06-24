@@ -1,0 +1,215 @@
+2026-06-02 10:16:18 | INFO | ============================================================
+2026-06-02 10:16:18 | INFO | BASELINE FIXED EXPERIMENT STARTED
+2026-06-02 10:16:18 | INFO | ============================================================
+2026-06-02 10:16:18 | INFO | 
+Processing data_EdgeIIoTset.csv with QuantileTransformer scaler...
+2026-06-02 10:16:18 | INFO | ..............................Data Overview................................
+2026-06-02 10:16:18 | INFO | Samples after noise: 31644 | Features: 52
+2026-06-02 10:16:18 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 10:16:34 | INFO | Results saved for data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 10:16:34 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 10:17:46 | INFO | Results saved for data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 10:17:46 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-02 10:17:46 | ERROR | Error with dataset data_EdgeIIoTset.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 10:17:46 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 10:22:15 | INFO | Results saved for data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 10:22:15 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 10:22:49 | INFO | Results saved for data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 10:22:49 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-02 10:22:49 | ERROR | Error with dataset data_EdgeIIoTset.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 10:22:49 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model VAE
+2026-06-02 10:26:46 | INFO | Results saved for data_EdgeIIoTset.csv with model VAE
+2026-06-02 10:26:46 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 10:32:20 | INFO | Results saved for data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 10:32:20 | INFO | ..............................Data Overview................................
+2026-06-02 10:32:20 | INFO | Samples after noise: 31960 | Features: 52
+2026-06-02 10:32:20 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 10:32:28 | INFO | Results saved for data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 10:32:28 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 10:33:45 | INFO | Results saved for data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 10:33:45 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-02 10:33:45 | ERROR | Error with dataset data_EdgeIIoTset.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 10:33:45 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 10:37:40 | INFO | Results saved for data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 10:37:40 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 10:38:18 | INFO | Results saved for data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 10:38:18 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-02 10:38:18 | ERROR | Error with dataset data_EdgeIIoTset.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 10:38:18 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model VAE
+2026-06-02 10:42:18 | INFO | Results saved for data_EdgeIIoTset.csv with model VAE
+2026-06-02 10:42:18 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 10:48:58 | INFO | Results saved for data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 10:48:58 | INFO | ..............................Data Overview................................
+2026-06-02 10:48:58 | INFO | Samples after noise: 32593 | Features: 52
+2026-06-02 10:48:58 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 10:49:06 | INFO | Results saved for data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 10:49:06 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 10:50:27 | INFO | Results saved for data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 10:50:27 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-02 10:50:27 | ERROR | Error with dataset data_EdgeIIoTset.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 10:50:27 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 10:54:57 | INFO | Results saved for data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 10:54:57 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 10:55:36 | INFO | Results saved for data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 10:55:36 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-02 10:55:36 | ERROR | Error with dataset data_EdgeIIoTset.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 10:55:36 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model VAE
+2026-06-02 10:59:54 | INFO | Results saved for data_EdgeIIoTset.csv with model VAE
+2026-06-02 10:59:54 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 11:06:28 | INFO | Results saved for data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 11:06:28 | INFO | ..............................Data Overview................................
+2026-06-02 11:06:28 | INFO | Samples after noise: 33226 | Features: 52
+2026-06-02 11:06:28 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 11:06:36 | INFO | Results saved for data_EdgeIIoTset.csv with model LUNAR
+2026-06-02 11:06:36 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 11:08:00 | INFO | Results saved for data_EdgeIIoTset.csv with model AutoEncoder
+2026-06-02 11:08:00 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-02 11:08:00 | ERROR | Error with dataset data_EdgeIIoTset.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 11:08:00 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 11:12:49 | INFO | Results saved for data_EdgeIIoTset.csv with model MO_GAAL
+2026-06-02 11:12:49 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 11:13:29 | INFO | Results saved for data_EdgeIIoTset.csv with model SO_GAAL
+2026-06-02 11:13:29 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-02 11:13:29 | ERROR | Error with dataset data_EdgeIIoTset.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 11:13:29 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model VAE
+2026-06-02 11:17:40 | INFO | Results saved for data_EdgeIIoTset.csv with model VAE
+2026-06-02 11:17:40 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 11:24:36 | INFO | Results saved for data_EdgeIIoTset.csv with model AE1SVM
+2026-06-02 11:24:36 | INFO | 
+Processing data_IoTID20.csv with QuantileTransformer scaler...
+2026-06-02 11:24:37 | INFO | ..............................Data Overview................................
+2026-06-02 11:24:37 | INFO | Samples after noise: 27064 | Features: 91
+2026-06-02 11:24:37 | INFO | 
+Running dataset data_IoTID20.csv with model LUNAR
+2026-06-02 11:24:44 | INFO | Results saved for data_IoTID20.csv with model LUNAR
+2026-06-02 11:24:44 | INFO | 
+Running dataset data_IoTID20.csv with model AutoEncoder
+2026-06-02 11:25:51 | INFO | Results saved for data_IoTID20.csv with model AutoEncoder
+2026-06-02 11:25:51 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-02 11:25:51 | ERROR | Error with dataset data_IoTID20.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 11:25:51 | INFO | 
+Running dataset data_IoTID20.csv with model MO_GAAL
+2026-06-02 11:29:34 | INFO | Results saved for data_IoTID20.csv with model MO_GAAL
+2026-06-02 11:29:34 | INFO | 
+Running dataset data_IoTID20.csv with model SO_GAAL
+2026-06-02 11:30:09 | INFO | Results saved for data_IoTID20.csv with model SO_GAAL
+2026-06-02 11:30:09 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-02 11:30:09 | ERROR | Error with dataset data_IoTID20.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 11:30:09 | INFO | 
+Running dataset data_IoTID20.csv with model VAE
+2026-06-02 11:33:30 | INFO | Results saved for data_IoTID20.csv with model VAE
+2026-06-02 11:33:30 | INFO | 
+Running dataset data_IoTID20.csv with model AE1SVM
+2026-06-02 11:39:07 | INFO | Results saved for data_IoTID20.csv with model AE1SVM
+2026-06-02 11:39:07 | INFO | ..............................Data Overview................................
+2026-06-02 11:39:07 | INFO | Samples after noise: 27334 | Features: 91
+2026-06-02 11:39:07 | INFO | 
+Running dataset data_IoTID20.csv with model LUNAR
+2026-06-02 11:39:15 | INFO | Results saved for data_IoTID20.csv with model LUNAR
+2026-06-02 11:39:15 | INFO | 
+Running dataset data_IoTID20.csv with model AutoEncoder
+2026-06-02 11:40:21 | INFO | Results saved for data_IoTID20.csv with model AutoEncoder
+2026-06-02 11:40:21 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-02 11:40:21 | ERROR | Error with dataset data_IoTID20.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 11:40:21 | INFO | 
+Running dataset data_IoTID20.csv with model MO_GAAL
+2026-06-02 11:44:11 | INFO | Results saved for data_IoTID20.csv with model MO_GAAL
+2026-06-02 11:44:11 | INFO | 
+Running dataset data_IoTID20.csv with model SO_GAAL
+2026-06-02 11:44:45 | INFO | Results saved for data_IoTID20.csv with model SO_GAAL
+2026-06-02 11:44:45 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-02 11:44:45 | ERROR | Error with dataset data_IoTID20.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 11:44:45 | INFO | 
+Running dataset data_IoTID20.csv with model VAE
+2026-06-02 11:48:09 | INFO | Results saved for data_IoTID20.csv with model VAE
+2026-06-02 11:48:09 | INFO | 
+Running dataset data_IoTID20.csv with model AE1SVM
+2026-06-02 11:53:56 | INFO | Results saved for data_IoTID20.csv with model AE1SVM
+2026-06-02 11:53:56 | INFO | ..............................Data Overview................................
+2026-06-02 11:53:56 | INFO | Samples after noise: 27875 | Features: 91
+2026-06-02 11:53:56 | INFO | 
+Running dataset data_IoTID20.csv with model LUNAR
+2026-06-02 11:54:04 | INFO | Results saved for data_IoTID20.csv with model LUNAR
+2026-06-02 11:54:04 | INFO | 
+Running dataset data_IoTID20.csv with model AutoEncoder
+2026-06-02 11:55:14 | INFO | Results saved for data_IoTID20.csv with model AutoEncoder
+2026-06-02 11:55:14 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-02 11:55:14 | ERROR | Error with dataset data_IoTID20.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 11:55:14 | INFO | 
+Running dataset data_IoTID20.csv with model MO_GAAL
+2026-06-02 11:59:01 | INFO | Results saved for data_IoTID20.csv with model MO_GAAL
+2026-06-02 11:59:01 | INFO | 
+Running dataset data_IoTID20.csv with model SO_GAAL
+2026-06-02 11:59:36 | INFO | Results saved for data_IoTID20.csv with model SO_GAAL
+2026-06-02 11:59:36 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-02 11:59:36 | ERROR | Error with dataset data_IoTID20.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 11:59:36 | INFO | 
+Running dataset data_IoTID20.csv with model VAE
+2026-06-02 12:03:05 | INFO | Results saved for data_IoTID20.csv with model VAE
+2026-06-02 12:03:05 | INFO | 
+Running dataset data_IoTID20.csv with model AE1SVM
+2026-06-02 12:09:18 | INFO | Results saved for data_IoTID20.csv with model AE1SVM
+2026-06-02 12:09:18 | INFO | ..............................Data Overview................................
+2026-06-02 12:09:18 | INFO | Samples after noise: 28417 | Features: 91
+2026-06-02 12:09:18 | INFO | 
+Running dataset data_IoTID20.csv with model LUNAR
+2026-06-02 12:09:26 | INFO | Results saved for data_IoTID20.csv with model LUNAR
+2026-06-02 12:09:26 | INFO | 
+Running dataset data_IoTID20.csv with model AutoEncoder
+2026-06-02 12:10:38 | INFO | Results saved for data_IoTID20.csv with model AutoEncoder
+2026-06-02 12:10:38 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-02 12:10:38 | ERROR | Error with dataset data_IoTID20.csv, model SUOD: pyod.models.suod requires the optional `suod` package. Install it with `pip install suod` and retry. Original error: No module named 'suod'
+2026-06-02 12:10:38 | INFO | 
+Running dataset data_IoTID20.csv with model MO_GAAL
+2026-06-02 12:14:28 | INFO | Results saved for data_IoTID20.csv with model MO_GAAL
+2026-06-02 12:14:28 | INFO | 
+Running dataset data_IoTID20.csv with model SO_GAAL
+2026-06-02 12:14:57 | INFO | Results saved for data_IoTID20.csv with model SO_GAAL
+2026-06-02 12:14:57 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-02 12:14:57 | ERROR | Error with dataset data_IoTID20.csv, model DeepSVDD: DeepSVDD.__init__() got an unexpected keyword argument 'device'
+2026-06-02 12:14:57 | INFO | 
+Running dataset data_IoTID20.csv with model VAE
+2026-06-02 12:18:29 | INFO | Results saved for data_IoTID20.csv with model VAE
+2026-06-02 12:18:29 | INFO | 
+Running dataset data_IoTID20.csv with model AE1SVM
+2026-06-02 12:18:35 | ERROR | Error with dataset data_IoTID20.csv, model AE1SVM: Expected more than 1 value per channel when training, got input size torch.Size([1, 64])

@@ -709,7 +709,7 @@ def generate_noise_line_chart(files, output_dir):
                  
     plt.xlabel('Noise Contamination Level (%)', fontsize=14, fontweight='bold')
     plt.ylabel('AUC-ROC (%)', fontsize=14, fontweight='bold')
-    plt.title('Performance Degradation Under Noise Scenarios', fontsize=16, fontweight='bold', pad=15)
+    # plt.title('Performance Degradation Under Noise Scenarios', fontsize=16, fontweight='bold', pad=15)
     plt.xticks(noises, [f"{int(n)}%" for n in noises], fontsize=13, fontweight='bold')
     plt.yticks(fontsize=13)
     

@@ -25,7 +25,7 @@ _script_dir  = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR   = os.path.join(_script_dir, 'results')
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT']
+KNOWN_DATASETS = ['BoTIoT', 'ToNIoT', 'N_BaIoT', 'CICIoT', 'EdgeIIoTset', 'IoTID20']
 
 DISPLAY_NAMES = {
     'BoTIoT':    'BoTIoT',
@@ -34,8 +34,8 @@ DISPLAY_NAMES = {
     'ToNIoT':    'ToN-IoT',
 }
 
-METRIC_COLS = ['aucroc', 'aucpr', 'mcc', 'accuracy', 'f1 score', 'precision', 'recall']
-DISPLAY_HEADERS = ['AUC-ROC (%)', 'AUC-PR (%)', 'MCC', 'ACC (%)', 'F1', 'Precision', 'Recall']
+METRIC_COLS = ['aucroc', 'accuracy', 'recall']
+DISPLAY_HEADERS = ['AUC-ROC (%)', 'ACC (%)', 'Recall']
 
 # Metrics that are stored as 0-100 (percentage) vs 0-1 scale
 PERCENT_COLS = ['aucroc', 'aucpr', 'accuracy']

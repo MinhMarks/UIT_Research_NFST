@@ -1,0 +1,38 @@
+\begin{sidewaystable}[htbp]
+\caption{Robustness analysis under imperfect supervision: Mean AUC-ROC (\%) performance across 6 IoT benchmarks under 1\%, 3\%, and 5\% training contamination levels. \textcolor{red}{\textbf{Red bold}} and \textcolor{blue}{\textit{blue italic}} values indicate the best and second-best performers, respectively.}
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{l ccc ccc ccc ccc ccc ccc}
+\toprule
+\multirow{2.5}{*}{\textbf{Model}} & \multicolumn{3}{c}{\textbf{BoT-IoT}} & \multicolumn{3}{c}{\textbf{CICIoT2023}} & \multicolumn{3}{c}{\textbf{EdgeIIoTset}} & \multicolumn{3}{c}{\textbf{IoTID20}} & \multicolumn{3}{c}{\textbf{N-BaIoT}} & \multicolumn{3}{c}{\textbf{ToN-IoT}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} \cmidrule(lr){17-19}
+ & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% \\
+\midrule
+\textbf{LOC-NFST (Our)} & 98.64 & \textcolor{red}{\textbf{95.87}} & \textcolor{red}{\textbf{100.00}} & 95.53 & \textcolor{red}{\textbf{99.84}} & \textcolor{red}{\textbf{99.85}} \\
+AE1SVM & 92.60 & 93.09 & 99.96 & 94.94 & 91.51 & 43.44 \\
+ALAD & 50.70 & 27.34 & 52.58 & 46.68 & 37.13 & 52.80 \\
+AutoEncoder & 99.62 & 94.70 & 99.96 & \textcolor{blue}{\textit{98.12}} & 88.50 & 61.86 \\
+CBLOF & 96.06 & 93.41 & 99.99 & 93.99 & 94.15 & 74.83 \\
+COPOD & 54.40 & 85.08 & 95.36 & 64.13 & 77.15 & 45.75 \\
+DASVDD & 98.65 & 90.35 & 99.96 & 90.59 & 83.54 & 84.67 \\
+DIF & 87.08 & 93.13 & 99.89 & 93.39 & 74.32 & 74.08 \\
+DeepSVDD & 62.55 & 80.97 & 94.92 & 68.52 & 73.94 & 47.84 \\
+ECOD & 61.32 & 88.88 & 98.16 & 74.14 & 88.45 & 44.70 \\
+HBOS & 86.68 & 93.39 & \textcolor{red}{\textbf{100.00}} & 83.59 & 20.17 & 67.90 \\
+IForest & 94.31 & 94.61 & 99.62 & 84.15 & \textcolor{blue}{\textit{98.13}} & 67.34 \\
+KNN & \textcolor{blue}{\textit{99.83}} & 94.93 & \textcolor{red}{\textbf{100.00}} & 97.90 & 79.33 & 98.79 \\
+LODA & 69.41 & 73.12 & 82.85 & 85.86 & 91.42 & 47.64 \\
+LOF & 99.20 & 93.70 & \textcolor{blue}{\textit{100.00}} & 96.99 & 94.22 & 89.80 \\
+LUNAR & \textcolor{red}{\textbf{99.87}} & \textcolor{blue}{\textit{94.98}} & 99.99 & \textcolor{red}{\textbf{98.91}} & 85.10 & \textcolor{blue}{\textit{99.43}} \\
+MO\_GAAL & 3.71 & 10.79 & 0.37 & 4.58 & 7.40 & 12.80 \\
+NeuTraLAD & 98.78 & 90.94 & \textcolor{red}{\textbf{100.00}} & 98.07 & 77.79 & 67.79 \\
+OCSVM & 79.96 & 89.75 & 99.96 & 71.31 & 94.58 & 29.11 \\
+PCA & 75.85 & 50.00 & 99.32 & 77.45 & 91.91 & 50.00 \\
+SO\_GAAL & 8.54 & 31.24 & 14.45 & 9.31 & 39.15 & 62.65 \\
+SUOD & 76.14 & 94.54 & 99.26 & 76.89 & 88.45 & 56.84 \\
+VAE & 91.11 & 92.18 & 99.96 & 97.40 & 94.18 & 28.73 \\
+\bottomrule
+\end{tabular}
+\label{tab:model_noise_perf}
+\end{sidewaystable}

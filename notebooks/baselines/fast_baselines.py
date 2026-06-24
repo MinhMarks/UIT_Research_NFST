@@ -148,26 +148,26 @@ def evaluate_model(y_true, y_pred, y_probabilities=None):
 # FIXED PARAMETERS (NO TUNING FOR SPEED)
 # ============================================================================
 FAST_PARAMS = {
-    "CBLOF": {"n_clusters": 50},
-    "KNN": {"n_neighbors": 20},
-    "LOF": {"n_neighbors": 20},
-    "HBOS": {"n_bins": 50},
-    "IForest": {"n_estimators": 100},
-    "PCA": {"n_components": 0.7},
-    "OCSVM": {"nu": 0.1},
-    "AutoEncoder": {"hidden_neurons": [64, 32, 32, 64], "epochs": 20},
-    "DIF": {"n_ensemble": 50, "n_estimators": 6},
-    "NeuTraLAD": {"latent_dim": 32, "enc_hdim": 32, "num_epochs": 20},
-    "DASVDD": {"code_size": 32, "num_epochs": 20},
-    "LODA": {"n_bins": 50},
-    "COPOD": {},
-    "ECOD": {},
-    "VAE": {"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 20},
-    "DeepSVDD": {"hidden_neurons": [64, 32], "epochs": 20},
-    "LUNAR": {"n_neighbors": 5},
-    "AE1SVM": {"epochs": 20},
-    "DevNet": {"epochs": 20},
-    "ALAD": {"epochs": 20},
+    # "CBLOF": {"n_clusters": 50},
+    # "KNN": {"n_neighbors": 20},
+    # "LOF": {"n_neighbors": 20},
+    # "HBOS": {"n_bins": 50},
+    # "IForest": {"n_estimators": 100},
+    # "PCA": {"n_components": 0.7},
+    # "OCSVM": {"nu": 0.1},
+    # "AutoEncoder": {"hidden_neurons": [64, 32, 32, 64], "epochs": 20},
+    # "DIF": {"n_ensemble": 50, "n_estimators": 6},
+    "NeuTraLAD": {"latent_dim": 32, "enc_hdim": 32, "num_epochs": 20, "batch_size": 128},
+    # "DASVDD": {"code_size": 32, "num_epochs": 20},
+    # "LODA": {"n_bins": 50},
+    # "COPOD": {},
+    # "ECOD": {},
+    "VAE": {"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 20, "batch_size": 128},
+    # "DeepSVDD": {"hidden_neurons": [64, 32], "epochs": 20, "batch_size": 128},
+    # "LUNAR": {"n_neighbors": 5},
+    "AE1SVM": {"epochs": 20, "batch_size": 128},
+    # "DevNet": {"epochs": 20},
+    "ALAD": {"epochs": 20, "batch_size": 128},
 }
 
 def get_model(model_name, params, n_features):
@@ -256,6 +256,17 @@ def run_single_model(model_name, X_train, y_train, X_test, y_test, dataset_name,
         }
     except Exception as e:
         return {"error": f"Error with {model_name} on {dataset_name}: {e}"}
+    finally:
+        if 'model' in locals():
+            del model
+        if 'y_pred' in locals():
+            del y_pred
+        if 'y_probs' in locals():
+            del y_probs
+        import gc
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
 
 # ============================================================================
 # MAIN
@@ -264,13 +275,13 @@ if __name__ == "__main__":
     _default_data = os.path.normpath(os.path.join(project_root, 'Datascaled', 'Official_OC_Data'))
     DATA_DIR = os.environ.get('DATA_DIR', _default_data)
     # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
-    dataset_prefixes = ['data_EdgeIIoTset.csv', 'data_IoTID20.csv']
+    dataset_prefixes = [ 'data_IoTID20.csv']
     
     # scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     scaler_names = ['QuantileTransformer']
     
-    # noise_levels = [0, 1, 3, 5]
-    noise_levels = [0]
+    noise_levels = [0, 1, 3, 5]
+    # noise_levels = [0]
     
     # --- Acceleration Toggle ---
     USE_PARALLEL = False  # Set to False if models crash (stability mode)

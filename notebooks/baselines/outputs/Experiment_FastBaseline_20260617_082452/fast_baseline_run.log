@@ -1,0 +1,51 @@
+2026-06-17 08:24:52 | INFO | ============================================================
+2026-06-17 08:24:52 | INFO | FAST BASELINE EXPERIMENT (Parallel=False)
+2026-06-17 08:24:52 | INFO | ============================================================
+2026-06-17 08:24:52 | INFO | 
+Processing Dataset: data_IoTID20.csv | Scaler: QuantileTransformer
+2026-06-17 08:24:52 | INFO | --- Noise: 0% ---
+2026-06-17 08:24:53 | INFO | Running 4 models SEQUENTIALLY (Stability Mode)...
+2026-06-17 08:24:54 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-06-17 08:24:54 | ERROR | Error with VAE on data_IoTID20.csv: VAE.__init__() got an unexpected keyword argument 'epochs'
+2026-06-17 08:24:54 | ERROR | Error with AE1SVM on data_IoTID20.csv: AE1SVM.__init__() got an unexpected keyword argument 'device'
+2026-06-17 08:24:54 | INFO |   ALAD: AUCROC=42.836494006014924%  Train=1.0954370498657227s
+2026-06-17 08:24:54 | INFO | --- Noise: 1% ---
+2026-06-17 08:24:54 | INFO | Running 4 models SEQUENTIALLY (Stability Mode)...
+2026-06-17 08:24:56 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-06-17 08:24:56 | ERROR | Error with VAE on data_IoTID20.csv: VAE.__init__() got an unexpected keyword argument 'epochs'
+2026-06-17 08:24:56 | ERROR | Error with AE1SVM on data_IoTID20.csv: AE1SVM.__init__() got an unexpected keyword argument 'device'
+2026-06-17 08:24:56 | INFO |   ALAD: AUCROC=49.93266526761369%  Train=1.1227986812591553s
+2026-06-17 08:24:56 | INFO | --- Noise: 3% ---
+2026-06-17 08:24:56 | INFO | Running 4 models SEQUENTIALLY (Stability Mode)...
+2026-06-17 08:24:58 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-06-17 08:24:58 | ERROR | Error with VAE on data_IoTID20.csv: VAE.__init__() got an unexpected keyword argument 'epochs'
+2026-06-17 08:24:58 | ERROR | Error with AE1SVM on data_IoTID20.csv: AE1SVM.__init__() got an unexpected keyword argument 'device'
+2026-06-17 08:24:58 | INFO |   ALAD: AUCROC=49.090740808692686%  Train=1.1927521228790283s
+2026-06-17 08:24:58 | INFO | --- Noise: 5% ---
+2026-06-17 08:24:58 | INFO | Running 4 models SEQUENTIALLY (Stability Mode)...
+2026-06-17 08:24:59 | ERROR | Error with NeuTraLAD on data_IoTID20.csv: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-06-17 08:24:59 | ERROR | Error with VAE on data_IoTID20.csv: VAE.__init__() got an unexpected keyword argument 'epochs'
+2026-06-17 08:24:59 | ERROR | Error with AE1SVM on data_IoTID20.csv: AE1SVM.__init__() got an unexpected keyword argument 'device'
+2026-06-17 08:24:59 | INFO |   ALAD: AUCROC=48.52358596108402%  Train=1.1849133968353271s
+2026-06-17 08:24:59 | INFO | 
+All results saved to: /home/jupyter-iec_duongnt/New Project/NFST/GMM-nfst/notebooks/baselines/outputs/Experiment_FastBaseline_20260617_082452

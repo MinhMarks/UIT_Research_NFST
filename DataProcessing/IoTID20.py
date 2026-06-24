@@ -130,7 +130,7 @@ class IoTID20():
         """Read a CSV, auto-detect label column, and sample proportionally."""
         list_ss = []
         base_self.__print(f"DEBUG: Opening file {f}")
-        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, engine='python', on_bad_lines='warn')
+        peek_iter = pd.read_csv(f, index_col=None, header=0, chunksize=5000, on_bad_lines='warn')
         real_label_col = base_self.__target_variable
         for chunk in peek_iter:
             if real_label_col not in chunk.columns:
@@ -219,6 +219,10 @@ class IoTID20():
                 import opendatasets as od
                 print(f"Downloading from Kaggle via opendatasets: {url}")
                 od.download(url, data_dir=os.path.dirname(filename))
+                dataset_slug = url.split('/')[-1].split('?')[0]
+                downloaded_dir = os.path.join(os.path.dirname(filename), dataset_slug)
+                if os.path.isdir(downloaded_dir):
+                    return downloaded_dir
                 return filename
             except ImportError:
                 print("ERROR: To download from Kaggle, please install kagglehub (pip install kagglehub) or opendatasets.")

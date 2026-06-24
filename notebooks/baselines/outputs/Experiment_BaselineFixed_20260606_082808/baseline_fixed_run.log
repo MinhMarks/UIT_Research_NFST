@@ -1,0 +1,71 @@
+2026-06-06 08:28:08 | INFO | ============================================================
+2026-06-06 08:28:08 | INFO | BASELINE FIXED EXPERIMENT STARTED
+2026-06-06 08:28:08 | INFO | ============================================================
+2026-06-06 08:28:08 | INFO | 
+Processing data_EdgeIIoTset.csv with QuantileTransformer scaler...
+2026-06-06 08:28:08 | INFO | ..............................Data Overview................................
+2026-06-06 08:28:08 | INFO | Samples after noise: 31644 | Features: 52
+2026-06-06 08:28:08 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:28:28 | INFO | Results saved for data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:28:28 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:29:02 | INFO | Results saved for data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:29:02 | INFO | ..............................Data Overview................................
+2026-06-06 08:29:02 | INFO | Samples after noise: 31960 | Features: 52
+2026-06-06 08:29:02 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:29:10 | INFO | Results saved for data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:29:10 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:29:42 | INFO | Results saved for data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:29:42 | INFO | ..............................Data Overview................................
+2026-06-06 08:29:42 | INFO | Samples after noise: 32593 | Features: 52
+2026-06-06 08:29:42 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:29:52 | INFO | Results saved for data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:29:52 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:30:27 | INFO | Results saved for data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:30:27 | INFO | ..............................Data Overview................................
+2026-06-06 08:30:27 | INFO | Samples after noise: 33226 | Features: 52
+2026-06-06 08:30:27 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:30:38 | INFO | Results saved for data_EdgeIIoTset.csv with model SUOD
+2026-06-06 08:30:38 | INFO | 
+Running dataset data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:31:15 | INFO | Results saved for data_EdgeIIoTset.csv with model DeepSVDD
+2026-06-06 08:31:15 | INFO | 
+Processing data_IoTID20.csv with QuantileTransformer scaler...
+2026-06-06 08:31:15 | INFO | ..............................Data Overview................................
+2026-06-06 08:31:15 | INFO | Samples after noise: 27064 | Features: 91
+2026-06-06 08:31:15 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-06 08:31:27 | INFO | Results saved for data_IoTID20.csv with model SUOD
+2026-06-06 08:31:27 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:32:00 | INFO | Results saved for data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:32:00 | INFO | ..............................Data Overview................................
+2026-06-06 08:32:00 | INFO | Samples after noise: 27334 | Features: 91
+2026-06-06 08:32:00 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-06 08:32:11 | INFO | Results saved for data_IoTID20.csv with model SUOD
+2026-06-06 08:32:11 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:32:42 | INFO | Results saved for data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:32:42 | INFO | ..............................Data Overview................................
+2026-06-06 08:32:42 | INFO | Samples after noise: 27875 | Features: 91
+2026-06-06 08:32:42 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-06 08:32:53 | INFO | Results saved for data_IoTID20.csv with model SUOD
+2026-06-06 08:32:53 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:33:25 | INFO | Results saved for data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:33:25 | INFO | ..............................Data Overview................................
+2026-06-06 08:33:25 | INFO | Samples after noise: 28417 | Features: 91
+2026-06-06 08:33:25 | INFO | 
+Running dataset data_IoTID20.csv with model SUOD
+2026-06-06 08:33:35 | INFO | Results saved for data_IoTID20.csv with model SUOD
+2026-06-06 08:33:35 | INFO | 
+Running dataset data_IoTID20.csv with model DeepSVDD
+2026-06-06 08:34:07 | INFO | Results saved for data_IoTID20.csv with model DeepSVDD

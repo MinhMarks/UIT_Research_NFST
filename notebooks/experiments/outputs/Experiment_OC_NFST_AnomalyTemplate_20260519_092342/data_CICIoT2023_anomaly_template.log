@@ -1,0 +1,36 @@
+2026-05-19 09:23:42 | INFO | Run started at 20260519_092342
+2026-05-19 09:23:42 | INFO | Dataset prefix : data_CICIoT2023
+2026-05-19 09:23:42 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-05-19 09:23:42 | INFO | N_CLUSTERS     : range(1, 301, 3) — 100 values
+2026-05-19 09:23:42 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-05-19 09:23:42 | INFO | CSV output     : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/Experiment_OC_NFST_AnomalyTemplate_20260519_092342/data_CICIoT2023_anomaly_template.csv
+2026-05-19 09:23:42 | INFO | Log file       : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/Experiment_OC_NFST_AnomalyTemplate_20260519_092342/data_CICIoT2023_anomaly_template.log
+2026-05-19 09:23:42 | INFO | ------------------------------------------------------------
+2026-05-19 09:23:42 | INFO | 
+>>> Processing data_CICIoT2023 | scaler=StandardScaler
+2026-05-19 09:23:42 | INFO | --- noise=0% ---
+2026-05-19 09:23:42 | INFO | ============================================================
+2026-05-19 09:23:42 | INFO | Dataset  : Train_StandardScaler_data_CICIoT2023.csv
+2026-05-19 09:23:42 | INFO | Scaler   : StandardScaler
+2026-05-19 09:23:42 | INFO | Noise    : 0%
+2026-05-19 09:23:42 | INFO | nClusters: 100 values (1..298)
+2026-05-19 09:23:42 | INFO | ============================================================
+2026-05-19 09:23:42 | INFO | df_full shape: (99514, 41)
+2026-05-19 09:23:42 | INFO | Training size : 77,212  |  Testing size: 19,903  |  Features: 40
+2026-05-19 09:23:55 | INFO | [ncluster=1/1] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=0.162s  Test=11.733s  Peak RAM=86.989 MB
+2026-05-19 09:24:17 | INFO | [ncluster=4/4] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=0.153s  Test=21.429s  Peak RAM=86.811 MB
+2026-05-19 09:24:51 | INFO | [ncluster=7/7] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.104s  Test=28.376s  Peak RAM=86.809 MB
+2026-05-19 09:25:27 | INFO | [ncluster=10/10] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.091s  Test=27.330s  Peak RAM=86.814 MB
+2026-05-19 09:26:00 | INFO | [ncluster=13/13] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.015s  Test=26.368s  Peak RAM=86.809 MB
+2026-05-19 09:26:36 | INFO | [ncluster=16/16] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.175s  Test=25.363s  Peak RAM=86.81 MB
+2026-05-19 09:27:13 | INFO | [ncluster=19/19] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.086s  Test=27.512s  Peak RAM=86.81 MB
+2026-05-19 09:27:48 | INFO | [ncluster=22/22] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.058s  Test=25.750s  Peak RAM=86.81 MB
+2026-05-19 09:28:14 | INFO | [ncluster=25/25] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=0.574s  Test=20.278s  Peak RAM=86.811 MB
+2026-05-19 09:28:55 | INFO | [ncluster=28/28] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.047s  Test=30.915s  Peak RAM=86.811 MB
+2026-05-19 09:29:34 | INFO | [ncluster=31/31] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.050s  Test=27.672s  Peak RAM=86.811 MB
+2026-05-19 09:30:12 | INFO | [ncluster=34/34] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.036s  Test=26.510s  Peak RAM=86.812 MB
+2026-05-19 09:30:52 | INFO | [ncluster=37/37] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.087s  Test=24.909s  Peak RAM=86.813 MB
+2026-05-19 09:31:33 | INFO | [ncluster=40/40] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.025s  Test=25.457s  Peak RAM=86.813 MB
+2026-05-19 09:32:02 | INFO | [ncluster=43/43] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=0.878s  Test=16.377s  Peak RAM=86.814 MB
+2026-05-19 09:32:46 | INFO | [ncluster=46/46] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=0.987s  Test=27.691s  Peak RAM=86.814 MB
+2026-05-19 09:33:30 | INFO | [ncluster=49/49] AUC-ROC=50.00%  AUC-PR=3.02%  F1=0.0000  MCC=0.0000  Train=1.112s  Test=26.802s  Peak RAM=86.814 MB

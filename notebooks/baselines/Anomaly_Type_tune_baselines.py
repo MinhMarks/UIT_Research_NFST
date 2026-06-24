@@ -92,31 +92,31 @@ def evaluate_model(y_true, y_pred, y_probabilities=None):
 
 # Parameter Grid Definition
 PARAM_GRIDS = {
-    "CBLOF": [{"n_clusters": 10}, {"n_clusters": 50}, {"n_clusters": 100}, {"n_clusters": 150}],
-    "KNN": [{"n_neighbors": 5}, {"n_neighbors": 20}, {"n_neighbors": 50}],
-    "LOF": [{"n_neighbors": 5}, {"n_neighbors": 20}, {"n_neighbors": 50}],
-    "HBOS": [{"n_bins": 10}, {"n_bins": 50}, {"n_bins": 100}],
-    "IForest": [{"n_estimators": 50}, {"n_estimators": 100}, {"n_estimators": 200}],
-    "PCA": [{"n_components": 0.5}, {"n_components": 0.7}, {"n_components": 0.9}],
-    "OCSVM": [{"nu": 0.1}, {"nu": 0.5}], 
-    "AutoEncoder": [{"hidden_neurons": [64, 32, 32, 64], "epochs": 50}, {"hidden_neurons": [128, 64, 64, 128], "epochs": 50}],
-    "DIF": [{"n_ensemble": 50, "n_estimators": 6}, {"n_ensemble": 100, "n_estimators": 10}],
-    "NeuTraLAD": [{"latent_dim": 32, "enc_hdim": 32}, {"latent_dim": 64, "enc_hdim": 64}],
-    "DASVDD": [{"code_size": 32}, {"code_size": 64}],
-    "LODA": [{"n_bins": 10}, {"n_bins": 50}],
+    # "CBLOF": [{"n_clusters": 10}, {"n_clusters": 50}, {"n_clusters": 100}, {"n_clusters": 150}],
+    # "KNN": [{"n_neighbors": 5}, {"n_neighbors": 20}, {"n_neighbors": 50}],
+    # "LOF": [{"n_neighbors": 5}, {"n_neighbors": 20}, {"n_neighbors": 50}],
+    # "HBOS": [{"n_bins": 10}, {"n_bins": 50}, {"n_bins": 100}],
+    # "IForest": [{"n_estimators": 50}, {"n_estimators": 100}, {"n_estimators": 200}],
+    # "PCA": [{"n_components": 0.5}, {"n_components": 0.7}, {"n_components": 0.9}],
+    # "OCSVM": [{"nu": 0.1}, {"nu": 0.5}], 
+    # "AutoEncoder": [{"hidden_neurons": [64, 32, 32, 64], "epochs": 50}, {"hidden_neurons": [128, 64, 64, 128], "epochs": 50}],
+    # "DIF": [{"n_ensemble": 50, "n_estimators": 6}, {"n_ensemble": 100, "n_estimators": 10}],
+    "NeuTraLAD": [{"latent_dim": 32, "enc_hdim": 32, "batch_size": 64, "device": "cpu"}, {"latent_dim": 64, "enc_hdim": 64, "batch_size": 64, "device": "cpu"}],
+    # "DASVDD": [{"code_size": 32}, {"code_size": 64}],
+    # "LODA": [{"n_bins": 10}, {"n_bins": 50}],
     
-    # Models without obvious fast tuning parameters left default
-    "ALAD": [{}],
-    "COPOD": [{}],
-    "ECOD": [{}],
-    "VAE": [{"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 50}],
-    "SO_GAAL": [{}],
-    "MO_GAAL": [{}],
-    "SUOD": [{}],
-    "DeepSVDD": [{"hidden_neurons": [64, 32]}],
-    "LUNAR": [{"n_endpoints": 10}],
-    "AE1SVM": [{}],
-    "DevNet": [{}]
+    # # Models without obvious fast tuning parameters left default
+    "ALAD": [{"batch_size": 64, "device": "cpu"}],
+    # "COPOD": [{}],
+    # "ECOD": [{}],
+    "VAE": [{"encoder_neurons": [64, 32], "decoder_neurons": [32, 64], "epochs": 50, "batch_size": 64, "device": "cpu"}],
+    # "SO_GAAL": [{}],
+    # "MO_GAAL": [{}],
+    # "SUOD": [{}],
+    # "DeepSVDD": [{"hidden_neurons": [64, 32], "batch_size": 64, "device": "cpu"}],
+    # "LUNAR": [{"n_endpoints": 10}],
+    "AE1SVM": [{"batch_size": 64, "device": "cpu"}],
+    # "DevNet": [{"batch_size": 64, "device": "cpu"}]
 }
 
 def get_model(model_name, params):
@@ -202,6 +202,17 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, anomaly_mode,
                     
             except Exception as e:
                 print(f"  Error with {model_name}: {e}")
+            finally:
+                if 'model' in locals():
+                    del model
+                if 'y_pred' in locals():
+                    del y_pred
+                if 'y_probs' in locals():
+                    del y_probs
+                import gc
+                gc.collect()
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
         
         if best_row:
             pd.DataFrame([best_row]).to_csv(output_file_best, mode='a', header=not os.path.exists(output_file_best), index=False)
@@ -219,7 +230,9 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, anomaly_mode,
             process_model(m, p)
 
 if __name__ == "__main__": 
-    dataset_prefixes = ['BoTIoT', 'CICIoT2023', 'ToNIoT', 'N_BaIoT', 'EdgeIIoTset', 'IoTID20', 'FiveGNIDD']
+    # DATASETS = [ 'data_EdgeIIoTset', 'data_IoTID20']
+    dataset_prefixes = ['IoTID20']
+    # ['BoTIoT', 'CICIoT2023', 'ToNIoT', 'N_BaIoT', 'EdgeIIoTset', 'IoTID20', 'FiveGNIDD']
     scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
     anomaly_modes = ['local', 'cluster', 'global']
     

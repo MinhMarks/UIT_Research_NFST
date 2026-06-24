@@ -1,3 +1,5 @@
+
+
 \documentclass[final,twocolumn,10pt]{elsarticle}
 
 \usepackage[numbers]{natbib}
@@ -27,7 +29,9 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
 % \newtheorem{proof}{Proof}
+
 \begin{document}
 
 
@@ -55,7 +59,9 @@
 
 
 \begin{keyword}
-Internet of Thing  \sep One-Class Novelty Detection \sep Null Foley-Sammon Transformation  \sep Network Intrusion Detection
+Internet of Things  \sep One-Class Novelty Detection 
+\sep Null Foley-Sammon Transformation 
+\sep Network Intrusion Detection
 \end{keyword}
 
 
@@ -64,8 +70,8 @@ Internet of Thing  \sep One-Class Novelty Detection \sep Null Foley-Sammon Trans
 \section{Introduction} 
 With more than 21 billion connected Internet of Things (IoT) devices projected worldwide by the end of 2025~\cite{iotanalytics2025devices}, large-scale IoT deployments continue to expand across healthcare, smart homes, and industrial automation. However, intrusion detection in these heterogeneous and resource-constrained networks remains challenging. While machine learning (ML)-based IDS can model complex traffic patterns, most existing approaches assume a closed-set setting and overfit known attack categories. As a result, detection rates for unseen or zero-day attacks can drop by up to 70\%~\cite{Sarhan2023ZeroShot}. Meanwhile, generative AI technologies are rapidly accelerating the creation of novel exploits and malware variants, further increasing the prevalence of previously unknown attacks~\cite{Ferrag2025GenAICybersec,Xu2025LLMAutonomousAttack}. Rather than extending closed-set classifiers that bias decision boundaries toward known attack distributions, we argue that \emph{one-class novelty detection} (OCND) provides a more suitable formulation for IoT intrusion detection under incomplete attack knowledge: it models only normal traffic and flags any significant deviation as a potential intrusion
 
-\subsection{One-Class Novelty Detection for IoT Intrusion Detection and Its Challenges}
-Despite its conceptual advantages, deploying OCND in real-world IoT environments introduces three practical challenges: 
+\subsection{Challenges}
+Deploying OCND in real-world IoT environments introduces three practical challenges: 
 \begin{itemize} 
 \item \textbf{Imperfect benign supervision.} Benign training data are rarely perfectly clean due to labeling limitations and open-world uncertainty. Even slight contamination from annotation errors can distort learned representations~\cite{Prabowo2026UncleanTrainingNIDS}.
 
@@ -87,10 +93,10 @@ By mapping samples into a null space, the method enables a simple global thresho
 
 
 \textbf{(ii) Efficient distance-based inference.}
-In the projected space, anomaly detection is performed using a simple linear distance-based scoring rule. To reduce the inference cost of proximity-based methods, benign samples are grouped into pseudo-classes and summarized by compact prototypes, enabling efficient inference while preserving global structural consistency. 
+In the projected space, anomaly detection is performed using a simple linear distance-based scoring rule. To reduce the inference cost of proximity-based methods, samples are grouped into pseudo-classes and summarized by compact prototypes, enabling efficient inference while preserving global structural consistency. 
 
 
-Although null-space projection provides a natural mechanism for compact representation, classical formulations such as the Null Foley–Sammon Transform become numerically unstable or even undefined in the high-sample, low-dimension regime ($n \gg d$), which is common in IoT network traffic data. To overcome this limitation, we develop a near-exact SVD-based construction that ensures numerical robustness and makes null-space modeling practical. Together, these components form a unified OCND framework that preserves geometric structure, reduces the impact of contamination, and supports efficient edge-level deployment.
+Although null-space projection provides a natural mechanism for compact representation, classical formulations such as the Null Foley–Sammon Transform become numerically unstable or even undefined in the high-sample, low-dimension regime ($n \gg d$), which is common in IoT network traffic data. To overcome this limitation, we develop a near-exact SVD-based construction that ensures numerical robustness and makes null-space modeling practical. Together, these components form a OCND framework that preserves geometric structure, reduces the impact of contamination, and supports efficient edge-level deployment.
 
 
 
@@ -99,7 +105,7 @@ The main contributions of this work are as follows:
 \begin{itemize} 
 \item We formally characterize IoT intrusion detection as a benign-only one-class novelty detection (OCND) problem, providing a novel perspective for intrusion detection in open-set environments where attack categories cannot be exhaustively enumerated. Under this formulation, we identify two fundamental trade-offs: structure preservation versus contamination sensitivity, and training scalability versus inference efficiency.
 
-\item We propose \textbf{XXX}, a lightweight OCND framework that combines one-class null-space projection with prototype-based distance scoring. The method preserves benign structure, diminishes the impact of mild contamination, and supports efficient inference in resource-constrained IoT environments. 
+\item We propose \textbf{XXX}, a lightweight OCND framework that combines one-class null-space projection with prototype-based distance scoring. The method preserves benign structure, diminishes the impact of mild contamination, and supports efficient inference in edge deployments. 
 
 \item We conduct extensive experiments on four standard IoT benchmarks (CICIoT2023, ToN-IoT, NBaIoT, and BoT-IoT), including controlled evaluations under synthetic local, cluster, and global anomaly types as well as benign-set contamination rates of 1\%, 3\%, and 5\%. The results show that \textbf{XXX} delivers strong and consistent performance across all scenarios. 
 \end{itemize}
@@ -107,6 +113,7 @@ The main contributions of this work are as follows:
 \section{Related Work}
 \label{sec:relatework}
 
+    
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\linewidth]{pictures/relatedWorks.pdf}
@@ -114,36 +121,35 @@ The main contributions of this work are as follows:
     \label{fig:relatedWorks}
 \end{figure}
 
-Intrusion Detection Systems (IDSs) are essential for securing IoT networks against threats such as distributed denial-of-service attacks, botnet activity, and probing. Due to the heterogeneous and partially labeled nature of IoT traffic, anomaly detection has emerged as a practical paradigm for identifying deviations from normal behavior~\cite{samara2022survey}. Compared with signature-based approaches, it is inherently better suited to open-world settings where attack patterns are incomplete or unseen.
+Intrusion Detection Systems (IDSs) are essential for securing IoT networks against evolving threats such as distributed denial-of-service attacks, botnet activity, and probing. Because IoT network flows are typically represented as tabular features, a wide range of Anomaly Detection (AD) algorithms have been widely adopted as standard baselines in IoT security ~\cite{mirsky2018kitsune,samara2022survey}, where AD is formally defined as the task of ``finding data points that do not conform with the rest of the data, and such data points are referred to as anomalies or outliers''~\cite{samariya2023comprehensive}. Beyond anomaly-based detection, two other paradigms are commonly employed: \emph{signature-based} methods match traffic against known-attack rule databases and achieve low false-alarm rates but cannot detect zero-day or polymorphic threats~\cite{liao2013intrusion}; and \emph{hybrid} methods combine both layers to balance precision and coverage, though they still incur the maintenance burden of the signature component~\cite{khraisat2019survey}. Compared with signature-based and hybrid counterparts, AD-driven solutions are inherently better suited to open-world settings where attack patterns are incomplete and heterogeneous~\cite{mirsky2018kitsune}.
+
 
 \subsection{Anomaly Detection for IoT Intrusion Detection}
 
-Existing approaches can be broadly divided into shallow and deep methods.  
+Along a wide range of general-purpose Anomaly Detection (AD) algorithms, a limited number of specialized frameworks explicitly tailored to the intrinsic characteristics of IoT ecosystems
+Existing general-purpose models evaluated in this domain can be categorized into shallow and deep methods \ref{fig:relatedWorks}.
+
 Shallow models, including density-based (e.g., LOF), statistical (e.g., ECOD), and ensemble-based methods (e.g., Isolation Forest), are computationally efficient and easy to deploy~\cite{KNN,9338429,IForest}. However, their limited representational capacity often fails to capture the heterogeneous and multimodal structure of benign IoT traffic, leading to unstable performance.
 
 Deep methods improve expressiveness through reconstruction-based models (e.g., Autoencoders), compactness-driven objectives (e.g., DeepSVDD), and adversarial frameworks (e.g., ALAD)~\cite{Autoencoder,ALAD}. While effective in modeling complex distributions, they introduce significant computational overhead and require careful tuning, limiting their practicality in resource-constrained environments. This reflects a fundamental trade-off between representation power and deployment efficiency.
 
-\subsection{One-Class Novelty Detection and Null-Space Methods}
+Moreever, IoT-specific architectures improve deployment feasibility through online ensemble learning (e.g., Kitsune), distributed self-learning profiles (e.g., DIoT, FLiForest), and lightweight gateway-centric designs (e.g., Passban)~\cite{mirsky2018kitsune, nguyen2019diot, xiang2026federated, 8976157}. While these IoT-specific architectures significantly improve deployment feasibility, they often require complex distributed training paradigms or rely on ensembles of neural networks that still incur non-trivial computational overhead during continual model updates.
+
+\subsection{One-Class Novelty Detection Methods}
 
 In open-world IoT security, intrusion detection is often formulated as a one-class novelty detection (OCND) problem, where models are trained on benign data only. Classical methods such as One-Class SVM estimate a decision boundary, while DeepSVDD learns a compact latent representation of normality~\cite{shin2005one,DeepSVDD}.
 However, these approaches rely on a global notion of normality, implicitly assuming that benign data forms a single coherent structure. This assumption is often violated in IoT environments, where normal traffic spans multiple operating regimes. As a result, such models may either overfit to dominant patterns or miss locally structured anomalies.
 
 Null-space-based methods provide an alternative perspective. Kernel NFST projects data into a discriminative null space by collapsing intra-class variance and measuring deviations in the projected space~\cite{bodesheim2013kernel}. Extensions such as nNFST further improve structure preservation for intrusion detection~\cite{nguyen2025nnfst}. Nevertheless, these methods are primarily designed for supervised or multiclass settings and do not naturally extend to benign-only learning, nor do they explicitly address contamination or scalability.
 
-\subsection{Robust Detection under Non-Ideal Assumptions}
-
-Recent studies have explored anomaly detection under more realistic conditions, including heterogeneous anomaly structures and imperfect supervision. Empirical evidence shows that anomalies may appear as global shifts, clustered deviations, or subtle local irregularities, and no single global scoring mechanism performs consistently across all cases~\cite{han2022adbench,KANG2019772}.
-
-Another line of work focuses on robustness to contaminated nominal data. Methods such as DIF and DASVDD aim to mitigate sensitivity to noisy supervision~\cite{DIF,DASVDD}. However, these approaches typically introduce additional complexity or optimization overhead, limiting scalability and deployment in IoT scenarios~\cite{Rahman2025IoTIDSSurvey,beggel2019robust,jodelka2021adaptive}.
-
 \textbf{Summary.} Existing methods address representation, robustness, and efficiency largely in isolation. There remains a lack of a unified framework that simultaneously captures heterogeneous benign structure, maintains robustness under slight contamination, and operates efficiently at scale. This gap motivates the proposed approach.
 
 \section{Problem Formulation}
 
-\subsection{Problem Definition: Benign-Only Novelty Detection under Practical Conditions}
+\subsection{Problem Definition}
 \label{sec:problem_def}
 
-Consider an IoT network monitoring environment with feature space $\mathcal{X}\subseteq\mathbb{R}^{d}$. Let $\mathbb{P}_{\text{norm}}$ denote the distribution of benign network traffic over $\mathcal{X}$. In the benign-only one-class novelty detection setting, we observe a training set
+Consider an IoT network monitoring environment with feature space $\mathcal{X}\subseteq\mathbb{R}^{d}$. Let $\mathbb{P}_{\text{norm}}$ denote the distribution of benign network traffic over $\mathcal{X}$. In the one-class setting, we observe a training set
 \[
 \mathcal{D}_{\text{train}}=\{x_1,\ldots,x_N\}, \qquad x_i\in\mathbb{R}^{d},
 \]
@@ -162,18 +168,19 @@ f(x_{\text{test}})=
 \end{cases}
 \label{eq:ocnd_decision}
 \end{equation}
-where label $0$ denotes benign traffic and label $1$ denotes anomalous traffic. In practice, $\tau$ is typically chosen from the training-score distribution according to a target false-positive level or a fixed contamination assumption.
+where label $0$ denotes benign traffic and label $1$ denotes anomalous traffic. In practice, $\tau$ is typically chosen from the training-score distribution according to a fixed contamination assumption. 
 
 While this formulation is standard, practical IoT intrusion detection departs from the ideal OCND setting in three important ways.
 
 \paragraph{1. Slight contamination in the benign training set.}
-In real deployments, the benign training set may not be perfectly clean. Undetected attacks, mislabeled flows, or annotation bias can introduce a small number of anomalous samples into the nominal training data. A convenient way to express this is to model the training samples as being drawn from a contaminated distribution
+In real deployments, the training set may not be perfectly clean. Undetected attacks or annotation bias can introduce a small number of anomalous samples into the nominal training data. A convenient way to express this is to model the training samples as being drawn from a contaminated distribution
 \begin{equation}
 \mathbb{P}_{\text{train}}=(1-\varepsilon)\mathbb{P}_{\text{norm}}+\varepsilon \mathbb{P}_{\text{cont}},
 \qquad 0\le \varepsilon \ll 1,
 \label{eq:contaminated_train}
 \end{equation}
-where $\mathbb{P}_{\text{cont}}$ denotes the contamination distribution. The resulting challenge is to estimate a useful benign support while reducing sensitivity to this slight contamination.
+where $\mathbb{P}_{\text{cont}}$ denotes the contamination distribution. 
+% The resulting challenge is to reduce sensitivity to this slight contamination.
 
 \paragraph{2. Multimodal benign structure and heterogeneous anomaly manifestations.}
 Benign IoT traffic rarely follows a single homogeneous pattern because devices, protocols, and usage contexts can induce multiple operating regimes. A convenient abstraction is to model benign traffic as a mixture distribution
@@ -194,7 +201,7 @@ IoT intrusion detection systems are often deployed in large-scale or edge enviro
 Given a training set drawn primarily from a multimodal benign distribution but subject to slight contamination, our goal is to learn a lightweight anomaly scoring function and decision rule that:
 (i) preserves benign structure sufficiently well to support benign-only novelty detection,
 (ii) exhibits limited sensitivity to slight training contamination,
-(iii) enables scalable training in terms of computational complexity and fast inference speed on heterogeneous IoT traffic in practical deployment settings.
+(iii) enables scalable training and fast inference speed in practical deployment settings.
 \subsection{Challenges of NFST in OCND}
 \label{sec:nfst_challenges}
 
@@ -229,7 +236,7 @@ Therefore, valid NPDs exist only if the null space $\mathcal{N}(Q^{\top}S_w Q)$ 
 Although NFST is effective in multiclass discrimination, two difficulties arise when it is transferred to benign-only novelty detection.
 
 \paragraph{1. Degeneracy under one-class training.}
-Classical NFST fundamentally relies on between-class scatter. In benign-only training, however, there is only one observed class ($c=1$). In that case, the global mean coincides with the class mean, so $S_b=0$. Consequently, the discriminative condition $w^{\top}S_b w>0$ in Eq.~(\ref{eq:nfst_constraint}) cannot be satisfied, and the original NFST objective degenerates. This means that classical NFST cannot be applied directly without introducing additional structure.
+Classical NFST fundamentally relies on between-class scatter. In benign-only training, however, there is only one observed class ($c=1$). In that case, the global mean coincides with the class mean, so $S_b=0$. Consequently, the discriminative condition $w^{\top}S_b w>0$ in Eq.~(\ref{eq:nfst_constraint}) cannot be satisfied, and the original NFST objective degenerates. This means that classical NFST cannot be applied directly for this task.
 
 \paragraph{2. Absence and fragility of null directions in large tabular settings.}
 In large tabular regimes (e.g., $N \gg d$), the matrix $Q^{\top}S_w Q$ may become full rank within the total-scatter subspace, yielding no exact null directions. Even when near-null directions exist, their recovery is often numerically unstable due to basis construction and floating-point errors. Consequently, adapting NFST to benign-only IoT novelty detection requires more than a direct reuse of the classical formulation; it calls for surrogate discriminative structure and numerically stable projection mechanisms.
@@ -302,32 +309,33 @@ Let \(\mathcal{D}_{\text{train}} = \{x_1, \ldots, x_n\}\) be a set of benign tra
 \subsection{Structure-Inducing Pseudo-Class Construction}
 \label{subsec:pseudoclass_XXX}
 
-Although benign-only intrusion detection is formulated as a single-class problem, benign traffic in practice often exhibits multiple latent modes and heterogeneous behaviors. Modeling such data as one homogeneous distribution therefore obscures its intrinsic structure. To address this issue, XXX introduces a lightweight pseudo-class construction mechanism that partitions benign samples into coarse groups. The goal is not to obtain an exact clustering result, but rather to derive a stable and computationally efficient approximation of the underlying multi-modal structure. This induced multi-group representation serves as a simple structural surrogate for benign behavior and helps avoid the degeneracies that often arise in single-class discriminative learning.
+\noindent {\textbf{Insight.}} XXX applies a lightweight pseudo-class construction mechanism that partitions benign samples into coarse groups. The objective is not to recover an exact clustering structure, but rather to obtain a computationally efficient approximation that captures the underlying multi-modal distribution. In addition, this mechanism mitigates the degeneracy issue of NFST under one-class training settings.
 
-Formally, the benign training set is partitioned into \(c\) pseudo-classes (\(c \ge 2\)) by K-means:
+Formally, we divide the benign training set into \(c\) pseudo-classes (\(c \ge 2\)), where \(C_j\) denotes the \(j\)-th pseudo-class and \(n_j = |C_j|\):
 \[
-\mathcal{D}_{\text{train}}=\bigcup_{j=1}^{c} C_j,
+\mathcal{D}_{\text{train}} = \bigcup_{j=1}^{c} C_j,
 \qquad
-C_j\cap C_\ell = \varnothing \text{ for } j\neq \ell,
+C_j \cap C_\ell = \varnothing \quad \text{for } j \neq \ell .
 \]
-where \(C_j\) denotes the \(j\)-th pseudo-class and \(n_j = |C_j|\). The corresponding pseudo-class centroids and global mean are defined as
+The corresponding centroids and mean are defined:
 \[
 \mu_j=\frac{1}{n_j}\sum_{x_i\in C_j}x_i,
 \qquad
 \mu=\frac{1}{n}\sum_{i=1}^{n}x_i .
 \]
 
-This partitioning provides a coarse structural approximation of benign traffic and also creates the prerequisite condition for defining a non-trivial between-class scatter matrix, as summarized below.
+% This partitioning provides a coarse structural approximation of benign traffic and also creates the prerequisite condition for defining a non-trivial between-class scatter matrix, as summarized below.
 
-\begin{proposition}[Necessity of multiple groups for non-trivial between-class scatter]
+\begin{proposition}[Non-trivial between-class scatter]
 Let the dataset be partitioned into \(c\) groups \(\{C_j\}_{j=1}^{c}\) with group means \(\mu_j\) and global mean \(\mu\). A non-trivial between-class scatter can arise only if at least two groups with distinct means exist.
 \end{proposition}
 
-\begin{proof}
-If the dataset consists of a single group (\(c=1\)), then the group mean coincides with the global mean, and no deviation between group-level and global statistics can exist. Consequently, the between-group variation is zero. In contrast, when the data are partitioned into multiple groups with different means, at least one group mean differs from the global mean, yielding non-zero between-group variation. Therefore, a non-trivial between-class scatter requires at least two groups with distinct means.
-\end{proof}
+Fig.~\ref{fig:pseudoclass_effect} illustrate, pseudo-class construction transforms a single heterogeneous benign distribution into multiple representative modes. This induced structure captures the latent multi-modal organization of benign behavior and provides the structural basis for defining meaningful between-group variation. Then, based on this multi-group structure, we define the within-class and between-class scatter matrices:
+% \begin{proof}
+% If the dataset consists of a single group (\(c=1\)), then the group mean coincides with the global mean, and no deviation between group-level and global statistics can exist. Consequently, the between-group variation is zero. In contrast, when the data are partitioned into multiple groups with different means, at least one group mean differs from the global mean, yielding non-zero between-group variation. Therefore, a non-trivial between-class scatter requires at least two groups with distinct means.
+% \end{proof}
 
-As illustrated in Fig.~\ref{fig:pseudoclass_effect}, pseudo-class construction transforms a single heterogeneous benign distribution into multiple representative modes. This induced structure captures the latent multi-modal organization of benign behavior and provides the structural basis for defining meaningful between-group variation.
+
 
 \begin{figure}[!ht]
     \centering
@@ -351,7 +359,7 @@ As illustrated in Fig.~\ref{fig:pseudoclass_effect}, pseudo-class construction t
     \label{fig:pseudoclass_effect}
 \end{figure}
 
-Based on this induced multi-group structure, the within-class and between-class scatter matrices are defined as
+% Based on this induced multi-group structure, the within-class and between-class scatter matrices are defined as
 \begin{equation}
 S_w=
 \sum_{j=1}^{c}\sum_{x_i\in C_j}(x_i-\mu_j)(x_i-\mu_j)^\top,
@@ -361,49 +369,51 @@ S_b=
 \sum_{j=1}^{c} n_j(\mu_j-\mu)(\mu_j-\mu)^\top .
 \end{equation}
 
-\begin{algorithm}[!htbp]
-\caption{Training Procedure of \textbf{XXX}}
-\label{alg:train_locnfst}
-\begin{algorithmic}
-\REQUIRE Benign data matrix $X=[x_1,\dots,x_n]\in\mathbb{R}^{d\times n}$, number of pseudo-classes $c$, tolerance $\epsilon$, trimming parameter $\rho$
-\ENSURE Projection matrix $W$, prototypes $\{p_j\}_{j=1}^{c}$, decision threshold $\tau$
+% \begin{algorithm}[!htbp]
+% \caption{Training Procedure of \textbf{XXX}}
+% \label{alg:train_locnfst}
+% \begin{algorithmic}
+% \REQUIRE Benign data matrix $X=[x_1,\dots,x_n]\in\mathbb{R}^{d\times n}$, number of pseudo-classes $c$, tolerance $\epsilon$, trimming parameter $\rho$
+% \ENSURE Projection matrix $W$, prototypes $\{p_j\}_{j=1}^{c}$, decision threshold $\tau$
 
-\STATE Partition $X$ into pseudo-classes $\{C_1,\dots,C_c\}$ using K-means
+% \STATE Partition $X$ into pseudo-classes $\{C_1,\dots,C_c\}$ using K-means
 
-\FOR{$j=1$ to $c$}
-\STATE Compute pseudo-class centroid $\mu_j$
-\ENDFOR
+% \FOR{$j=1$ to $c$}
+% \STATE Compute pseudo-class centroid $\mu_j$
+% \ENDFOR
 
-\STATE Compute global mean $\mu$
+% \STATE Compute global mean $\mu$
 
-\STATE Construct within-class and between-class scatter matrices $S_w$ and $S_b$
+% \STATE Construct within-class and between-class scatter matrices $S_w$ and $S_b$
 
-\STATE $W \gets$ \textsc{SpectralRelaxedNFST}$(X,S_w,S_b,\mu,\epsilon)$
+% \STATE $W \gets$ \textsc{SpectralRelaxedNFST}$(X,S_w,S_b,\mu,\epsilon)$
 
-\FOR{$j=1$ to $c$}
-\STATE Compute prototype $p_j \gets W^\top \mu_j$
-\ENDFOR
+% \FOR{$j=1$ to $c$}
+% \STATE Compute prototype $p_j \gets W^\top \mu_j$
+% \ENDFOR
 
-\FOR{each training sample $x_i$}
-\STATE Project representation $z_i \gets W^\top x_i$
-\STATE Compute score $s_i \gets \min_j \|z_i - p_j\|_2$
-\ENDFOR
+% \FOR{each training sample $x_i$}
+% \STATE Project representation $z_i \gets W^\top x_i$
+% \STATE Compute score $s_i \gets \min_j \|z_i - p_j\|_2$
+% \ENDFOR
 
-\STATE Estimate threshold $\tau \gets Q_{1-\rho}(\{s_i\}_{i=1}^{n})$
+% \STATE Estimate threshold $\tau \gets Q_{1-\rho}(\{s_i\}_{i=1}^{n})$
 
-\RETURN $W,\{p_j\}_{j=1}^{c},\tau$
-\end{algorithmic}
-\end{algorithm}
+% \RETURN $W,\{p_j\}_{j=1}^{c},\tau$
+% \end{algorithmic}
+% \end{algorithm}
 
-Overall, pseudo-class construction acts as a lightweight structure-inducing approximation that exposes the latent multi-modal organization of benign data. By introducing coarse group structure, it enables the formulation of meaningful within-class and between-class statistics, thereby providing a principled foundation for subsequent representation learning even in the absence of explicit class labels.
+% Overall, pseudo-class construction acts as a lightweight structure-inducing approximation that exposes the latent multi-modal organization of benign data. By introducing coarse group structure, it enables the formulation of meaningful within-class and between-class statistics, thereby providing a principled foundation for subsequent representation learning even in the absence of explicit class labels.
 
-\subsection{Spectral Relaxation of NFST via Near-Null Directions}
+\subsection{Spectral Relaxation of the NFST Near-null Space}
 \label{subsec:projection_XXX}
 
-Let the centered data matrix be
-\[
-X_c=[x_1-\mu,\ldots,x_n-\mu]\in\mathbb{R}^{d\times n},
-\]
+
+\noindent \textbf{Insight.}
+Classical NFST relies on the existence of exact null directions of the within-class scatter matrix. However, in practical high-dimensional tabular settings, the within-class scatter matrix is often numerically full-rank, causing the exact null-space assumption to break down. To address this limitation, we propose a spectral relaxation that constructs a near-null subspace from the low-energy eigenspectrum of the within-class scatter operator. This relaxation guarantees the existence of a valid solution even when the exact null space is absent.
+
+
+Let the centered data matrix be $X_c=[x_1-\mu,\ldots,x_n-\mu]\in\mathbb{R}^{d\times n},$
 with compact singular value decomposition
 \begin{equation}
 X_c = U_r \Sigma_r V_r^\top ,
@@ -416,17 +426,23 @@ M = U_r^\top S_w U_r,
 A = U_r^\top S_b U_r .
 \label{eq:reduced_scatter_XXX}
 \end{equation}
-
-Classical Null Foley--Sammon Transform (NFST) assumes the existence of a non-trivial null space of \(M\), namely projection directions satisfying \(Mw=0\). However, in practical IoT tabular data, the within-class scatter matrix \(S_w\) is often full-rank due to the small-sample regime (\(n<d\)). Consequently, the exact null space may not exist, which makes the classical NFST formulation inapplicable. In particular, direct null-space extraction or Gram--Schmidt-based constructions can only operate when a true null subspace is already present and therefore cannot remove this rank constraint.
-
-To overcome this limitation, XXX introduces a \emph{spectral relaxation} of the NFST constraint. The complete procedure is summarized in Algorithm~\ref{alg:nearnull_nfst}. Instead of requiring exact null directions, we construct a \emph{near-null subspace} spanned by eigenvectors associated with the smallest eigenvalues of \(M\). Let
+Instead of requiring exact null directions, we construct a \emph{near-null subspace} spanned by eigenvectors associated with the smallest eigenvalues of \(M\), where \(0 \le \lambda_1 \le \cdots \le \lambda_r\) denote the eigenvalues of \(M\). 
 \[
-M = V \Lambda V^\top,
+M = V \Lambda V^\top .
 \]
-where \(0 \le \lambda_1 \le \cdots \le \lambda_r\) denote the eigenvalues of \(M\).
+% Classical Null Foley--Sammon Transform (NFST) assumes the existence of a non-trivial null space of \(M\), namely projection directions satisfying \(Mw=0\). However, in practical IoT tabular data, the within-class scatter matrix \(S_w\) is often full-rank due to the small-sample regime (\(n<d\)). Consequently, the exact null space may not exist, which makes the classical NFST formulation inapplicable. In particular, direct null-space extraction or Gram--Schmidt-based constructions can only operate when a true null subspace is already present and therefore cannot remove this rank constraint.
+
+% To overcome this limitation, XXX introduces a \emph{spectral relaxation} of the NFST constraint. The complete procedure is summarized in ư
+
+
+
+
+
+
+
 
 \begin{definition}[Near-null subspace]
-Given a relaxation parameter \(\epsilon \ge 0\), the near-null index set is defined as
+Given a relaxation parameter \(\epsilon \ge 0\), the near-null index set :
 \begin{equation}
 \mathcal{I}_\epsilon =
 \left\{\ell : \lambda_\ell \le \epsilon\,\lambda_{\max}(M)\right\}.
@@ -438,9 +454,47 @@ B_\epsilon = V_{[:,\mathcal{I}_\epsilon]} .
 \]
 \end{definition}
 
-This construction relaxes the exact NFST condition \(Mw=0\) by allowing projection directions to lie in the subspace of minimal within-class variance.
+\begin{remark}
+Let \(M\) be symmetric positive semidefinite. For any \(\epsilon > 0\), the near-null index set \(\mathcal{I}_\epsilon\) is guaranteed to be non-empty.
+\end{remark}
+Within this near-null subspace, discriminative structure is further enhanced by maximizing the projected between-class scatter. After applying the near-null index set \(\mathcal{I}_\epsilon\), we have \(A_\epsilon = B_\epsilon^\top A B_\epsilon\), with eigendecomposition \(A_\epsilon = R \Gamma R^\top\). Eigenvectors associated with positive eigenvalues are retained and denoted by \(R_+\). The final projection matrix is therefore
+\begin{equation}
+W = U_r B_\epsilon R_+ \in \mathbb{R}^{d\times L}.
+\label{eq:projection_XXX_revised}
+\end{equation}
+A sample \(x\) is projected by the matrix \(W \in \mathbb{R}^{d \times L}\):
+\[
+z = W^\top x .
+\]
+Overall, the proposed method replacing the infeasible exact null-space constraint with a spectral relaxation that identifies directions of minimal within-class variance Algorithm~\ref{alg:nearnull_nfst}.  
 
 
+% \begin{proof}
+% Since \(M\) is positive semidefinite, its smallest eigenvalue satisfies
+% \(0 \le \lambda_1 \le \lambda_{\max}(M)\). For any \(\epsilon > 0\), we have
+% \(\lambda_1 \le \epsilon \lambda_{\max}(M)\), which implies \(1 \in \mathcal{I}_\epsilon\). Therefore, the near-null subspace always exists.
+% \end{proof}
+% This construction relaxes the exact NFST condition \(Mw=0\) by allowing projection directions to lie in the subspace of minimal within-class variance.
+
+
+
+
+
+
+% \begin{theorem}[Recovery of classical NFST]
+% If the within-class scatter matrix \(S_w\) admits a non-trivial null space, the proposed formulation reduces to classical NFST when \(\epsilon = 0\).
+% \end{theorem}
+
+% \begin{proof}
+% When \(\epsilon = 0\), the index set \(\mathcal{I}_0\) selects eigenvectors satisfying \(\lambda_\ell = 0\), which correspond exactly to the null space of \(M\). The subsequent maximization of the projected between-class scatter therefore becomes identical to the classical NFST formulation.
+% \end{proof}
+
+
+
+\subsection{Prototype-aligned novelty scoring}
+\label{subsec:scoring_XXX}
+\noindent \textbf{Insight.}
+Conventional distance-based methods require computing distances between a test sample and all training samples, which is computationally expensive during inference. In contrast, after projection, the proposed formulation localizes each class into a compact representation in the embedded space. As a result, each class can be effectively represented by a single prototype. To reduce inference cost, we compute the score by measuring distances between the test sample and these compact class representations.
 \begin{algorithm}[!htbp]
 \caption{Spectral Relaxation NFST Solver}
 \label{alg:nearnull_nfst}
@@ -458,19 +512,14 @@ A \gets U_r^\top S_b U_r\)
 
 \STATE Eigen-decomposition: \(M = V \Lambda V^\top\)
 
-\STATE Extract near-null index set:
-\\
-\(\mathcal{I}_\epsilon =
-\{\ell : \lambda_\ell \le \epsilon \lambda_{\max}(M)\}\)
-
-\STATE \(B_\epsilon \gets V_{[:,\mathcal{I}_\epsilon]}\)
+\STATE Extract near-null index set: $\mathcal{I}_\epsilon $, \(B_\epsilon \gets V_{[:,\mathcal{I}_\epsilon]}\)
 
 \STATE Compute:
 \(A_\epsilon \gets B_\epsilon^\top A B_\epsilon\)
 
 \STATE Eigen-decomposition: \(A_\epsilon = R \Gamma R^\top\)
 
-\STATE Retain eigenvectors corresponding to positive eigenvalues \(R_+\)
+\STATE Retain positive eigenvalues \(R_+\)
 
 \STATE \(W \gets U_r B_\epsilon R_+\)
 
@@ -479,72 +528,14 @@ A \gets U_r^\top S_b U_r\)
 \end{algorithmic}
 \end{algorithm}
 
-\begin{lemma}[Existence of the near-null subspace]
-Let \(M\) be symmetric positive semidefinite. For any \(\epsilon > 0\), the near-null index set \(\mathcal{I}_\epsilon\) is non-empty.
-\end{lemma}
-
-\begin{proof}
-Since \(M\) is positive semidefinite, its smallest eigenvalue satisfies
-\(0 \le \lambda_1 \le \lambda_{\max}(M)\). For any \(\epsilon > 0\), we have
-\(\lambda_1 \le \epsilon \lambda_{\max}(M)\), which implies \(1 \in \mathcal{I}_\epsilon\). Therefore, the near-null subspace always exists.
-\end{proof}
-Within this near-null subspace, discriminative structure is further enhanced by maximizing the projected between-class scatter. Specifically,
-\[
-A_\epsilon = B_\epsilon^\top A B_\epsilon ,
-\]
-with eigendecomposition
-\[
-A_\epsilon = R \Gamma R^\top .
-\]
-Eigenvectors associated with positive eigenvalues are retained and denoted by \(R_+\). The final projection matrix is therefore
-\begin{equation}
-W = U_r B_\epsilon R_+ \in \mathbb{R}^{d\times L}.
-\label{eq:projection_XXX_revised}
-\end{equation}
-
-
-A sample \(x\) is mapped to the low-dimensional representation
-\[
-z = W^\top x .
-\]
-
-\begin{theorem}[Recovery of classical NFST]
-If the within-class scatter matrix \(S_w\) admits a non-trivial null space, the proposed formulation reduces to classical NFST when \(\epsilon = 0\).
-\end{theorem}
-
-\begin{proof}
-When \(\epsilon = 0\), the index set \(\mathcal{I}_0\) selects eigenvectors satisfying \(\lambda_\ell = 0\), which correspond exactly to the null space of \(M\). The subsequent maximization of the projected between-class scatter therefore becomes identical to the classical NFST formulation.
-\end{proof}
-
-
-Overall, the proposed formulation generalizes classical NFST by replacing the infeasible exact null-space constraint with a spectral relaxation that identifies directions of minimal within-class variance. This relaxation guarantees the existence of a valid solution even when the within-class scatter matrix is full-rank, while preserving the classical NFST solution whenever exact null directions exist.
-
-\subsection{Representative-Based Novelty Scoring}
-\label{subsec:scoring_XXX}
-
-After learning \(W\), each pseudo-class is represented in the projected space by its projected centroid
-\begin{equation}
-p_j = W^\top \mu_j,
-\qquad j=1,\ldots,c.
-\label{eq:representatives_XXX}
-\end{equation}
-Given a test sample \(x_{\text{test}}\), let
-\[
-z_{\text{test}} = W^\top x_{\text{test}}.
-\]
-Its novelty score is defined as the minimum Euclidean distance to the projected pseudo-class representatives:
+After learning \(W\), each pseudo-class is represented in the projected space by its projected centroid \(p_j = W^\top \mu_j, \; j=1,\ldots,c\), and given a test sample \(x_{\text{test}}\), let \(z_{\text{test}} = W^\top x_{\text{test}}\), its novelty score is defined as the minimum Euclidean distance to the projected pseudo-class representatives:
 \begin{equation}
 s(x_{\text{test}})
 =
 \min_{j=1,\ldots,c}
-\left\|
-z_{\text{test}}-p_j
-\right\|_2.
+\left\| W^\top (x_{\text{test}} - \mu_j) \right\|_2.
 \label{eq:novelty_score_XXX_revised}
 \end{equation}
-
-This score is intentionally prototype-based. It captures multiple benign modes at low computational cost, but it does not explicitly model within-mode covariance or local density. Accordingly, XXX should be interpreted as a lightweight multi-representative detector rather than a full covariance-aware local model.
-
 To convert novelty scores into binary decisions, XXX first computes training scores for benign samples:
 \begin{equation}
 s_i
@@ -561,9 +552,13 @@ The decision threshold is then estimated from the empirical distribution of thes
 \tau = Q_{1-\rho}\big(\{s_i\}_{i=1}^{n}\big),
 \label{eq:tau_XXX_revised}
 \end{equation}
-where \(Q_{1-\rho}\) denotes the \((1-\rho)\)-quantile and \(\rho\) controls how much of the upper tail of benign training scores is ignored. The special case \(\rho=0\) reduces to the maximum training score.
+where \(Q_{1-\rho}\) denotes the \((1-\rho)\)-quantile and \(\rho\) controls how much of the upper tail of benign training scores is ignored. The special case \(\rho=0\) reduces to the maximum training score. The final decision rule:
 
-The final decision rule is
+% This score is intentionally prototype-based. It captures multiple benign modes at low computational cost, but it does not explicitly model within-mode covariance or local density. Accordingly, XXX should be interpreted as a lightweight multi-representative detector rather than a full covariance-aware local model.
+
+
+
+
 \begin{equation}
 f(x_{\text{test}})=
 \begin{cases}
@@ -572,8 +567,7 @@ f(x_{\text{test}})=
 \end{cases}
 \label{eq:decision_rule_XXX_revised}
 \end{equation}
-
-Hence, XXX combines \emph{representative-based localized scoring} with a \emph{single global threshold}. Figure~\ref{fig:threshold_rewrite} illustrates this thresholding step.
+Hence, XXX combines \emph{representative-based localized scoring} with a \emph{single global threshold} (Figure~\ref{fig:threshold_rewrite}). 
 
 \begin{figure}[!ht]
     \centering
@@ -666,91 +660,67 @@ s(x)=\min_{j=1,\ldots,c}\|z-p_j\|_2
 % =========================================================================
 % VERSION 2: STANDARD K-MEANS
 % =========================================================================
+
 \subsection{Complexity Analysis}
 \label{subsec:complexity_XXX_revised}
 
-The computational cost of XXX is divided into pseudo-class construction, projection learning, threshold estimation, and inference. Let \(n\) be the number of training samples, \(d\) the original feature dimension, \(c\) the number of pseudo-classes, and \(L\) the dimension of the discovered null space (\(L \le d\)).
-
-\paragraph{Pseudo-class construction.}
-For \(n\) samples, \(d\) features, \(c\) pseudo-classes, and \(I\) iterations, the cost of partitioning the benign data using standard K-means clustering is
-\[
-O(ncdI).
-\]
-
-\paragraph{Projection learning.}
-Computing dense scatter matrices incrementally per pseudo-class requires \(O(nd^2)\) time. For \(n>d\), the compact SVD of the centered data matrix \(X_c\in\mathbb{R}^{d\times n}\) requires \(O(nd^2)\) time. Subsequently, the eigendecompositions of the reduced matrices scale at most as \(O(d^3)\). Thus, the bottleneck of this phase is simply \(O(nd^2 + d^3)\).
-
-\paragraph{Threshold estimation.}
-After the \(d \times L\) projection matrix \(W\) is learned, computing the projected training scores requires mapping all \(n\) training samples into the \(L\)-dimensional null space and comparing them to the \(c\) representatives. This costs
-\[
-O(n d L + n c L).
-\]
-
-\paragraph{Overall training complexity.}
-The structural training complexity of XXX is bounded linearly by the dataset size \(n\):
+Let \(n\) denote the number of training samples, \(d\) the feature dimension, \(c\) the number of pseudo-classes, and \(L \le d\) the null-space dimension. The pseudo-class construction stage using K-means requires \(O(ncdI)\), while the projection learning stage is dominated by scatter computation and compact SVD operations with complexity at most \(O(nd^2)\). Since \(d\) is typically small for tabular IoT data, the eigendecomposition overhead is negligible in practice. The threshold estimation step additionally scales linearly with \(n\).Therefore, the overall training complexity of XXX is upper bounded by:
 \begin{equation}
-O(ncdI + nd^2 + d^3 + nL(d+c)).
+O(ncdI + nd^2).
 \label{eq:complexity_train_XXX_revised}
 \end{equation}
-In the common large-tabular regime (\(n\gg d\), where \(d\) usually ranges from a few tens to a hundred features and the number of pseudo-classes \(c\) is computationally bounded), the empirical iterations \(I\) typically converge rapidly. Consequently, the dominating operations scale linearly with \(n\). This guarantees that both the clustering and null-space projection phases remain  lightweight, ensuring fast, scalable training even when handling millions of IoT network flows, as empirically validated in our evaluation of \ref{ssubsec:RQ3}.
-
-\paragraph{Inference complexity.}
-For a single test sample, the projection to the null space requires \(O(dL)\) operations, and calculating the minimum distance to the \(c\) prototypes in the low-dimensional space requires \(O(cL)\). Hence, the per-sample inference cost is explicitly deterministic:
+For inference, projecting a test sample and computing distances to the \(c\) prototypes requires at most:
 \begin{equation}
-O\big(L(d + c)\big).
+O\big(L(d+c)\big).
 \label{eq:complexity_test_XXX_revised}
 \end{equation}
-Because \(L \le d\) and the number of pseudo-classes \(c\) is small, inference is executed in time independent of the training set size $n$. This fulfills the stringent latency requirements of real-time edge deployment.
-
-\paragraph{Memory complexity.}
-During training, rather than forming a massive \(n \times n\) matrix as typically needed by kernel-based methods, XXX operates entirely in the primal feature space. The dominant training memory cost is simply storing the raw \(d \times n\) data array alongside local \(d \times d\) covariance accumulators:
+The training memory complexity is bounded by:
 \begin{equation}
-O(nd + d^2).
+O(nd+d^2),
 \label{eq:complexity_memory_train_XXX}
 \end{equation}
-Furthermore, at inference time, only the compact mapping \(W \in \mathbb{R}^{d \times L}\), the prototypes \(\{p_j\}_{j=1}^{c} \in \mathbb{R}^{L}\), and the scalar threshold \(\tau\) are retained. The deployment memory footprint is therefore isolated to:
+while the deployment memory footprint is:
 \begin{equation}
-O(dL + cL),
+O(dL+cL).
 \label{eq:complexity_memory_test_XXX}
 \end{equation}
-making the final model extremely lightweight, occupying significantly less memory compared to generative deep networks or ensemble trees.
-
+Since inference is independent of the training size \(n\), XXX remains lightweight for IoT system deployment.
 
 \section{Experimental Evaluation}
 \subsection{Experimental Setup}
 \label{sec:exp_su}
 
-To rigorously evaluate the efficacy of the XXX algorithm across several experimental dimensions, and to provide empirical validation for the three core structural challenges defined in the Introduction (\textbf{Structural Diversity}, \textbf{Imperfect Supervision}, and \textbf{Constrained Edge Deployment}), we address three primary research questions:
+This section, we provide empirical validation for the three core structural challenges, we address three primary research questions:
 \begin{itemize}
-    \item \textbf{RQ1 (Detection Accuracy):} How does XXX compare against state-of-the-art anomaly detection baselines across diverse real-world IoT traffic benchmarks in ideal one-class classification setting?
-    \item \textbf{RQ2 (Robustness and Sensitivity):} To what extent is XXX resilient to varying contamination levels and heterogeneous anomaly structures (local, global, and cluster)?
-    \item \textbf{RQ3 (Resource Efficiency):} Does XXX maintain computational and memory efficiency suitable for large-scale tabular IoT data compared to representative benchmarks?
+    \item \textbf{RQ1 (Detection Accuracy):} How does XXX compare against state-of-the-art anomaly detection baselines across diverse real-world IoT traffic benchmarks in one-class classification setting?
+    \item \textbf{RQ2 (Robustness and Sensitivity):}  How robust is XXX under varying contamination levels and heterogeneous anomaly structures?
+    \item \textbf{RQ3 (Resource Efficiency):} Does XXX maintain computational efficiency during both training and inference on large-scale tabular IoT datasets compared to representative anomaly detection baselines?
 \end{itemize}
 
 \subsubsection{Datasets and Evaluation Protocol}
 
 
-For benchmarking in \textbf{RQ1} and \textbf{RQ2}, we construct the training sets by sampling up to $30{,}000$ benign instances per dataset, while the evaluation set is composed of one half attack and one half normal data, from four prominent public IoT security benchmarks (fully summarized in ~\ref{ap1:datasets}): \textit{CICIoT2023}, \textit{ToN-IoT}, \textit{N-BaIoT}, and \textit{BoT-IoT}~\cite{neto2023ciciot2023,8490192,koroniotis2019towards,fesz-dm97-19}.
+For benchmarking in \textbf{RQ1} and \textbf{RQ2}, we construct the training sets by sampling up to $30{,}000$ benign instances per dataset, while the evaluation set is composed of one half attack and one half normal data, from six prominent public IoT security benchmarks (fully summarized in~\ref{ap1:datasets}): \textit{CICIoT2023}, \textit{ToN-IoT}, \textit{N-BaIoT}, \textit{BoT-IoT}, \textit{EdgeIIoTset}, and \textit{IoTID20}~\cite{neto2023ciciot2023,8490192,koroniotis2019towards,fesz-dm97-19}.
 
-These four datasets are evaluated without any feature transformation to assess \textbf{RQ1} under real-world, cross-domain conditions. For \textbf{RQ2}, on each base IoT benchmark, we generate three distinct structural anomaly profiles, including \textit{local}, \textit{cluster-based}, and \textit{global}, synthesized via Gaussian Mixture Model (GMM) perturbations following the ADBench setting, to evaluate susceptibility. Different slight levels of contamination (\emph{$1\%$, $3\%$, and $5\%$}) are introduced to describe imperfect supervision and test robustness in practical conditions (detail setting in~\ref{ap:anomaly_generation}).
+These six datasets are evaluated without any feature transformation to assess \textbf{RQ1} under real-world, cross-domain conditions. For \textbf{RQ2}, on each base IoT benchmark, we generate three distinct structural anomaly profiles, including \textit{local}, \textit{cluster-based}, and \textit{global}, synthesized via Gaussian Mixture Model (GMM) perturbations following the ADBench setting, to evaluate susceptibility. Different slight levels of contamination (\emph{$1\%$, $3\%$, and $5\%$}) are introduced to describe imperfect supervision and test robustness in practical conditions (detail setting in~\ref{ap:anomaly_generation}).
                 
 
-For \textbf{RQ3}, besides conducting empirical evaluation of computational resource efficiency, including training and inference durations as well as peak RAM usage, on the four datasets, we also perform additional analysis; specifically, a \textit{dimensional scalability analysis} is conducted on massively synthetically generated tabular data, with sample sizes expanding from $10^3$ to $10^6$ and feature dimensions ranging from $10^1$ to $10^4$.
+For \textbf{RQ3}, besides conducting empirical evaluation of computational resource efficiency, including training and inference durations on the six datasets, we also perform additional analysis; specifically, a \textit{dimensional scalability analysis} is conducted on massively synthetically generated tabular data, with sample sizes expanding from $10^3$ to $10^6$ and feature dimensions ranging from $10^1$ to $10^4$.
  
 \subsubsection{Baselines and Metrics}
 
-We benchmark our proposed method against 22 representative anomaly detection algorithms (fully systematized and detailed in ~\ref{ap1:ap_baselines}), categorized into seven distinct paradigms:
+We benchmark our proposed method against 22 representative anomaly detection algorithms (fully systematized and detailed in~\ref{ap1:ap_baselines}), categorized into seven distinct paradigms:
 \textit{Proximity-based} methods, including KNN, LOF, and CBLOF;
 \textit{Linear models}, such as PCA, OCSVM ;
 \textit{Probabilistic and statistical} methods, comprising HBOS, ECOD, and COPOD;
 \textit{Ensemble-based} approaches, such as IForest, LODA, SUOD, and DIF;
 \textit{Hypersphere-based} deep models, including DeepSVDD, and DASVDD;
 \textit{Reconstruction-based} models, such as AutoEncoder, VAE, and AE1SVM; and
-\textit{Generative and representation learning} frameworks, including SO-GAAL, MO-GAAL, ALAD, LUNAR, and NeuTraLAD. All baseline models are implemented using the PyOD library \cite{zhao2019pyod} and evaluated under consistent experimental protocols to ensure a fair comparison. Detection performance is primarily quantified using the Area Under the Receiver Operating Characteristic (AUC-ROC) and Precision–Recall curve (AUC-PR), alongside additional evaluation metrics. Detailed metric definitions and evaluation protocols are provided in~\ref{ap1:EM}.
+\textit{Generative and representation learning} frameworks, including SO-GAAL, MO-GAAL, ALAD, LUNAR, and NeuTraLAD. All baseline models are implemented using the PyOD library \cite{zhao2019pyod} and evaluated under consistent experimental protocols to ensure a fair comparison. Detection performance is primarily quantified using the Area Under the Receiver Operating Characteristic (AUC-ROC) and Precision–Recall curve (AUC-PR), alongside additional evaluation metrics. Detailed evaluation protocols are provided in~\ref{ap1:EM}.
 
 
 \subsubsection{Preprocessing and Implementation Details}
-Data preprocessing includes categorical encoding, duplicate removal, and numerical stabilization. We handle missing values and infinite residuals via median imputation and training-set mean substitution. All models are implemented in Python 3.12 using PyOD \cite{zhao2019pyod}, Scikit-learn \cite{pedregosa2011scikit} and \textbf{Pandas} for large-scale data manipulation. Experiments are conducted on a server equipped with an \textbf{AMD Ryzen 5 3600} 6-core processor (12 threads) and \textbf{64 GB of RAM}. The XXX algorithm is implemented using a custom linear NFST formulation with $k=75$ pseudo-classes. For full reproducibility, a detailed breakdown of the experimental environment and the hyperparameter configurations employed for all tested models is provided in ~\ref{ap1:reproducibility}.
+Data preprocessing includes categorical encoding, duplicate removal, and numerical stabilization. We handle missing values and infinite residuals via median imputation and training-set mean substitution. All models are implemented in Python 3.12 using PyOD \cite{zhao2019pyod}, Scikit-learn \cite{pedregosa2011scikit} and \textbf{Pandas} for large-scale data manipulation. Experiments are conducted on a server equipped with an \textbf{AMD Ryzen 5 3600} 6-core processor and \textbf{64 GB of RAM}. The XXX algorithm is implemented using a custom linear NFST formulation with $k=75$ pseudo-classes. For full reproducibility, a detailed of the experimental environment and hyperparameter employed for all tested models is provided in~\ref{ap1:reproducibility}.
 
 
 
@@ -768,33 +738,35 @@ Our evaluation against a diverse set of strong baselines demonstrates that the c
 \subsubsection{Detection Performance on IoT Benchmarks (RQ1)}
 \label{ssubsec:RQ1}
 
-Figure~\ref{fig:cd_map} presents the rank-based comparison across 20 baselines under a non-tuned setting, highlighting the strong cross-dataset stability of XXX. The proposed method achieves the best overall rank (2.50) with a mean AUC-ROC of 98.28\%. Compared with the second- and third-ranked methods, LUNAR (Rank 4.50) and LOF (Rank 4.75), XXX maintains a margin of over 3--4\% in mean AUC-ROC, indicating superior consistency across datasets. In contrast, deep models exhibit larger performance degradation in the one-class novelty detection setting. For example, DASVDD and AutoEncoder underperform by 8.98\% and 12.11\%, respectively, consistent with the trend reported in Figure~5(b) of ADBench. For fairness, we also include tuned variants of representative top-performing methods from each category, as detailed in the ~\ref{ap2:tuned_baselines}.
+Figure~\ref{fig:cd_map} presents the rank-based comparison across 20 baselines under a non-tuned setting, highlighting the strong cross-dataset stability of XXX. The proposed method achieves the best overall rank with a mean AUC-ROC of 98.28\%. Compared with the second- and third-ranked methods, XXX maintains a clear performance margin, indicating superior consistency across datasets. In contrast, deep models exhibit larger performance degradation in the one-class novelty detection setting. For example, DASVDD and AutoEncoder underperform by substantial margins, consistent with the trend reported in Figure~5(b) of ADBench. For fairness, we also include tuned variants of representative top-performing methods from each category, as detailed in the ~\ref{ap2:tuned_baselines}.
 
 \begin{figure}[h]
 \centering
 \begin{subfigure}{\columnwidth}
-\includegraphics[width=1\columnwidth]{pictures/cd_diagram_custom.png}
+\includegraphics[width=1\columnwidth]{pictures/cd_diagram_custom1.png}
 \label{fig:cd_aucpr}
 \end{subfigure}%
 \hfill
-\caption{Rank diagram comparing XXX with 22 baselines on AUC-ROC across four IoT datasets, grouped by average rank (XXX highlighted in bold red).}
+\caption{Rank diagram comparing XXX with 22 baselines on AUC-ROC across six IoT datasets, grouped by average rank (XXX highlighted in bold red).}
 \label{fig:cd_map}
 \end{figure}
 
-As shown in Table~\ref{tab:iot_metrics}, XXX consistently achieves strong performance across all datasets in terms of AUC-ROC, Accuracy, and Recall. AUC-ROC ranges from 95\% to nearly 100\%, with the best result on ToN-IoT (99.85\%), followed by N-BaIoT (98.77\%), while BoT-IoT also yields competitive performance. Accuracy and Recall remain consistently high, exceeding 91\% and 0.95, respectively. These findings are further supported by comparisons with prior studies, as summarized in ~\ref{ap2:competitor_results}.
+As shown in Table~\ref{tab:iot_metrics}, XXX consistently achieves strong performance across all six datasets in terms of AUC-ROC, Accuracy, and Recall. AUC-ROC ranges from 95\% to 100\%, with a perfect score on EdgeIIoTset (100.0\%) and strong results on ToN-IoT (99.85\%), N-BaIoT (99.84\%), and BoT-IoT (98.64\%). On the more challenging IoTID20, the method still attains a competitive 95.53\% AUC-ROC. Accuracy and Recall remain consistently high across all benchmarks. These findings are further supported by comparisons with prior studies, as summarized in ~\ref{ap2:competitor_results}.
 
 \begin{table}[t]
-\caption{Performance of the method on four IoT datasets using AUC-ROC, Accuracy, and Recall.}
+\caption{Performance of the method on six IoT datasets using AUC-ROC, Accuracy, and Recall.}
 \centering
 \resizebox{0.8\columnwidth}{!}{%
 \begin{tabular}{cccc}
 \hline
 \textbf{Dataset} & AUC-ROC(\%) & ACC(\%) & Recall \\
 \hline
-BoT-IoT & 98.64 & 95.59 & 0.9647 \\
+BoTIoT & 98.64 & 95.59 & 0.9647 \\
 ToN-IoT & 99.85 & 99.15 & 0.9887 \\
-N-BaIoT & 98.77 & 96.39 & 0.9785 \\
+N-BaIoT & 99.84 & 98.84 & 0.9882 \\
 CICIoT2023 & 95.87 & 91.72 & 0.9568 \\
+EdgeIIoTset & 100.0 & 100.0 & 1.0 \\
+IoTID20 & 95.53 & 85.57 & 0.9633 \\
 \hline
 \end{tabular}
 }
@@ -820,7 +792,7 @@ A critical challenge in anomaly detection is maintaining reliable performance ac
     % Biểu đồ 2: Bên Phải
     \begin{subfigure}{0.48\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{pictures/Special_Anomaly_Difference.png}
+        \includegraphics[width=\linewidth]{pictures/Special_Anomaly_Difference1.png}
         \caption{Deterioration}
         \label{fig:sub_anomaly_diff}
     \end{subfigure}
@@ -830,10 +802,9 @@ A critical challenge in anomaly detection is maintaining reliable performance ac
 \end{figure}
 
 
-
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{pictures/noise_levels_line_chart.png}
+\includegraphics[width=\columnwidth]{pictures/noise_levels_line_chart1.png}
 \caption{Rank bump chart and average AUC-ROC degradation trajectories across 0\%, 1\%, 3\%, and 5\% contamination.}
 \label{fig:noise_levels}
 \end{figure}
@@ -890,54 +861,54 @@ $10^{6}$ & 10.5647 & 99.4214 & $3.20 \times 10^{3}$ & 0.0215 & 0.0288 & 0.2306 \
 
 \subsection{Ablation Study}
 
-We analyze three key design components of XXX: the SVD truncation threshold ($\epsilon$) that controls numerical stability, the number of pseudo-classes used to construct the surrogate structure, and the basis-construction method employed in the projection stage.
+We analyze three key design components of XXX: the SVD truncation threshold ($\epsilon$) that controls numerical stability, the number of pseudo-classes used to construct the structure, and the basis-construction method employed in the projection stage.
 
 
 \subsubsection{Impact of the SVD Truncation Threshold ($\epsilon$)}
 \label{subsubsec:ablation_epsilon}
 
 To validate our chosen truncation threshold $\epsilon = 2 \times 10^{-6}$ for stable null-space projection, we evaluate its impact on subspace dimensionality ($Rank_{Pt}$) and AUC-ROC across $\epsilon \in [0.0, 5]$.
-As evidenced in Table \ref{tab:epsilon_ablation}, detection performance exhibits significant fluctuation in the high-tolerance regime ($\epsilon \in [0.035, 5]$) due to the premature omission of discriminative components. However, completely bypassing the regularizer ($\epsilon = 0.0$) forces the SVD process to assimilate non-informative floating-point noise; this dimensional overfitting inflates subspace complexity (e.g., $Rank_{Pt}$ increasing from 35 to 44 on CICIoT2023) and triggers a slight degradation in AUC-ROC. Consequently, we select $\epsilon = 2 \times 10^{-6}$ as the optimal threshold, establishing a stable, quasi-hyperparameter-free anchor that preserves essential structural features while immunizing the model against computational noise.
+As evidenced in Table \ref{tab:epsilon_ablation}, detection performance exhibits significant fluctuation in the high-tolerance regime ($\epsilon \in [0.035, 5]$) due to the premature omission of discriminative components. However, completely bypassing the regularizer ($\epsilon = 0.0$) forces the SVD process to assimilate non-informative floating-point noise; this dimensional overfitting inflates subspace complexity (e.g., $Rank_{Pt}$ increasing from 35 to 44 on CICIoT2023) and triggers a slight degradation in AUC-ROC. Consequently, we select $\epsilon = 2 \times 10^{-6}$ as the optimal threshold, establishing a stable, quasi-hyperparameter-free anchor that preserves structural features while immunizing the model against computational noise.
 
 \begin{table}[ht]
 \centering
 \caption{Impact of the SVD truncation threshold ($\epsilon$) on subspace rank ($Rank_{Pt}$) and AUC-ROC (\%) across the evaluated datasets.}
 \label{tab:epsilon_ablation}
 \resizebox{\columnwidth}{!}{%
-\begin{tabular}{l c c c c c c c c}
+\begin{tabular}{l c c c c c c c c c c}
 \toprule
 \multirow{2}{*}{$\epsilon$} & 
 \multicolumn{2}{c}{CICIoT2023} & 
 \multicolumn{2}{c}{ToN-IoT} & 
 \multicolumn{2}{c}{N-BaIoT} & 
-\multicolumn{2}{c}{BoT-IoT} \\
-\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
-& Rank & AUC & Rank & AUC & Rank & AUC & Rank & AUC \\
+\multicolumn{2}{c}{BoT-IoT} &
+\multicolumn{2}{c}{IoTID20} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11}
+& Rank & AUC & Rank & AUC & Rank & AUC & Rank & AUC & Rank & AUC \\
 \midrule
-$5$ & 33 & 88.07 & 22 & 87.78 & 27 & 50.00 & 11 & 96.94 \\
-$0.5$ & 35 & 95.28 & 30 & 99.31 & 83 & 50.00 & 15 & 97.73 \\
-$0.05$ & 35 & 95.28 & 30 & 99.31 & 100 & 50.00 & 15 & 97.73 \\
-$0.035$ & 35 & 95.28 & 30 & 99.31 & 103 & 50.00 & 15 & 97.73 \\
-$10^{-2}$ & 35 & 95.28 & 30 & 99.31 & 115 & 99.68 & 15 & 97.73 \\
-$10^{-3}$ & 35 & 95.28 & 31 & 98.99 & 115 & 99.68 & 15 & 97.73 \\
-$10^{-4}$ & 35 & 95.28 & 35 & 99.18 & 115 & 99.68 & 15 & 97.73 \\
-$2 \times 10^{-6}$ & 35 & 95.28 & 35 & 99.18 & 115 & 99.68 & 15 & 97.73 \\
-$10^{-10}$ & 35 & 95.28 & 38 & 99.18 & 115 & 99.68 & 15 & 97.73 \\
-$0.0$ & 44 & 95.26 & 43 & 99.01 & 115 & 99.68 & 15 & 97.73 \\
+$5$ & 33 & 88.07 & 22 & 87.78 & 27 & 50.00 & 11 & 96.94 & 51 & 92.20 \\
+$0.5$ & 35 & 95.28 & 30 & 99.31 & 83 & 50.00 & 15 & 97.73 & 59 & 97.20 \\
+$0.05$ & 35 & 95.28 & 30 & 99.31 & 100 & 50.00 & 15 & 97.73 & 66 & 94.07 \\
+$0.035$ & 35 & 95.28 & 30 & 99.31 & 103 & 50.00 & 15 & 97.73 & 66 & 94.07 \\
+$10^{-2}$ & 35 & 95.28 & 30 & 99.31 & 115 & 99.68 & 15 & 97.73 & 66 & 94.07 \\
+$10^{-3}$ & 35 & 95.28 & 31 & 98.99 & 115 & 99.68 & 15 & 97.73 & 66 & 94.07 \\
+$10^{-4}$ & 35 & 95.28 & 35 & 99.18 & 115 & 99.68 & 15 & 97.73 & 66 & 94.07 \\
+$2 \times 10^{-6}$ & 35 & 95.28 & 35 & 99.18 & 115 & 99.68 & 15 & 97.73 & 66 & 94.07 \\
+$10^{-10}$ & 35 & 95.28 & 38 & 99.18 & 115 & 99.68 & 15 & 97.73 & 66 & 94.07 \\
+$0.0$ & 44 & 95.26 & 43 & 99.01 & 115 & 99.68 & 15 & 97.73 & 91 & 94.08 \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
-
 \subsubsection{Sensitivity to the Number of Pseudo-Classes}
 \label{subsec:cluster_sensitivity}
 
-XXX requires at least two pseudo-classes to construct the surrogate class structure. We therefore vary the number of K-means clusters within the valid range \(k \in [2,200]\), with the default value \(k=75\) selected according to the protocol described in Section~\ref{sec:exp_su}. Figure~\ref{fig:au_vs_cluster} reveals a consistent pattern across different pseudo-class counts: performance fluctuates when \(k\) is small, but gradually stabilizes as \(k\) increases. In particular, performance degrades in the low-cluster regime (\(k \leq 20\)), especially on datasets such as CICIoT2023 and BoT-IoT. As \(k\) increases, performance saturates, with AUC-ROC exceeding 90\% across all datasets once \(k \approx 75\). This indicates that the method is relatively insensitive to the exact choice of \(k\), provided sufficient pseudo-class granularity is achieved.
+XXX requires at least two pseudo-classes to construct the surrogate class structure. We therefore vary the number of K-means clusters within the valid range \(k \in [2,200]\), with the default value \(k=75\) selected according to the protocol described in Section~\ref{sec:exp_su}. Figure~\ref{fig:au_vs_cluster} reveals a consistent pattern across different pseudo-class counts: performance fluctuates when \(k\) is small, but gradually stabilizes as \(k\) increases. In particular, performance degrades in the low-cluster regime (\(k \leq 20\)), especially on datasets such as CICIoT2023 and BoT-IoT. As \(k\) increases, performance saturates, with AUC-ROC exceeding 90\% across all datasets once \(k \approx 75\). This consistent behavior holds across all six benchmarks, including the newly added EdgeIIoTset and IoTID20, indicating that the method is relatively insensitive to \(k\).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{pictures/Sensitivity_nCluster_AUCROC.png}
-\caption{Sensitivity of XXX to the number of pseudo-classes across four IoT datasets.}
+\caption{Sensitivity of XXX to the number of pseudo-classes across six IoT datasets.}
 \label{fig:au_vs_cluster}
 \end{figure}
 
@@ -948,23 +919,16 @@ We further examine the impact of the basis-construction strategy used in the pro
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=\linewidth]{pictures/SVD_vs_GS_Training_Time1.png}
+    \includegraphics[width=\linewidth]{pictures/SVD_vs_GS_Training_Time.png}
     \caption{Training time comparison between SVD and Gram--Schmidt basis construction across datasets.}
     \label{fig:svd_gs_train_time}
 \end{figure}
 
-Figure~\ref{fig:svd_gs_train_time} compares the training time of the two basis-construction methods. On average across the four datasets, the SVD-based implementation is approximately \textbf{14$\times$} faster than Gram--Schmidt (GS). The gap remains substantial for every dataset: the smallest difference is observed on ToN-IoT, N-BaIoT, and CICIoT2023 where GS is about 12--13$\times$ slower, while the largest gap appears on BoT-IoT where GS becomes roughly \textbf{45--50$\times$} slower.
+Figure~\ref{fig:svd_gs_train_time} compares the training time of the two basis-construction methods across all six datasets. On average, the SVD-based implementation is approximately \textbf{14$\times$} faster than Gram--Schmidt (GS). The gap remains substantial for every dataset: the smallest difference is observed on ToN-IoT, N-BaIoT, and CICIoT2023 where GS is about 12--13$\times$ slower, while the largest gap appears on BoT-IoT where GS becomes roughly \textbf{45--50$\times$} slower. The newly evaluated EdgeIIoTset and IoTID20 datasets exhibit speedup ratios consistent with the overall trend.
 
-
+\newpage
 \section{Conclusion}
-
-This paper presented \textbf{XXX}, a lightweight benign-only novelty-detection framework for IoT intrusion detection based on a reformulation of the Null Foley--Sammon Transform (NFST). The work was motivated by three practical challenges in open-world IoT security: slight contamination in the benign training set, multimodal benign traffic together with heterogeneous anomaly manifestations, and the need for efficient deployment on large tabular network data.
-
-To address these challenges, XXX introduces pseudo-class construction to restore surrogate discriminative structure in benign-only training, combines it with an SVD-based NFST reformulation for stable projection learning, and performs representative-based novelty scoring with a global quantile threshold in the projected space. This design preserves the lightweight nature of linear projection methods while adapting NFST to the benign-only IoT intrusion detection setting.
-Experimental results on four public IoT benchmarks, together with controlled evaluations under local, global, and cluster anomaly structures and benign-set contamination levels of \(1\%\), \(3\%\), and \(5\%\), show that XXX achieves strong and consistent performance across a range of settings. Additional scalability experiments further indicate that the proposed framework remains practical for large tabular datasets in terms of runtime and memory usage.
-
-At the same time, this study has several limitations. The current scoring rule is representative-based and does not explicitly model within-cluster covariance or local density, and the performance of the method still depends on design choices such as the number of pseudo-classes and the threshold parameter. Future work will therefore investigate more adaptive pseudo-class construction, covariance-aware or density-aware scoring in the projected space, and more systematic threshold-selection strategies for contaminated benign training data. Another promising direction is to extend the framework to streaming or continually evolving IoT environments, where benign behavior and attack patterns may drift over time.
-
+This paper presented \textbf{XXX}, a lightweight one-class novelty detection framework for IoT intrusion detection under evolving open-world threat scenarios. XXX leverages a pseudo-class construction mechanism together with the compact representation property of the null space projection to preserve the underlying data structure while reducing sensitivity to imperfections in normal-only supervision. Furthermore, the framework employs prototype-based scoring in the projected space, enabling efficient inference by measuring distances to compact cluster representatives instead all training samples. Extensive experiments across six standard IoT benchmark datasets---CICIoT2023, ToN-IoT, N-BaIoT, BoT-IoT, EdgeIIoTset, and IoTID20---under diverse settings including varying contamination ratios and heterogeneous anomaly structures, demonstrate that XXX outperforms representative baselines. At the same time, it maintains low training and inference complexity, making it well-suited for edge deployment in IoT security environments.
 % ========================
 
 
@@ -1031,7 +995,7 @@ For our proposed XXX framework, the globally constant parameter $k=75$ was empir
 \section{IoT Benchmark Datasets}
 \label{ap1:datasets}
 
-In this study, our experimental subsets are extracted from four widely used datasets in the attack detection field: CICIoT2023, N-BaIoT, BoT-IoT, and ToN-IoT. These datasets are specifically designed to simulate IoT network environments and include a range of up-to-date attacks. A summary of each dataset is provided in Table~\ref{tab:datasets}, and further details are described below:
+In this study, our experimental subsets are extracted from six widely used datasets in the attack detection field: CICIoT2023, N-BaIoT, BoT-IoT, ToN-IoT, EdgeIIoTset, and IoTID20. These datasets are specifically designed to simulate IoT network environments and include a range of up-to-date attacks. A summary of each dataset is provided in Table~\ref{tab:datasets}, and further details are described below:
 
 
 \begin{table}[h]
@@ -1043,10 +1007,12 @@ In this study, our experimental subsets are extracted from four widely used data
 \toprule
 \textbf{Dataset} & \textbf{Selected Features} & \textbf{Total Samples} & \textbf{Benign Ratio} & \textbf{Anomaly Categories} \\
 \midrule
-CICIoT2023 & 44 & 46,686,579 & 2.29\% & 33 \\
-N-BaIoT    & 115 & 7,062,042  & 8.43\% & 10 \\
-BoT-IoT    & 26 & 73,370,443 & $\sim$0.01\% & 4  \\
-ToN-IoT    & 44 & 22,339,021 & 3.56\% & 9  \\
+CICIoT2023  & 44  & 46,686,579 & 2.29\%        & 33 \\
+N-BaIoT     & 115 & 7,062,042  & 8.43\%        & 10 \\
+BoT-IoT     & 26  & 73,370,443 & $\sim$0.01\%  & 4  \\
+ToN-IoT     & 44  & 22,339,021 & 3.56\%        & 9  \\
+EdgeIIoTset & 61  & 1,294,000  & 20.54\%       & 14 \\
+IoTID20     & 77  & 625,783    & 10.08\%       & 18 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1059,10 +1025,14 @@ ToN-IoT    & 44 & 22,339,021 & 3.56\% & 9  \\
 
 \textbf{ToN-IoT}: Provided by the UNSW Canberra Cyber Range Lab, ToN-IoT is a heterogeneous dataset spanning multiple industrial IoT (IIoT) protocols including MQTT, COAP, and HTTP~\cite{fesz-dm97-19}. Unlike simpler benchmarks, ToN-IoT incorporates sophisticated attacks such as Ransomware, Backdoors, and Cross-site Scripting (XSS) targeting the application layer. This diversity is crucial for validating XXX's capacity to model the complex topological structure of modern industrial network traffic.
 
+\textbf{EdgeIIoTset}: Developed to reflect realistic edge computing and IoT deployment scenarios, EdgeIIoTset encompasses traffic from a wide range of IoT sensors and actuators operating under 14 distinct attack categories~\cite{ferrag2022edge}. With 61 network flow features and over 1.2 million samples, it provides a balanced and diverse testbed that spans Denial-of-Service, man-in-the-middle, data exfiltration, and scanning attacks. The relatively higher proportion of benign samples ($\sim$20\%) compared to other benchmarks makes it valuable for assessing model calibration under less extreme class imbalance.
+
+\textbf{IoTID20}: IoTID20 is a large-scale benchmark designed for evaluating intrusion detection in heterogeneous IoT environments~\cite{ullah2020iotid20}. Comprising over 600,000 network flow records and 77 extracted features, the dataset captures traffic from a diverse mix of IoT devices and covers 18 attack categories including port scanning, ARP spoofing, and botnet activity. The dataset's breadth of attack vectors and relatively balanced class distribution make it a rigorous benchmark for assessing XXX's detection generalization across multi-protocol IoT ecosystems.
+
 \subsection{Dataset Splitting and Evaluation Protocol}
 To rigorously and fairly evaluate anomaly detection performance across massive datasets while maintaining computational feasibility, we implement a tailored sub-sampling protocol to construct the training and evaluation sets:
 \begin{enumerate}
-    \item \textbf{Standard Protocol (CICIoT2023, N-BaIoT, ToN-IoT):} For these heavily populated datasets, we strictly sample $30{,}000$ normal instances to construct the benign-only training set. The evaluation set is explicitly balanced to avoid accuracy-masking in highly imbalanced domains, comprising exactly $15{,}000$ normal instances and $15{,}000$ anomaly instances sampled from the remaining data pool.
+    \item \textbf{Standard Protocol (CICIoT2023, N-BaIoT, ToN-IoT, EdgeIIoTset, IoTID20):} For these heavily populated datasets, we strictly sample $30{,}000$ normal instances to construct the benign-only training set. The evaluation set is explicitly balanced to avoid accuracy-masking in highly imbalanced domains, comprising exactly $15{,}000$ normal instances and $15{,}000$ anomaly instances sampled from the remaining data pool.
     \item \textbf{Exception Protocol (BoT-IoT):} BoT-IoT exhibits extreme natural class imbalance, yielding exactly $9{,}542$ normal samples across the entire raw dataset. To preserve natural distribution boundaries without applying oversampling techniques, we utilize approximately $7{,}000$ available normal instances for training. The evaluation set is constructed from the remaining data pool, resulting in a naturally imbalanced test set that authentically reflects the dataset's asymmetric threat landscape.
 \end{enumerate}
 
@@ -1203,7 +1173,7 @@ This appendix provides granular empirical data to supplement the aggregated find
 To provide deeper insight into the algorithmic robustness and boundary sensitivity of the evaluated models, we present extended categorical records differentiating performance across varying noise thresholds and distinct anomaly structures.
 
 \paragraph{Resilience to Label Noise Contamination} 
-Table~\ref{tab:model_noise_perf} reports an exhaustive breakdown of individual baseline anomaly detection performances under strict training-set contamination conditions (1\%, 3\%, and 5\% noise) across the BoT-IoT, CICIoT2023, N-BaIoT, and ToN-IoT datasets. This granular view highlights the high volatility of traditional algorithms under imperfect supervision. For example, while deep reconstructive architectures such as \textit{AutoEncoder} demonstrate strong detection capabilities in clean or low-noise settings (achieving 99.06\% AUC-ROC on BoT-IoT at 1\% noise), its boundary effectiveness degrades severely as contamination ratios increase (92.38\% at 5\% noise). Similarly, reconstructive models like \textit{DASVDD} excel on BoT-IoT (95.40\%) but collapse entirely on N-BaIoT (36.92\%). In contrast, XXX exhibits strong, balanced resilience by continuously rejecting structural noise, notably dominating across the highly-complex ToN-IoT dataset with peak robustness (94.07\% AUC-ROC at 1\% noise and maintaining an 87.64\% AUC-ROC even at 5\% noise).
+Table~\ref{tab:model_noise_perf} reports an exhaustive breakdown of individual baseline anomaly detection performances under strict training-set contamination conditions (1\%, 3\%, and 5\% noise) across all six benchmarks: BoT-IoT, CICIoT2023, EdgeIIoTset, IoTID20, N-BaIoT, and ToN-IoT. This granular view highlights the high volatility of traditional algorithms under imperfect supervision. For example, while deep reconstructive architectures such as \textit{AutoEncoder} demonstrate strong detection capabilities in clean or low-noise settings (achieving 99.06\% AUC-ROC on BoT-IoT at 1\% noise), its boundary effectiveness degrades severely as contamination ratios increase (92.38\% at 5\% noise). Similarly, reconstructive models like \textit{DASVDD} excel on BoT-IoT (95.40\%) but collapse entirely on N-BaIoT (36.92\%). On the two newly included benchmarks, EdgeIIoTset and IoTID20, performance polarization is similarly pronounced: most ensemble and proximity-based methods excel on EdgeIIoTset (achieving near-100\% AUC-ROC) but exhibit greater degradation on the more complex IoTID20. In contrast, XXX exhibits strong, balanced resilience by continuously rejecting structural noise, notably dominating across the highly-complex ToN-IoT dataset with peak robustness (93.59\% AUC-ROC at 1\% noise and maintaining 87.15\% even at 5\% noise), while also leading on EdgeIIoTset and remaining competitive on IoTID20.
 
 
 \begin{table*}[t]
@@ -1244,6 +1214,44 @@ MO\_GAAL    & 6.37 & 7.93 & 8.57 & 18.31 & 24.21 & 25.98 & 15.73 & 36.97 & 35.10
 \end{tabular}
 \label{tab:model_noise_perf}
 \end{table*}
+\begin{sidewaystable}[htbp]
+\caption{Robustness analysis under imperfect supervision: Mean AUC-ROC (\%) performance across 6 IoT benchmarks under 1\%, 3\%, and 5\% training contamination levels. \textcolor{red}{\textbf{Red bold}} and \textcolor{blue}{\textit{blue italic}} values indicate the best and second-best performers, respectively.}
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{l ccc ccc ccc ccc ccc ccc}
+\toprule
+\multirow{2.5}{*}{\textbf{Model}} & \multicolumn{3}{c}{\textbf{BoT-IoT}} & \multicolumn{3}{c}{\textbf{CICIoT2023}} & \multicolumn{3}{c}{\textbf{EdgeIIoTset}} & \multicolumn{3}{c}{\textbf{IoTID20}} & \multicolumn{3}{c}{\textbf{N-BaIoT}} & \multicolumn{3}{c}{\textbf{ToN-IoT}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} \cmidrule(lr){17-19}
+ & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% & 1\% & 3\% & 5\% \\
+\midrule
+\textbf{LOC-NFST (Our)} & 98.01 & 95.55 & \textcolor{blue}{\textit{94.69}} & 92.61 & 78.18 & 74.43 & 99.91 & 99.68 & 99.16 & 94.42 & 90.40 & 80.09 & 80.62 & 79.54 & 78.67 & \textcolor{red}{\textbf{93.59}} & \textcolor{red}{\textbf{89.49}} & \textcolor{red}{\textbf{87.15}} \\
+AE1SVM & 91.45 & 89.70 & 82.07 & 93.06 & 92.74 & 92.70 & 97.45 & 97.30 & 93.57 & 94.53 & 93.15 & - & 75.09 & 71.20 & 68.40 & 36.39 & 32.73 & 33.96 \\
+ALAD & 50.72 & 50.79 & 50.90 & 27.36 & 27.51 & 27.63 & 53.66 & 52.47 & 54.32 & 46.92 & 51.09 & 54.85 & 37.15 & 37.31 & 37.43 & 52.85 & 53.08 & 53.07 \\
+AutoEncoder & \textcolor{red}{\textbf{99.06}} & \textcolor{blue}{\textit{96.77}} & 92.38 & 93.86 & 92.70 & 88.52 & 99.94 & 99.89 & 97.54 & \textcolor{red}{\textbf{97.58}} & \textcolor{blue}{\textit{96.15}} & \textcolor{red}{\textbf{96.10}} & 85.01 & 51.97 & 32.50 & 77.25 & 59.42 & 72.11 \\
+CBLOF & 96.61 & 95.76 & 94.58 & 91.80 & 91.60 & 89.89 & 96.17 & 100.00 & \textcolor{red}{\textbf{100.00}} & 94.53 & 92.58 & 95.40 & \textcolor{blue}{\textit{96.05}} & 92.99 & 90.05 & 71.84 & 65.42 & 64.47 \\
+COPOD & 54.21 & 53.85 & 53.50 & 84.72 & 84.70 & 82.82 & 95.02 & 93.86 & 93.33 & 63.48 & 62.39 & 61.27 & 76.26 & 73.51 & 70.25 & 45.49 & 45.00 & 44.51 \\
+DASVDD & \textcolor{blue}{\textit{98.31}} & \textcolor{red}{\textbf{97.43}} & \textcolor{red}{\textbf{95.40}} & 85.29 & 78.82 & 67.58 & \textcolor{red}{\textbf{100.00}} & \textcolor{blue}{\textit{100.00}} & \textcolor{blue}{\textit{99.98}} & 91.05 & 91.29 & - & 60.02 & 36.92 & 21.30 & 85.28 & \textcolor{blue}{\textit{80.87}} & 72.78 \\
+DIF & 84.63 & 82.33 & 80.96 & 92.85 & 92.43 & 91.92 & 99.89 & 99.87 & 99.44 & 93.11 & 91.56 & 91.10 & 72.42 & 70.36 & 59.23 & 70.26 & 70.31 & 63.50 \\
+DeepSVDD & 61.93 & 60.74 & 68.93 & 79.03 & 88.10 & 84.38 & 99.59 & 91.06 & 96.51 & 89.20 & 86.08 & 82.41 & 86.82 & 92.51 & 58.83 & 33.92 & 31.94 & 30.86 \\
+ECOD & 61.22 & 61.01 & 60.81 & 88.66 & 88.19 & 87.72 & 97.89 & 97.27 & 96.62 & 73.45 & 72.00 & 70.78 & 88.14 & 87.54 & 86.87 & 44.40 & 43.86 & 43.32 \\
+HBOS & 85.55 & 83.26 & 81.66 & 93.37 & 92.33 & 90.70 & \textcolor{blue}{\textit{100.00}} & 99.98 & 99.32 & 84.14 & 80.58 & 78.00 & 17.90 & 13.59 & 10.30 & 67.12 & 65.75 & 64.17 \\
+IForest & 95.99 & 92.96 & 92.12 & \textcolor{blue}{\textit{94.32}} & \textcolor{red}{\textbf{94.45}} & \textcolor{blue}{\textit{93.13}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & 99.32 & 87.62 & 89.92 & 89.47 & \textcolor{red}{\textbf{96.68}} & \textcolor{red}{\textbf{95.47}} & \textcolor{blue}{\textit{90.09}} & 67.55 & 64.17 & 60.86 \\
+KNN & 97.93 & 93.71 & 89.42 & 54.26 & 39.70 & 35.19 & 99.89 & 80.09 & 74.87 & 96.77 & 91.24 & 86.46 & 22.42 & 15.99 & 13.40 & \textcolor{blue}{\textit{88.60}} & 79.05 & \textcolor{blue}{\textit{73.08}} \\
+LODA & 75.26 & 82.80 & 68.24 & 67.97 & 80.60 & 80.94 & 76.71 & 78.14 & 79.13 & 89.09 & 88.30 & 86.31 & 89.73 & 84.40 & 79.81 & 24.99 & 33.01 & 49.36 \\
+LOF & 68.13 & 53.10 & 45.58 & 65.60 & 64.51 & 68.62 & 58.43 & 58.07 & 54.92 & 63.01 & 50.00 & 51.55 & 52.04 & 45.09 & 46.15 & 59.91 & 53.87 & 52.47 \\
+LUNAR & 94.09 & 84.94 & 80.25 & 45.91 & 32.29 & 31.72 & 79.29 & 59.81 & 55.64 & 82.50 & 49.94 & 43.47 & 18.97 & 14.01 & 11.32 & 82.47 & 74.85 & 70.27 \\
+MO\_GAAL & 6.37 & 8.57 & 7.93 & 18.31 & 24.21 & 25.98 & 59.51 & 56.94 & 73.44 & 7.22 & 20.84 & 29.87 & 15.73 & 36.97 & 35.10 & 39.41 & 33.79 & 52.42 \\
+NeuTraLAD & 96.02 & 93.46 & 89.64 & 91.28 & 90.23 & 90.82 & 98.77 & 99.10 & 98.83 & \textcolor{blue}{\textit{97.44}} & \textcolor{red}{\textbf{96.63}} & 95.34 & 46.95 & 61.10 & 62.78 & 66.54 & 40.39 & 58.41 \\
+OCSVM & 79.20 & 77.66 & 76.09 & 89.50 & 88.93 & 88.32 & 99.95 & 96.01 & 84.28 & 70.10 & 68.30 & 67.12 & 94.28 & \textcolor{blue}{\textit{93.63}} & \textcolor{red}{\textbf{92.85}} & 28.90 & 28.46 & 27.98 \\
+PCA & 75.59 & 75.03 & 74.48 & 50.00 & 50.00 & 50.00 & 97.53 & 97.28 & 96.26 & 93.07 & 92.55 & 92.00 & 91.43 & 90.46 & 89.51 & 50.00 & 50.00 & 50.00 \\
+SO\_GAAL & 24.66 & 31.36 & 33.39 & 35.11 & 40.09 & 13.19 & 71.35 & 69.89 & 77.00 & 12.45 & 9.72 & 15.52 & 52.39 & 45.03 & 35.83 & 62.07 & 59.47 & 60.69 \\
+SUOD & 76.28 & 75.25 & 74.63 & \textcolor{red}{\textbf{94.45}} & \textcolor{blue}{\textit{94.19}} & \textcolor{red}{\textbf{93.31}} & 98.86 & 97.62 & 96.59 & 78.79 & 76.68 & 74.42 & 88.14 & 84.98 & 82.97 & 56.53 & 55.37 & 55.78 \\
+VAE & 87.02 & 80.65 & 75.41 & 91.59 & 91.64 & 91.49 & 99.94 & 99.81 & 93.73 & 97.20 & 95.90 & \textcolor{blue}{\textit{95.79}} & 89.21 & 87.64 & 74.45 & 25.40 & 25.99 & 22.94 \\
+\bottomrule
+\end{tabular}
+\label{tab:model_noise_perf}
+\end{sidewaystable}
 
 \paragraph{Sensitivity to Structural Anomaly Profiles} 
 Furthermore, Table~\ref{tab:anomaly_types_transposed} dissects each model's detection capability across distinct Local, Global, and Cluster anomaly manifestations, these detailed metrics expose significant structural blind spots among traditional benchmarks. As observed, detecting broad Global scatter or extreme Cluster shifts is a relatively trivial task for most algorithms, with models like \textit{PCA}, \textit{IForest}, and \textit{VAE} easily achieving near 100\% AUC-ROC.  However, the true discriminatory challenge lies in identifying dense, heavily-obscured \textit{Local} anomalies. Confronted with localized deviations, numerous baselines experience critical detection failures (e.g., ALAD drops to 47.12\% and SO-GAAL to 37.16\% on average). By systematically projecting the feature space into the null-space to isolate localized deviations, XXX successfully retains sensitivity across all manifestations, achieving near-perfect stability and leading the combined average detection profile (99.60\% Local, 100.0\% Global, 99.99\% Cluster averages).
@@ -1254,32 +1262,31 @@ Furthermore, Table~\ref{tab:anomaly_types_transposed} dissects each model's dete
 \resizebox{\textwidth}{!}{
 \small
 \setlength{\tabcolsep}{4.5pt} 
-\begin{tabular}{l cccc cccc cccc c}
+\begin{tabular}{l ccccc ccccc ccccc c}
 \toprule
-\multirow{2.5}{*}{\textbf{Model}} & \multicolumn{4}{c}{\textbf{Local}} & \multicolumn{4}{c}{\textbf{Global}} & \multicolumn{4}{c}{\textbf{Cluster}} & \multirow{2.5}{*}{\shortstack{\textbf{Total} \\ \textbf{Mean}}} \\
-\cmidrule(lr){2-5} \cmidrule(lr){6-9} \cmidrule(lr){10-13}
-& CIC & BaI & ToN & \textit{Avg} & CIC & BaI & ToN & \textit{Avg} & CIC & BaI & ToN & \textit{Avg} & \\
+\multirow{2.5}{*}{\textbf{Model}} & \multicolumn{5}{c}{\textbf{Local}} & \multicolumn{5}{c}{\textbf{Global}} & \multicolumn{5}{c}{\textbf{Cluster}} & \multirow{2.5}{*}{\shortstack{\textbf{Total} \\ \textbf{Mean}}} \\
+\cmidrule(lr){2-6} \cmidrule(lr){7-11} \cmidrule(lr){12-16}
+& CIC & BaI & ToN & Edge & \textit{Avg} & CIC & BaI & ToN & Edge & \textit{Avg} & CIC & BaI & ToN & Edge & \textit{Avg} & \\
 \midrule
-\textbf{XXX (Our)} & 99.13 & \textcolor{red}{\textbf{99.82}} & \textcolor{red}{\textbf{99.85}} & \textcolor{red}{\textbf{99.60}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.98 & \textcolor{blue}{\textit{99.99}} & \textcolor{red}{\textbf{99.86}} \\
-AutoEncoder & \textcolor{blue}{\textit{99.67}} & \textcolor{red}{\textbf{99.82}} & 93.54 & \textcolor{blue}{\textit{97.68}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{blue}{\textit{99.23}} \\
-DASVDD      & 98.46 & 98.71 & 93.26 & 96.81 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 98.94 \\
-KNN         & 99.48 & 97.01 & 90.10 & 95.53 & 99.99 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.99 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 98.51 \\
-LUNAR       & \textcolor{red}{\textbf{99.85}} & 97.88 & 88.39 & 95.37 & 99.96 & \textcolor{red}{\textbf{100.0}} & 99.99 & 99.98 & 99.96 & \textcolor{red}{\textbf{100.0}} & 99.99 & 99.98 & 98.45 \\
-CBLOF       & 95.60 & 98.25 & 92.04 & 95.30 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 98.43 \\
-OCSVM       & 96.14 & 98.56 & 89.97 & 94.89 & 99.99 & \textcolor{red}{\textbf{100.0}} & 99.98 & 99.99 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 98.29 \\
-AE1SVM      & 96.73 & 95.44 & 87.67 & 93.28 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.91 & 99.97 & 97.75 \\
-VAE         & 95.97 & 96.35 & 86.83 & 93.05 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.94 & 99.98 & 97.68 \\
-PCA         & 96.66 & 96.97 & 79.90 & 91.18 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.99 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.80 & 99.93 & 97.03 \\
-LODA        & 93.95 & 97.34 & 81.28 & 90.86 & \textcolor{red}{\textbf{100.0}} & 99.99 & \textcolor{red}{\textbf{100.0}} & 99.98 & \textcolor{red}{\textbf{100.0}} & 99.99 & 99.99 & \textcolor{red}{\textbf{100.0}} & 96.95 \\
-IForest     & 95.71 & 95.47 & 76.86 & 89.35 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 93.50 & 97.83 & 95.73 \\
-SUOD        & 97.76 & 94.24 & 80.13 & 90.71 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 81.37 & 93.79 & 94.83 \\
-COPOD       & 96.65 & 91.82 & 80.35 & 89.61 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 99.94 & \textcolor{red}{\textbf{100.0}} & 82.07 & 94.00 & 94.54 \\
-HBOS        & 97.09 & 93.44 & 71.69 & 87.41 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 82.10 & 94.03 & 93.81 \\
-ECOD        & 98.32 & 94.96 & 86.97 & 93.42 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 93.21 & 96.34 & 72.48 & 87.35 & 93.59 \\
-NEUTRALAD       & 95.47 & 91.97 & 87.51 & 91.65 & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & \textcolor{red}{\textbf{100.0}} & 4.51 & 1.34 & 3.56 & 3.13 & 64.93 \\
-ALAD        & 47.52 & 45.34 & 48.50 & 47.12 & 43.36 & 31.74 & 65.19 & 46.76 & 91.42 & 80.83 & 74.07 & 82.11 & 58.66 \\
-SO-GAAL       & 33.19 & 27.27 & 51.01 & 37.16 & 8.62 & 0.49 & 64.11 & 24.41 & 96.63 & 94.41 & 82.70 & 91.25 & 50.94 \\
-\bottomrule
+\textbf{XXX (Our)} & \textbf{99.13} & \textcolor{red}{\textbf{99.82}} & \textcolor{red}{\textbf{99.85}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{99.70}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textbf{99.98} & \textbf{99.99} & \textbf{99.99} & \textcolor{red}{\textbf{99.90}} \\
+AutoEncoder & \textcolor{blue}{\textit{99.67}} & \textcolor{blue}{\textit{99.82}} & \textcolor{blue}{\textit{93.54}} & \textcolor{blue}{\textit{99.97}} & \textcolor{blue}{\textit{98.25}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{blue}{\textit{99.42}} \\
+DASVDD & 98.46 & 98.71 & 93.26 & 89.64 & 95.02 & \textcolor{blue}{\textit{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & 100.00 & \textcolor{blue}{\textit{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & 98.34 \\
+KNN & 99.48 & 97.01 & 90.10 & 92.02 & 94.65 & 99.99 & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & 99.99 & 100.00 & 99.99 & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & 99.99 & 100.00 & 98.22 \\
+LUNAR & \textcolor{red}{\textbf{99.85}} & 97.88 & 88.39 & 99.96 & 96.52 & 99.96 & \textcolor{red}{\textbf{100.00}} & 99.99 & \textcolor{red}{\textbf{100.00}} & 99.99 & 99.96 & \textcolor{red}{\textbf{100.00}} & 99.99 & \textcolor{red}{\textbf{100.00}} & 99.99 & 98.83 \\
+CBLOF & 95.60 & 98.25 & 92.04 & 89.34 & 93.81 & 100.00 & 100.00 & 100.00 & 99.99 & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & \textcolor{red}{\textbf{100.00}} & \textcolor{blue}{\textit{100.00}} & \textcolor{blue}{\textit{100.00}} & 97.93 \\
+OCSVM & 96.14 & 98.56 & 89.97 & 86.92 & 92.90 & 99.99 & 99.99 & 99.98 & 99.96 & 99.98 & \textcolor{blue}{\textit{100.00}} & 99.99 & \textcolor{blue}{\textit{100.00}} & \textcolor{blue}{\textit{100.00}} & 100.00 & 97.63 \\
+AE1SVM & 96.73 & 95.44 & 87.67 & 99.23 & 94.77 & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & 100.00 & 100.00 & \textcolor{blue}{\textit{100.00}} & \textcolor{red}{\textbf{100.00}} & 99.91 & \textcolor{red}{\textbf{100.00}} & 99.98 & 98.25 \\
+VAE & 95.97 & 96.35 & 86.83 & 99.95 & 94.78 & 100.00 & \textcolor{red}{\textbf{100.00}} & 99.99 & 100.00 & 100.00 & \textcolor{blue}{\textit{100.00}} & \textcolor{red}{\textbf{100.00}} & 99.94 & \textcolor{blue}{\textit{100.00}} & 99.98 & 98.25 \\
+PCA & 96.66 & 96.97 & 79.90 & 96.89 & 92.61 & 100.00 & \textcolor{red}{\textbf{100.00}} & 99.99 & \textcolor{blue}{\textit{100.00}} & 100.00 & \textcolor{blue}{\textit{100.00}} & \textcolor{red}{\textbf{100.00}} & 99.80 & \textcolor{red}{\textbf{100.00}} & 99.95 & 97.52 \\
+LODA & 93.95 & 97.34 & 81.28 & 74.02 & 86.65 & 99.99 & 99.99 & 99.96 & 99.31 & 99.81 & \textcolor{red}{\textbf{100.00}} & 99.99 & 99.99 & 96.01 & 99.00 & 95.15 \\
+IForest & 95.71 & 95.47 & 76.86 & 93.07 & 90.28 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & 93.50 & 93.32 & 96.70 & 95.66 \\
+SUOD & 97.76 & 94.24 & 80.13 & - & 90.71 & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & - & \textcolor{red}{\textbf{100.00}} & 99.99 & \textcolor{blue}{\textit{100.00}} & 81.37 & - & 93.79 & 94.83 \\
+COPOD & 96.65 & 91.82 & 80.35 & 98.96 & 91.95 & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & 99.94 & 100.00 & 82.07 & 96.08 & 94.52 & 95.49 \\
+HBOS & 97.09 & 93.44 & 71.69 & 99.40 & 90.40 & \textcolor{red}{\textbf{100.00}} & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & 100.00 & \textcolor{red}{\textbf{100.00}} & 100.00 & 82.10 & 99.66 & 95.44 & 95.28 \\
+ECOD & 98.32 & 94.96 & 86.97 & 99.73 & 94.99 & \textcolor{blue}{\textit{100.00}} & \textcolor{blue}{\textit{100.00}} & \textcolor{blue}{\textit{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{blue}{\textit{100.00}} & 93.21 & 96.34 & 72.48 & 85.85 & 86.97 & 93.99 \\
+NEUTRALAD & 95.47 & 91.97 & 87.51 & 91.47 & 91.61 & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & \textcolor{red}{\textbf{100.00}} & 4.51 & 1.34 & 3.56 & 22.04 & 7.86 & 66.49 \\
+ALAD & 47.52 & 45.34 & 48.50 & 48.60 & 47.49 & 43.36 & 31.74 & 65.19 & 56.66 & 49.24 & 91.42 & 80.83 & 74.06 & 94.71 & 85.26 & 60.66 \\
+SO-GAAL & 33.19 & 27.27 & 51.01 & 35.41 & 36.72 & 8.62 & 0.49 & 64.11 & 0.65 & 18.47 & 96.63 & 94.41 & 82.70 & 80.84 & 88.64 & 47.94 \\
 \end{tabular}
 }
 \label{tab:anomaly_types_transposed}

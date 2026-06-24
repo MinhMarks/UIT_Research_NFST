@@ -1,0 +1,243 @@
+2026-05-19 09:24:04 | INFO | Run started at 20260519_092404
+2026-05-19 09:24:04 | INFO | Dataset prefix : data_EdgeIIoTset
+2026-05-19 09:24:04 | INFO | Scalers        : ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+2026-05-19 09:24:04 | INFO | N_CLUSTERS     : range(1, 301, 3) — 100 values
+2026-05-19 09:24:04 | INFO | NOISE_LIST     : [0, 1, 3, 5]
+2026-05-19 09:24:04 | INFO | CSV output     : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/Experiment_OC_NFST_MemOpt_20260519_092404/data_EdgeIIoTset_memopt.csv
+2026-05-19 09:24:04 | INFO | Log file       : /home/jupyter-iclr2025/New Project/NFST/GMM-nfst/notebooks/experiments/outputs/Experiment_OC_NFST_MemOpt_20260519_092404/data_EdgeIIoTset_memopt.log
+2026-05-19 09:24:04 | INFO | ------------------------------------------------------------
+2026-05-19 09:24:04 | INFO | 
+>>> Processing data_EdgeIIoTset | scaler=StandardScaler
+2026-05-19 09:24:04 | INFO | --- noise=0% ---
+2026-05-19 09:24:04 | INFO | ============================================================
+2026-05-19 09:24:04 | INFO | Dataset  : Train_StandardScaler_data_EdgeIIoTset.csv
+2026-05-19 09:24:04 | INFO | Scaler   : StandardScaler
+2026-05-19 09:24:04 | INFO | Noise    : 0%
+2026-05-19 09:24:04 | INFO | nClusters: 100 values (1..298)
+2026-05-19 09:24:04 | INFO | K-Means  : Standard KMeans
+2026-05-19 09:24:04 | INFO | ============================================================
+2026-05-19 09:24:05 | INFO | Loaded Raw Shape -> Train: (30000, 53), Test: (30000, 53)
+2026-05-19 09:24:05 | INFO | Training size : 30,000  |  Testing size: 30,000  |  Features: 52
+2026-05-19 09:24:05 | INFO | Firing up Parallel execution for 100 cluster configs...
+2026-05-19 09:28:06 | INFO | [ncluster=1/1] AUC-ROC=100.00%  AUC-PR=100.00%  F1=1.0000  MCC=1.0000  Train=0.516s  Test=0.044s  Peak RAM Train=44.021 MB  Peak RAM Test=27.035 MB
+2026-05-19 09:28:06 | INFO | [ncluster=4/4] AUC-ROC=100.00%  AUC-PR=100.00%  F1=1.0000  MCC=0.9999  Train=0.437s  Test=0.031s  Peak RAM Train=44.026 MB  Peak RAM Test=27.515 MB
+2026-05-19 09:28:06 | INFO | [ncluster=7/7] AUC-ROC=100.00%  AUC-PR=100.00%  F1=1.0000  MCC=0.9999  Train=0.489s  Test=0.044s  Peak RAM Train=44.032 MB  Peak RAM Test=27.995 MB
+2026-05-19 09:28:06 | INFO | [ncluster=10/10] AUC-ROC=100.00%  AUC-PR=100.00%  F1=1.0000  MCC=0.9999  Train=0.485s  Test=0.053s  Peak RAM Train=44.037 MB  Peak RAM Test=28.475 MB
+2026-05-19 09:28:06 | INFO | [ncluster=13/13] AUC-ROC=100.00%  AUC-PR=100.00%  F1=1.0000  MCC=0.9999  Train=0.440s  Test=0.071s  Peak RAM Train=44.034 MB  Peak RAM Test=28.715 MB
+2026-05-19 09:28:06 | INFO | [ncluster=16/16] AUC-ROC=100.00%  AUC-PR=100.00%  F1=1.0000  MCC=0.9999  Train=0.430s  Test=0.069s  Peak RAM Train=44.041 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=19/19] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.432s  Test=0.057s  Peak RAM Train=44.04 MB  Peak RAM Test=28.715 MB
+2026-05-19 09:28:06 | INFO | [ncluster=22/22] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.494s  Test=0.086s  Peak RAM Train=44.042 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=25/25] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.452s  Test=0.033s  Peak RAM Train=44.041 MB  Peak RAM Test=28.715 MB
+2026-05-19 09:28:06 | INFO | [ncluster=28/28] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.504s  Test=0.054s  Peak RAM Train=44.043 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=31/31] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.485s  Test=0.059s  Peak RAM Train=44.048 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=34/34] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.504s  Test=0.048s  Peak RAM Train=44.039 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=37/37] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.288s  Test=0.038s  Peak RAM Train=43.855 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=40/40] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.325s  Test=0.054s  Peak RAM Train=43.855 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=43/43] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.345s  Test=0.066s  Peak RAM Train=43.857 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=46/46] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.307s  Test=0.043s  Peak RAM Train=43.856 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=49/49] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.248s  Test=0.034s  Peak RAM Train=43.859 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=52/52] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.232s  Test=0.038s  Peak RAM Train=43.857 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=55/55] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.321s  Test=0.073s  Peak RAM Train=43.858 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=58/58] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.229s  Test=0.041s  Peak RAM Train=43.858 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=61/61] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.402s  Test=0.033s  Peak RAM Train=43.861 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=64/64] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.399s  Test=0.063s  Peak RAM Train=43.86 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=67/67] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.580s  Test=0.069s  Peak RAM Train=43.863 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=70/70] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.393s  Test=0.098s  Peak RAM Train=43.862 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=73/73] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.412s  Test=0.087s  Peak RAM Train=43.846 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=76/76] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.408s  Test=0.075s  Peak RAM Train=43.85 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=79/79] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.455s  Test=0.073s  Peak RAM Train=43.848 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=82/82] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.313s  Test=0.080s  Peak RAM Train=43.851 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=85/85] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.392s  Test=0.078s  Peak RAM Train=43.85 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=88/88] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.433s  Test=0.079s  Peak RAM Train=43.852 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=91/91] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.358s  Test=0.087s  Peak RAM Train=43.853 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=94/94] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.463s  Test=0.094s  Peak RAM Train=43.852 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=97/97] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.378s  Test=0.063s  Peak RAM Train=43.853 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=100/100] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.412s  Test=0.083s  Peak RAM Train=43.854 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=103/103] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.392s  Test=0.084s  Peak RAM Train=43.857 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=106/106] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.517s  Test=0.085s  Peak RAM Train=43.857 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=109/109] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.429s  Test=0.069s  Peak RAM Train=43.856 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=112/112] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.335s  Test=0.078s  Peak RAM Train=43.855 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=115/115] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.265s  Test=0.081s  Peak RAM Train=43.855 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=118/118] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.403s  Test=0.052s  Peak RAM Train=43.856 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=121/121] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.238s  Test=0.050s  Peak RAM Train=43.857 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=124/124] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.180s  Test=0.052s  Peak RAM Train=43.859 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=127/127] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.395s  Test=0.080s  Peak RAM Train=43.859 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=130/130] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.444s  Test=0.091s  Peak RAM Train=43.862 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=133/133] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.416s  Test=0.080s  Peak RAM Train=43.863 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=136/136] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.429s  Test=0.096s  Peak RAM Train=43.861 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=139/139] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.245s  Test=0.092s  Peak RAM Train=43.863 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=142/142] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.440s  Test=0.102s  Peak RAM Train=43.863 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=145/145] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.338s  Test=0.101s  Peak RAM Train=43.863 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=148/148] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.406s  Test=0.086s  Peak RAM Train=43.862 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=151/151] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.462s  Test=0.061s  Peak RAM Train=43.864 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=154/154] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.488s  Test=0.126s  Peak RAM Train=43.863 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=157/157] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.370s  Test=0.106s  Peak RAM Train=43.866 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=160/160] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.276s  Test=0.066s  Peak RAM Train=43.867 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=163/163] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.432s  Test=0.103s  Peak RAM Train=43.867 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=166/166] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.464s  Test=0.106s  Peak RAM Train=43.866 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=169/169] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.432s  Test=0.103s  Peak RAM Train=43.869 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=172/172] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.432s  Test=0.095s  Peak RAM Train=43.867 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=175/175] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.414s  Test=0.103s  Peak RAM Train=43.868 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=178/178] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.450s  Test=0.109s  Peak RAM Train=43.872 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=181/181] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.436s  Test=0.113s  Peak RAM Train=43.872 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=184/184] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.419s  Test=0.096s  Peak RAM Train=43.87 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=187/187] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.279s  Test=0.062s  Peak RAM Train=43.872 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=190/190] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.212s  Test=0.070s  Peak RAM Train=43.87 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=193/193] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.248s  Test=0.111s  Peak RAM Train=43.872 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=196/196] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.210s  Test=0.061s  Peak RAM Train=43.875 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=199/199] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.242s  Test=0.123s  Peak RAM Train=43.873 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=202/202] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.455s  Test=0.102s  Peak RAM Train=43.876 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=205/205] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.259s  Test=0.065s  Peak RAM Train=43.875 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=208/208] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.481s  Test=0.121s  Peak RAM Train=43.875 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=211/211] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.545s  Test=0.104s  Peak RAM Train=43.876 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=214/214] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.433s  Test=0.116s  Peak RAM Train=43.88 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=217/217] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.453s  Test=0.130s  Peak RAM Train=43.879 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=220/220] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.286s  Test=0.070s  Peak RAM Train=43.879 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=223/223] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.355s  Test=0.130s  Peak RAM Train=43.877 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=226/226] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.173s  Test=0.105s  Peak RAM Train=43.879 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=229/229] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.443s  Test=0.127s  Peak RAM Train=43.878 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=232/232] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.499s  Test=0.143s  Peak RAM Train=43.881 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=235/235] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.454s  Test=0.127s  Peak RAM Train=43.88 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=238/238] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.505s  Test=0.106s  Peak RAM Train=43.882 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=241/241] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.511s  Test=0.126s  Peak RAM Train=43.883 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=244/244] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.469s  Test=0.072s  Peak RAM Train=43.883 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=247/247] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.508s  Test=0.077s  Peak RAM Train=43.884 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=250/250] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.233s  Test=0.076s  Peak RAM Train=43.885 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=253/253] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.396s  Test=0.072s  Peak RAM Train=43.885 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=256/256] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.478s  Test=0.130s  Peak RAM Train=43.886 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=259/259] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.378s  Test=0.164s  Peak RAM Train=43.885 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=262/262] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.517s  Test=0.118s  Peak RAM Train=43.887 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=265/265] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.431s  Test=0.078s  Peak RAM Train=43.886 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=268/268] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.438s  Test=0.138s  Peak RAM Train=43.889 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=271/271] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.203s  Test=0.073s  Peak RAM Train=43.889 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=274/274] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.228s  Test=0.073s  Peak RAM Train=43.89 MB  Peak RAM Test=28.955 MB
+2026-05-19 09:28:06 | INFO | [ncluster=277/277] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.213s  Test=0.073s  Peak RAM Train=43.891 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=280/280] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.149s  Test=0.050s  Peak RAM Train=43.891 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=283/283] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.223s  Test=0.073s  Peak RAM Train=43.891 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=286/286] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.188s  Test=0.069s  Peak RAM Train=43.892 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=289/289] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.184s  Test=0.056s  Peak RAM Train=43.892 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=292/292] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.159s  Test=0.059s  Peak RAM Train=43.895 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | [ncluster=295/295] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.127s  Test=0.053s  Peak RAM Train=43.892 MB  Peak RAM Test=29.435 MB
+2026-05-19 09:28:06 | INFO | [ncluster=298/298] AUC-ROC=99.99%  AUC-PR=99.99%  F1=0.9999  MCC=0.9997  Train=0.137s  Test=0.058s  Peak RAM Train=43.894 MB  Peak RAM Test=29.195 MB
+2026-05-19 09:28:06 | INFO | --- noise=1% ---
+2026-05-19 09:28:06 | INFO | ============================================================
+2026-05-19 09:28:06 | INFO | Dataset  : Train_StandardScaler_data_EdgeIIoTset.csv
+2026-05-19 09:28:06 | INFO | Scaler   : StandardScaler
+2026-05-19 09:28:06 | INFO | Noise    : 1%
+2026-05-19 09:28:06 | INFO | nClusters: 100 values (1..298)
+2026-05-19 09:28:06 | INFO | K-Means  : Standard KMeans
+2026-05-19 09:28:06 | INFO | ============================================================
+2026-05-19 09:28:07 | INFO | Loaded Raw Shape -> Train: (30000, 53), Test: (30000, 53)
+2026-05-19 09:28:07 | INFO | Training size : 30,300  |  Testing size: 29,700  |  Features: 52
+2026-05-19 09:28:07 | INFO | Firing up Parallel execution for 100 cluster configs...
+2026-05-19 09:32:03 | INFO | [ncluster=1/1] AUC-ROC=98.44%  AUC-PR=98.81%  F1=0.9641  MCC=0.9294  Train=0.619s  Test=0.028s  Peak RAM Train=44.267 MB  Peak RAM Test=15.064 MB
+2026-05-19 09:32:03 | INFO | [ncluster=4/4] AUC-ROC=96.58%  AUC-PR=97.54%  F1=0.9526  MCC=0.9057  Train=0.530s  Test=0.040s  Peak RAM Train=44.271 MB  Peak RAM Test=15.306 MB
+2026-05-19 09:32:03 | INFO | [ncluster=7/7] AUC-ROC=96.22%  AUC-PR=97.02%  F1=0.9464  MCC=0.8920  Train=0.684s  Test=0.038s  Peak RAM Train=44.27 MB  Peak RAM Test=15.791 MB
+2026-05-19 09:32:03 | INFO | [ncluster=10/10] AUC-ROC=96.47%  AUC-PR=97.32%  F1=0.9501  MCC=0.8998  Train=0.736s  Test=0.041s  Peak RAM Train=44.271 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=13/13] AUC-ROC=96.22%  AUC-PR=96.92%  F1=0.9473  MCC=0.8937  Train=0.688s  Test=0.044s  Peak RAM Train=44.272 MB  Peak RAM Test=15.791 MB
+2026-05-19 09:32:03 | INFO | [ncluster=16/16] AUC-ROC=96.04%  AUC-PR=96.89%  F1=0.9472  MCC=0.8965  Train=0.722s  Test=0.037s  Peak RAM Train=44.274 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=19/19] AUC-ROC=96.07%  AUC-PR=96.90%  F1=0.9508  MCC=0.9030  Train=0.694s  Test=0.045s  Peak RAM Train=44.274 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=22/22] AUC-ROC=96.46%  AUC-PR=97.39%  F1=0.9493  MCC=0.8979  Train=0.687s  Test=0.043s  Peak RAM Train=44.274 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=25/25] AUC-ROC=97.51%  AUC-PR=98.22%  F1=0.9553  MCC=0.9106  Train=0.668s  Test=0.040s  Peak RAM Train=44.274 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=28/28] AUC-ROC=95.60%  AUC-PR=96.32%  F1=0.9275  MCC=0.8520  Train=0.664s  Test=0.047s  Peak RAM Train=44.278 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=31/31] AUC-ROC=95.11%  AUC-PR=95.95%  F1=0.9065  MCC=0.8093  Train=0.674s  Test=0.038s  Peak RAM Train=44.276 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=34/34] AUC-ROC=96.71%  AUC-PR=97.62%  F1=0.9378  MCC=0.8757  Train=0.387s  Test=0.024s  Peak RAM Train=44.275 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=37/37] AUC-ROC=97.00%  AUC-PR=98.09%  F1=0.9659  MCC=0.9331  Train=0.277s  Test=0.030s  Peak RAM Train=44.276 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=40/40] AUC-ROC=96.96%  AUC-PR=98.04%  F1=0.9626  MCC=0.9274  Train=0.386s  Test=0.028s  Peak RAM Train=44.278 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=43/43] AUC-ROC=97.02%  AUC-PR=98.10%  F1=0.9548  MCC=0.9133  Train=0.366s  Test=0.050s  Peak RAM Train=44.278 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=46/46] AUC-ROC=97.04%  AUC-PR=98.10%  F1=0.9593  MCC=0.9197  Train=0.426s  Test=0.030s  Peak RAM Train=44.279 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=49/49] AUC-ROC=97.07%  AUC-PR=98.17%  F1=0.9651  MCC=0.9327  Train=0.334s  Test=0.030s  Peak RAM Train=44.279 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=52/52] AUC-ROC=97.12%  AUC-PR=98.15%  F1=0.9522  MCC=0.9114  Train=0.324s  Test=0.026s  Peak RAM Train=44.282 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=55/55] AUC-ROC=96.51%  AUC-PR=97.62%  F1=0.9488  MCC=0.9029  Train=0.377s  Test=0.057s  Peak RAM Train=44.282 MB  Peak RAM Test=16.033 MB
+2026-05-19 09:32:03 | INFO | [ncluster=58/58] AUC-ROC=97.37%  AUC-PR=98.29%  F1=0.9695  MCC=0.9408  Train=0.359s  Test=0.033s  Peak RAM Train=44.282 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=61/61] AUC-ROC=97.05%  AUC-PR=98.11%  F1=0.9570  MCC=0.9187  Train=0.327s  Test=0.034s  Peak RAM Train=44.282 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=64/64] AUC-ROC=97.28%  AUC-PR=98.23%  F1=0.9589  MCC=0.9188  Train=0.455s  Test=0.064s  Peak RAM Train=44.285 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=67/67] AUC-ROC=97.25%  AUC-PR=98.24%  F1=0.9653  MCC=0.9323  Train=0.604s  Test=0.030s  Peak RAM Train=44.283 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=70/70] AUC-ROC=97.00%  AUC-PR=98.09%  F1=0.9623  MCC=0.9257  Train=0.601s  Test=0.067s  Peak RAM Train=44.283 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=73/73] AUC-ROC=97.46%  AUC-PR=98.31%  F1=0.9580  MCC=0.9207  Train=0.297s  Test=0.065s  Peak RAM Train=44.286 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=76/76] AUC-ROC=97.41%  AUC-PR=98.29%  F1=0.9559  MCC=0.9171  Train=0.570s  Test=0.062s  Peak RAM Train=44.285 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=79/79] AUC-ROC=97.19%  AUC-PR=98.16%  F1=0.9527  MCC=0.9113  Train=0.423s  Test=0.070s  Peak RAM Train=44.286 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=82/82] AUC-ROC=96.98%  AUC-PR=97.68%  F1=0.9499  MCC=0.9029  Train=0.595s  Test=0.065s  Peak RAM Train=44.286 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=85/85] AUC-ROC=97.32%  AUC-PR=98.22%  F1=0.9572  MCC=0.9190  Train=0.696s  Test=0.072s  Peak RAM Train=44.287 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=88/88] AUC-ROC=97.16%  AUC-PR=98.05%  F1=0.9535  MCC=0.9113  Train=0.637s  Test=0.060s  Peak RAM Train=44.289 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=91/91] AUC-ROC=97.19%  AUC-PR=98.15%  F1=0.9612  MCC=0.9264  Train=0.676s  Test=0.097s  Peak RAM Train=44.29 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=94/94] AUC-ROC=97.36%  AUC-PR=98.20%  F1=0.9563  MCC=0.9169  Train=0.582s  Test=0.037s  Peak RAM Train=44.29 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=97/97] AUC-ROC=96.96%  AUC-PR=97.83%  F1=0.9438  MCC=0.8899  Train=0.320s  Test=0.034s  Peak RAM Train=44.29 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=100/100] AUC-ROC=97.00%  AUC-PR=97.92%  F1=0.9528  MCC=0.9094  Train=0.576s  Test=0.071s  Peak RAM Train=44.291 MB  Peak RAM Test=16.275 MB
+2026-05-19 09:32:03 | INFO | [ncluster=103/103] AUC-ROC=96.67%  AUC-PR=97.70%  F1=0.9499  MCC=0.9034  Train=0.897s  Test=0.067s  Peak RAM Train=44.291 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=106/106] AUC-ROC=97.20%  AUC-PR=98.05%  F1=0.9487  MCC=0.9013  Train=0.434s  Test=0.041s  Peak RAM Train=44.293 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=109/109] AUC-ROC=96.85%  AUC-PR=97.82%  F1=0.9515  MCC=0.9064  Train=0.264s  Test=0.037s  Peak RAM Train=44.291 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=112/112] AUC-ROC=96.82%  AUC-PR=97.85%  F1=0.9492  MCC=0.9011  Train=0.586s  Test=0.058s  Peak RAM Train=44.294 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=115/115] AUC-ROC=97.56%  AUC-PR=98.29%  F1=0.9676  MCC=0.9366  Train=0.448s  Test=0.058s  Peak RAM Train=44.294 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=118/118] AUC-ROC=96.80%  AUC-PR=97.56%  F1=0.9506  MCC=0.9045  Train=0.327s  Test=0.042s  Peak RAM Train=44.295 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=121/121] AUC-ROC=96.93%  AUC-PR=97.78%  F1=0.9474  MCC=0.8984  Train=0.420s  Test=0.051s  Peak RAM Train=44.3 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=124/124] AUC-ROC=97.31%  AUC-PR=98.13%  F1=0.9611  MCC=0.9233  Train=0.415s  Test=0.044s  Peak RAM Train=44.296 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=127/127] AUC-ROC=97.36%  AUC-PR=98.19%  F1=0.9607  MCC=0.9233  Train=0.471s  Test=0.044s  Peak RAM Train=44.297 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=130/130] AUC-ROC=97.14%  AUC-PR=97.91%  F1=0.9579  MCC=0.9177  Train=0.448s  Test=0.082s  Peak RAM Train=44.297 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=133/133] AUC-ROC=96.80%  AUC-PR=97.26%  F1=0.9428  MCC=0.8855  Train=0.332s  Test=0.059s  Peak RAM Train=44.298 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=136/136] AUC-ROC=97.20%  AUC-PR=98.00%  F1=0.9563  MCC=0.9149  Train=0.392s  Test=0.043s  Peak RAM Train=44.298 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=139/139] AUC-ROC=96.39%  AUC-PR=96.98%  F1=0.9414  MCC=0.8831  Train=0.506s  Test=0.073s  Peak RAM Train=44.298 MB  Peak RAM Test=16.275 MB
+2026-05-19 09:32:03 | INFO | [ncluster=142/142] AUC-ROC=97.28%  AUC-PR=98.09%  F1=0.9564  MCC=0.9155  Train=0.621s  Test=0.078s  Peak RAM Train=44.299 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=145/145] AUC-ROC=96.87%  AUC-PR=97.76%  F1=0.9502  MCC=0.9027  Train=0.648s  Test=0.082s  Peak RAM Train=44.3 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=148/148] AUC-ROC=97.31%  AUC-PR=98.03%  F1=0.9470  MCC=0.8960  Train=0.597s  Test=0.116s  Peak RAM Train=44.3 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=151/151] AUC-ROC=95.47%  AUC-PR=95.20%  F1=0.9385  MCC=0.8781  Train=0.586s  Test=0.090s  Peak RAM Train=44.302 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=154/154] AUC-ROC=97.18%  AUC-PR=97.79%  F1=0.9495  MCC=0.9006  Train=0.671s  Test=0.098s  Peak RAM Train=44.303 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=157/157] AUC-ROC=96.80%  AUC-PR=97.59%  F1=0.9435  MCC=0.8886  Train=0.495s  Test=0.085s  Peak RAM Train=44.303 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=160/160] AUC-ROC=96.39%  AUC-PR=97.36%  F1=0.9408  MCC=0.8844  Train=0.510s  Test=0.069s  Peak RAM Train=44.303 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=163/163] AUC-ROC=97.48%  AUC-PR=98.22%  F1=0.9598  MCC=0.9215  Train=0.687s  Test=0.086s  Peak RAM Train=44.304 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=166/166] AUC-ROC=97.10%  AUC-PR=97.89%  F1=0.9503  MCC=0.9044  Train=0.640s  Test=0.080s  Peak RAM Train=44.306 MB  Peak RAM Test=16.276 MB
+2026-05-19 09:32:03 | INFO | [ncluster=169/169] AUC-ROC=96.58%  AUC-PR=97.23%  F1=0.9366  MCC=0.8753  Train=0.352s  Test=0.102s  Peak RAM Train=44.304 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=172/172] AUC-ROC=97.54%  AUC-PR=98.31%  F1=0.9572  MCC=0.9177  Train=0.355s  Test=0.049s  Peak RAM Train=44.305 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=175/175] AUC-ROC=96.63%  AUC-PR=97.57%  F1=0.9451  MCC=0.8930  Train=0.330s  Test=0.048s  Peak RAM Train=44.305 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=178/178] AUC-ROC=97.58%  AUC-PR=98.30%  F1=0.9614  MCC=0.9252  Train=0.458s  Test=0.048s  Peak RAM Train=44.307 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=181/181] AUC-ROC=96.83%  AUC-PR=97.48%  F1=0.9448  MCC=0.8902  Train=0.652s  Test=0.084s  Peak RAM Train=44.308 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=184/184] AUC-ROC=96.69%  AUC-PR=97.27%  F1=0.9388  MCC=0.8772  Train=0.700s  Test=0.104s  Peak RAM Train=44.307 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=187/187] AUC-ROC=97.35%  AUC-PR=97.89%  F1=0.9568  MCC=0.9155  Train=0.659s  Test=0.099s  Peak RAM Train=44.309 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=190/190] AUC-ROC=96.97%  AUC-PR=97.66%  F1=0.9496  MCC=0.9008  Train=0.517s  Test=0.092s  Peak RAM Train=44.31 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=193/193] AUC-ROC=96.95%  AUC-PR=97.65%  F1=0.9465  MCC=0.8966  Train=0.417s  Test=0.054s  Peak RAM Train=44.31 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=196/196] AUC-ROC=97.14%  AUC-PR=97.90%  F1=0.9509  MCC=0.9021  Train=0.738s  Test=0.106s  Peak RAM Train=44.311 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=199/199] AUC-ROC=97.63%  AUC-PR=98.34%  F1=0.9635  MCC=0.9302  Train=0.697s  Test=0.107s  Peak RAM Train=44.312 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=202/202] AUC-ROC=96.33%  AUC-PR=96.50%  F1=0.9394  MCC=0.8799  Train=0.672s  Test=0.102s  Peak RAM Train=44.314 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=205/205] AUC-ROC=97.43%  AUC-PR=98.20%  F1=0.9584  MCC=0.9192  Train=0.379s  Test=0.062s  Peak RAM Train=44.312 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=208/208] AUC-ROC=96.85%  AUC-PR=97.60%  F1=0.9417  MCC=0.8836  Train=0.381s  Test=0.062s  Peak RAM Train=44.313 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=211/211] AUC-ROC=96.99%  AUC-PR=97.47%  F1=0.9506  MCC=0.9026  Train=0.264s  Test=0.053s  Peak RAM Train=44.313 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=214/214] AUC-ROC=95.80%  AUC-PR=95.62%  F1=0.9376  MCC=0.8752  Train=0.326s  Test=0.058s  Peak RAM Train=44.314 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=217/217] AUC-ROC=97.44%  AUC-PR=98.22%  F1=0.9575  MCC=0.9168  Train=0.684s  Test=0.121s  Peak RAM Train=44.315 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=220/220] AUC-ROC=97.13%  AUC-PR=97.73%  F1=0.9526  MCC=0.9064  Train=0.687s  Test=0.099s  Peak RAM Train=44.318 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=223/223] AUC-ROC=97.09%  AUC-PR=97.68%  F1=0.9522  MCC=0.9040  Train=0.282s  Test=0.052s  Peak RAM Train=44.319 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=226/226] AUC-ROC=96.97%  AUC-PR=97.24%  F1=0.9470  MCC=0.8946  Train=0.474s  Test=0.057s  Peak RAM Train=44.317 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=229/229] AUC-ROC=96.89%  AUC-PR=97.13%  F1=0.9501  MCC=0.9008  Train=0.772s  Test=0.117s  Peak RAM Train=44.317 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=232/232] AUC-ROC=96.99%  AUC-PR=97.37%  F1=0.9503  MCC=0.9014  Train=0.742s  Test=0.146s  Peak RAM Train=44.319 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=235/235] AUC-ROC=97.15%  AUC-PR=97.68%  F1=0.9532  MCC=0.9077  Train=0.443s  Test=0.075s  Peak RAM Train=44.319 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=238/238] AUC-ROC=96.91%  AUC-PR=97.18%  F1=0.9466  MCC=0.8926  Train=0.419s  Test=0.063s  Peak RAM Train=44.321 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=241/241] AUC-ROC=96.88%  AUC-PR=97.27%  F1=0.9496  MCC=0.9004  Train=0.286s  Test=0.064s  Peak RAM Train=44.321 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=244/244] AUC-ROC=96.72%  AUC-PR=96.97%  F1=0.9434  MCC=0.8867  Train=0.300s  Test=0.067s  Peak RAM Train=44.321 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=247/247] AUC-ROC=96.24%  AUC-PR=96.59%  F1=0.9414  MCC=0.8824  Train=0.322s  Test=0.064s  Peak RAM Train=44.32 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=250/250] AUC-ROC=96.90%  AUC-PR=97.09%  F1=0.9450  MCC=0.8904  Train=0.705s  Test=0.110s  Peak RAM Train=44.322 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=253/253] AUC-ROC=96.28%  AUC-PR=96.40%  F1=0.9428  MCC=0.8863  Train=0.720s  Test=0.116s  Peak RAM Train=44.323 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=256/256] AUC-ROC=96.85%  AUC-PR=97.20%  F1=0.9422  MCC=0.8849  Train=0.628s  Test=0.119s  Peak RAM Train=44.324 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=259/259] AUC-ROC=96.25%  AUC-PR=96.35%  F1=0.9367  MCC=0.8736  Train=0.615s  Test=0.124s  Peak RAM Train=44.324 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=262/262] AUC-ROC=96.59%  AUC-PR=96.91%  F1=0.9394  MCC=0.8780  Train=0.664s  Test=0.118s  Peak RAM Train=44.325 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=265/265] AUC-ROC=96.44%  AUC-PR=96.78%  F1=0.9431  MCC=0.8873  Train=0.314s  Test=0.072s  Peak RAM Train=44.325 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=268/268] AUC-ROC=96.24%  AUC-PR=96.32%  F1=0.9341  MCC=0.8685  Train=0.367s  Test=0.079s  Peak RAM Train=44.326 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=271/271] AUC-ROC=95.97%  AUC-PR=96.18%  F1=0.9370  MCC=0.8745  Train=0.348s  Test=0.072s  Peak RAM Train=44.328 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=274/274] AUC-ROC=96.51%  AUC-PR=96.94%  F1=0.9409  MCC=0.8829  Train=0.363s  Test=0.053s  Peak RAM Train=44.327 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=277/277] AUC-ROC=96.54%  AUC-PR=96.65%  F1=0.9433  MCC=0.8861  Train=0.230s  Test=0.048s  Peak RAM Train=44.327 MB  Peak RAM Test=17.245 MB
+2026-05-19 09:32:03 | INFO | [ncluster=280/280] AUC-ROC=96.25%  AUC-PR=96.27%  F1=0.9357  MCC=0.8702  Train=0.423s  Test=0.066s  Peak RAM Train=44.329 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=283/283] AUC-ROC=96.55%  AUC-PR=96.72%  F1=0.9419  MCC=0.8842  Train=0.345s  Test=0.080s  Peak RAM Train=44.332 MB  Peak RAM Test=16.518 MB
+2026-05-19 09:32:03 | INFO | [ncluster=286/286] AUC-ROC=98.92%  AUC-PR=98.14%  F1=0.9775  MCC=0.9542  Train=0.208s  Test=0.054s  Peak RAM Train=44.33 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | [ncluster=289/289] AUC-ROC=99.28%  AUC-PR=98.83%  F1=0.9848  MCC=0.9691  Train=0.275s  Test=0.063s  Peak RAM Train=44.332 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=292/292] AUC-ROC=96.17%  AUC-PR=96.57%  F1=0.9361  MCC=0.8714  Train=0.211s  Test=0.053s  Peak RAM Train=44.331 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=295/295] AUC-ROC=99.05%  AUC-PR=98.33%  F1=0.9782  MCC=0.9557  Train=0.160s  Test=0.047s  Peak RAM Train=44.332 MB  Peak RAM Test=16.76 MB
+2026-05-19 09:32:03 | INFO | [ncluster=298/298] AUC-ROC=96.11%  AUC-PR=96.17%  F1=0.9375  MCC=0.8745  Train=0.144s  Test=0.040s  Peak RAM Train=44.332 MB  Peak RAM Test=17.003 MB
+2026-05-19 09:32:03 | INFO | --- noise=3% ---
+2026-05-19 09:32:03 | INFO | ============================================================
+2026-05-19 09:32:03 | INFO | Dataset  : Train_StandardScaler_data_EdgeIIoTset.csv
+2026-05-19 09:32:03 | INFO | Scaler   : StandardScaler
+2026-05-19 09:32:03 | INFO | Noise    : 3%
+2026-05-19 09:32:03 | INFO | nClusters: 100 values (1..298)
+2026-05-19 09:32:03 | INFO | K-Means  : Standard KMeans
+2026-05-19 09:32:03 | INFO | ============================================================
+2026-05-19 09:32:03 | INFO | Loaded Raw Shape -> Train: (30000, 53), Test: (30000, 53)
+2026-05-19 09:32:03 | INFO | Training size : 30,900  |  Testing size: 29,100  |  Features: 52
+2026-05-19 09:32:03 | INFO | Firing up Parallel execution for 100 cluster configs...

@@ -7,6 +7,8 @@ import traceback
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import matthews_corrcoef, f1_score, precision_score, recall_score, accuracy_score, roc_auc_score, average_precision_score
 import sys
+import logging
+from datetime import datetime
 from sklearn.impute import SimpleImputer
 
 # Link DRLAD from the root path
@@ -15,16 +17,34 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
-output_file = "Baseline_Noise_Results_Fixed.csv"
 columns = ["Dataset", "Model", "Parameters", "Scaled", "Noise", "AUCROC", "AUCPR", "Accuracy", "MCC", "F1 Score", 
            "Precision", "Recall", "Time Train", "Time Test", "Peak RAM Train (MB)", "Peak RAM Test (MB)"]
+
+def setup_logger(log_path, name="baseline"):
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+    if logger.handlers:
+        logger.handlers.clear()
+    fmt = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+    fh = logging.FileHandler(log_path, mode='a', encoding='utf-8')
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(fmt)
+    logger.addHandler(fh)
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setLevel(logging.INFO)
+    ch.setFormatter(fmt)
+    logger.addHandler(ch)
+    return logger
+
+# Global logger for functions
+logger = logging.getLogger("baseline")
 
 # ============================================================================
 # UTILITIES
 # ============================================================================
 
 def preprocess_data_noise(train_data, test_data, noise_percentage=10):
-    print("..............................Data Overview................................")
+    logger.info("..............................Data Overview................................")
     X_train_total = train_data.iloc[:, :-1].to_numpy()
     y_train_total = train_data.iloc[:, -1].to_numpy()
     X_train = X_train_total[y_train_total == 0]
@@ -40,7 +60,7 @@ def preprocess_data_noise(train_data, test_data, noise_percentage=10):
         
     X_test = test_data.iloc[:, :-1].to_numpy()
     y_test = test_data.iloc[:, -1].to_numpy()
-    print(f"Samples after noise: {len(X_train)} | Features: {X_train.shape[1]}")
+    logger.info(f"Samples after noise: {len(X_train)} | Features: {X_train.shape[1]}")
     return X_train, y_train, X_test, y_test
 
 def evaluate_model(y_true, y_pred, y_probabilities=None):
@@ -138,23 +158,30 @@ def get_model(name, **kwargs):
     m_class = model_dict.get(name)
     if m_class is None: 
         raise ValueError(f"Model {name} not found or required wrapper is missing.")
-    return m_class(**kwargs)
+    
+    try:
+        return m_class(**kwargs)
+    except TypeError as e:
+        msg = str(e).lower()
+        if 'device' in msg and 'unexpected' in msg:
+            kwargs.pop('device', None)
+        return m_class(**kwargs)
 
 # ============================================================================
 # EXECUTION ENGINE
 # ============================================================================
 
-def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, models_list):
+def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percentage, scaler, models_list, output_file):
     # Force float64 and C-contiguous for PCA/sklearn stability
     X_train = np.ascontiguousarray(X_train, dtype=np.float64)
     X_test = np.ascontiguousarray(X_test, dtype=np.float64)
 
     if not np.isfinite(X_train).all() or not np.isfinite(X_test).all():
-        print(f"CRITICAL WARNING: Non-finite values detected in {dataset_name} ({scaler})")
+        logger.warning(f"CRITICAL WARNING: Non-finite values detected in {dataset_name} ({scaler})")
 
     for model_name in models_list:
         try:
-            print(f"\nRunning dataset {dataset_name} with model {model_name}")
+            logger.info(f"\nRunning dataset {dataset_name} with model {model_name}")
             params = { "device": "cpu" } # Force CPU for stability
             
             tracemalloc.start()
@@ -214,7 +241,7 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                 except Exception as prob_e:
                     # ROBUST FALLBACK: Manual scaling of decision scores (Fix for PCA/ToNIoT/CICIoT stability)
                     try:
-                        print(f"DEBUG: predict_proba failed for {model_name}, manual scaling fallback...")
+                        logger.debug(f"DEBUG: predict_proba failed for {model_name}, manual scaling fallback...")
                         test_scores = model.decision_function(X_test)
                         # Clean test scores
                         test_scores = np.nan_to_num(test_scores, posinf=1e15, neginf=-1e15)
@@ -229,7 +256,7 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                         # y_probabilities: [prob_normal, prob_anomaly]
                         y_probabilities = np.vstack([1 - probs, probs]).T
                     except Exception as manual_e:
-                        print(f"DEBUG: Manual scaling also failed for {model_name}: {manual_e}")
+                        logger.debug(f"DEBUG: Manual scaling also failed for {model_name}: {manual_e}")
                         y_probabilities = None
             
             # Final probability sanitization
@@ -248,10 +275,10 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
                       peak_train/10**6, peak_test/10**6]
             
             pd.DataFrame([result], columns=columns).to_csv(output_file, mode='a', header=False, index=False)
-            print(f"Results saved for {dataset_name} with model {model_name}")
+            logger.info(f"Results saved for {dataset_name} with model {model_name}")
             
         except Exception as e:
-            print(f"Error with dataset {dataset_name}, model {model_name}: {e}")
+            logger.error(f"Error with dataset {dataset_name}, model {model_name}: {e}")
             traceback.print_exc()
 
 # ============================================================================
@@ -259,15 +286,30 @@ def run_experiment(X_train, y_train, X_test, y_test, dataset_name, noise_percent
 # ============================================================================
 
 if __name__ == "__main__":
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+    exp_dir = os.path.join(current_dir, 'outputs', f"Experiment_BaselineFixed_{RUN_TIMESTAMP}")
+    os.makedirs(exp_dir, exist_ok=True)
+    
+    log_path = os.path.join(exp_dir, "baseline_fixed_run.log")
+    setup_logger(log_path)
+    
+    output_file = os.path.join(exp_dir, "Baseline_Noise_Results_Fixed.csv")
     if not os.path.exists(output_file):
         pd.DataFrame(columns=columns).to_csv(output_file, index=False)
         
-    models_list = ['PMKFN', 'DRLAD']
+    logger.info("=" * 60)
+    logger.info("BASELINE FIXED EXPERIMENT STARTED")
+    logger.info("=" * 60)
+        
+    # models_list = ['LUNAR', 'AutoEncoder', 'SUOD', 'MO_GAAL', 'SO_GAAL', 'DeepSVDD', 'VAE', 'AE1SVM']
+    models_list = ['SUOD', 'DeepSVDD']
     
-    dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
-    # dataset_prefixes = ['data_EdgeIIoTset.csv', 'data_IoTID20.csv']
+    # dataset_prefixes = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
+    dataset_prefixes = ['data_EdgeIIoTset.csv', 'data_IoTID20.csv']
     
-    scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+    # scaler_names = ['StandardScaler', 'MinMaxScaler', 'Normalizer', 'QuantileTransformer', 'RobustScaler']
+    scaler_names = ['QuantileTransformer']
     
     imputer = SimpleImputer(strategy="mean")
     
@@ -277,10 +319,10 @@ if __name__ == "__main__":
             test_file = f'../../Datascaled/Official_OC_Data/Test_{scaler}_{prefix}'
             
             if not os.path.exists(train_file):
-                print(f"File not found: {train_file}")
+                logger.warning(f"File not found: {train_file}")
                 continue
                 
-            print(f"\nProcessing {prefix} with {scaler} scaler...")
+            logger.info(f"\nProcessing {prefix} with {scaler} scaler...")
             df_train = pd.read_csv(train_file).dropna()
             df_test = pd.read_csv(test_file).dropna()
             df_full = pd.concat([df_train, df_test], ignore_index=True)
@@ -305,6 +347,6 @@ if __name__ == "__main__":
                 X_test = np.nan_to_num(X_test, nan=0.0)
                 
                 if not np.isfinite(X_train).all():
-                    print(f"CRITICAL WARNING: X_train still contains non-finite values after cleaning ({prefix})")
+                    logger.warning(f"CRITICAL WARNING: X_train still contains non-finite values after cleaning ({prefix})")
                 
-                run_experiment(X_train, y_train, X_test, y_test, prefix, noise, scaler, models_list)
+                run_experiment(X_train, y_train, X_test, y_test, prefix, noise, scaler, models_list, output_file)

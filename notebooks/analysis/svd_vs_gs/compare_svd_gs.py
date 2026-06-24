@@ -169,13 +169,13 @@ def plot_2d_projections(dataset_name, projected_data, y_test, output_dir):
 
 # ----------------- Pipeline -----------------
 def run_comparison(output_dir):
-    datasets = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_BoTIoT.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
+    datasets = ['data_ToNIoT.csv', 'data_N_BaIoT.csv', 'data_CICIoT2023.csv', 'data_EdgeIIoTset.csv', 'data_IoTID20.csv', 'data_FiveGNIDD.csv']
     scaler = 'MinMaxScaler'
     # Data directory can be set via the DATA_DIR environment variable for server deployments.
     # Example: export DATA_DIR=/data/GMM-nfst/Datascaled/NoiseOCData
     # Locally, it falls back to a relative path from this file.
     _script_dir = os.path.dirname(os.path.abspath(__file__))
-    _default_data_dir = os.path.normpath(os.path.join(_script_dir, '..', '..', '..', 'Datascaled', 'NoiseOCData'))
+    _default_data_dir = os.path.normpath(os.path.join(_script_dir, '..', '..', '..', 'Datascaled', 'Official_OC_Data'))
     base_dir = os.environ.get('DATA_DIR', _default_data_dir)
     results = []
 
