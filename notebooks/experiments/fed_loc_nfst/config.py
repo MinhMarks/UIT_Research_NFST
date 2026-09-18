@@ -53,7 +53,7 @@ NOISE_PCT = 1.0
 EPSILON_SVD = 1e-6           # Threshold for near-zero singular values
 EPSILON_NEAR_NULL = 1e-4     # Near-null relaxation threshold τ (for S_w null detection)
 ALPHA_ORTHO = 0.5            # Weight for orthogonal residual distance
-L_MIN = 1                    # Minimum null-space dimensions (fallback protection)
+L_MIN = 5                    # Minimum null-space dimensions (subspace floor to prevent L=1 collapse)
 
 # ============================================================
 # Communication Budget Tracking
