@@ -1,0 +1,108 @@
+% ==============================================================================
+% SECTION 2: RELATED WORK (MASTER DRAFT FOR LOC-NFST THESIS / PAPER)
+% Author: Tran Le Minh Nhat (MSSV: 23521098, KHTN2023, UIT)
+% Supervisors: Assoc. Prof. Le Kim Hung, Nguyen Xuan Ha (IEC Lab, UIT)
+% ==============================================================================
+
+\section{Related Work}
+\label{sec:related_work}
+
+Securing Internet of Things (IoT) ecosystems against malicious intrusions requires network intrusion detection systems (NIDS) capable of operating under strict computational budgets and open-world uncertainties~\cite{mirsky2018kitsune,samara2022survey}. While traditional intrusion detection literature categorizes detection schemes into signature-based, anomaly-based, and hybrid architectures~\cite{liao2013intrusion,khraisat2019survey}, the open-ended evolution of polymorphic exploits and zero-day vulnerabilities has shifted the primary research focus toward unsupervised and one-class anomaly detection paradigms. This section synthesizes the theoretical evolution, architectural trade-offs, and empirical paradigms governing anomaly-based IoT intrusion detection.
+
+% ------------------------------------------------------------------------------
+\subsection{From Closed-World Multiclass Classifiers to Open-World Novelty Detection}
+\label{subsec:rel_closed_vs_open}
+
+Early machine learning-based NIDS predominantly adopted supervised multiclass classification frameworks, training algorithms such as Random Forests, Multi-Layer Perceptrons (MLPs), and Gradient Boosting Decision Trees on labeled datasets of known attack families~\cite{koroniotis2019towards,phan2024comparison}. However, as formally articulated by Sommer and Paxson~\cite{sommer2010outside}, applying machine learning to network security departs fundamentally from canonical machine learning domains due to the vast semantic gap between statistical anomalies and actual security breaches, the asymmetric cost of false alarms, and the non-stationary nature of adversarial environments. 
+
+Recent empirical studies have revealed the severe vulnerability of the \emph{closed-world assumption} in IoT networks. Sarhan et al.~\cite{sarhan2023zero} demonstrated that when supervised NIDS are evaluated in zero-shot or open-world settings containing previously unseen attack classes, their classification accuracy degrades catastrophically by up to 70\%, accompanied by elevated false-negative rates. This fragility is exacerbated by the weaponization of generative artificial intelligence and large language models (LLMs) to synthesize autonomous, polymorphic exploits~\cite{ferrag2025generative,xu2025autonomous}. 
+
+Consequently, the field has increasingly pivoted toward \emph{One-Class Novelty Detection} (OCND) and benign-only profiling~\cite{shin2005one,DeepSVDD}. By estimating the support or density distribution strictly on nominal (benign) network traffic $\mathbb{P}_{\text{norm}}$, OCND frameworks eliminate dependence on attack signatures and circumvent the open-world zero-day dilemma. Nonetheless, practical deployment of OCND introduces severe operational challenges: nominal training sets collected in-the-wild are inevitably tainted by imperfect supervision and slight contamination ($\varepsilon \in [1\%, 5\%]$)~\cite{prabowo2026unclean}, while benign traffic across heterogeneous IoT protocols inherently exhibits complex multimodal structures.
+
+% ------------------------------------------------------------------------------
+\subsection{Anomaly Detection Paradigms: The Trilemma of Boundaries, Compactness, and Reconstruction}
+\label{subsec:rel_ad_paradigms}
+
+Extant anomaly detection algorithms can be categorized into four core foundational paradigms, each characterized by intrinsic structural trade-offs:
+
+\paragraph{1. Boundary-Based Support Estimation}
+Classical methods such as One-Class Support Vector Machines (OC-SVM)~\cite{scholkopf2001estimating} and Support Vector Data Description (SVDD)~\cite{tax2004support} construct a maximal-margin hyperplane or a minimum-volume hypersphere in a reproducing kernel Hilbert space (RKHS) enclosing nominal data. While geometrically elegant, boundary methods suffer from acute \emph{boundary fragility under contamination}. Because the optimization objective depends critically on exterior support vectors, even minor label contamination ($1\% - 5\%$) substantially distorts the boundary geometry, absorbing malicious samples into the nominal acceptance region~\cite{han2022adbench,DeepSVDD}. Furthermore, computing and storing the kernel matrix incurs $O(N^2)$ memory and $O(N^3)$ computational complexity, rendering classical kernel OC-SVM intractable for high-throughput IoT tabular streams.
+
+\paragraph{2. Deep Compactness and the Hypersphere Collapse}
+Deep Support Vector Data Description (Deep SVDD)~\cite{DeepSVDD} addresses non-linear representation by training a deep neural network $f(x; \mathcal{W})$ to map benign samples into a minimal enclosing hypersphere centered at a fixed point $c$. However, unconstrained optimization in Deep SVDD is subject to the notorious \emph{hypersphere collapse} (or representation collapse) problem: if network bias terms are enabled or weights converge toward zero ($\mathcal{W} \to \mathbf{0}$), the network yields a trivial constant mapping $f(x) \equiv c, \forall x$, mapping both normal and anomalous instances to the center. While removing bias terms and freezing $c \neq \mathbf{0}$ mitigates trivial solutions, deep hypersphere formulations remain non-convex, require substantial backpropagation overhead, and frequently suffer from training instability when fitted on tabular feature topologies.
+
+\paragraph{3. Reconstruction-Based Latent Bottlenecks}
+Autoencoder (AE) architectures~\cite{sakurada2014anomaly} and their variational extensions (VAE) encode traffic flows into a low-dimensional bottleneck representation and reconstruct the original input, using reconstruction error $\|x - \hat{x}\|_2^2$ as the anomaly score. The core vulnerability of standard autoencoders is the \emph{overgeneralization trap}~\cite{gong2019memorizing}: deep non-linear networks often possess excessive expressive capacity, allowing them to generalize unexpectedly well to unseen anomalous traffic flows, thereby reconstructing intrusions with deceptively low residual error. Although memory-augmented autoencoders (MemAE)~\cite{gong2019memorizing} and contractive autoencoders~\cite{aktar2024robust} incorporate regularization penalties to curb overgeneralization, they impose non-trivial computational and memory overheads that impede real-time edge execution.
+
+\paragraph{4. Density, Proximity, and Tree-Based Ensembles}
+Non-parametric proximity models, such as $k$-Nearest Neighbors ($k$-NN)~\cite{ramaswamy2000efficient} and Local Outlier Factor (LOF)~\cite{breunig2000lof}, evaluate local neighborhood densities. While intuitive and effective for local anomalies, their inference complexity scales linearly with the training set size $O(N \cdot d)$, creating unacceptable test-time latency on edge devices. Conversely, Isolation Forest (iForest)~\cite{liu2008isolation} isolates anomalies using random orthogonal partitioning trees with linear training time $O(N \log \psi)$. Nevertheless, standard iForest relies on axis-parallel splits, introducing artificial coordinate biases and exhibiting blind spots when detecting subtle clustered or multimodal anomalies along non-axis-aligned manifolds~\cite{hariri2021extended}.
+
+% ------------------------------------------------------------------------------
+\subsection{Subspace and Null-Space Learning: Foundations and Theoretical Dilemmas}
+\label{subsec:rel_subspace_nullspace}
+
+To circumvent the curse of dimensionality and the computational cost of full-space metric evaluation, subspace learning methods project data onto lower-dimensional manifolds where normal samples cluster densely while anomalies deviate significantly.
+
+\paragraph{The Fisher Criterion and the Emergence of Null Spaces}
+Linear Discriminant Analysis (LDA), originating from Fisher's foundational criterion~\cite{fisher1936use} and extended by Foley and Sammon~\cite{foley1975optimal}, seeks projection vectors $w$ that maximize the Rayleigh quotient:
+\begin{equation}
+J(w) = \frac{w^\top S_b w}{w^\top S_w w},
+\label{eq:fisher_criterion}
+\end{equation}
+where $S_b$ and $S_w$ denote the between-class and within-class scatter matrices, respectively. In high-dimensional regimes characterized by the Small Sample Size (SSS) condition ($n < d$), $S_w$ becomes singular. Chen et al.~\cite{chen2000new} and Guo et al.~\cite{guo2006null} demonstrated a profound mathematical insight: the most discriminative projection directions are not those where $w^\top S_w w$ is merely small, but rather those residing in the \emph{null space} of $S_w$, satisfying:
+\begin{equation}
+w^\top S_w w = 0 \quad \text{and} \quad w^\top S_b w > 0.
+\label{eq:null_condition}
+\end{equation}
+Under Eq.~(\ref{eq:null_condition}), the Fisher discriminant ratio approaches infinity ($J(w) \to \infty$). Geometrically, projecting samples onto these Null Projecting Directions (NPDs) collapses the intra-class variance to zero, mapping all instances belonging to the same class to a single discrete point in the null subspace while maintaining class separation.
+
+\paragraph{Kernel Null Foley--Sammon Transformation in Novelty Detection}
+Bodesheim et al.~\cite{bodesheim2013kernel} pioneered the adaptation of NFST to one-class novelty detection in computer vision via the kernel trick (KNFST). By implicitly projecting benign samples into an RKHS and extracting the null space of the centered kernel Gram matrix, all nominal training samples are mapped to a single zero-variance coordinate vector $\mu^*$. For any test instance $x_{\text{test}}$, its anomaly score is computed as the Euclidean distance to this canonical prototype: $s(x_{\text{test}}) = \|W^\top \phi(x_{\text{test}}) - \mu^*\|_2$. Subsequent extensions, such as $p$-norm Multiple Kernel One-Class Fisher Null-Space (PMKFN)~\cite{arashloo2020p} and normalized NFST (nNFST)~\cite{nguyen2025nnfst}, improved kernel selection and metric normalization.
+
+\paragraph{Theoretical Breakdown of Classical NFST in IoT Tabular Streams}
+Despite the theoretical elegance of null-space projection, deploying classical NFST in network intrusion detection exposes two fundamental mathematical impasses:
+\begin{enumerate}[label=(\roman*)]
+    \item \emph{One-Class Degeneracy ($S_b \equiv \mathbf{0}$)}: In a purely benign-only setting, the dataset consists of a single nominal class ($c = 1$). Consequently, the class centroid coincides identically with the global mean ($\mu_1 = \mu$), causing the between-class scatter matrix to vanish identically: $S_b = n_1 (\mu_1 - \mu)(\mu_1 - \mu)^\top \equiv \mathbf{0}$. The discriminative constraint $w^\top S_b w > 0$ cannot be satisfied, causing classical NFST to degenerate into an ill-posed problem.
+    \item \emph{The Large-Tabular Non-Null Regime ($N \gg d$)}: Unlike image processing benchmarks where feature dimensions vastly exceed sample sizes ($d \gg n$), IoT network traffic presents the opposite regime: massive sample sizes ($N \in [10^5, 10^7]$) measured across moderate feature dimensions ($d \in [40, 80]$). In this setting, the empirical covariance matrix $S_w \in \mathbb{R}^{d \times d}$ is full-rank with probability 1 due to continuous traffic variations. Thus, an exact null space does not exist ($\mathcal{N}(S_w) = \{\mathbf{0}\}$), rendering exact null-space solvers completely inoperative.
+\end{enumerate}
+
+To overcome these impasses, modern algebraic formulations must induce surrogate discriminative structure without requiring ground-truth attack labels, while employing continuous spectral relaxations (e.g., SVD-based low-energy eigenspectrum filtering) to identify \emph{near-null subspaces} of minimal within-class variance~\cite{golestani2024exploring,aktar2024robust}.
+
+% ------------------------------------------------------------------------------
+\subsection{Network Traffic Realities: Heavy Tails and Metric Invalidation}
+\label{subsec:rel_traffic_realities}
+
+A critical yet frequently overlooked limitation in machine learning NIDS is the profound mismatch between standard statistical assumptions and the stochastic realities of computer network flows. 
+
+\paragraph{Heavy-Tailed Traffic and Moment Instability}
+Foundational networking treatises by Paxson and Floyd~\cite{paxson1995wide} and recent traffic modeling studies by Holland et al.~\cite{holland2021new} rigorously demonstrate that network traffic features---such as flow duration, packet volume, and inter-arrival timing---do not follow Gaussian or light-tailed distributions; rather, they exhibit extreme \emph{heavy-tailed} phenomena (e.g., Pareto, log-normal, and Lévy-stable distributions). Because scatter matrices ($S_w, S_b$) represent empirical second-order statistical moments ($\sum (x - \mu)(x - \mu)^\top$), extreme heavy-tailed outliers within nominal traffic can catastrophically inflate empirical covariance estimates and distort SVD principal components. Consequently, robust preprocessing, quantile transformations, and heavy-tailed clipping are indispensable prerequisites for stabilizing empirical second-order operators.
+
+\paragraph{Distance Concentration and Orthogonal Subspace Blind Spots}
+In high-dimensional feature spaces, the concentration of measure phenomenon documented by Aggarwal et al.~\cite{aggarwal2001surprising} causes the ratio between the distance to the nearest neighbor and the distance to the farthest neighbor to converge to zero ($\lim_{d \to \infty} \frac{\text{dist}_{\max} - \text{dist}_{\min}}{\text{dist}_{\min}} \to 0$). This metric degradation undermines full-space Euclidean calculations. 
+
+More critically, in one-class projection frameworks, if anomalous attacks exhibit massive values (e.g., volumetric DoS packet rates) exclusively along feature dimensions that exhibit negligible variance in nominal traffic, a naive principal subspace projection onto $\mathrm{span}(X_{\text{benign}})$ projects these massive attack vectors directly onto the zero vector! As observed in recent empirical studies on volumetric datasets (e.g., BoT-IoT), this creates a catastrophic \emph{orthogonal blind spot}, inverting the anomaly ranking (yielding AUC-ROC $\approx 0.0$) unless the scoring rule explicitly incorporates the \emph{orthogonal reconstruction residual} $\|(I - QQ^\top)(x - \mu)\|_2$.
+
+% ------------------------------------------------------------------------------
+\subsection{Edge Deployment Constraints and Federated IoT Paradigms}
+\label{subsec:rel_edge_federated}
+
+\paragraph{Resource Saturation on IoT Edge Gateways}
+While complex deep architectures (e.g., Transformers, Graph Neural Networks, and Deep Generative Ensembles) report competitive detection scores in offline server evaluations, they are practically unusable on resource-constrained IoT gateways (e.g., ARM Cortex-M microcontrollers and Raspberry Pi single-board computers)~\cite{rahman2025iot,mirsky2018kitsune}. Gateway-centric architectures such as Passban~\cite{eskandari2020passban} and lightweight ensembles such as Kitsune~\cite{mirsky2018kitsune} and FLiForest~\cite{xiang2026federated} emphasize the necessity of sub-millisecond inference and micro-watt energy footprints. To avoid packet queuing latency and buffer exhaustion, inference operations must be restricted to deterministic linear projections and compact prototype matching.
+
+\paragraph{Federated Learning: Client Drift vs. Algebraic Lossless Aggregation}
+In decentralized IoT networks, privacy regulations (e.g., GDPR) and uplink bandwidth limitations prohibit aggregating raw flow logs at a central cloud. Distributed learning frameworks such as Federated Learning (FL)~\cite{mcmahan2017communication,nguyen2019diot} distribute model training across edge clients. However, conventional Federated Deep Learning (e.g., FedAvg) suffers from severe \emph{client drift} caused by non-IID (heterogeneous) traffic distributions across edge nodes, as well as recurring communication overhead from transferring millions of neural weights per iteration. 
+
+In contrast, parametric statistical frameworks that rely on \emph{sufficient statistics} offer a transformative advantage: by partitioning the feature space into globally synchronized Voronoi cells, edge clients can compute local first- and second-order moment accumulators ($n_j^{(k)}, \mu_j^{(k)}, S_{w,j}^{(k)}$) and transmit only compact $d \times d$ covariance summaries. The central orchestrator can aggregate these statistics via exact, lossless matrix summation ($\sum_k S_{w}^{(k)}$) without optimization divergence, achieving global convergence in a single communication round while preserving raw data privacy.
+
+% ------------------------------------------------------------------------------
+\subsection{Methodological Rigor: The Imperative for Non-Parametric Hypothesis Testing}
+\label{subsec:rel_demser_rigor}
+
+A persistent deficiency in published NIDS benchmarks is the reliance on single-seed evaluations or unvalidated empirical averages, which obscures stochastic variance and produces statistically unreproducible claims. Following the authoritative statistical benchmarking protocol established by Janez Dem{\v{s}}ar~\cite{demsar2006statistical}, rigorous comparative evaluations over multiple benchmark datasets require:
+\begin{enumerate}
+    \item Multi-seed experimental repetitions (e.g., 10 independent randomized trials) to capture the stochastic dispersion of pseudo-class clustering and data partitioning;
+    \item The non-parametric Friedman test and its Iman--Davenport extension to evaluate the global null hypothesis of baseline equivalence across datasets;
+    \item Post-hoc Nemenyi Critical Difference (CD) diagrams to establish rigorous statistical significance boundaries;
+    \item Pairwise Wilcoxon signed-rank tests with Holm--Bonferroni step-down correction and non-parametric Cliff's delta ($\delta$) effect size quantification~\cite{romano2006appropriate}.
+\end{enumerate}
+Adopting this rigorous protocol ensures that empirical performance claims reflect true algorithmic superiority rather than dataset-specific artifacts or seed-selection bias.

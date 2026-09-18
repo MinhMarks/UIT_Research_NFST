@@ -206,12 +206,24 @@ def adaptive_spectral_solve(
         eigvals_A, eigvecs_A = eigh(A)
         eigvals_A = np.maximum(eigvals_A, 0)
 
-        # Select eigenvectors with eigenvalue below near-null threshold
-        near_null_mask = eigvals_A < epsilon_near_null
+        lambda_max = float(eigvals_A[-1]) if len(eigvals_A) > 0 else 1.0
+
+        # Adaptive threshold: use relative gap OR absolute epsilon (whichever is larger)
+        # Relative threshold: eigvals < 1% of max eigenvalue  — handles both small and large scale
+        relative_threshold = max(epsilon_near_null, lambda_max * 1e-2)
+        near_null_mask = eigvals_A < relative_threshold
+
+        logger.info(
+            f"[Server] Near-null: lambda_max={lambda_max:.6f}, "
+            f"relative_thr={relative_threshold:.6f}, "
+            f"n_candidates={np.sum(near_null_mask)}"
+        )
+
         if not np.any(near_null_mask):
             # Absolute fallback: take L_min smallest
             logger.warning(
-                f"[Server] No eigenvalues < ε_near_null. Taking {L_min} smallest."
+                f"[Server] No eigenvalues < threshold={relative_threshold:.6f}. "
+                f"Taking {L_min} smallest."
             )
             near_null_idx = np.argsort(eigvals_A)[:L_min]
         else:

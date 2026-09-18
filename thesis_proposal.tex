@@ -1,0 +1,255 @@
+
+\documentclass[12pt,a4paper]{article}
+
+% =====================================================================
+%  PACKAGES
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese,english]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2cm]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{pgfgantt}    % Gantt chart
+\usepackage{pdflscape}   % Landscape page for Gantt
+\usepackage{tikz}        % Architecture diagrams
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds, calc}
+\usepackage{listings}    % Code snippets
+\usepackage{mathtools}   % Extended math
+\usepackage{bm}          % Bold math symbols
+\usepackage{colortbl}    % Colored table cells
+\usepackage{soul}        % Highlighting
+\lstset{basicstyle=\ttfamily\footnotesize, breaklines=true, frame=single, backgroundcolor=\color{gray!8}}
+
+% =====================================================================
+%  HYPERREF SETUP
+% =====================================================================
+\hypersetup{
+    colorlinks  = true,
+    linkcolor   = blue!60!black,
+    citecolor   = blue!60!black,
+    urlcolor    = blue!70!black,
+    pdftitle    = {Đề Xuất Khóa Luận Tốt Nghiệp},
+    pdfauthor   = {Trần Lê Minh Nhật},
+}
+
+% =====================================================================
+%  TITLE STYLING
+% =====================================================================
+\titleformat{\section}{\large\bfseries\color{blue!70!black}}{{\thesection.}}{0.5em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{blue!50!black}}{{\thesubsection.}}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{{\thesubsubsection.}}{0.5em}{}
+
+\setstretch{1.3}
+
+% =====================================================================
+%  HEADER / FOOTER
+% =====================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small \textit{Đề Xuất KLTN – Trần Lê Minh Nhật}}
+\rhead{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% =====================================================================
+%  CUSTOM BOXES
+% =====================================================================
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{proposalbox}[1][]{
+    colback  = blue!4,
+    colframe = blue!55!black,
+    fonttitle= \bfseries,
+    title    = {#1},
+    breakable,
+    sharp corners = south,
+}
+\newtcolorbox{highlightbox}{
+    colback  = orange!8,
+    colframe = orange!60!black,
+    breakable,
+    sharp corners,
+}
+\newtcolorbox{demobox}[1][]{
+    colback  = green!4,
+    colframe = green!45!black,
+    fonttitle= \bfseries,
+    title    = {#1},
+    breakable,
+    sharp corners = south,
+}
+
+% =====================================================================
+%  DOCUMENT
+% =====================================================================
+\begin{document}
+
+% ----- TITLE PAGE -----
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+
+    {\large \textbf{ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH}}\\[0.3em]
+    {\large \textbf{TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN}}\\[0.3em]
+    {\large \textbf{KHOA KHOA HỌC MÁY TÍNH}}\\[1.5cm]
+
+    \includegraphics[width=3.5cm]{pictures/logo.png}\\[1.5cm]  
+
+    \rule{\linewidth}{1.5pt}\\[0.6em]
+    {\LARGE \bfseries ĐỀ XUẤT KHÓA LUẬN TỐT NGHIỆP}\\[0.5em]
+    \rule{\linewidth}{1.5pt}\\[0.8cm]
+
+    {\Large \bfseries Phát triển và Mở rộng Khung LOC-NFST:\\
+    Local One-Class Null Foley-Sammon Transformation: A Lightweight Anomaly Detection Framework for IoT Network Intrusion Detection \\[0.3em]
+    }\\[2cm]
+
+    \begin{tabular}{rl}
+        \textbf{Sinh viên:}         & Trần Lê Minh Nhật \\[0.4em]
+        \textbf{MSSV:}              & 23521098 \\[0.4em]
+        \textbf{Lớp:}               & KHTN2023 \\[0.4em]
+        \textbf{Giảng viên hướng dẫn dự kiến:} & PGS.TS. Lê Kim Hùng \\[0.4em]
+        \textbf{Cộng sự hướng dẫn:} & Nguyễn Xuân Hà \\[0.4em]
+        \textbf{Nhóm nghiên cứu:}   & IEC Lab -- UIT \\[0.4em]
+        \textbf{Thời gian thực hiện:} & Kỳ 1, Năm học 2026--2027 \\[0.4em]
+    \end{tabular}
+\end{titlepage}
+
+% ----- TABLE OF CONTENTS -----
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Nội dung đề tài}
+% =====================================================================
+
+\subsection{Tổng quan đề tài}
+
+Sự bùng nổ của mạng Internet vạn vật (IoT) mang lại nhiều tiện ích nhưng cũng mở ra bề mặt tấn công rộng lớn. Các hệ thống phát hiện xâm nhập mạng (IoT-IDS) truyền thống thường gặp khó khăn do tài nguyên giới hạn của thiết bị IoT và sự xuất hiện liên tục của các cuộc tấn công mới (zero-day attacks). 
+
+Trong khuôn khổ Đồ án Chuyên ngành (ĐACN) vừa qua, em đã nghiên cứu và đề xuất phương pháp \textbf{LOC-NFST} (\textit{Local One-Class Null Foley--Sammon Transformation}). Đây là một khung phát hiện bất thường một lớp siêu nhẹ (lightweight one-class novelty detection), giải quyết hiệu quả vấn đề thiếu nhãn sạch (imperfect benign supervision) và cấu trúc dữ liệu dị thường phức tạp. Mô hình đã đạt AUC-ROC lên đến $98.29\%$ trên 4 bộ dữ liệu IoT lớn (CICIoT2023, ToN-IoT, N-BaIoT, BoT-IoT).
+
+\textbf{Thực trạng và lý do thực hiện KLTN:} Dù đạt kết quả khả quan, các nghiên cứu hiện tại trên thị trường và học thuật (kể cả ĐACN vừa thực hiện) vẫn bộc lộ một số hạn chế:
+\begin{enumerate}[label=(\roman*)]
+    \item Các phương pháp đánh giá chủ yếu dựa vào một lần chạy (single run) hoặc lấy trung bình đơn giản, \textbf{thiếu sự kiểm định thống kê nghiêm ngặt} để chứng minh sự vượt trội thực sự.
+    \item Thuật toán thường bị "đóng khung" ở việc sử dụng khoảng cách Euclidean làm hàm điểm (scoring function) mà chưa khai thác hết đặc tính của không gian null-space.
+    \item Hầu hết các phương pháp "lightweight" (như FLiForest, CADE) chỉ mới được \textbf{mô phỏng offline trên máy tính (PC/Server)}, rất hiếm công trình được đưa xuống chạy và đo đạc thực tế trên phần cứng Edge IoT (như Raspberry Pi) để kiểm chứng mức độ tiêu thụ CPU/RAM và độ trễ (latency).
+\end{enumerate}
+
+\subsection{Mục tiêu của đề tài}
+
+Mục tiêu cốt lõi của KLTN là \textbf{củng cố, mở rộng và hiện thực hóa} khung LOC-NFST từ ĐACN thành một hệ thống IoT-IDS toàn diện. Các mục tiêu cải tiến cụ thể so với thực trạng gồm:
+\begin{itemize}
+    \item \textbf{Nâng cấp độ tin cậy khoa học:} Áp dụng các tiêu chuẩn kiểm định thống kê quốc tế (chạy 10 seeds, Friedman test, Wilcoxon, Nemenyi) thay vì chỉ báo cáo điểm trung bình như ĐACN.
+    \item \textbf{Tối ưu hóa thuật toán:} Cải tiến hàm điểm (scoring methods) phù hợp nhất với dữ liệu IoT trong không gian null-space thay vì rập khuôn dùng Euclidean.
+    \item \textbf{Hiện thực hóa vật lý (Mục tiêu quan trọng nhất):} Triển khai thành công thuật toán lên thiết bị IoT thực tế (Raspberry Pi 4) để chứng minh khả năng hoạt động thời gian thực với tài nguyên giới hạn.
+\end{itemize}
+
+\subsection{Phương pháp thực hiện}
+
+Đề tài kết hợp cả ba phương pháp: nghiên cứu lý thuyết, thực nghiệm phần mềm (software evaluation) và đo đạc phần cứng (hardware profiling).
+\begin{itemize}
+    \item \textbf{Nghiên cứu lý thuyết:} Khảo sát các công trình IoT-IDS mới nhất (2024-2025), nghiên cứu nền tảng về kiểm định thống kê phi tham số, các hàm đo khoảng cách (Mahalanobis, Cosine, GMM), và cơ chế Học liên kết (Federated Learning).
+    \item \textbf{Phương pháp thực nghiệm thuật toán:} Huấn luyện và đánh giá mô hình trên 4 bộ dữ liệu chuẩn (CICIoT2023, ToN-IoT, N-BaIoT, BoT-IoT). Sử dụng Python (scikit-learn, PyOD) để chạy 10 lần ngẫu nhiên độc lập, tính toán Bootstrap 95\% CI và vẽ Critical Difference Diagram.
+    \item \textbf{Phương pháp xây dựng hệ thống vật lý:} Xây dựng cấu trúc Client-Server qua giao thức MQTT. Mô hình được huấn luyện offline trên máy tính, sau đó trích xuất các ma trận trọng số chuyển xuống thiết bị Edge (Raspberry Pi 4). Máy tính sẽ đóng vai trò mô phỏng mạng, "bơm" dữ liệu (streaming) sang Raspberry Pi để thực hiện phân tích và phát hiện tấn công theo thời gian thực.
+\end{itemize}
+
+\subsection{Các nội dung chính và giới hạn của đề tài}
+
+\textbf{Các nội dung chính (Task thực hiện):}
+\begin{enumerate}
+    \item \textbf{Cập nhật Related Works và Củng cố Đánh giá Thực nghiệm:} Rà soát các công trình mới (2024-2025). Đánh giá thống kê toàn diện hiệu năng của LOC-NFST so với 20+ baselines bằng Friedman, Wilcoxon, Nemenyi.
+    \item \textbf{Mở rộng Ablation Study -- Thử nghiệm Scoring Methods:} Đánh giá so sánh hiệu quả của các hàm điểm (Euclidean, Mahalanobis, Cosine, Soft-min) và phương pháp gom cụm tạo pseudo-class (K-means, GMM).
+    \item \textbf{Triển khai Hệ thống Demo Vật lý trên IoT (Raspberry Pi 4):} 
+    \begin{itemize}
+        \item Cài đặt môi trường, đưa mô hình LOC-NFST lên RPi4.
+        \item Xây dựng pipeline: Máy tính bắn traffic $\xrightarrow{MQTT}$ RPi4 suy luận $\to$ WebSocket cảnh báo.
+        \item Đo lường hệ thống: Inference latency (P50/P95), CPU, RAM, nhiệt độ.
+        \item Demo tại buổi bảo vệ với các kịch bản: Bình thường, bị tấn công DoS, bị nhiễm Botnet.
+    \end{itemize}
+    \item \textbf{Khám phá Federated LOC-NFST (Tùy chọn):} Cài đặt prototype học liên kết bằng cách chia tập dữ liệu thành các phần độc lập giả lập các client. Server tổng hợp ma trận phân tán $S_w, S_b$ (chỉ gửi ma trận, không gửi dữ liệu thô) để học không gian chung $W$.
+\end{enumerate}
+
+\textbf{Kết quả mong đợi (Sản phẩm dự kiến):}
+\begin{itemize}
+    \item Quyển Khóa luận tốt nghiệp hoàn chỉnh.
+    \item Thư viện mã nguồn mở \texttt{loc-nfst-ids} hỗ trợ xử lý dữ liệu luồng (streaming).
+    \item Hệ thống phần cứng demo hoàn chỉnh chạy trên Raspberry Pi 4.
+    \item Bài báo khoa học dự kiến gửi các hội nghị/tạp chí quốc tế (ECAI, IJCNN...).
+\end{itemize}
+
+\textbf{Giới hạn của đề tài:}
+\begin{itemize}
+    \item Hệ thống demo sử dụng dữ liệu đặc trưng đã được trích xuất (tabular features từ tập CICIoT2023, v.v.) và được mô phỏng streaming qua mạng, thay vì thực hiện bắt gói tin thô (raw packet sniffing) và trích xuất đặc trưng thời gian thực, do giới hạn về mặt phần cứng của thiết bị Edge.
+    \item Hướng Federated Learning chỉ dừng ở mức Prototype (Proof-of-Concept) để chứng minh tính đúng đắn của toán học, không tập trung giải quyết các bài toán về bảo mật đường truyền hay đồng bộ hóa hệ thống phân tán.
+\end{itemize}
+
+
+% =====================================================================
+\section{Kế hoạch thực hiện}
+% =====================================================================
+
+Đề tài do \textbf{01 sinh viên} (Trần Lê Minh Nhật) thực hiện độc lập dưới sự hướng dẫn của Giảng viên.
+
+\textbf{Đề xuất Kế hoạch Làm việc và Báo cáo (Working Online):} \\
+Trong thời gian triển khai KLTN (3 tháng tới), em đã trúng tuyển và thực tập tại Viettel Digital Talent (Trung tâm Công nghệ Hàng không Viettel) tại Hà Nội. Môi trường công nghệ cao này sẽ giúp em rèn luyện tư duy hệ thống rất tốt để hỗ trợ việc code KLTN. Nhằm đảm bảo tiến độ KLTN không bị ảnh hưởng, em xin cam kết kế hoạch làm việc như sau:
+
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Khía cạnh} & \textbf{Cam kết cá nhân} \\
+\midrule
+Thời gian cho KLTN & Tối thiểu \textbf{20 giờ/tuần} dành riêng cho việc code và viết KLTN. \\[0.3em]
+Báo cáo tiến độ    & Gửi email báo cáo tiến độ công việc định kỳ vào \textbf{đầu buổi chiều Thứ 2 hàng tuần}, kết hợp họp Zoom/Meet theo lịch Thầy sắp xếp. \\[0.3em]
+Họp nhóm IEC       & Sắp xếp tham gia 100\% các buổi họp nhóm online. \\[0.3em]
+Lịch bảo vệ KLTN   & Hợp đồng thực tập dự kiến kết thúc trước giai đoạn bảo vệ chính thức; em hoàn toàn chủ động bay về TP.HCM để tham gia bảo vệ trực tiếp tại trường. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Lộ trình công việc dự kiến (15 tuần):}
+\begin{itemize}
+    \item \textbf{Tuần 1-3:} Cập nhật tài liệu (Related works 2024-2025). Code module kiểm định thống kê (chạy 10 seeds, tính Wilcoxon, Nemenyi).
+    \item \textbf{Tuần 4-6:} Code và chạy thực nghiệm Ablation Study cho các Scoring Methods (Mahalanobis, Cosine). Viết báo cáo phân tích kết quả.
+    \item \textbf{Tuần 7-9:} Code module Federated LOC-NFST Prototype. Chạy thử nghiệm phân tán trên máy ảo.
+    \item \textbf{Tuần 10-12:} Triển khai hệ thống lên Raspberry Pi 4. Thiết lập MQTT Broker. Đo đạc các chỉ số hệ thống (Latency, RAM, CPU).
+    \item \textbf{Tuần 13-15:} Viết quyển KLTN hoàn chỉnh. Hoàn thiện Dashboard web cho hệ thống Demo. Chuẩn bị slide bảo vệ.
+\end{itemize}
+
+% =====================================================================
+\section{Lời kết}
+% =====================================================================
+
+Em kính mong Thầy xem xét và cho ý kiến về:
+\begin{enumerate}[label=(\arabic*)]
+    \item Thầy có yêu cầu gì với việc báo cáo thường xuyên không ? 
+    \item Hướng phát triển nào phù hợp nhất với định hướng nghiên cứu của nhóm IEC?
+    \item Tên đề tài KLTN có cần điều chỉnh không?
+\end{enumerate}
+
+Em xin chân thành cảm ơn Thầy đã dành thời gian xem xét đề xuất này. Em rất mong nhận được sự đồng ý và những định hướng quý báu từ Thầy và anh Nguyễn Xuân Hà để bắt đầu triển khai KLTN một cách hiệu quả nhất.
+
+\vspace{1.5cm}
+
+\begin{flushright}
+Trần Lê Minh Nhật\\
+MSSV: 23521098\\
+SĐT: 0382195854\\
+Email: 23521098@gm.uit.edu.vn
+\end{flushright}
+
+\end{document}
