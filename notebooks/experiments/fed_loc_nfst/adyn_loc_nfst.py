@@ -199,7 +199,8 @@ class AdynLOCNFST:
 
     def _init_from_chunk(self, X_chunk: np.ndarray) -> None:
         """
-        Initialize model from a chunk using K-Means + full scatter solve.
+        Initialize model from raw data using K-Means + full d×d scatter solve.
+        EXACTLY mirrors compute_centralized_NPD from run_centralized.py.
         """
         d = X_chunk.shape[1]
         N = len(X_chunk)
@@ -211,7 +212,42 @@ class AdynLOCNFST:
         centroids = km.cluster_centers_.astype(np.float64)
         classes = np.unique(y)
 
-        # Initialize ClusterBank with K-Means centroids
+        # ── Full d×d scatter computation (centralized path) ──
+        S_w = np.zeros((d, d), dtype=np.float64)
+        for cls in classes:
+            X_cls = X_chunk[y == cls].astype(np.float64)
+            mu_cls = centroids[cls]
+            diff = X_cls - mu_cls
+            S_w += diff.T @ diff
+        S_w /= N
+
+        mu_total = np.mean(X_chunk, axis=0).astype(np.float64)
+        diff_t = X_chunk.astype(np.float64) - mu_total
+        S_t = (diff_t.T @ diff_t) / N
+
+        # ── Initialize subspace engine with full scatter ──
+        self.engine = SubspaceEngine(d=d)
+        self.engine.initialize(S_w.astype(np.float32), S_t.astype(np.float32))
+
+        # ── Compute null centers from raw projected training points (centralized logic) ──
+        W = self.engine.W   # (d, L)
+        null_train = X_chunk.astype(np.float32) @ W   # (N, L)
+        null_centers_init = np.array([
+            np.mean(null_train[y == cls], axis=0) for cls in classes
+        ], dtype=np.float32)   # (K, L)
+
+        train_dists = min_dist_to_centers(null_train, null_centers_init)
+        max_train_init = float(np.max(train_dists)) if len(train_dists) > 0 else 1.0
+        if max_train_init < 1e-10:
+            max_train_init = 1.0
+
+        # Store initial model state (used when no lifecycle event has fired)
+        self.W = W
+        self.L = self.engine.L
+        self.null_centers = null_centers_init
+        self.max_train = max_train_init
+
+        # ── Initialize ClusterBank with K-Means centroids (for online tracking) ──
         self.bank = ClusterBank(d=d)
         for cls in classes:
             free = self.bank._free_slot()
@@ -225,19 +261,13 @@ class AdynLOCNFST:
             slot.is_active = True
             slot.count = n_cls
             slot.centroid = mu_cls.copy()
-            # Welford M2 from batch
             slot.M2 = np.sum((X_cls - mu_cls) ** 2, axis=0)
             slot.last_active_ts = 0
 
-        # Compute scatter matrices
-        S_w, S_t = self.bank.compute_scatter()
-
-        # Initialize subspace engine
-        self.engine = SubspaceEngine(d=d)
-        self.engine.initialize(S_w, S_t)
+        self.K_final = self.bank.K
 
         logger.info(f"[ADYN] Initialized: K={self.bank.K}, L={self.engine.L}, "
-                    f"N={N}, d={d}")
+                    f"N={N}, d={d}, max_train={max_train_init:.4f}")
 
     def _process_chunk_online(self, X_chunk: np.ndarray, chunk_id: int) -> List[dict]:
         """
@@ -266,38 +296,35 @@ class AdynLOCNFST:
 
     def _finalize_model(self) -> None:
         """
-        After all chunks, build final W, null_centers, max_train from bank state.
+        After all chunks, finalize model state:
+        - Preserve W and max_train from Phase 1 full-scatter init.
+        - Update null_centers and K_final from current bank centroids.
 
-        IMPORTANT: We preserve the W computed from the FULL scatter matrix in Phase 1.
-        We do NOT re-initialize from the diagonal Welford scatter (which is degenerate).
-        Only null_centers are refreshed from the current bank centroids (which have
-        adapted through Split/Merge/Birth/Death lifecycle events).
+        max_train MUST come from Phase 1 (computed from all raw training points).
+        Recomputing from centroid-centroid distances after lifecycle gives wrong scale.
         """
         if self.engine is None or not self.engine.is_initialized:
             logger.error("[ADYN] Engine not initialized!")
             return
+        if self.W is None:
+            logger.error("[ADYN] W not set (init failed?)!")
+            return
 
-        # Preserve W from engine (already computed from full scatter in _init_from_chunk)
-        # The Rank-1 updates have kept W consistent with cluster lifecycle changes.
+        # Preserve W from engine (updated by Rank-1 ops during lifecycle)
         self.W = self.engine.W
         self.L = self.engine.L
 
-        # Refresh null centers from current (adapted) bank centroids
+        # Update null centers from current adapted bank centroids
         centroids = self.bank.centroids()  # (K_current, d)
-        null_centers_raw = centroids.astype(np.float32) @ self.W  # (K_current, L)
+        null_centers_new = centroids.astype(np.float32) @ self.W  # (K_current, L)
+        self.null_centers = null_centers_new
 
-        # max_train: max nearest-neighbor distance among null centers
-        dists = min_dist_to_centers(null_centers_raw, null_centers_raw)
-        max_train = float(np.max(dists)) if len(dists) > 1 else 1.0
-        if max_train < 1e-10:
-            max_train = 1.0
-
-        self.null_centers = null_centers_raw
-        self.max_train = max_train
+        # Keep max_train from Phase 1 (correct scale from raw training data)
+        # self.max_train already set in _init_from_chunk — do NOT recompute
         self.K_final = self.bank.K
 
         logger.info(f"[ADYN] Model finalized: K_final={self.K_final}, "
-                    f"L={self.L}, max_train={max_train:.6f}")
+                    f"L={self.L}, max_train={self.max_train:.6f} (preserved from init)")
 
     def fit_temporal(
         self,
