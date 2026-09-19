@@ -305,9 +305,16 @@ class AdynLOCNFST:
         """
         Fit ADYN-LOC-NFST with temporal chunk concept drift simulation.
 
+        Strategy (academically correct):
+        1. Initialize model on ALL training data (K-Means + full scatter solve).
+           This gives ADYN the SAME starting point as Static-K.
+        2. Simulate concept drift by re-processing each temporal chunk online
+           with lifecycle adaptation (Split/Merge/Birth/Death).
+        3. At each chunk boundary, record K(t), L(t), and checkpoint AUC.
+
         Parameters
         ----------
-        X_train : (N, d) training data (order preserved)
+        X_train : (N, d) training data (order preserved for temporal split)
         y_test  : (N_test,) test labels (for per-checkpoint AUC logging)
         X_test  : (N_test, d) test data
 
@@ -323,6 +330,14 @@ class AdynLOCNFST:
                     f"n_chunks={self.n_chunks}, chunk_size={chunk_size}, "
                     f"K_init={self.K_init}")
 
+        # ── Phase 1: Full-data initialization (same as Static-K baseline) ──
+        logger.info(f"[ADYN] Phase 1: Full-data K-Means init (K={self.K_init})")
+        self._init_from_chunk(X_train)   # use ALL training data for init
+        L_now = self.engine.L if self.engine.is_initialized else 0
+        logger.info(f"[ADYN] Full init done: K={self.bank.K}, L={L_now}")
+
+        # ── Phase 2: Online lifecycle pass over temporal chunks ──
+        # (simulates how the model adapts as new traffic patterns emerge)
         for chunk_id in range(self.n_chunks):
             t0 = time.time()
             start = chunk_id * chunk_size
@@ -332,12 +347,8 @@ class AdynLOCNFST:
             logger.info(f"[ADYN] === Chunk {chunk_id+1}/{self.n_chunks}: "
                         f"samples {start}-{end} (n={len(X_chunk)}) ===")
 
-            if chunk_id == 0:
-                # Full K-Means initialization on first chunk
-                self._init_from_chunk(X_chunk)
-            else:
-                # Online update: process each sample
-                chunk_events = self._process_chunk_online(X_chunk, chunk_id)
+            # Online lifecycle pass
+            chunk_events = self._process_chunk_online(X_chunk, chunk_id)
 
             chunk_time = time.time() - t0
             K_now = self.bank.K
