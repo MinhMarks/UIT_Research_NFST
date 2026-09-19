@@ -267,23 +267,26 @@ class AdynLOCNFST:
     def _finalize_model(self) -> None:
         """
         After all chunks, build final W, null_centers, max_train from bank state.
+
+        IMPORTANT: We preserve the W computed from the FULL scatter matrix in Phase 1.
+        We do NOT re-initialize from the diagonal Welford scatter (which is degenerate).
+        Only null_centers are refreshed from the current bank centroids (which have
+        adapted through Split/Merge/Birth/Death lifecycle events).
         """
         if self.engine is None or not self.engine.is_initialized:
             logger.error("[ADYN] Engine not initialized!")
             return
 
-        # Re-solve with full spectral solve from current bank scatter
-        S_w, S_t = self.bank.compute_scatter()
-        self.engine.initialize(S_w, S_t)
-
+        # Preserve W from engine (already computed from full scatter in _init_from_chunk)
+        # The Rank-1 updates have kept W consistent with cluster lifecycle changes.
         self.W = self.engine.W
         self.L = self.engine.L
 
-        # Null centers from active cluster centroids
-        centroids = self.bank.centroids()  # (K, d)
-        null_centers_raw = centroids.astype(np.float32) @ self.W  # (K, L)
+        # Refresh null centers from current (adapted) bank centroids
+        centroids = self.bank.centroids()  # (K_current, d)
+        null_centers_raw = centroids.astype(np.float32) @ self.W  # (K_current, L)
 
-        # max_train: max distance from any null center to any other null center
+        # max_train: max nearest-neighbor distance among null centers
         dists = min_dist_to_centers(null_centers_raw, null_centers_raw)
         max_train = float(np.max(dists)) if len(dists) > 1 else 1.0
         if max_train < 1e-10:
