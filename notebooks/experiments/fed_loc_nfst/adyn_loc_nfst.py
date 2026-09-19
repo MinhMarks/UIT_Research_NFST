@@ -227,7 +227,7 @@ class AdynLOCNFST:
 
         # ── Initialize subspace engine with full scatter ──
         self.engine = SubspaceEngine(d=d)
-        self.engine.initialize(S_w.astype(np.float32), S_t.astype(np.float32))
+        self.engine.initialize(S_w.astype(np.float32), S_t.astype(np.float32), N_total=N)
 
         # ── Compute null centers from raw projected training points (centralized logic) ──
         W = self.engine.W   # (d, L)

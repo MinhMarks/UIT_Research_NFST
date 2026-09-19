@@ -372,8 +372,9 @@ class SubspaceEngine:
         self.W: Optional[np.ndarray] = None      # (d, L)
         self.L: int = 0
         self.is_initialized: bool = False
+        self.N_total: float = 1.0
 
-    def initialize(self, S_w: np.ndarray, S_t: np.ndarray):
+    def initialize(self, S_w: np.ndarray, S_t: np.ndarray, N_total: Optional[float] = None):
         """
         Full initialization from scratch.
         Called once at the beginning, or after Birth/Death (S_t changes).
@@ -381,6 +382,8 @@ class SubspaceEngine:
         d = self.d
         S_w = S_w.astype(np.float64)
         S_t = S_t.astype(np.float64)
+        if N_total is not None and N_total > 0:
+            self.N_total = float(N_total)
 
         # SVD of S_t to get Q
         eigvals_t, eigvecs_t = eigh(S_t)
@@ -398,7 +401,7 @@ class SubspaceEngine:
 
         self._update_W()
         self.is_initialized = True
-        logger.debug(f"[SubspaceEngine] Init: rank={rank}, L={self.L}")
+        logger.debug(f"[SubspaceEngine] Init: rank={rank}, L={self.L}, N_total={self.N_total}")
 
     def _update_W(self):
         """Recompute W from current A eigendecomposition."""
@@ -422,10 +425,8 @@ class SubspaceEngine:
                             N_j1: int, N_j2: int) -> bool:
         """
         Apply Rank-1 downdate after cluster split (j → j1, j2).
-        ΔS_w = - v v^T,   v = sqrt(N_j1 * N_j2 / N_j) * (μ_j1 - μ_j2)
+        ΔS_w = - (1 / N_total) * (N_j1 * N_j2 / N_j) * (μ_j1 - μ_j2)(μ_j1 - μ_j2)^T
         ΔA   = - u u^T,   u = Q^T v
-
-        Returns True if update was applied successfully.
         """
         if not self.is_initialized:
             return False
@@ -434,7 +435,8 @@ class SubspaceEngine:
         if N_j <= 0:
             return False
 
-        v = np.sqrt(N_j1 * N_j2 / N_j) * (
+        scale = self.N_total if self.N_total > 0 else 1.0
+        v = np.sqrt(N_j1 * N_j2 / (scale * N_j)) * (
             mu_j1.astype(np.float64) - mu_j2.astype(np.float64)
         )
         u = self.Q.T @ v  # (r,)
@@ -452,10 +454,8 @@ class SubspaceEngine:
                             N_a: int, N_b: int) -> bool:
         """
         Apply Rank-1 update after cluster merge (a, b → ab).
-        ΔS_w = + w w^T,   w = sqrt(N_a * N_b / (N_a+N_b)) * (μ_a - μ_b)
+        ΔS_w = + (1 / N_total) * (N_a * N_b / (N_a+N_b)) * (μ_a - μ_b)(μ_a - μ_b)^T
         ΔA   = + u u^T,   u = Q^T w
-
-        Returns True if update was applied successfully.
         """
         if not self.is_initialized:
             return False
@@ -464,7 +464,8 @@ class SubspaceEngine:
         if N_ab <= 0:
             return False
 
-        w = np.sqrt(N_a * N_b / N_ab) * (
+        scale = self.N_total if self.N_total > 0 else 1.0
+        w = np.sqrt(N_a * N_b / (scale * N_ab)) * (
             mu_a.astype(np.float64) - mu_b.astype(np.float64)
         )
         u = self.Q.T @ w  # (r,)

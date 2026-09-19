@@ -77,7 +77,7 @@ def test_rank1_split_Sw_decrease():
 
     # Initialize subspace engine
     engine = SubspaceEngine(d=d)
-    engine.initialize(S_w_before, S_t_before)
+    engine.initialize(S_w_before, S_t_before, N_total=N)
     A_before = engine.A.copy()
 
     # Perform split on slot 0
@@ -129,7 +129,7 @@ def test_rank1_merge_Sw_increase():
 
     S_w, S_t = bank.compute_scatter()
     engine = SubspaceEngine(d=d)
-    engine.initialize(S_w, S_t)
+    engine.initialize(S_w, S_t, N_total=180)
     A_before = engine.A.copy()
 
     engine.rank1_update_merge(mu_a, mu_b, 100, 80)
