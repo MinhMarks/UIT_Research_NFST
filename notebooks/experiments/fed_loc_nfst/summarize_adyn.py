@@ -7,19 +7,23 @@ import pandas as pd
 
 def main():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pattern = os.path.join(base_dir, 'outputs', 'adyn_results', 'adyn_benchmark_*.csv')
-    files = sorted([f for f in glob.glob(pattern) if not f.endswith('_interim.csv')], key=os.path.getmtime)
-
-    if not files:
-        print("No final CSV found, checking interim...")
-        files = sorted(glob.glob(os.path.join(base_dir, 'outputs', 'adyn_results', '*.csv')), key=os.path.getmtime)
-
-    if not files:
+    all_csvs = glob.glob(os.path.join(base_dir, 'outputs', 'adyn_results', '*.csv'))
+    if not all_csvs:
         print("No CSV files found!")
         return
 
-    latest = files[-1]
-    print(f"=== Reading latest benchmark: {os.path.basename(latest)} ===")
+    # Find the CSV with the largest number of rows (the full benchmark run)
+    scored = []
+    for f in all_csvs:
+        try:
+            nrows = len(pd.read_csv(f))
+            scored.append((nrows, f))
+        except Exception:
+            pass
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    max_rows, latest = scored[0]
+    print(f"=== Selected largest benchmark: {os.path.basename(latest)} ({max_rows} rows) ===")
     df = pd.read_csv(latest)
     print(f"Total rows: {len(df)}")
 
