@@ -20,16 +20,22 @@ from pathlib import Path
 # ─── Paths ────────────────────────────────────────────────────────────────────
 SCRIPT_DIR  = Path(__file__).resolve().parent
 REPO_ROOT   = SCRIPT_DIR.parent.parent
-SRC_DIR     = REPO_ROOT / "src" / "fed_loc_nfst"
-DATA_DIR    = Path("/home/jupyter-iec_duongnt/New Project/NFST/GMM-nfst/Datascaled/Official_OC_Data")
+SRC_DIR     = SCRIPT_DIR / "fed_loc_nfst"
+
+_DEFAULT_DATA = Path("/home/jupyter-iec_duongnt/New Project/NFST/GMM-nfst/Datascaled/Official_OC_Data")
+if not _DEFAULT_DATA.exists():
+    _DEFAULT_DATA = REPO_ROOT / "Datascaled" / "Official_OC_Data"
+DATA_DIR = Path(os.environ.get("DATA_DIR", _DEFAULT_DATA))
+
 OUTPUT_DIR  = SCRIPT_DIR / "outputs" / "drift_results"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+sys.path.insert(0, str(SCRIPT_DIR))
 sys.path.insert(0, str(REPO_ROOT / "src"))
 sys.path.insert(0, str(REPO_ROOT))
 
 from fed_loc_nfst.adyn_loc_nfst import AdynLOCNFST
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
+from fed_loc_nfst.data_utils import load_dataset as fl_load_dataset
 from sklearn.metrics import roc_auc_score
 
 # ─── Constants (Rule 21.2 & 21.3) ─────────────────────────────────────────────
@@ -38,39 +44,40 @@ CONTAMINATION_MAX = 0.05   # ≤ 5% contamination in test set
 N_SEEDS           = 10     # 10 independent runs (Rule 21.5.1)
 
 DATASET_FILES = {
-    "N_BaIoT":     "N_BaIoT",
-    "BoTIoT":      "BoTIoT",
-    "EdgeIIoTset": "EdgeIIoTset",
-    "CICIoT2023":  "CICIoT2023",
-    "IoTID20":     "IoTID20",
-    "MQTTset":     "MQTTset",
+    "N_BaIoT":     "data_N_BaIoT",
+    "BoTIoT":      "data_BoTIoT",
+    "EdgeIIoTset": "data_EdgeIIoTset",
+    "CICIoT2023":  "data_CICIoT2023",
+    "IoTID20":     "data_IoTID20",
+    "ToNIoT":      "data_ToNIoT",
 }
 
-SCALERS = {
-    "StandardScaler": StandardScaler,
-    "MinMaxScaler":   MinMaxScaler,
-    "Normalizer":     Normalizer,
-}
+SCALERS = [
+    "StandardScaler",
+    "MinMaxScaler",
+    "Normalizer",
+    "RobustScaler",
+    "QuantileTransformer",
+]
 
 
 # ─── Data Loading ─────────────────────────────────────────────────────────────
-def load_dataset(dataset_name: str):
-    """Load train (normal) and test (normal+attack) splits."""
-    base = DATA_DIR / dataset_name
-    train_path = base / "train_normal.csv"
-    test_path  = base / "test.csv"
+def load_dataset(dataset_name: str, scaler_name: str):
+    """Load pre-scaled train (normal) and test (normal+attack) splits."""
+    prefix = DATASET_FILES.get(dataset_name, dataset_name)
+    train_path = DATA_DIR / f"Train_{scaler_name}_{prefix}.csv"
+    test_path  = DATA_DIR / f"Test_{scaler_name}_{prefix}.csv"
 
     if not train_path.exists():
         raise FileNotFoundError(f"Train file not found: {train_path}")
     if not test_path.exists():
         raise FileNotFoundError(f"Test file not found: {test_path}")
 
-    X_train = pd.read_csv(train_path).drop(columns=["label"], errors="ignore").values
-    df_test  = pd.read_csv(test_path)
-    y_test   = df_test["label"].values.astype(int)   # 0=normal, 1=attack
-    X_test   = df_test.drop(columns=["label"], errors="ignore").values
-
+    X_train, y_train, X_test, y_test = fl_load_dataset(
+        str(train_path), str(test_path), noise_pct=0.0
+    )
     return X_train, X_test, y_test
+
 
 
 def enforce_contamination(X_test, y_test, max_rate=CONTAMINATION_MAX, seed=RANDOM_SEED):
@@ -223,31 +230,26 @@ def run_single(dataset_name: str, scenario: str, scaler_name: str, seed: int) ->
     np.random.seed(seed)
     rng = np.random.default_rng(seed)
 
-    # 1. Load data
-    X_train, X_test, y_test = load_dataset(dataset_name)
+    # 1. Load pre-scaled data
+    X_train, X_test, y_test = load_dataset(dataset_name, scaler_name)
 
     # 2. Enforce contamination
     X_test, y_test = enforce_contamination(X_test, y_test, seed=seed)
 
-    # 3. Scale
-    scaler = SCALERS[scaler_name]()
-    X_train_s = scaler.fit_transform(X_train)
-    X_test_s  = scaler.transform(X_test)
-
-    # 4. Inject drift
+    # 3. Inject drift into test stream
     injector = DRIFT_INJECTORS[scenario]
-    X_test_drifted, drift_info = injector(X_test_s, seed=seed)
+    X_test_drifted, drift_info = injector(X_test, seed=seed)
 
-    # 5. Train ADYN model on clean train data
+    # 4. Train ADYN model on clean train data
     model = AdynLOCNFST(
         n_clusters=20,
         max_clusters=128,
         n_chunks=5,
         random_state=seed,
     )
-    model.fit(X_train_s)
+    model.fit(X_train)
 
-    # 6. Score drifted test stream
+    # 5. Score drifted test stream
     t0 = time.perf_counter()
     scores = model.score_samples(X_test_drifted)
     latency_ms = (time.perf_counter() - t0) / len(X_test_drifted) * 1000.0
@@ -256,13 +258,13 @@ def run_single(dataset_name: str, scenario: str, scaler_name: str, seed: int) ->
     if scores.mean() > 0:
         scores = -scores
 
-    # 7. Overall AUC-ROC
+    # 6. Overall AUC-ROC
     try:
         auc_overall = roc_auc_score(y_test, scores)
     except ValueError:
         auc_overall = float("nan")
 
-    # 8. Scenario-specific metrics
+    # 7. Scenario-specific metrics
     extra = {}
     if scenario == "D1":
         dp = drift_info["drift_point"]
@@ -291,8 +293,9 @@ def main():
     parser = argparse.ArgumentParser(description="Drift Injection Benchmark — Rule 21.3")
     parser.add_argument("--dataset", choices=list(DATASET_FILES.keys()) + ["all"], default="all")
     parser.add_argument("--scenario", choices=["D1", "D2", "D3", "all"], default="all")
-    parser.add_argument("--scaler", choices=list(SCALERS.keys()), default="StandardScaler")
+    parser.add_argument("--scaler", choices=SCALERS, default="StandardScaler")
     args = parser.parse_args()
+
 
     datasets  = list(DATASET_FILES.keys()) if args.dataset == "all" else [args.dataset]
     scenarios = ["D1", "D2", "D3"] if args.scenario == "all" else [args.scenario]
