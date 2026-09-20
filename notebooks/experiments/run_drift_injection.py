@@ -242,21 +242,22 @@ def run_single(dataset_name: str, scenario: str, scaler_name: str, seed: int) ->
 
     # 4. Train ADYN model on clean train data
     model = AdynLOCNFST(
-        n_clusters=20,
-        max_clusters=128,
+        K_init=20,
         n_chunks=5,
-        random_state=seed,
+        seed=seed,
     )
-    model.fit(X_train)
+    model.fit_temporal(X_train)
 
     # 5. Score drifted test stream
     t0 = time.perf_counter()
-    scores = model.score_samples(X_test_drifted)
+    y_proba = model.predict(X_test_drifted)
     latency_ms = (time.perf_counter() - t0) / len(X_test_drifted) * 1000.0
 
-    # Invert: higher score = more anomalous
-    if scores.mean() > 0:
-        scores = -scores
+    # Probability of being anomaly is column 1 (or 1D array)
+    if y_proba.ndim == 2 and y_proba.shape[1] >= 2:
+        scores = y_proba[:, 1]
+    else:
+        scores = y_proba.ravel()
 
     # 6. Overall AUC-ROC
     try:
