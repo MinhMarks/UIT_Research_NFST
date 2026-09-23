@@ -103,11 +103,12 @@ def instantiate_model(model_name: str, device: str, seed: int = 42) -> Any:
             rank=10,
             c_param=0.4,
             mode="CAGrad",
+            enable_cmnp=True,
             tau_null=1.0,
             alpha=0.01,
-            lr=0.001,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )
@@ -117,44 +118,44 @@ def instantiate_model(model_name: str, device: str, seed: int = 42) -> Any:
             k=10,
             rank=10,
             mode="FedAvg",
+            enable_cmnp=True,
             tau_null=1.0,
             alpha=0.01,
-            lr=0.001,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )
     elif resolved == "Ablation_FedLUNAR_NoCMNP":
-        # DROGA enabled, but NO CMNP filtering (tau_null=0 -> no negatives purged)
+        # DROGA enabled, but NO CMNP filtering
         return FedLUNAR(
             k=10,
             rank=10,
             c_param=0.4,
             mode="CAGrad",
-            tau_null=0.0,
-            alpha=0.0,
-            lr=0.001,
+            enable_cmnp=False,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )
     elif resolved == "Naive_FedLUNAR":
         return NaiveFedLunar(
             k=10,
-            lr=0.001,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )
     elif resolved == "FedAutoEncoder":
         return FedAutoEncoder(
             code_size=32,
-            lr=0.001,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )
@@ -162,18 +163,18 @@ def instantiate_model(model_name: str, device: str, seed: int = 42) -> Any:
         return FedProxLunar(
             k=10,
             mu=0.01,
-            lr=0.001,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )
     elif resolved == "PCGrad_FedLUNAR":
         return PCGradFedLunar(
             k=10,
-            lr=0.001,
+            lr=0.002,
             batch_size=128,
-            local_epochs=3,
+            local_epochs=4,
             device=device,
             seed=seed,
         )

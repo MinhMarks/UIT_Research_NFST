@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+BoTIoT,FedAutoEncoder,3,0.5,1,10,0.60991,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,2,10,0.24488,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,3,10,0.11389,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,4,10,0.07947,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,5,10,0.06194,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,6,10,0.05019,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,7,10,0.04711,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,8,10,0.03802,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,9,10,0.03344,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69
+BoTIoT,FedAutoEncoder,3,0.5,10,10,0.03424,0.0,1.0,1.0,0,0,0.0,0.0,0.182,99.8,95.74,67.62,5.01,0.0002,18.69

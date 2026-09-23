@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,1,10,1.95705,0.0,0.8994,1.0,0,0,2.44912,57.2815,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,2,10,0.47547,0.0,0.8524,1.0,0,0,2.11936,56.8341,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,3,10,0.29303,0.0,0.7178,1.0,0,0,1.70913,57.2229,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,4,10,0.19547,0.0,0.5623,1.0,0,0,1.11125,57.076,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,5,10,0.16302,0.0,0.3496,1.0,0,0,0.89531,57.1559,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,6,10,0.16644,0.0,0.2376,1.0,0,0,0.81025,57.6764,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,7,10,0.14752,33.33,0.1607,1.0,0,0,0.8249,57.0384,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,8,10,0.13612,33.33,0.0712,1.0,0,0,0.7569,57.11,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,9,10,0.13293,33.33,0.0809,1.0,0,0,0.75806,57.0067,1.101,99.76,97.15,66.76,5.01,0.002,67.06
+N_BaIoT,Ablation_FedLUNAR_NoDROGA,3,0.5,10,10,0.13628,0.0,0.097,1.0,0,0,0.72786,57.683,1.101,99.76,97.15,66.76,5.01,0.002,67.06

@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+BoTIoT,FedProx_LUNAR,3,0.5,1,10,0.99871,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,2,10,0.44556,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,3,10,0.35044,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,4,10,0.31123,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,5,10,0.29346,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,6,10,0.2888,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,7,10,0.2773,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,8,10,0.27518,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,9,10,0.27506,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08
+BoTIoT,FedProx_LUNAR,3,0.5,10,10,0.27277,0.0,1.0,1.0,0,0,0.0,0.0,0.515,98.62,76.11,67.62,5.01,0.0007,48.08

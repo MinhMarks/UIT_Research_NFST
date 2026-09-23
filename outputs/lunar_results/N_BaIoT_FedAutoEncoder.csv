@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+N_BaIoT,FedAutoEncoder,3,0.5,1,10,0.59737,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,2,10,0.32828,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,3,10,0.23222,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,4,10,0.1894,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,5,10,0.17004,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,6,10,0.15829,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,7,10,0.14924,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,8,10,0.14187,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,9,10,0.13475,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01
+N_BaIoT,FedAutoEncoder,3,0.5,10,10,0.12709,0.0,1.0,1.0,0,0,0.0,0.0,0.253,99.82,90.71,67.48,5.01,0.0003,20.01

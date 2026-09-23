@@ -19,5 +19,7 @@ Trash/
 Results/ 
 
 *.csv
+!outputs/lunar_results/*.csv
+!outputs/lunar_results/**/*.csv
 *.png
-*.zip 
+*.zip

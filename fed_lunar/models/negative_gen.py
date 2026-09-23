@@ -223,6 +223,8 @@ class SubspaceNegativeGenerator:
         cmnp_filter: Optional[CMNPFilter] = None,
         subspace_U: Optional[Union[np.ndarray, torch.Tensor]] = None,
         mode: str = "subspace",
+        multi_scale: bool = False,
+        scales: Optional[List[float]] = None,
         seed: Optional[int] = None,
     ):
         self.negative_ratio = max(0.1, float(negative_ratio))
@@ -230,6 +232,8 @@ class SubspaceNegativeGenerator:
         self.sigma_parallel = float(sigma_parallel)
         self.cmnp_filter = cmnp_filter
         self.mode = mode.lower()
+        self.multi_scale = multi_scale
+        self.scales = scales if scales is not None else [0.2, 0.5, 1.5, 3.0, 6.0]
         self.rng = np.random.default_rng(seed)
 
         self.subspace_U: Optional[np.ndarray] = None
@@ -249,6 +253,11 @@ class SubspaceNegativeGenerator:
 
     def _sample_perturbations(self, n_samples: int, ambient_dim: int) -> np.ndarray:
         """Sample perturbation noise delta in R^{n_samples x ambient_dim}."""
+        if self.multi_scale:
+            scale_factors = self.rng.choice(self.scales, size=(n_samples, 1)).astype(np.float64)
+        else:
+            scale_factors = self.sigma_pert
+
         if self.mode == "subspace" and self.subspace_U is not None:
             # delta = delta_perp + delta_parallel
             # where delta_perp in null space (I - U U^T), delta_parallel in span(U)
@@ -259,21 +268,28 @@ class SubspaceNegativeGenerator:
             recon = proj @ self.subspace_U.T  # (n_samples, ambient_dim)
             perp = xi - recon  # (n_samples, ambient_dim)
 
-            delta = self.sigma_pert * perp + self.sigma_parallel * recon
+            delta = scale_factors * perp + self.sigma_parallel * recon
             return delta
 
         elif self.mode == "hypersphere":
-            # Uniform direction on unit sphere, scaled to radius ~ U(0.5 sigma, 1.5 sigma)
+            # Uniform direction on unit sphere, scaled to radius
             xi = self.rng.normal(loc=0.0, scale=1.0, size=(n_samples, ambient_dim))
             norms = np.linalg.norm(xi, axis=1, keepdims=True) + 1e-12
             unit_dirs = xi / norms
-            radii = self.rng.uniform(0.5 * self.sigma_pert, 1.5 * self.sigma_pert, size=(n_samples, 1))
+            if self.multi_scale:
+                radii = scale_factors
+            else:
+                radii = self.rng.uniform(0.5 * self.sigma_pert, 1.5 * self.sigma_pert, size=(n_samples, 1))
             return unit_dirs * radii
 
         else:
             # Isotropic Gaussian perturbation (Standard Naive baseline)
-            delta = self.rng.normal(loc=0.0, scale=self.sigma_pert, size=(n_samples, ambient_dim))
-            return delta
+            if self.multi_scale:
+                xi = self.rng.normal(loc=0.0, scale=1.0, size=(n_samples, ambient_dim))
+                return scale_factors * xi
+            else:
+                delta = self.rng.normal(loc=0.0, scale=self.sigma_pert, size=(n_samples, ambient_dim))
+                return delta
 
     def _fallback_boundary_noise(self, X_norm: np.ndarray, count: int) -> np.ndarray:
         """Generate high-radius boundary noise when all candidates get purged."""

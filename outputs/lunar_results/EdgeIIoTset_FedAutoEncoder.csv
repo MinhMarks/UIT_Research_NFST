@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+EdgeIIoTset,FedAutoEncoder,3,0.5,1,10,0.36509,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,2,10,0.13509,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,3,10,0.06716,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,4,10,0.04286,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,5,10,0.02491,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,6,10,0.02344,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,7,10,0.02274,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,8,10,0.02352,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,9,10,0.019,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99
+EdgeIIoTset,FedAutoEncoder,3,0.5,10,10,0.02329,0.0,1.0,1.0,0,0,0.0,0.0,0.247,99.96,99.6,67.66,5.01,0.0002,18.99

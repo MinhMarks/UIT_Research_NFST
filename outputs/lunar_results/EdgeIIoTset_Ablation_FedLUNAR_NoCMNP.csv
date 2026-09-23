@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,1,10,0.72237,0.0,0.6859,1.0,0,0,3.55956,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,2,10,0.18856,0.0,0.4068,1.0,0,0,2.30795,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,3,10,0.10435,0.0,0.375,1.0,0,0,1.9132,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,4,10,0.07472,0.0,0.2596,1.0,0,0,1.43327,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,5,10,0.05404,0.0,0.1917,1.0,0,0,1.35952,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,6,10,0.06068,0.0,0.2185,1.0,0,0,1.32758,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,7,10,0.04417,0.0,0.1592,1.0,0,0,1.03609,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,8,10,0.04439,66.67,0.0918,1.0,0,0,1.02628,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,9,10,0.03765,0.0,0.1411,1.0,0,0,1.19696,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoCMNP,3,0.5,10,10,0.04311,33.33,0.0559,1.0,0,0,1.14223,0.0,0.749,99.99,99.4,67.66,5.01,0.0012,61.76

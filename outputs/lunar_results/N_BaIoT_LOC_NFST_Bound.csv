@@ -1,0 +1,2 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+N_BaIoT,LOC_NFST_Bound,3,0.5,1,1,0.0,0.0,1.0,1.0,0,0,0.0,0.0,12.981,99.52,89.24,66.76,5.01,0.004,958.21

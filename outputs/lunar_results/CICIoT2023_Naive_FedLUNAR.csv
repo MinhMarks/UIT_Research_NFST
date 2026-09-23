@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+CICIoT2023,Naive_FedLUNAR,3,0.5,1,10,1.16916,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,2,10,0.69116,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,3,10,0.62362,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,4,10,0.57613,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,5,10,0.54238,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,6,10,0.52642,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,7,10,0.52119,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,8,10,0.5085,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,9,10,0.50542,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41
+CICIoT2023,Naive_FedLUNAR,3,0.5,10,10,0.50049,0.0,1.0,1.0,0,0,0.0,0.0,0.672,94.04,65.44,55.49,5.01,0.001,61.41

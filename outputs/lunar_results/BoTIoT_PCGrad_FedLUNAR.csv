@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+BoTIoT,PCGrad_FedLUNAR,3,0.5,1,10,0.98605,0.0,1.0,1.0,0,0,2.34177,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,2,10,0.43799,0.0,1.0,1.0,0,0,2.10895,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,3,10,0.34014,0.0,1.0,1.0,0,0,1.43393,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,4,10,0.30013,0.0,1.0,1.0,0,0,0.98143,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,5,10,0.28501,0.0,1.0,1.0,0,0,0.80732,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,6,10,0.28124,0.0,1.0,1.0,0,0,0.62892,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,7,10,0.26943,0.0,1.0,1.0,0,0,0.60702,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,8,10,0.26725,0.0,1.0,1.0,0,0,0.55782,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,9,10,0.26846,0.0,1.0,1.0,0,0,0.58208,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08
+BoTIoT,PCGrad_FedLUNAR,3,0.5,10,10,0.26643,0.0,1.0,1.0,0,0,0.5664,0.0,0.423,98.37,74.31,67.62,5.01,0.0007,48.08

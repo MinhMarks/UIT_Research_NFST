@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,1,10,0.99681,0.0,0.7607,1.0,0,0,3.15069,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,2,10,0.5087,0.0,0.6837,1.0,0,0,2.78793,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,3,10,0.41846,0.0,0.658,1.0,0,0,1.96903,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,4,10,0.38293,0.0,0.4008,1.0,0,0,1.09033,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,5,10,0.36585,0.0,0.2601,1.0,0,0,0.92385,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,6,10,0.36851,33.33,0.0836,1.0,0,0,0.71094,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,7,10,0.35231,0.0,0.1137,1.0,0,0,0.75847,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,8,10,0.35431,0.0,0.0697,1.0,0,0,0.68416,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,9,10,0.35508,0.0,0.0788,1.0,0,0,0.64614,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08
+BoTIoT,Ablation_FedLUNAR_NoCMNP,3,0.5,10,10,0.35648,0.0,0.0621,1.0,0,0,0.67771,0.0,0.427,98.0,66.91,66.67,5.01,0.0007,48.08

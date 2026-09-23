@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,1,10,0.76638,0.0,0.685,1.0,0,0,2.65983,24.0529,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,2,10,0.18795,0.0,0.3787,1.0,0,0,1.98102,24.0693,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,3,10,0.14959,0.0,0.2367,1.0,0,0,1.38729,23.9354,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,4,10,0.19369,66.67,0.1228,1.0,0,0,1.21117,23.3533,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,5,10,0.16035,33.33,0.1058,1.0,0,0,1.19253,24.1376,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,6,10,0.18801,66.67,0.017,1.0,0,0,1.21913,23.6026,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,7,10,0.13356,33.33,0.1014,1.0,0,0,1.00042,23.2885,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,8,10,0.1854,33.33,0.0792,1.0,0,0,1.03767,23.9045,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,9,10,0.14161,33.33,0.1396,1.0,0,0,0.98565,23.9125,0.973,99.99,99.01,67.66,5.01,0.0012,61.76
+EdgeIIoTset,Ablation_FedLUNAR_NoDROGA,3,0.5,10,10,0.17348,66.67,0.0326,1.0,0,0,1.03118,23.8836,0.973,99.99,99.01,67.66,5.01,0.0012,61.76

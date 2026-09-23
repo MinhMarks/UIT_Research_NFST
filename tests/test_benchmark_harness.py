@@ -128,7 +128,7 @@ class TestMetricsPipelineAccuracy:
         """Verifies AUC-ROC=100% and FAR=0% on perfect separation, and AUC-ROC=0% on inverted scores."""
         y_true = np.array([0, 0, 0, 0, 1, 1, 1, 1])
         y_scores_perfect = np.array([0.1, 0.2, 0.3, 0.4, 0.7, 0.8, 0.9, 1.0])
-        m_perf = calculate_detection_metrics(y_true, y_scores_perfect)
+        m_perf = calculate_detection_metrics(y_true, y_scores_perfect, threshold=0.5)
         assert m_perf["auc_roc"] == 100.0
         assert m_perf["f1_optimal"] == 100.0
         assert m_perf["far"] == 0.0
@@ -212,12 +212,15 @@ class TestEndToEndBenchmarkExecution:
     def synthetic_benchmark_slice(self):
         rng = np.random.RandomState(42)
         D = 8
-        c1 = rng.randn(40, D).astype(np.float32) + 2.0
-        c2 = rng.randn(40, D).astype(np.float32) - 2.0
-        c3 = rng.randn(40, D).astype(np.float32)
+        N = 50
+        c1 = (rng.randn(N, D).astype(np.float32) * 0.2) + 2.0
+        c2 = (rng.randn(N, D).astype(np.float32) * 0.2) - 2.0
+        c3 = (rng.randn(N, D).astype(np.float32) * 0.2)
         client_train = [c1, c2, c3]
 
-        test_norm = rng.randn(38, D).astype(np.float32)
+        test_norm1 = (rng.randn(19, D).astype(np.float32) * 0.2) + 2.0
+        test_norm2 = (rng.randn(19, D).astype(np.float32) * 0.2) - 2.0
+        test_norm = np.vstack([test_norm1, test_norm2])
         test_anom = rng.uniform(-8.0, 8.0, size=(2, D)).astype(np.float32)
         X_test = np.vstack([test_norm, test_anom])
         y_test = np.array([0] * 38 + [1] * 2)  # 5% contamination
@@ -225,17 +228,17 @@ class TestEndToEndBenchmarkExecution:
 
     def test_e2e_proposed_fed_lunar(self, synthetic_benchmark_slice):
         client_train, X_test, y_test = synthetic_benchmark_slice
-        model = FedLUNAR(k=3, rank=3, mode="CAGrad", local_epochs=1, device="cpu", seed=42)
+        model = FedLUNAR(k=3, rank=3, mode="CAGrad", sigma_pert=1.0, local_epochs=2, lr=0.005, device="cpu", seed=42)
         model.fit(client_train, rounds=2)
         scores = model.decision_function(X_test)
         metrics = calculate_detection_metrics(y_test, scores)
+        assert metrics["auc_roc"] > 50.0
         assert len(scores) == len(X_test)
-        assert "auc_roc" in metrics
         assert len(model.history) == 2
 
     def test_e2e_naive_fed_lunar(self, synthetic_benchmark_slice):
         client_train, X_test, y_test = synthetic_benchmark_slice
-        model = NaiveFedLunar(k=3, local_epochs=1, device="cpu", seed=42)
+        model = NaiveFedLunar(k=3, sigma_pert=1.0, local_epochs=2, lr=0.005, device="cpu", seed=42)
         model.fit(client_train, rounds=2)
         scores = model.decision_function(X_test)
         metrics = calculate_detection_metrics(y_test, scores)

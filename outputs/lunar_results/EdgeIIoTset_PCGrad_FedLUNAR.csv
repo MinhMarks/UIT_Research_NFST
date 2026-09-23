@@ -1,0 +1,11 @@
+dataset,method,clients,alpha,round,total_rounds,round_train_loss,gcr_pre,mean_cosine_pre,min_cosine_pre,conflicting_pairs,total_pairs,aligned_norm,cmnp_rejection_rate,round_time_sec,final_auc_roc,final_f1_optimal,final_f1_calibrated,final_far,latency_ms_per_sample,peak_memory_mb
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,1,10,0.7296,0.0,1.0,1.0,0,0,2.68581,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,2,10,0.19297,0.0,1.0,1.0,0,0,1.92894,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,3,10,0.12955,0.0,1.0,1.0,0,0,1.46577,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,4,10,0.11548,0.0,1.0,1.0,0,0,1.21016,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,5,10,0.06875,0.0,1.0,1.0,0,0,1.21784,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,6,10,0.11013,0.0,1.0,1.0,0,0,1.01591,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,7,10,0.06077,0.0,1.0,1.0,0,0,0.97866,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,8,10,0.08057,0.0,1.0,1.0,0,0,0.98417,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,9,10,0.05552,0.0,1.0,1.0,0,0,1.01878,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76
+EdgeIIoTset,PCGrad_FedLUNAR,3,0.5,10,10,0.07336,0.0,1.0,1.0,0,0,0.87172,0.0,0.733,100.0,99.4,67.66,5.01,0.0012,61.76

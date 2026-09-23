@@ -52,6 +52,8 @@ class FedProxLunar:
         dropout: float = 0.1,
         negative_ratio: float = 1.0,
         sigma_pert: float = 0.1,
+        multi_scale: bool = True,
+        scales: Optional[List[float]] = None,
         lr: float = 0.001,
         batch_size: int = 128,
         local_epochs: int = 3,
@@ -65,6 +67,8 @@ class FedProxLunar:
         self.dropout = dropout
         self.negative_ratio = negative_ratio
         self.sigma_pert = sigma_pert
+        self.multi_scale = multi_scale
+        self.scales = scales if scales is not None else [0.2, 0.5, 1.5, 3.0, 6.0]
         self.lr = lr
         self.batch_size = batch_size
         self.local_epochs = local_epochs
@@ -144,6 +148,8 @@ class FedProxLunar:
                 sigma_pert=self.sigma_pert,
                 cmnp_filter=None,  # No CMNP filter
                 mode="subspace",
+                multi_scale=self.multi_scale,
+                scales=self.scales,
                 seed=self.seed + idx,
             )
             for idx in range(M)
@@ -320,6 +326,8 @@ class PCGradFedLunar:
         dropout: float = 0.1,
         negative_ratio: float = 1.0,
         sigma_pert: float = 0.1,
+        multi_scale: bool = True,
+        scales: Optional[List[float]] = None,
         lr: float = 0.001,
         batch_size: int = 128,
         local_epochs: int = 3,
@@ -332,6 +340,8 @@ class PCGradFedLunar:
         self.dropout = dropout
         self.negative_ratio = negative_ratio
         self.sigma_pert = sigma_pert
+        self.multi_scale = multi_scale
+        self.scales = scales if scales is not None else [0.2, 0.5, 1.5, 3.0, 6.0]
         self.lr = lr
         self.batch_size = batch_size
         self.local_epochs = local_epochs
@@ -411,6 +421,8 @@ class PCGradFedLunar:
                 sigma_pert=self.sigma_pert,
                 cmnp_filter=None,  # No CMNP filter
                 mode="subspace",
+                multi_scale=self.multi_scale,
+                scales=self.scales,
                 seed=self.seed + idx,
             )
             for idx in range(M)
