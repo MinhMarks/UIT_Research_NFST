@@ -7,6 +7,21 @@
 
 ---
 
+> ### 📋 Originating Research Prompts (Yêu cầu Nghiên cứu Gốc)
+> 
+> **Prompt 1**:
+> *"Bây giờ với model base là LUNAR, hãy thực nghiệm so sánh với các baseline và trên các bộ dataset có trong ssh-postmaster iec để thực nghiệm các giải pháp mới cho các challenge của Federated cho LUNAR nói riêng và IDS model nói chung. Tôi muốn tìm khía cạnh của một challenge mà là điểm yếu chung của tất cả model, rồi bằng các ý tưởng mới được áp dụng lên LUNAR nó sẽ khắc phục được. Yêu cầu tính đúng đắn khoa học, có trích dẫn, và không bịa phải có nguồn. Yêu cầu nghiên cứu chuyên sâu đốt hết token cũng được nhưng cần quy mô vì tìm được 1 cái mới thì ko dễ, chạy thực nghiệm trên nhánh mới trên server. /teamwork-preview /boost"*
+> 
+> **Prompt 2**:
+> *"- @[Quote] Tôi thấy bạn quên bước khảo sát các giải pháp xử lý vấn đề tương tự, giống challenge phải là giống challenge chứ người ta giải challenge A mà lại đi so sánh với việc mình xử lý challenge B thì không được.*  
+> *- Chưa thấy bạn xuất báo cáo md, tôi mong muốn báo cáo dài đầy đủ chi tiết.*  
+> */teamwork-preview /boost"*
+> 
+> **Prompt 3**:
+> *"Trong nghiên cứu quan trọng là tính đóng góp, một lời giải mới hơn, hay hơn cho một bài toán cụ thể có context cụ thể và tránh làm một đóng góp mà không có tính cạnh tranh với các model, sản phẩm hiện có( Cái này đòi hỏi khả năng tìm tồi và có cái nhìn rộng cho chủ đề). Tôi muốn bạn kiểm tra lại thật kĩ phần nội dung này. /boost"*
+
+---
+
 ## 1. Executive Summary & Universal Problem Formulation
 
 ### 1.1 The Universal FL-IDS Challenge: Adversarial Negative Gradient Cancellation & Cross-Manifold Intrusion
