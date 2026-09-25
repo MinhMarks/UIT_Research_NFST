@@ -1,0 +1,105 @@
+% ==============================================================================
+% SECTION III: PROBLEM FORMULATION & MATHEMATICAL MECHANICS OF BREAKDOWN
+% Target Venues: IEEE S&P / ACM CCS / USENIX Security / NDSS
+% ==============================================================================
+
+\section{Problem Formulation and Mathematical Mechanics of Breakdown}
+\label{sec:formulation}
+
+In this section, we formulate the mathematical mechanics of graph distance-ranking anomaly detection and analyze the analytical origin of the two catastrophic failure modes that arise when extending distance ranking to decentralized Non-IID IoT edge networks.
+
+\subsection{Graph Distance-Ranking Foundations: Canonical LUNAR}
+\label{subsec:lunar_foundations}
+
+Let $\mathcal{D}_i = \{x_1, x_2, \dots, x_{N_i}\} \subset \mathcal{M}_i \subset \mathbb{R}^D$ denote the nominal training telemetry captured locally by edge gateway $\mathcal{G}_i$. Canonical distance-ranking outlier detection (LUNAR~\cite{goodge2022lunar}) conceptualizes anomaly detection as learning spatial density transitions on a nearest-neighbor graph $\mathcal{G}_{\text{graph}} = (\mathcal{V}, \mathcal{E})$. 
+
+For any query sample $x \in \mathbb{R}^D$, let $\mathcal{N}_k(x) = \{x^{(1)}, x^{(2)}, \dots, x^{(k)}\} \subset \mathcal{D}_i$ denote its $k$-nearest neighbors in the nominal training set according to Euclidean distance $\norm{x - x^{(j)}}_2$. We define the sorted distance vector mapping $D: \mathbb{R}^D \to \mathbb{R}^k$:
+\begin{equation}
+\label{eq:sorted_distance_vector}
+D(x; \mathcal{D}_i) \triangleq \begin{bmatrix} d_1(x) \\ d_2(x) \\ \vdots \\ d_k(x) \end{bmatrix}, \quad \text{such that} \quad 0 \le d_1(x) \le d_2(x) \le \dots \le d_k(x),
+\end{equation}
+where $d_j(x) = \norm{x - x^{(j)}}_2$. The distance vector $D(x)$ provides a coordinate-free, rotation-invariant representation of the local density profile surrounding $x$.
+
+To map the distance vector to an anomaly confidence score, LUNAR employs a parameterized neural ranking function $f_\theta: \mathbb{R}^k \to \mathbb{R}$ parameterized by an $L$-layer Multi-Layer Perceptron (MLP) with parameter set $\theta = \{W^{(l)}, b^{(l)}\}_{l=1}^L$:
+\begin{align}
+h^{(0)} &= D(x), \\
+h^{(l)} &= \phi\left(W^{(l)} h^{(l-1)} + b^{(l)}\right), \quad l \in \{1, \dots, L-1\}, \\
+f_\theta(D(x)) &= W^{(L)} h^{(L-1)} + b^{(L)},
+\end{align}
+where $\phi(z) = \max(z, \alpha_{\text{leak}} z)$ denotes the LeakyReLU activation function with negative slope $\alpha_{\text{leak}} \in (0, 1)$, and the final predicted anomaly probability is given by $\hat{y} = \sigma(f_\theta(D(x)))$ via the sigmoid function $\sigma(z) = (1 + e^{-z})^{-1}$.
+
+\subsubsection{Pseudo-Negative Generation via Subspace Perturbation}
+Because edge intrusion detection operates under the one-class classification paradigm where only nominal traffic is available during benign commissioning, LUNAR synthesizes artificial negative (anomalous) training samples via uniform subspace perturbation:
+\begin{equation}
+\label{eq:lunar_perturbation}
+\tilde{x} = x + M \odot (\epsilon \cdot z), \quad x \sim \mathcal{D}_i, \; z \sim \mathcal{N}(0, I_D), \; M_d \sim \text{Bernoulli}(p_{\text{mask}}),
+\end{equation}
+where $\epsilon > 0$ is a fixed scalar perturbation radius (canonically $\epsilon = 0.1$~\cite{goodge2022lunar}), $M \in \{0, 1\}^D$ is a stochastic subspace projection mask with masking probability $p_{\text{mask}} \in (0, 1)$, and $\odot$ denotes the element-wise Hadamard product. The model parameters $\theta$ are optimized locally by minimizing the binary cross-entropy (BCE) objective:
+\begin{equation}
+\label{eq:bce_loss}
+\mathcal{L}(\theta; \mathcal{D}_i) = -\frac{1}{2 N_i} \sum_{n=1}^{N_i} \left[ \log\left(1 - \sigma(f_\theta(D(x_n)))\right) + \log \sigma\left(f_\theta(D(\tilde{x}_n))\right) \right].
+\end{equation}
+
+\subsection{Analytical Mechanics of Breakdown in Federated IoT Networks}
+\label{subsec:breakdown_mechanics}
+
+When deploying distance-ranking anomaly detection across decentralized, Non-IID multi-tenant edge gateways, two fundamental mathematical pathologies emerge that destroy detection efficacy:
+
+\subsubsection{Failure Mode 1: Out-of-Distribution Distance Inversion}
+In canonical LUNAR, because the perturbation scale is fixed at a single small radius $\epsilon = 0.1$, the distance vectors $D(\tilde{x})$ synthesized during training are strictly confined to a compact annular neighborhood around the nominal manifold:
+\begin{equation}
+\label{eq:train_support}
+\mathcal{K}_{\text{train}} \triangleq \left\{ d \in \mathbb{R}^k \;\middle|\; d_j \in [\delta_{\min}, \delta_{\max}], \; \forall j \in \{1, \dots, k\} \right\} \subset [0.4, 1.4]^k.
+\end{equation}
+
+Now consider an operational environment under a large-scale volumetric cyber attack (e.g., Mirai botnet UDP flood in \texttt{BoTIoT} or \texttt{CICIoT2023}). High-rate packet flows distort network flow counters by several orders of magnitude, causing the true attack sample $x_{\text{att}}$ to lie extraordinarily far from nominal reference points:
+\begin{equation}
+d_j(x_{\text{att}}) = \norm{x_{\text{att}} - x^{(j)}}_2 \gg \delta_{\max} \quad (d_j \in [10.0, 100.0]).
+\end{equation}
+
+Because an unconstrained MLP with piecewise-affine activations (LeakyReLU) partitions the input domain $\mathbb{R}^k$ into a finite set of polyhedral convex cells $\{\mathcal{C}_p\}_{p=1}^P$~\cite{arora2018understanding}, on any unbounded polyhedral cell $\mathcal{C}_{\text{unbounded}}$ extending to infinity, the neural network acts as an affine mapping:
+\begin{equation}
+f_\theta(d) = J_p^\top d + c_p \quad \forall d \in \mathcal{C}_p, \quad \text{where} \quad J_p = \left( \prod_{l=1}^L W^{(l)} \Sigma^{(l)}(d) \right)^\top \in \mathbb{R}^k,
+\end{equation}
+where $\Sigma^{(l)}(d) \in \mathbb{R}^{h_l \times h_l}$ is a diagonal matrix indicating the active derivative gates of layer $l$.
+
+Crucially, because the loss objective~\eqref{eq:bce_loss} imposes zero gradient constraints on unpopulated regions $d \notin \mathcal{K}_{\text{train}}$, the linear projection vector $J_p$ along unbounded rays $d(t) = t \cdot v$ ($t \to \infty$) is entirely unconstrained. In the absence of global monotonicity constraints, optimization stochasticity frequently drives the effective gradient negative:
+\begin{equation}
+\label{eq:inversion_condition}
+\inner{J_p}{v} = \nabla_d f_\theta(d) \cdot \frac{d}{\norm{d}_2} \le -\gamma < 0 \quad (\gamma > 0).
+\end{equation}
+
+Under condition~\eqref{eq:inversion_condition}, as attack severity grows and distance $d \to \infty$, the output logit plunges toward negative infinity:
+\begin{equation}
+\lim_{\norm{d}_2 \to \infty} f_\theta(d) = -\infty \implies \lim_{\norm{d}_2 \to \infty} \sigma(f_\theta(d)) = 0.0000.
+\end{equation}
+Thus, the most violent cyber attacks are classified as ``hyper-nominal'' ($0.0000$), producing the severe Distance Inversion pathology where AUC-ROC drops to $0.15\%$ on \texttt{BoTIoT}.
+
+\subsubsection{Failure Mode 2: Cross-Manifold Negative Gradient Cancellation}
+In a federated network with $M$ edge gateways, let gateways $\mathcal{G}_A$ and $\mathcal{G}_B$ monitor disjoint nominal sub-manifolds $\mathcal{M}_A$ and $\mathcal{M}_B$ satisfying~\eqref{eq:disjoint_manifolds}. During local training round $t$, gateway $\mathcal{G}_A$ synthesizes pseudo-negative vectors $\tilde{x}_A = x_A + M \odot (\epsilon \cdot z)$ centered at $x_A \in \mathcal{M}_A$. 
+
+Because gateway $\mathcal{G}_A$ possesses no visibility into the private nominal support of peer gateways, isotropic perturbation causes a significant fraction of candidate negatives to land directly inside the nominal manifold of gateway $\mathcal{G}_B$:
+\begin{equation}
+\label{eq:intrusion_set}
+\tilde{x}_A \in \Omega_{A \to B} \triangleq \left( \mathcal{M}_A \oplus \mathcal{B}_D(0, \epsilon) \right) \cap \mathcal{M}_B \neq \emptyset.
+\end{equation}
+
+When candidate $\tilde{x}_A \in \Omega_{A \to B}$ is assigned pseudo-anomaly label $y=1$ by gateway $\mathcal{G}_A$, while an identical or nearby point $x_B \in \mathcal{M}_B$ is assigned nominal label $y=0$ by gateway $\mathcal{G}_B$, the local gradient vectors computed by the two gateways on model parameters $\theta$ satisfy:
+\begin{align}
+\label{eq:grad_A}
+\nabla_\theta \mathcal{L}_A(\tilde{x}_A) &= \left( \sigma(f_\theta(D(\tilde{x}_A))) - 1 \right) \nabla_\theta f_\theta(D(\tilde{x}_A)), \\
+\label{eq:grad_B}
+\nabla_\theta \mathcal{L}_B(x_B) &= \left( \sigma(f_\theta(D(x_B))) - 0 \right) \nabla_\theta f_\theta(D(x_B)).
+\end{align}
+
+Because $\tilde{x}_A \approx x_B$, their distance vectors relative to local nominal references are comparable, yielding collinear feature gradients: $\nabla_\theta f_\theta(D(\tilde{x}_A)) \approx \nabla_\theta f_\theta(D(x_B)) \triangleq g_0$. Evaluating the inner product between the client update vectors yields:
+\begin{equation}
+\label{eq:inner_product_cancel}
+\inner{\nabla_\theta \mathcal{L}_A}{\nabla_\theta \mathcal{L}_B} \approx -\sigma(f_\theta)(1 - \sigma(f_\theta)) \norm{g_0}_2^2 < 0.
+\end{equation}
+
+When the central parameter server $\mathcal{S}$ aggregates client updates via standard Federated Averaging (FedAvg~\cite{mcmahan2017communication}):
+\begin{equation}
+\nabla_\theta \mathcal{L}_{\text{global}} = \frac{1}{M} \sum_{i=1}^M \nabla_\theta \mathcal{L}_i,
+\end{equation}
+the conflicting gradients cancel each other along active manifold boundaries: $\nabla_\theta \mathcal{L}_A + \nabla_\theta \mathcal{L}_B \approx \mathbf{0}$. As a consequence, the global model experiences severe gradient stagnation, client updates fail to converge, and the decision boundary oscillates violently, causing false alarms to skyrocket.

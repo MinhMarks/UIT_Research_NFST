@@ -1,0 +1,212 @@
+% ==============================================================================
+% SECTION IV: THE FED-LUNAR ARCHITECTURE & METHODOLOGY
+% Target Venues: IEEE S&P / ACM CCS / USENIX Security / NDSS
+% ==============================================================================
+
+\section{The Fed-LUNAR Methodology}
+\label{sec:methodology}
+
+To resolve the dual failure modes of distance-ranking anomaly detection in decentralized Non-IID environments, we propose \textbf{Fed-LUNAR}. As illustrated in Figure~\ref{fig:fed_lunar_pipeline}, Fed-LUNAR unifies four mathematically synchronized modules:
+(1)~\emph{Multi-Scale Subspace Perturbation (MSSP)},
+(2)~\emph{Federated Subspace Density Sketches (FSDS)},
+(3)~\emph{Cross-Manifold Negative Purging (CMNP)}, and
+(4)~\emph{Distance-Ranking Orthogonal Gradient Alignment (DROGA)}.
+
+\begin{figure*}[t]
+\centering
+% Conceptual high-level diagram represented in standard LaTeX box format
+\fbox{
+\begin{minipage}{0.96\textwidth}
+\centering
+\vspace{1mm}
+\textbf{\large Architecture Overview of Fed-LUNAR: Decentralized Defense Pipeline}\\[2mm]
+\small
+\begin{tabular}{ccccc}
+\textbf{Edge Gateway $\mathcal{G}_A$} & $\xrightarrow{\text{Candidate Negatives}}$ & \textbf{Cross-Manifold Negative Purging (CMNP)} & $\xrightarrow{\text{Purged Samples}}$ & \textbf{Local Distance Ranking} \\
+Local Telemetry $x \sim \mathcal{M}_A$ & & $\bullet$ Orthogonal Residual: $\norm{(I - U_B U_B^\top)(\tilde{x} - \mu_B)}_2 \le \tau_B$ & & Compute $D(x), D(\tilde{x})$ via $k$-NN \\
+MSSP: $\epsilon \in \{0.2, 0.5, 1.5, 3.0, 6.0\}$ & & $\bullet$ In-Subspace Maha: $\mathcal{D}_{\text{Maha}}^2(\tilde{x}; \mu_B, \Lambda_B) \le \chi^2_{r_B}(1-\delta)$ & & Optimize BCE Ranking Loss $\mathcal{L}_A$ \\
+\midrule
+\multicolumn{5}{c}{$\Downarrow$ Transmit Unit-Norm Normalized Gradients $\hat{g}_i = g_i / \norm{g_i}_2$ \& Compact Sketches $\mathcal{S}_i = (\mu_i, \Lambda_i, U_i, \tau_i)$ ($<5$\,KB)} \\
+\midrule
+\multicolumn{5}{c}{\textbf{Parameter Server $\mathcal{S}$: Distance-Ranking Orthogonal Gradient Alignment (DROGA)}} \\
+\multicolumn{5}{c}{Solve Dual Simplex QP: $\min_{w \in \Delta} \frac{1}{2} \norm{\sum_{i=1}^M w_i \hat{g}_i}_2^2 \implies \inner{g_{\text{aligned}}}{g_i} \ge 0 \quad \forall i \in \{1, \dots, M\}$} \\
+\midrule
+\multicolumn{5}{c}{$\Downarrow$ Broadcast Synchronized Global Model Weights $\theta^{(t+1)} \leftarrow \theta^{(t)} - \eta \cdot g_{\text{aligned}}$ to All Edge Gateways} \\
+\bottomrule
+\end{tabular}
+\vspace{1mm}
+\end{minipage}
+}
+\caption{The end-to-end Fed-LUNAR architecture. Edge gateways employ MSSP to span unbounded distance domains, filter cross-manifold candidate negatives via FSDS and CMNP without exchanging raw packet data, and synchronize updates at the parameter server via DROGA gradient surgery.}
+\label{fig:fed_lunar_pipeline}
+\end{figure*}
+
+\subsection{Multi-Scale Subspace Perturbation (MSSP)}
+\label{subsec:mssp}
+
+To eliminate OOD distance inversion and enforce global rank monotonicity across unbounded feature space, MSSP replaces the single fixed perturbation radius $\epsilon = 0.1$ with a geometrically progressive radial spectrum:
+\begin{equation}
+\label{eq:scale_spectrum}
+\mathcal{S}_{\text{scales}} = \{\epsilon_1, \epsilon_2, \dots, \epsilon_S\} \subset \mathbb{R}^+, \quad \text{where} \quad \epsilon_s = \epsilon_{\min} \cdot \rho^{s-1}, \quad s \in \{1, \dots, S\},
+\end{equation}
+with base scale $\epsilon_{\min} = 0.2$, geometric growth factor $\rho \approx 2.3$, and scale count $S = 5$, yielding $\mathcal{S}_{\text{scales}} = \{0.2, 0.5, 1.5, 3.0, 6.0\}$.
+
+For each nominal training flow $x_n \in \mathcal{D}_i$, MSSP synthesizes an artificial negative sample $\tilde{x}_n$ by sampling a scale parameter $s \sim \text{Uniform}(\{1, \dots, S\})$ and generating perturbation:
+\begin{equation}
+\label{eq:mssp_perturbation}
+\tilde{x}_n = x_n + M_n \odot (\epsilon_s \cdot z_n), \quad z_n \sim \mathcal{N}(0, I_D), \quad M_{n,d} \sim \text{Bernoulli}(p_{\text{mask}}),
+\end{equation}
+where $p_{\text{mask}} \in [0.2, 0.8]$ selects random subspace coordinates. By anchoring synthetic negatives in concentric geometric shells spanning radii up to $R_{\max} = \epsilon_S \sqrt{D \cdot p_{\text{mask}}}$, MSSP forces the distance-ranking MLP $f_\theta$ to learn active linear partitions across the entire spectrum $[0, R_{\max}]$, guaranteeing positive directional derivatives $\partial f_\theta / \partial d_j > 0$.
+
+\subsection{Federated Subspace Density Sketches (FSDS)}
+\label{subsec:fsds}
+
+To prevent cross-manifold negative invasion without exposing raw flow telemetry, each gateway $\mathcal{G}_i$ constructs an ultra-compact mathematical representation of its nominal manifold $\mathcal{M}_i$, termed a \emph{Federated Subspace Density Sketch} $\mathcal{S}_i$.
+
+Gateway $\mathcal{G}_i$ performs Principal Component Analysis (PCA) on its local nominal dataset $\mathcal{D}_i$. Retaining the top-$r_i$ principal eigenspace capturing $\ge 95\%$ cumulative variance ($r_i \ll D$, typically $r_i \in [3, 8]$ for IoT traffic), the sketch is parameterized as a compact 5-tuple:
+\begin{equation}
+\label{eq:fsds_tuple}
+\mathcal{S}_i \triangleq \left( \mu_i, U_i, \Lambda_i, \tau_i, r_i \right),
+\end{equation}
+where:
+\begin{itemize}
+    \item $\mu_i = \frac{1}{N_i}\sum_{n=1}^{N_i} x_n \in \mathbb{R}^D$ is the empirical feature centroid.
+    \item $U_i \in \mathbb{R}^{D \times r_i}$ is the orthonormal projection basis spanning the active manifold tangent space.
+    \item $\Lambda_i = \text{diag}(\lambda_{i,1}, \dots, \lambda_{i,r_i}) \in \mathbb{R}^{r_i \times r_i}$ contains the corresponding principal eigenvalues.
+    \item $\tau_i = \max_{x \in \mathcal{D}_i} \norm{(I - U_i U_i^\top)(x - \mu_i)}_2$ is the maximum orthogonal reconstruction residual bounding nominal thickness.
+\end{itemize}
+
+\subsubsection{Communication and Privacy Efficiency}
+The memory size of sketch $\mathcal{S}_i$ is strictly $(D + D \cdot r_i + r_i + 2) \times 4$\,bytes. For typical IoT feature dimension $D = 40$ and intrinsic rank $r_i = 5$, sketch $\mathcal{S}_i$ requires only \textbf{988 bytes} ($<1$\,KB). Gateways broadcast their sketches to the server $\mathcal{S}$ once during initialization, which relays them to participating edge clients. Because sketches contain only low-rank second-order statistical moments rather than individual data records, raw packet flows are never exposed, strictly complying with edge privacy mandates.
+
+\subsection{Cross-Manifold Negative Purging (CMNP)}
+\label{subsec:cmnp}
+
+With peer sketches $\{\mathcal{S}_j\}_{j \neq i}$ cached locally at gateway $\mathcal{G}_i$, gateway $\mathcal{G}_i$ executes \emph{Cross-Manifold Negative Purging} during local synthetic sample generation.
+
+Whenever a candidate pseudo-negative $\tilde{x}$ is generated via MSSP~\eqref{eq:mssp_perturbation}, gateway $\mathcal{G}_i$ interrogates the candidate against all peer sketches $\mathcal{S}_j$ ($j \neq i$) using a dual-stage geometric containment test:
+\begin{enumerate}
+    \item \textbf{Stage 1: Orthogonal Subspace Proximity Test}. The candidate is projected onto the orthogonal null space of peer basis $U_j$:
+    \begin{equation}
+    \label{eq:test_residual}
+    \Delta_{\perp}^2(\tilde{x}; \mathcal{S}_j) \triangleq \norm{(I - U_j U_j^\top)(\tilde{x} - \mu_j)}_2^2.
+    \end{equation}
+    If $\Delta_{\perp}(\tilde{x}; \mathcal{S}_j) > \tau_j$, the candidate lies outside the spatial affine slab of peer $\mathcal{M}_j$ and is declared non-invasive with respect to peer $j$.
+    \item \textbf{Stage 2: In-Subspace Mahalanobis Density Test}. If the candidate passes Stage 1 ($\Delta_{\perp} \le \tau_j$), its in-subspace coordinates $z_j = U_j^\top (\tilde{x} - \mu_j) \in \mathbb{R}^{r_j}$ are tested against the peer covariance density:
+    \begin{equation}
+    \label{eq:test_mahalanobis}
+    \mathcal{D}_{\text{Maha}}^2(\tilde{x}; \mathcal{S}_j) \triangleq z_j^\top \Lambda_j^{-1} z_j = \sum_{m=1}^{r_j} \frac{(u_{j,m}^\top (\tilde{x} - \mu_j))^2}{\lambda_{j,m}}.
+    \end{equation}
+    Under Gaussian assumptions on the principal subspace, $\mathcal{D}_{\text{Maha}}^2$ follows a chi-squared distribution with $r_j$ degrees of freedom. The candidate is flagged as an invasive sample if:
+    \begin{equation}
+    \label{eq:purging_condition}
+    \mathcal{D}_{\text{Maha}}^2(\tilde{x}; \mathcal{S}_j) \le \chi^2_{r_j}(1 - \delta),
+    \end{equation}
+    where $\delta \in (0, 0.05]$ is the purging significance tolerance (canonically $\delta = 0.01$).
+\end{enumerate}
+
+If condition~\eqref{eq:purging_condition} is satisfied for \emph{any} peer sketch $j \neq i$, candidate $\tilde{x}$ is confirmed to invade a legitimate peer nominal manifold ($\tilde{x} \in \mathcal{M}_j$). The candidate is immediately purged (discarded), and a replacement sample is synthesized. This guarantees with confidence $\ge 1 - \delta = 99\%$ that no peer benign manifold is poisoned with synthetic anomaly labels.
+
+\subsection{Distance-Ranking Orthogonal Gradient Alignment (DROGA)}
+\label{subsec:droga}
+
+While CMNP eliminates direct manifold label poisoning, residual optimization tensions arise from gradient magnitude disparities and boundary curvature variations across heterogeneous edge clients. To guarantee monotonic convergence of the global federated model, we develop \emph{Distance-Ranking Orthogonal Gradient Alignment (DROGA)}.
+
+At communication round $t$, each client $\mathcal{G}_i$ computes its local empirical gradient on model parameters $\theta$:
+\begin{equation}
+g_i^{(t)} \triangleq \nabla_\theta \mathcal{L}_i(\theta^{(t)}; \mathcal{D}_i, \tilde{\mathcal{D}}_i^{\text{purged}}) \in \mathbb{R}^P.
+\end{equation}
+
+\subsubsection{Unit-Norm Scaling}
+Due to variations in local client dataset sizes and loss scales, raw gradient norms vary widely ($\norm{g_i}_2 / \norm{g_j}_2 \in [2.5, 12.0]$), allowing high-magnitude clients to dominate global aggregation. DROGA projects all client update vectors onto the unit hypersphere:
+\begin{equation}
+\label{eq:unit_norm}
+\hat{g}_i \triangleq \frac{g_i}{\norm{g_i}_2 + \epsilon_0}, \quad i \in \{1, \dots, M\},
+\end{equation}
+where $\epsilon_0 = 10^{-8}$ prevents numerical instability.
+
+\subsubsection{Dual Simplex Quadratic Programming (DR-CAGrad QP)}
+Let $G = [\hat{g}_1, \hat{g}_2, \dots, \hat{g}_M] \in \mathbb{R}^{P \times M}$ denote the normalized client gradient matrix. To identify an optimal global update direction that aligns with all participating clients without destructive interference, the central server solves a dual simplex quadratic program:
+\begin{equation}
+\label{eq:droga_qp}
+w^* = \arg\min_{w \in \Delta^M} \frac{1}{2} \norm{\sum_{i=1}^M w_i \hat{g}_i}_2^2 = \arg\min_{w \in \Delta^M} \frac{1}{2} w^\top (G^\top G) w,
+\end{equation}
+subject to the probability simplex constraint:
+\begin{equation}
+\Delta^M \triangleq \left\{ w \in \mathbb{R}^M \;\middle|\; \sum_{i=1}^M w_i = 1, \; w_i \ge 0 \; \forall i \in \{1, \dots, M\} \right\}.
+\end{equation}
+
+Because the number of edge gateways is small ($M \in [3, 20]$), the Gram matrix $K = G^\top G \in \mathbb{R}^{M \times M}$ is tiny, and problem~\eqref{eq:droga_qp} is solved in $<1$\,ms using standard interior-point or active-set QP solvers. The aligned global gradient is constructed as:
+\begin{equation}
+\label{eq:aligned_update}
+g_{\text{aligned}}^{(t)} \triangleq \sum_{i=1}^M w_i^* \cdot g_i^{(t)},
+\end{equation}
+and the global parameter update is applied:
+\begin{equation}
+\theta^{(t+1)} \leftarrow \theta^{(t)} - \eta \cdot g_{\text{aligned}}^{(t)},
+\end{equation}
+where $\eta > 0$ is the global learning rate. When $M$ is large and real-time execution is constrained, DROGA provides an exact fallback to \emph{DR-PCGrad} projection: if $\inner{g_i}{g_j} < 0$, client update $g_i$ is replaced by its orthogonal projection $g_i \leftarrow g_i - \frac{\inner{g_i}{g_j}}{\norm{g_j}_2^2} g_j$.
+
+\subsection{Algorithmic Workflows}
+\label{subsec:algorithms}
+
+The complete training and edge streaming inference workflows of Fed-LUNAR are summarized in Algorithms~\ref{alg:fed_lunar_training} and~\ref{alg:fed_lunar_inference}.
+
+\begin{algorithm}[t]
+\caption{Fed-LUNAR Federated Training Protocol}
+\label{alg:fed_lunar_training}
+\begin{algorithmic}[1]
+\REQUIRE Edge gateways $\mathcal{G}_1, \dots, \mathcal{G}_M$ with local datasets $\mathcal{D}_i$; communication rounds $T$; local epochs $E$; learning rate $\eta$; scale set $\mathcal{S}_{\text{scales}}$; threshold $\delta$.
+\ENSURE Synchronized global distance-ranking model parameters $\theta^{(T)}$.
+\STATE \textbf{Phase 1: Sketch Extraction and Exchange (Round 0)}
+\FOR{each gateway $\mathcal{G}_i$ ($i \in \{1, \dots, M\}$) \textbf{in parallel}}
+    \STATE Compute centroid $\mu_i$ and top-$r_i$ eigenspace $(U_i, \Lambda_i, \tau_i)$ from $\mathcal{D}_i$.
+    \STATE Transmit sketch $\mathcal{S}_i = (\mu_i, U_i, \Lambda_i, \tau_i, r_i)$ to server $\mathcal{S}$.
+\ENDFOR
+\STATE Server $\mathcal{S}$ broadcasts sketch directory $\{\mathcal{S}_1, \dots, \mathcal{S}_M\}$ to all gateways.
+\STATE Initialize global model parameters $\theta^{(0)}$.
+\STATE \textbf{Phase 2: Federated Optimization Rounds}
+\FOR{round $t = 0, 1, \dots, T-1$}
+    \FOR{each gateway $\mathcal{G}_i$ \textbf{in parallel}}
+        \STATE Initialize purged negative set $\tilde{\mathcal{D}}_i^{\text{purged}} \leftarrow \emptyset$.
+        \FOR{each nominal sample $x_n \in \mathcal{D}_i$}
+            \REPEAT
+                \STATE Sample scale $\epsilon \sim \mathcal{S}_{\text{scales}}$ and mask $M_n \sim \text{Bernoulli}(p_{\text{mask}})$.
+                \STATE Synthesize candidate $\tilde{x} = x_n + M_n \odot (\epsilon \cdot z_n)$.
+                \STATE Compute $\Delta_{\perp}(\tilde{x}; \mathcal{S}_j)$ and $\mathcal{D}_{\text{Maha}}^2(\tilde{x}; \mathcal{S}_j)$ $\forall j \neq i$.
+                \STATE $\text{is\_invasive} \leftarrow \exists j \neq i \text{ s.t. } \Delta_{\perp} \le \tau_j \land \mathcal{D}_{\text{Maha}}^2 \le \chi^2_{r_j}(1-\delta)$.
+            \UNTIL{$\text{is\_invasive} == \text{False}$}
+            \STATE Add $\tilde{x}$ to $\tilde{\mathcal{D}}_i^{\text{purged}}$.
+        \ENDFOR
+        \STATE Train local model $\theta_i$ for $E$ epochs on $(\mathcal{D}_i, \tilde{\mathcal{D}}_i^{\text{purged}})$ using BCE loss.
+        \STATE Compute gradient update $g_i^{(t)} = (\theta^{(t)} - \theta_i) / \eta$.
+        \STATE Transmit $g_i^{(t)}$ to server $\mathcal{S}$.
+    \ENDFOR
+    \STATE \textbf{Server Optimization via DROGA}:
+    \STATE Normalize client updates: $\hat{g}_i = g_i^{(t)} / \norm{g_i^{(t)}}_2$ $\forall i$.
+    \STATE Solve dual simplex QP~\eqref{eq:droga_qp} to obtain optimal simplex weights $w^* \in \Delta^M$.
+    \STATE Construct aligned gradient: $g_{\text{aligned}}^{(t)} = \sum_{i=1}^M w_i^* g_i^{(t)}$.
+    \STATE Update global parameters: $\theta^{(t+1)} \leftarrow \theta^{(t)} - \eta \cdot g_{\text{aligned}}^{(t)}$.
+    \STATE Broadcast $\theta^{(t+1)}$ to all edge gateways.
+\ENDFOR
+\RETURN $\theta^{(T)}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{Fed-LUNAR Edge Streaming Inference Engine}
+\label{alg:fed_lunar_inference}
+\begin{algorithmic}[1]
+\REQUIRE Ingress network flow packet $x_{\text{test}} \in \mathbb{R}^D$; local nominal index $\mathcal{D}_i$; neighbor count $k$; trained global model $\theta$; threshold $\gamma_{\text{th}}$.
+\ENSURE Anomaly classification $\hat{y} \in \{0, 1\}$ and anomaly probability $p_{\text{anom}} \in [0, 1]$.
+\STATE Extract $k$-nearest nominal neighbors $\mathcal{N}_k(x_{\text{test}}) \subset \mathcal{D}_i$ via exact $k$-NN or HNSW index.
+\STATE Compute sorted Euclidean distance vector $D(x_{\text{test}}) = [d_1, \dots, d_k]^\top$.
+\STATE Compute forward pass through 3-layer MLP: $\hat{f} = f_\theta(D(x_{\text{test}}))$.
+\STATE Calculate anomaly score: $p_{\text{anom}} = \sigma(\hat{f}) = (1 + e^{-\hat{f}})^{-1}$.
+\IF{$p_{\text{anom}} \ge \gamma_{\text{th}}$}
+    \STATE \textbf{return} $\hat{y} = 1$ (Malicious flow detected; trigger SDN drop policy).
+\ELSE
+    \STATE \textbf{return} $\hat{y} = 0$ (Nominal traffic; forward packet).
+\ENDIF
+\end{algorithmic}
+\end{algorithm}

@@ -1,0 +1,58 @@
+% ==============================================================================
+% SECTION VII: RELATED WORK & COMPETITIVE LITERATURE TAXONOMY
+% Target Venues: IEEE S&P / ACM CCS / USENIX Security / NDSS
+% ==============================================================================
+
+\section{Related Work and Competitive Taxonomy}
+\label{sec:related}
+
+In this section, we systematically position Fed-LUNAR against the broader literature of network intrusion detection, federated outlier detection, and gradient conflict resolution across five established paradigms.
+
+\subsection{Five-Paradigm Architectural Taxonomy}
+\label{subsec:taxonomy}
+
+\subsubsection{Signature and Rule-Based NIDS}
+Deterministic pattern matching engines (e.g., Snort~\cite{roesch1999snort}, Zeek~\cite{paxson1999bro}, and Suricata) remain foundational components of enterprise network security due to their deterministic line-rate packet parsing. However, signature-based approaches are intrinsically incapable of detecting novel zero-day exploits, polymorphic botnet payloads, or low-rate structural reconnaissance that avoid known vulnerability signatures~\cite{sommer2010outside}.
+
+\subsubsection{Statistical and Reconstruction-Based Deep NIDS}
+Unsupervised deep architectures detect anomalies by measuring data reconstruction fidelity. Kitsune~\cite{mirsky2018kitsune} employs an ensemble of lightweight autoencoders over sliding statistical feature windows. Deep Autoencoders~\cite{sakurada2014anomaly}, Variational Autoencoders (VAEs)~\cite{kingma2013auto}, and Memory-augmented Autoencoders (MemAE)~\cite{gong2019memorizing} extend reconstruction objectives to decentralized networks. However, as analyzed in Section~\ref{sec:threat_model}, continuous deep autoencoders suffer from the \emph{reconstruction shortcut trap}: on slow, low-rate multi-stage attacks, deep latent representations easily reconstruct sparse anomalous flow statistics with negligible residual error, yielding unacceptable false-negative rates on stealthy C2 channels.
+
+\subsubsection{Tree-Based and Density Ensembles}
+Classic one-class algorithms, including Isolation Forest (iForest)~\cite{liu2008isolation}, One-Class Support Vector Machines (OC-SVM)~\cite{scholkopf2001estimating}, and Local Outlier Factor (LOF)~\cite{breunig2000lof}, detect anomalies via axis-aligned space partitioning or local density estimation. Deep SVDD~\cite{ruff2018deep} maps nominal data into a minimal enclosing hypersphere. However, axis-aligned tree splits exhibit severe dimensional bias in high-dimensional flow spaces, while kernelized OC-SVM incurs $\mathcal{O}(N^3)$ computational scaling. Furthermore, tree-based models lack natural gradient-based interfaces, making federated aggregation across Non-IID edge nodes notoriously difficult without transmitting raw boundary points.
+
+\subsubsection{Analytical Spectral Subspace Methods}
+Subspace projection techniques, including Kernel Null Foley-Sammon Transform (KNFST)~\cite{bodesheim2013kernel} and Local Orthogonal Component NFST (LOC-NFST)~\cite{nguyen2024locnfst}, project nominal data into a mathematically exact null space ($S_w w = 0$) where nominal variance collapses to zero. While spectral methods offer closed-form, single-round federated aggregation, in streaming high-volume IoT networks ($N \gg D$), empirical covariance matrices become strictly positive definite ($S_w \succ 0$). Non-stationary streaming drift forces iterative rank-one updates that rapidly erode the null space, causing decision-threshold collapse ($\tau \to 0$). Furthermore, kernelized Gram matrices consume $434.8$\,MB to $958.2$\,MB of system RAM, exceeding edge hardware constraints.
+
+\subsubsection{Contrastive and Graph-Based Outlier Detection}
+Graph neural networks and contrastive learning frameworks (e.g., NeuTraL AD~\cite{qiu2021neural}, Outlier Exposure~\cite{hendrycks2019deep}, and LUNAR~\cite{goodge2022lunar}) classify anomalies by learning relative topological distances to $k$-nearest neighbors. In federated settings, FedOD~\cite{wang2022fedod} and FedGNN~\cite{wu2021federated} attempt collaborative graph anomaly detection. However, prior work universally relies on fixed, small-scale perturbation ($\epsilon = 0.1$) and ignores cross-manifold intrusion. As proven in Theorems~\ref{thm:distance_inversion} and~\ref{thm:gradient_cancellation}, uncoordinated federated distance ranking triggers catastrophic OOD Distance Inversion ($0.15\%$ AUC) and Negative Gradient Cancellation.
+
+% ------------------------------------------------------------------------------
+% TABLE 5: COMPARATIVE LITERATURE MATRIX
+% ------------------------------------------------------------------------------
+\begin{table*}[t]
+\centering
+\caption{Comprehensive Competitive Literature Matrix: Comparing Fed-LUNAR against state-of-the-art anomaly detection paradigms across foundational security, optimization, and edge system dimensions.}
+\label{tab:literature_matrix}
+\adjustbox{max width=\textwidth}{
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Paradigm / Architecture} & \textbf{Representative Systems} & \textbf{Zero-Day Detection} & \textbf{Stealthy Structural Attacks} & \textbf{Non-IID Drift Immunity} & \textbf{Memory Footprint} & \textbf{Streaming Throughput} \\
+\midrule
+\textbf{Rule / Signature} & Snort~\cite{roesch1999snort}, Zeek~\cite{paxson1999bro} & \xmark~No (Signatures Only) & \xmark~Bypassed by Encodings & \cmark~High (Static Rules) & $<20$\,MB & $>1{,}000{,}000$\,pkts/s \\
+\textbf{Reconstruction AE} & Kitsune~\cite{mirsky2018kitsune}, Fed-AE~\cite{sakurada2014anomaly} & \cmark~Yes & \xmark~Shortcut Trap & \cmark~Moderate ($\Delta$F1: $-5\%$) & $18.7$\,MB & $\approx 500{,}000$\,pkts/s \\
+\textbf{Kernel Space / Tree} & OC-SVM~\cite{scholkopf2001estimating}, iForest~\cite{liu2008isolation} & \cmark~Yes & \xmark~Axis-Aligned Distortion & \xmark~Poor (FL Incompatible) & $50$--$200$\,MB & $\approx 100{,}000$\,pkts/s \\
+\textbf{Analytical Spectral} & KNFST~\cite{bodesheim2013kernel}, LOC-NFST~\cite{nguyen2024locnfst} & \cmark~Yes & \cmark~High (Null Space) & \xmark~Null-Space Erosion & $434$--$958$\,MB & $>200{,}000$\,pkts/s \\
+\textbf{Canonical GNN} & LUNAR~\cite{goodge2022lunar}, NeuTraL AD~\cite{qiu2021neural} & \cmark~Yes & \cmark~High ($k$-NN Topology) & \xmark~Distance Inversion ($0.15\%$) & $48.1$\,MB & $>500{,}000$\,pkts/s \\
+\midrule
+\textbf{Fed-LUNAR (Proposed)} & \textbf{MSSP + FSDS + CMNP + DROGA} & \textbf{\cmark~Yes (Robust)} & \textbf{\cmark~Superior ($99.4\%$ F1)} & \textbf{\cmark~Immune ($\alpha=0.1$)} & \textbf{49.6--67.1\,MB} & \textbf{$>$500,000--1,250,000\,pkts/s} \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}
+
+\subsection{Gradient Conflict Resolution in Federated Learning}
+\label{subsec:gradient_conflict_literature}
+
+Mitigating conflicting gradients between optimization objectives has been explored in multi-task learning through PCGrad~\cite{yu2020gradient}, CAGrad~\cite{liu2021conflict}, and Nash-MTL~\cite{navon2022multi}. In federated learning, FedProx~\cite{li2020federated} introduces a proximal term to penalize client drift, while FedNova~\cite{wang2020tackling} normalizes client progress across heterogeneous local steps. 
+
+However, existing multi-task gradient surgery techniques assume full visibility into simultaneous task loss functions at a central server. They are not designed for decentralized edge networks where gradient conflicts originate from spatial pseudo-negative intrusion across unshared private manifolds ($\mathcal{M}_A \cap \mathcal{M}_B \approx \emptyset$). Fed-LUNAR bridges this critical divide: CMNP proactively prevents manifold intrusion at the client boundary via lightweight sketches ($<5$\,KB), while DROGA resolves residual optimization tensions at the server via unit-norm dual simplex quadratic programming, guaranteeing Pareto monotonic convergence.

@@ -1,0 +1,87 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% ------------------------------------------------------------------------------
+% PREAMBLE PACKAGES (Strictly IEEEtran Compatible - NO natbib)
+% ------------------------------------------------------------------------------
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{adjustbox}
+\usepackage{url}
+\usepackage{balance}
+
+% ------------------------------------------------------------------------------
+% THEOREM ENVIRONMENTS (Native IEEEtran Compatible)
+% ------------------------------------------------------------------------------
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+% Mathematical custom macros
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\inner}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\xmark}{\text{\sffamily X}}
+\newcommand{\cmark}{\checkmark}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% ------------------------------------------------------------------------------
+% DOCUMENT METADATA
+% ------------------------------------------------------------------------------
+\begin{document}
+
+\title{Federated Distance-Ranking Graph Outlier Detection for Non-IID Multi-Tenant IoT Edge Networks}
+
+\author{
+\IEEEauthorblockN{Anonymous Authors}
+\IEEEauthorblockA{\textit{Track: Network \& Distributed Systems Security} \\
+\textit{Paper Under Double-Blind Review for A* Security Venue}}
+}
+
+\maketitle
+
+% ------------------------------------------------------------------------------
+% ABSTRACT
+% ------------------------------------------------------------------------------
+\begin{abstract}
+Decentralized multi-tenant Internet of Things (IoT) edge infrastructures face an escalating barrage of coordinated cyber attacks, ranging from massive volumetric distributed denial-of-service (DDoS) inundations to stealthy, low-rate multi-stage botnet intrusions (e.g., Mirai, Gafgyt). In multi-tenant environments where edge gateways monitor non-overlapping application domains, traffic flows exhibit extreme non-independent and identically distributed (Non-IID) manifold skew ($\mathcal{M}_i \cap \mathcal{M}_j \approx \emptyset$). While local distance-ranking graph neural networks (e.g., LUNAR) offer exceptional sensitivity to localized relational anomalies, we uncover two catastrophic failure modes when deploying distance-ranking outlier detection in federated IoT networks: (1)~\emph{Out-of-Distribution Distance Inversion}, wherein unconstrained linear layers extrapolate with inverted gradients ($\nabla_d f_\theta \le 0$) on large volumetric attack distances, driving anomaly scores to zero ($AUC \to 0.15\%$); and (2)~\emph{Cross-Manifold Negative Gradient Cancellation}, wherein uncoordinated local pseudo-negative synthesis intrudes into peer clients' legitimate manifolds, generating opposing gradients ($\mathbb{E}[\langle \nabla \mathcal{L}_A, \nabla \mathcal{L}_B \rangle] < 0$) that paralyze global Federated Averaging (FedAvg).
+
+To resolve these challenges, we propose \textbf{Fed-LUNAR}, a mathematically grounded federated distance-ranking graph outlier detection architecture tailored for heterogeneous edge gateways. Fed-LUNAR introduces: (i)~\emph{Multi-Scale Subspace Perturbation (MSSP)}, which samples synthetic negatives across a geometric radial spectrum to guarantee strictly positive ranking monotonicity ($\partial f_\theta / \partial d > 0$); (ii)~\emph{Federated Subspace Density Sketches (FSDS)} and \emph{Cross-Manifold Negative Purging (CMNP)}, which filter invasive pseudo-negatives with probability $\ge 99\%$ via ultra-compact ($<5$\,KB) geometric sketches; and (iii)~\emph{Distance-Ranking Orthogonal Gradient Alignment (DROGA)}, which eliminates gradient conflicts via dual simplex quadratic programming, guaranteeing monotonic Pareto descent. Comprehensive empirical evaluations across four canonical IoT datasets (\texttt{BoTIoT}, \texttt{EdgeIIoTset}, \texttt{CICIoT2023}, \texttt{N\_BaIoT}) executed on physical NVIDIA RTX 5090 edge server hardware demonstrate that Fed-LUNAR dramatically outperforms state-of-the-art baselines under extreme Non-IID Dirichlet skew ($\alpha=0.1$). Furthermore, Fed-LUNAR achieves deterministic sub-millisecond edge streaming inference ($0.0008$--$0.0020$\,ms/sample, exceeding $500{,}000$ packets/second) with an edge memory footprint of only $49.6$--$67.1$\,MB RAM---saving $85\%$--$93\%$ memory compared to spectral null-space alternatives.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Federated Learning, Network Intrusion Detection, Graph Neural Networks, Distance-Ranking Outlier Detection, Non-IID Heterogeneity, Gradient Surgery, IoT Edge Security.
+\end{IEEEkeywords}
+
+% ------------------------------------------------------------------------------
+% MODULAR SECTIONS
+% ------------------------------------------------------------------------------
+\input{sec_intro}
+\input{sec_threat_model}
+\input{sec_formulation}
+\input{sec_methodology}
+\input{sec_proofs}
+\input{sec_experiments}
+\input{sec_related}
+\input{sec_conclusion}
+
+% ------------------------------------------------------------------------------
+% BIBLIOGRAPHY
+% ------------------------------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

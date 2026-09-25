@@ -1,0 +1,24 @@
+% ==============================================================================
+% SECTION VIII: CONCLUSION & FUTURE WORK
+% Target Venues: IEEE S&P / ACM CCS / USENIX Security / NDSS
+% ==============================================================================
+
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+In this paper, we addressed the fundamental problem of deploying distance-ranking graph outlier detection across decentralized, Non-IID multi-tenant IoT edge networks. We exposed two catastrophic failure modes inherent to uncoordinated federated distance ranking: (1)~\emph{Out-of-Distribution Distance Inversion}, wherein unconstrained piecewise-affine layers extrapolate with inverted derivatives on large attack distances, causing AUC-ROC to collapse to $0.15\%$; and (2)~\emph{Cross-Manifold Negative Gradient Cancellation}, wherein local pseudo-negatives invade peer clients' legitimate manifolds, generating opposing gradients that paralyze standard Federated Averaging.
+
+To overcome these theoretical and practical dilemmas, we developed \textbf{Fed-LUNAR}, a mathematically grounded federated intrusion detection architecture. Fed-LUNAR integrates: (i)~\emph{Multi-Scale Subspace Perturbation (MSSP)}, which enforces strictly positive ranking monotonicity across the unbounded metric space; (ii)~\emph{Federated Subspace Density Sketches (FSDS)} and \emph{Cross-Manifold Negative Purging (CMNP)}, which filter invasive synthetic samples with confidence $\ge 99\%$ via ultra-compact ($<5$\,KB) geometric sketches without sharing private telemetry; and (iii)~\emph{Distance-Ranking Orthogonal Gradient Alignment (DROGA)}, which eliminates residual gradient conflicts via dual simplex quadratic programming, guaranteeing monotonic Pareto descent.
+
+Extensive empirical evaluations across four canonical IoT benchmarks (\texttt{BoTIoT}, \texttt{EdgeIIoTset}, \texttt{CICIoT2023}, \texttt{N\_BaIoT}) executed on physical NVIDIA RTX 5090 edge hardware demonstrate that Fed-LUNAR achieves remarkable detection efficacy ($99.40\%$ F1 on \texttt{EdgeIIoTset}, $97.54\%$ F1 on \texttt{N\_BaIoT}), maintaining high accuracy even under extreme Dirichlet heterogeneity ($\alpha = 0.1$). Component ablations verify that disabling CMNP precipitates a devastating $-26.23\%$ collapse in F1-Score. Furthermore, hardware profiling confirms deterministic line-rate streaming throughput ($0.0008$--$0.0020$\,ms per packet) and an ultra-lean memory working set ($49.6$--$67.1$\,MB RAM)---delivering an $85\%$--$93\%$ memory reduction over analytical null-space methods.
+
+\subsection{Limitations and Future Directions}
+\label{subsec:future_work}
+
+We transparently delineate two operational trade-offs and avenues for ongoing exploration:
+\begin{enumerate}
+    \item \textbf{Adaptive Neighborhood Scaling}: While Fed-LUNAR fixes $k = 10$, edge networks with dynamic density variations would benefit from adaptive local scaling ($k_i = \phi(\text{density}_i)$). Future iterations will investigate federated estimation of local intrinsic dimensionality to dynamically calibrate $k$.
+    \item \textbf{Approximate Nearest Neighbor Acceleration}: In ultra-high-rate $100$\,Gbps backbone deployments, exact $k$-NN lookups will be coupled with hardware-accelerated Hierarchical Navigable Small World (HNSW) graph indices on FPGA/SmartNIC architectures to sustain multi-gigabit line-rate processing.
+\end{enumerate}
+
+In conclusion, Fed-LUNAR resolves the foundational mathematical bottlenecks of decentralized graph outlier detection, establishing a robust, privacy-preserving, and line-rate intrusion defense framework for next-generation IoT edge ecosystems.
