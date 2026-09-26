@@ -137,12 +137,19 @@ def check_unescaped_special_chars_and_markdown(filename, text):
     issues = []
     lines = text.splitlines()
 
+    align_envs = {'tabular', 'tabular*', 'array', 'align', 'align*', 'alignat', 'alignat*', 'matrix', 'pmatrix', 'bmatrix', 'cases', 'dcases', 'split', 'IEEEeqnarray', 'IEEEeqnarray*'}
+    env_stack = []
+
     for line_num, line in enumerate(lines, 1):
         stripped = line.strip()
         if stripped.startswith('%'):
             continue
 
         clean = strip_comments(line)
+
+        # Track begin of environments
+        for m in re.finditer(r'\\begin\{([^}]+)\}', clean):
+            env_stack.append(m.group(1).strip())
 
         # 1. Check for unescaped percent sign preceded by digits or numbers
         m_percent = re.search(r'(\d+)\s*(?<!\\)%', line)
@@ -165,15 +172,21 @@ def check_unescaped_special_chars_and_markdown(filename, text):
             })
 
         # 3. Check for unescaped & outside alignment environments
-        # First, ignore escaped \&
-        for m in re.finditer(r'(?<!\\)&', clean):
-            # Check if this line is in an alignment environment
-            issues.append({
-                "type": "UNESCAPED_AMPERSAND",
-                "severity": "CRITICAL",
-                "line": line_num,
-                "message": f"Unescaped ampersand '&' found in text mode at column {m.start()+1} in line: {line.strip()}"
-            })
+        in_align = any(e in align_envs for e in env_stack)
+        if not in_align:
+            for m in re.finditer(r'(?<!\\)&', clean):
+                issues.append({
+                    "type": "UNESCAPED_AMPERSAND",
+                    "severity": "CRITICAL",
+                    "line": line_num,
+                    "message": f"Unescaped ampersand '&' found in text mode at column {m.start()+1} in line: {line.strip()}"
+                })
+
+        # Track end of environments
+        for m in re.finditer(r'\\end\{([^}]+)\}', clean):
+            env = m.group(1).strip()
+            if env_stack and env_stack[-1] == env:
+                env_stack.pop()
 
     # 4. Token-level check for unescaped underscore outside math mode
     clean_lines = [strip_comments(l) for l in lines]
@@ -184,7 +197,7 @@ def check_unescaped_special_chars_and_markdown(filename, text):
 
     masked = full_clean
     # Mask allowable macro arguments with optional brackets: [ ... ]
-    masked = mask_pattern(r'\\(label|cite|ref|input|includegraphics|url|lstinline|usepackage|bibliographystyle|bibliography)(\[[^\]]*\])?\{[^}]*\}', masked)
+    masked = mask_pattern(r'\\(label|cite|ref|eqref|cref|autoref|input|includegraphics|url|lstinline|usepackage|bibliographystyle|bibliography)(\[[^\]]*\])?\{[^}]*\}', masked)
     masked = mask_pattern(r'\\begin\{(equation\*?|align\*?|gather\*?|multline\*?)\}.*?\\end\{\1\}', masked)
     masked = mask_pattern(r'\$\$.*?\$\$', masked)
     masked = mask_pattern(r'\$.*?\$', masked)

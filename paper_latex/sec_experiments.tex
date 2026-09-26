@@ -17,10 +17,10 @@ All federated training and evaluation experiments are conducted on an enterprise
 \subsubsection{Canonical IoT Datasets}
 To ensure rigorous evaluation across diverse IoT environments and attack topologies, we evaluate four benchmark datasets pre-scaled under standardized one-class protocols:
 \begin{enumerate}
-    \item \textbf{\texttt{BoTIoT}}~\cite{koroniotis2019towards}: Captured in a smart home IoT testbed, containing massive volumetric DDoS, DoS, OS reconnaissance, and keylogging traffic ($D = 26$ flow features).
+    \item \textbf{\texttt{BoTIoT}}~\cite{neto2023botiot}: Captured in a smart home IoT testbed, containing massive volumetric DDoS, DoS, OS reconnaissance, and keylogging traffic ($D = 26$ flow features).
     \item \textbf{\texttt{EdgeIIoTset}}~\cite{ferrag2022edgeiiotset}: Multi-protocol industrial IoT (IIoT) telemetry comprising Modbus, MQTT, and CoAP telemetry subjected to ransomware, SQL injection, and DDoS ($D = 52$ features).
     \item \textbf{\texttt{CICIoT2023}}~\cite{neto2023ciciot2023}: Large-scale IoT attack dataset encompassing 33 distinct attack profiles with high-rate volumetric floods and brute-force scans ($D = 44$ features).
-    \item \textbf{\texttt{N\_BaIoT}}~\cite{meidan2018n}: Real-world commercial hardware botnet dataset captured from 9 infected IoT devices (e.g., Doorbell, Security Camera) exhibiting Mirai and Bashlite infection stages ($D = 115$ high-dimensional statistical stream features).
+    \item \textbf{\texttt{N\_BaIoT}}~\cite{meidan2018nbiot}: Real-world commercial hardware botnet dataset captured from 9 infected IoT devices (e.g., Doorbell, Security Camera) exhibiting Mirai and Bashlite infection stages ($D = 115$ high-dimensional statistical stream features).
 \end{enumerate}
 
 \subsubsection{Non-IID Partitioning Protocol}
@@ -31,7 +31,7 @@ We benchmark Fed-LUNAR against a 3-tier hierarchy of competitive baselines:
 \begin{itemize}
     \item \textbf{Tier 1 (Canonical Federated Graph)}: \emph{Naive Fed-LUNAR} (Standard FedAvg on LUNAR with fixed $\epsilon = 0.1$).
     \item \textbf{Tier 2 (SOTA Representation \& Gradient Surgery)}: \emph{FedAutoEncoder} (4-layer bottleneck reconstruction NIDS~\cite{sakurada2014anomaly}), \emph{FedProx-LUNAR} ($\mu = 0.01$ proximal regularization~\cite{li2020federated}), and \emph{PCGrad-FedLUNAR} (Pairwise projecting conflicting gradients~\cite{yu2020gradient}).
-    \item \textbf{Tier 3 (Analytical Bound)}: \emph{LOC-NFST Bound} (Local Orthogonal Component Null Foley-Sammon Transform~\cite{nguyen2024locnfst}, representing the theoretical closed-form upper bound).
+    \item \textbf{Tier 3 (Analytical Bound)}: \emph{LOC-NFST Bound} (Local Orthogonal Component Null Foley-Sammon Transform~\cite{foley1975optimal}, representing the theoretical closed-form upper bound).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
