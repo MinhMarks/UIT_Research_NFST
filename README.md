@@ -23,7 +23,8 @@ Repository này chứa toàn bộ mã nguồn, thực nghiệm và văn bản kh
 │   │   ├── 📁 fed_lunar/                # Báo cáo chuyên đề Federated LUNAR
 │   │   │   ├── BAO_CAO_KHOA_HOC_FEDERATED_LUNAR_CHI_TIET.md
 │   │   │   ├── WALKTHROUGH_FEDERATED_LUNAR.md
-│   │   │   └── REPORT_DEVICE_TYPE_AWARE_INTRUSION_DETECTION.md
+│   │   │   ├── REPORT_DEVICE_TYPE_AWARE_INTRUSION_DETECTION.md
+│   │   │   └── REPORT_LUNAR_VARIANTS_AND_SOTA_SURVEY.md
 │   │   └── 📁 loc_nfst/                 # Báo cáo chuyên đề LOC-NFST & Giới hạn giải tích
 │   │       ├── FEDERATED_EDGE_LOC_NFST_COMPREHENSIVE_REPORT.md
 │   │       ├── RESEARCH_DYNAMIC_K_LOC_NFST.md
@@ -86,6 +87,7 @@ Repository này chứa toàn bộ mã nguồn, thực nghiệm và văn bản kh
 
 ### 1. Nghiên cứu Federated LUNAR (`docs/reports/fed_lunar/`)
 - [**Báo cáo Khoa học Federated LUNAR Chi tiết**](docs/reports/fed_lunar/BAO_CAO_KHOA_HOC_FEDERATED_LUNAR_CHI_TIET.md): Báo cáo toàn diện phân tích hiện tượng Distance-Ranking Inversion khi gặp OOD flood và hiện tượng triệt tiêu gradient xuyên đa tạp trong FL; giải pháp MSSP, FSDS, CMNP, DROGA cùng kết quả trên GPU RTX 5090 qua 4 bộ dữ liệu (`BoTIoT`, `EdgeIIoTset`, `CICIoT2023`, `N_BaIoT`).
+- [**Khảo sát Toàn diện LUNAR, các Biến thể & SOTA trong IDS**](docs/reports/fed_lunar/REPORT_LUNAR_VARIANTS_AND_SOTA_SURVEY.md): Khảo sát chuyên sâu nguyên lý toán học của LUNAR (Goodge et al., AAAI 2022), phân loại các biến thể học thuật (SHAP-LUNAR, ADBench NeurIPS 2022, ARES), cơ chế sụp đổ Distance-Ranking Inversion và bảng xếp hạng SOTA thực nghiệm trên server RTX 5090.
 - [**Walkthrough Kỹ thuật Triển khai**](docs/reports/fed_lunar/WALKTHROUGH_FEDERATED_LUNAR.md): Hướng dẫn chi tiết từng module mã nguồn, kiến trúc pipeline và các giao thức kiểm thử.
 - [**Nghiên cứu Nhận biết Loại Thiết bị trong IDS**](docs/reports/fed_lunar/REPORT_DEVICE_TYPE_AWARE_INTRUSION_DETECTION.md): Phân tích lý luận khoa học và khảo sát văn hiến chuyên sâu về sự cần thiết của đặc trưng nhận biết loại thiết bị (Device-Type-Aware Feature / Device Profiling) khi khoảng cách chuẩn hóa của các thiết bị IoT khác nhau có hình thái đa tạp hoàn toàn khác nhau.
 
