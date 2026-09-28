@@ -94,16 +94,20 @@ def calculate_detection_metrics(
         Dictionary of formatted metrics:
             - 'auc_roc': Area Under the ROC Curve in [0, 100] %.
             - 'f1_score': Primary benchmark F1 score in [0, 100] % (= f1_optimal).
-            - 'f1_optimal': Optimal threshold F1 score in [0, 100] %.
-            - 'optimal_threshold': Evaluated optimal threshold.
-            - 'f1_calibrated': Operational F1 score at calibrated threshold in [0, 100] %.
-            - 'calibrated_threshold': Calibrated decision threshold.
-            - 'f1_macro': Macro-averaged F1 score in [0, 100] %.
-            - 'precision': Precision for anomaly class in [0, 100] %.
-            - 'detection_rate': Recall / True Positive Rate in [0, 100] %.
-            - 'far': False Alarm Rate / False Positive Rate in [0, 100] %.
-            - 'threshold': Evaluated decision threshold (same as calibrated_threshold).
-            - 'tp', 'fp', 'tn', 'fn': Raw confusion matrix counts.
+            - 'f1_optimal': Optimal threshold F1 score in [0, 100] % (PR-curve sweep).
+            - 'optimal_threshold': Optimal decision threshold from PR-curve sweep.
+            - 'far': False Alarm Rate at the OPTIMAL threshold in [0, 100] %.
+              NOTE: FAR and DR are computed at the optimal F1 threshold (not the 95th-percentile
+              calibrated threshold). Using the 95th-percentile threshold locks FAR to ~5% for
+              every model because by definition 5% of normal samples exceed their own 95th
+              percentile, making FAR non-discriminative across methods.
+            - 'detection_rate': True Positive Rate at the optimal threshold in [0, 100] %.
+            - 'precision': Precision at the optimal threshold in [0, 100] %.
+            - 'f1_calibrated': Operational F1 score at 95th-pct calibrated threshold in [0, 100] %.
+            - 'calibrated_threshold': 95th-percentile operational decision threshold.
+            - 'f1_macro': Macro-averaged F1 at calibrated threshold in [0, 100] %.
+            - 'threshold': Calibrated decision threshold (same as calibrated_threshold).
+            - 'tp', 'fp', 'tn', 'fn': Raw confusion matrix counts at the optimal threshold.
     """
     y_true = np.asarray(y_true, dtype=int).ravel()
     y_scores = np.asarray(y_scores, dtype=np.float64).ravel()
@@ -121,10 +125,22 @@ def calculate_detection_metrics(
     except Exception:
         auc = 50.0
 
-    # 2. Optimal F1 calculation
+    # 2. Optimal F1 calculation (PR-curve sweep)
     f1_opt, opt_thresh = calculate_optimal_f1_threshold(y_true, y_scores)
 
-    # 3. Calibrated decision threshold (default 95th percentile of normal scores)
+    # 3a. PRIMARY confusion matrix at OPTIMAL threshold.
+    #     FAR/DR/Precision are reported here so they reflect genuine model discrimination
+    #     quality and are not locked to the test contamination rate (≈5%).
+    y_pred_opt = (y_scores >= opt_thresh).astype(int)
+    cm_opt = confusion_matrix(y_true, y_pred_opt, labels=[0, 1])
+    tn_opt, fp_opt, fn_opt, tp_opt = cm_opt.ravel()
+
+    far = (fp_opt / max(1, fp_opt + tn_opt)) * 100.0
+    dr = (tp_opt / max(1, tp_opt + fn_opt)) * 100.0
+    prec = (tp_opt / max(1, tp_opt + fp_opt)) * 100.0
+
+    # 3b. SECONDARY: 95th-percentile calibrated operational threshold.
+    #     Kept for deployment context (f1_calibrated) but not used for primary FAR/DR.
     if threshold is None:
         normal_scores = y_scores[y_true == 0]
         if f1_opt >= 99.99:
@@ -136,18 +152,9 @@ def calculate_detection_metrics(
     else:
         eval_thresh = float(threshold)
 
-    y_pred = (y_scores >= eval_thresh).astype(int)
-
-    # 4. Confusion Matrix at calibrated threshold
-    cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
-    tn, fp, fn, tp = cm.ravel()
-
-    # 5. Rates and scores
-    far = (fp / max(1, fp + tn)) * 100.0
-    dr = (tp / max(1, tp + fn)) * 100.0
-    prec = (tp / max(1, tp + fp)) * 100.0
-    f1_cal = float(f1_score(y_true, y_pred, pos_label=1, zero_division=0)) * 100.0
-    f1_mac = float(f1_score(y_true, y_pred, average="macro", zero_division=0)) * 100.0
+    y_pred_cal = (y_scores >= eval_thresh).astype(int)
+    f1_cal = float(f1_score(y_true, y_pred_cal, pos_label=1, zero_division=0)) * 100.0
+    f1_mac = float(f1_score(y_true, y_pred_cal, average="macro", zero_division=0)) * 100.0
 
     return {
         "auc_roc": round(auc, 2),
@@ -162,10 +169,10 @@ def calculate_detection_metrics(
         "detection_rate": round(dr, 2),
         "far": round(far, 2),
         "threshold": round(eval_thresh, 4),
-        "tp": int(tp),
-        "fp": int(fp),
-        "tn": int(tn),
-        "fn": int(fn),
+        "tp": int(tp_opt),
+        "fp": int(fp_opt),
+        "tn": int(tn_opt),
+        "fn": int(fn_opt),
     }
 
 
