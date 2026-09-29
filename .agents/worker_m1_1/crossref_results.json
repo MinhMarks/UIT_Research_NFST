@@ -1,0 +1,142 @@
+{
+  "goodge2022lunar": {
+    "doi": "10.1609/aaai.v36i6.20629",
+    "title": "LUNAR: Unifying Local Outlier Detection Methods via Graph Neural Networks"
+  },
+  "yu2020gradient": {
+    "doi": "10.36227/techrxiv.177031372.20321869/v1",
+    "title": "Cross-Attention Gradient Transplantation (CAGT): Mitigating Gradient Conflict in Multi-Task Learning Through Cross-Blockwise Attention"
+  },
+  "liu2021conflict": {
+    "doi": "10.2139/ssrn.6346312",
+    "title": "Conflict-Averse Federated Multi-Task Learning for Power System Stability Assessment"
+  },
+  "han2022adbench": {
+    "doi": "10.2139/ssrn.4266498",
+    "title": "ADBench: Anomaly Detection Benchmark"
+  },
+  "zhou2022fedproto": {
+    "doi": "10.1609/aaai.v36i8.20819",
+    "title": "FedProto: Federated Prototype Learning across Heterogeneous Clients"
+  },
+  "ruff2018deep": {
+    "doi": "10.1109/ijcnn48605.2020.9207209",
+    "title": "Simple and Effective Prevention of Mode Collapse in Deep One-Class Classification"
+  },
+  "qiu2021neural": {
+    "doi": "10.1201/9781003463559-5",
+    "title": "Deep Learning for Anomaly Detection in IoT Time Series"
+  },
+  "sener2018active": {
+    "doi": "10.1109/siu49456.2020.9302394",
+    "title": "Hand-Gun Detection in Images with Transfer Learning-Based Convolutional Neural Networks"
+  },
+  "hendrycks2019deep": {
+    "doi": "10.2139/ssrn.4790485",
+    "title": "Deep Support Vector Data Description with Outlier Exposure for Anomaly Detection"
+  },
+  "bergman2020classification": {
+    "doi": "10.1109/cvpr46437.2021.00283",
+    "title": "PANDA: Adapting Pretrained Features for Anomaly Detection and Segmentation"
+  },
+  "shen2022connective": {
+    "doi": "10.1016/b978-0-44-319037-7.00028-4",
+    "title": "Federated quantum natural gradient descent for quantum federated learning"
+  },
+  "yuan2021federated": {
+    "doi": "10.21203/rs.3.rs-4846662/v1",
+    "title": "SPM-FL: A Federated Learning Privacy Protection Mechanism Based on Local Differential Privacy"
+  },
+  "sommer2010outside": {
+    "doi": "10.1109/sp.2010.25",
+    "title": "Outside the Closed World: On Using Machine Learning for Network Intrusion Detection"
+  },
+  "carlini2017towards": {
+    "doi": "10.1109/sp.2017.49",
+    "title": "Towards Evaluating the Robustness of Neural Networks"
+  },
+  "nasr2019comprehensive": {
+    "doi": "10.1109/sp.2019.00065",
+    "title": "Comprehensive Privacy Analysis of Deep Learning: Passive and Active White-box Inference Attacks against Centralized and Federated Learning"
+  },
+  "holland2021new": {
+    "doi": "10.1145/3460120.3484758",
+    "title": "New Directions in Automated Traffic Analysis"
+  },
+  "truex2019hybrid": {
+    "doi": "10.1145/3338501.3357370",
+    "title": "A Hybrid Approach to Privacy-Preserving Federated Learning"
+  },
+  "shokri2017membership": {
+    "doi": "10.1109/sp.2017.41",
+    "title": "Membership Inference Attacks Against Machine Learning Models"
+  },
+  "wang2020attack": {
+    "doi": "10.2139/ssrn.5171090",
+    "title": "Backdoor Attack in Federated Learning Via Conditional Trigger"
+  },
+  "sun2021flpa": {
+    "doi": "10.1007/978-3-031-99447-0_18",
+    "title": "Dual Perspectives on GAN-Based Data Poisoning in Federated Learning: VagueGAN Attacks and Data Poisoning Detection"
+  },
+  "marchal2014phishstorm": {
+    "doi": "10.1109/tnsm.2014.2377295",
+    "title": "PhishStorm: Detecting Phishing With Streaming Analytics"
+  },
+  "mirsky2018kitsune": {
+    "doi": "10.14722/ndss.2018.23204",
+    "title": "Kitsune: An Ensemble of Autoencoders for Online Network Intrusion Detection"
+  },
+  "shen2021ares": {
+    "doi": "10.4236/wsn.2011.37026",
+    "title": "A High-level Architecture for Intrusion Detection on Heterogeneous Wireless Sensor Networks: Hierarchical, Scalable and Dynamic Reconfigurable"
+  },
+  "aldujaili2018adversarial": {
+    "doi": "10.1109/spw.2018.00020",
+    "title": "Adversarial Deep Learning for Robust Detection of Binary Encoded Malware"
+  },
+  "dinh2020federated": {
+    "doi": "10.1109/tnet.2020.3035770",
+    "title": "Federated Learning Over Wireless Networks: Convergence Analysis and Resource Allocation"
+  },
+  "wang2019adaptive": {
+    "doi": "10.1109/jsac.2019.2904348",
+    "title": "Adaptive Federated Learning in Resource Constrained Edge Computing Systems"
+  },
+  "chen2020joint": {
+    "doi": "10.1109/infocom.2019.8737385",
+    "title": "Joint Service Placement and Request Routing in Multi-cell Mobile Edge Computing Networks"
+  },
+  "eskandari2020passban": {
+    "doi": "10.1109/jiot.2020.2970501",
+    "title": "Passban IDS: An Intelligent Anomaly-Based Intrusion Detection System for IoT Edge Devices"
+  },
+  "segurola2024unsupervised": {
+    "doi": "10.23919/jnic58574.2023.10205384",
+    "title": "Edge-based Analysis for Network Intrusion Detection using a GNN Approach"
+  },
+  "xiang2026federated": {
+    "doi": "10.1007/s10723-023-09725-3",
+    "title": "Intrusion Detection using Federated Attention Neural Network for Edge Enabled Internet of Things"
+  },
+  "sarhan2023evaluating": {
+    "doi": "10.2139/ssrn.4029439",
+    "title": "From Zero-Shot Machine Learning to Zero-Day Attack Detection"
+  },
+  "prabowo2026contrastive": {
+    "doi": "10.1109/globecom59602.2025.11431646",
+    "title": "MGCRL: Multi-Scale Graph Contrastive Representation Learning For Network Intrusion Detection"
+  },
+  "wang2022fedod": {
+    "doi": "10.2139/ssrn.4790485",
+    "title": "Deep Support Vector Data Description with Outlier Exposure for Anomaly Detection"
+  },
+  "ferrag2022edgeiiotset": {
+    "doi": "10.36227/techrxiv.18857336",
+    "title": "Edge-IIoTset: A New Comprehensive Realistic Cyber Security Dataset of IoT and IIoT Applications for Centralized and Federated Learning"
+  },
+  "neto2023botiot": {
+    "doi": "10.2139/ssrn.5368170",
+    "title": "AI-Based Intrusion Detection System for Securing IoT Networks using the BoT-IoT Dataset"
+  }
+}

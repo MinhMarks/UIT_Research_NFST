@@ -1,0 +1,502 @@
+[
+  {
+    "key": "goodge2022lunar",
+    "doi": "10.1609/aaai.v36i6.20629",
+    "bib_title": "LUNAR",
+    "real_title": "LUNAR: Unifying Local Outlier Detection Methods via Graph Neural Networks",
+    "bib_author": "Goodge, Adam and Hooi, Bryan and Ng, See-Kiong and Ng, Wee Siong",
+    "real_authors": "Goodge, Hooi, Ng, Ng",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "ruff2018deep",
+    "doi": "10.48550/arXiv.1801.04949",
+    "bib_title": "Deep One-Class Classification",
+    "real_title": "Predicted Number, Multiplicity, and Orbital Dynamics of TESS M Dwarf Exoplanets",
+    "bib_author": "Ruff, Lukas and Vandermeulen, Robert and Goernitz, Nico and Deecke, Lucas and Siddiqui, Shoaib Ahmed and Binder, Alexander and M{\\\"u",
+    "real_authors": "Ballard",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "qiu2021neural",
+    "doi": "10.48550/arXiv.2106.00258",
+    "bib_title": "Neural Transformation Learning for Deep Anomaly Detection Beyond Images",
+    "real_title": "Divide and Rule: Recurrent Partitioned Network for Dynamic Processes",
+    "bib_author": "Qiu, Chen and Pfrommer, Timm and Pick, Marius and Wang, Nils Philipp and Zi{\\k{e",
+    "real_authors": "Feng, Zhang, Yang",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "hendrycks2019deep",
+    "doi": "10.48550/arXiv.1812.04606",
+    "bib_title": "Deep Anomaly Detection with Outlier Exposure",
+    "real_title": "Deep Anomaly Detection with Outlier Exposure",
+    "bib_author": "Hendrycks, Dan and Mazeika, Mantas and Dietterich, Thomas",
+    "real_authors": "Hendrycks, Mazeika, Dietterich",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "bergman2020classification",
+    "doi": "10.48550/arXiv.1911.08779",
+    "bib_title": "Classification-Based Anomaly Detection for General Data",
+    "real_title": "Characterizing Scalability of Sparse Matrix-Vector Multiplications on Phytium FT-2000+ Many-cores",
+    "bib_author": "Bergman, Liron and Hoshen, Yedid",
+    "real_authors": "Chen, Fang, Xu, Chen, Wang",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "han2022adbench",
+    "doi": "10.48550/arXiv.2206.09426",
+    "bib_title": "ADBench",
+    "real_title": "ADBench: Anomaly Detection Benchmark",
+    "bib_author": "Han, Songqiao and Hu, Xiyang and Huang, Hailiang and Jiang, Minqi and Zhao, Yue",
+    "real_authors": "Han, Hu, Huang, Jiang, Zhao",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "jin2021anemone",
+    "doi": "10.1145/3459637.3482101",
+    "bib_title": "ANEMONE",
+    "real_title": "Query-driven Segment Selection for Ranking Long Documents",
+    "bib_author": "Jin, Ming and Liu, Yixin and Zheng, Yu and Chi, Lianhua and Li, Yuan-Fang and Pan, Shirui",
+    "real_authors": "Kim, Rahimi, Bonab, Allan",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "ngo2019fence",
+    "doi": "10.1109/TKDE.2019.2944645",
+    "bib_title": "Fence GAN",
+    "real_title": "",
+    "bib_author": "Ngo, Phuc and Winarto, Andrea and Li, Kok-Seng and Park, Sung-Hyun",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "liu2008isolation",
+    "doi": "10.1109/ICDM.2008.17",
+    "bib_title": "Isolation Forest",
+    "real_title": "Isolation Forest",
+    "bib_author": "Liu, Fei Tony and Ting, Kai Ming and Zhou, Zhi-Hua",
+    "real_authors": "Liu, Ting, Zhou",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "gong2019memorizing",
+    "doi": "10.1109/ICCV.2019.00179",
+    "bib_title": "Memorizing Normality to Detect Anomaly: Memory-Augmented Deep Autoencoder for Unsupervised Anomaly Detection",
+    "real_title": "Memorizing Normality to Detect Anomaly: Memory-Augmented Deep Autoencoder for Unsupervised Anomaly Detection",
+    "bib_author": "Gong, Dong and Liu, Lingqiao and Le, Vuong and Saha, Budhaditya and Mansour, Moussa Reda and Venkatesh, Svetha and van den Hengel, Anton",
+    "real_authors": "Gong, Liu, Le, Saha, Mansour, Venkatesh, Van Den Hengel",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "sakurada2014anomaly",
+    "doi": "10.1109/MLSP.2014.6958866",
+    "bib_title": "Anomaly Detection Using Autoencoders with Extreme Value Theory",
+    "real_title": "A stochastic coordinate descent primal-dual algorithm and applications",
+    "bib_author": "Sakurada, Mayu and Yairi, Takehisa",
+    "real_authors": "Bianchi, Hachem, Franck",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "bodesheim2013kernel",
+    "doi": "10.1109/CVPR.2013.372",
+    "bib_title": "Kernel Null Space Methods for Novelty Detection",
+    "real_title": "Dense Segmentation-Aware Descriptors",
+    "bib_author": "Bodesheim, Paul and Freytag, Alexander and Rodner, Erik and Kemmler, Michael and Denzler, Joachim",
+    "real_authors": "Trulls, Kokkinos, Sanfeliu, Moreno-Noguer",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "nguyen2024locnfst",
+    "doi": "10.1109/ACCESS.2024.3411234",
+    "bib_title": "Local Orthogonal Component Null Foley--Sammon",
+    "real_title": "",
+    "bib_author": "Nguyen, Tuan-Anh and Le, Kim-Hung and Nguyen, Xuan-Ha",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "yu2020gradient",
+    "doi": "10.48550/arXiv.2001.06782",
+    "bib_title": "Gradient Surgery for Multi-Task Learning",
+    "real_title": "Gradient Surgery for Multi-Task Learning",
+    "bib_author": "Yu, Tianhe and Kumar, Saurabh and Gupta, Abhishek and Levine, Sergey and Hausman, Karol and Finn, Chelsea",
+    "real_authors": "Yu, Kumar, Gupta, Levine, Hausman, Finn",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "liu2021conflict",
+    "doi": "10.48550/arXiv.2110.14048",
+    "bib_title": "Conflict-Averse Gradient Descent for Multi-Task Learning",
+    "real_title": "Conflict-Averse Gradient Descent for Multi-task Learning",
+    "bib_author": "Liu, Bo and Liu, Xingchao and Jin, Xiaojie and Stone, Peter and Liu, Qiang",
+    "real_authors": "Liu, Liu, Jin, Stone, Liu",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "mcmahan2017communication",
+    "doi": "10.48550/arXiv.1602.05629",
+    "bib_title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+    "real_title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+    "bib_author": "McMahan, Brendan and Moore, Eider and Ramage, Daniel and Hampson, Seth and y Arcas, Blaise Ag{\\\"u",
+    "real_authors": "McMahan, Moore, Ramage, Hampson, Arcas",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "li2020federated",
+    "doi": "10.48550/arXiv.1812.06127",
+    "bib_title": "Federated Optimization in Heterogeneous Networks",
+    "real_title": "Federated Optimization in Heterogeneous Networks",
+    "bib_author": "Li, Tian and Sahu, Anit Kumar and Zaheer, Manzil and Sanjabi, Maziar and Talwalkar, Ameet and Smith, Virginia",
+    "real_authors": "Li, Sahu, Zaheer, Sanjabi, Talwalkar, Smith",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "zhou2022fedproto",
+    "doi": "10.1609/aaai.v36i8.20819",
+    "bib_title": "FedProto",
+    "real_title": "FedProto: Federated Prototype Learning across Heterogeneous Clients",
+    "bib_author": "Zhou, Yue and Long, Guodong and Qian, Shengsheng and Sheng, Quan Z.",
+    "real_authors": "Tan, Long, LIU, Zhou, Lu, Jiang, Zhang",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "sener2018active",
+    "doi": "10.48550/arXiv.1708.00489",
+    "bib_title": "Active Learning for Convolutional Neural Networks: A Core-Set Approach",
+    "real_title": "Active Learning for Convolutional Neural Networks: A Core-Set Approach",
+    "bib_author": "Sener, Ozan and Savarese, Silvio",
+    "real_authors": "Sener, Savarese",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "shen2022connective",
+    "doi": "10.48550/arXiv.2202.04277",
+    "bib_title": "Connective Gradient Descent for Heterogeneous Federated Learning",
+    "real_title": "A decision-tree framework to select optimal box-sizes for product shipments",
+    "bib_author": "Shen, Zebang and Richt{\\'a",
+    "real_authors": "Gurumoorthy, Hinge",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "yuan2021federated",
+    "doi": "10.1609/aaai.v35i12.17297",
+    "bib_title": "Federated Graph Learning with Local Differential Privacy",
+    "real_title": "Exploration by Maximizing Renyi Entropy for Reward-Free RL Framework",
+    "bib_author": "Yuan, Li and Long, Guodong and Shen, Tao and Zhou, Tianyi and Wang, Jing and Jiang, Chengqiang",
+    "real_authors": "Zhang, Cai, Huang, Li",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "aaai2025fedclgn",
+    "doi": "10.1609/aaai.v39i1.30125",
+    "bib_title": "Federated Contrastive Learning on Heterogeneous Graph Networks",
+    "real_title": "",
+    "bib_author": "Zhang, Chen and Wang, Hao and Zhao, Wei and Liu, Bo",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "sommer2010outside",
+    "doi": "10.1109/SP.2010.25",
+    "bib_title": "Outside the Closed World: On Using Machine Learning for Network Intrusion Detection",
+    "real_title": "Outside the Closed World: On Using Machine Learning for Network Intrusion Detection",
+    "bib_author": "Sommer, Robin and Paxson, Vern",
+    "real_authors": "Sommer, Paxson",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "carlini2017towards",
+    "doi": "10.1109/SP.2017.49",
+    "bib_title": "Towards Evaluating the Robustness of Neural Networks",
+    "real_title": "Towards Evaluating the Robustness of Neural Networks",
+    "bib_author": "Carlini, Nicholas and Wagner, David",
+    "real_authors": "Carlini, Wagner",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "nasr2019comprehensive",
+    "doi": "10.1109/SP.2019.00065",
+    "bib_title": "Comprehensive Privacy Analysis of Deep Learning: Passive and Active White-Box Inference Attacks Towards Federated Learning",
+    "real_title": "Comprehensive Privacy Analysis of Deep Learning: Passive and Active White-box Inference Attacks against Centralized and Federated Learning",
+    "bib_author": "Nasr, Milad and Shokri, Reza and Houmansadr, Amir",
+    "real_authors": "Nasr, Shokri, Houmansadr",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "shokri2017membership",
+    "doi": "10.1109/SP.2017.41",
+    "bib_title": "Membership Inference Attacks Against Machine Learning Models",
+    "real_title": "Membership Inference Attacks Against Machine Learning Models",
+    "bib_author": "Shokri, Reza and Stronati, Marco and Song, Congzheng and Shmatikov, Vitaly",
+    "real_authors": "Shokri, Stronati, Song, Shmatikov",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "holland2021new",
+    "doi": "10.1145/3460120.3484758",
+    "bib_title": "New Directions in Automated Traffic Analysis",
+    "real_title": "New Directions in Automated Traffic Analysis",
+    "bib_author": "Holland, Jordan and Schmitt, Paul and Feamster, Nick and Mittal, Prateek",
+    "real_authors": "Holland, Schmitt, Feamster, Mittal",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "truex2019hybrid",
+    "doi": "10.1145/3338501.3357370",
+    "bib_title": "A Hybrid Approach to Privacy-Preserving Federated Learning",
+    "real_title": "A Hybrid Approach to Privacy-Preserving Federated Learning",
+    "bib_author": "Truex, Stacey and Baracaldo, Nathalie and Anwar, Ali and Steinke, Thomas and Ludwig, Heiko and Zhang, Rui and Zhou, Yi",
+    "real_authors": "Truex, Baracaldo, Anwar, Steinke, Ludwig, Zhang, Zhou",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "wang2020attack",
+    "doi": "10.48550/arXiv.2007.05084",
+    "bib_title": "Attack of the Tails: Yes, You Really Can Backdoor Federated Learning",
+    "real_title": "Attack of the Tails: Yes, You Really Can Backdoor Federated Learning",
+    "bib_author": "Wang, Hongyi and Sreenivasan, Kartik and Rajput, Shashank and Vishwakarma, Harit and Agarwal, Saurabh and Sohn, Jy-yong and Lee, Kangwook and Papailiopoulos, Dimitris",
+    "real_authors": "Wang, Sreenivasan, Rajput, Vishwakarma, Agarwal, Sohn, Lee, Papailiopoulos",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "sun2021flpa",
+    "doi": "10.1109/JIOT.2021.3128634",
+    "bib_title": "Data Poisoning Attacks on Federated Machine Learning",
+    "real_title": "",
+    "bib_author": "Sun, Gan and Cong, Yang and Dong, Jiahua and Wang, Qiang and Liu, Ji",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "marchal2014phishstorm",
+    "doi": "10.1109/TNSM.2014.2377295",
+    "bib_title": "PhishStorm",
+    "real_title": "PhishStorm: Detecting Phishing With Streaming Analytics",
+    "bib_author": "Marchal, Samuel and Fran{\\c{c",
+    "real_authors": "Marchal, Francois, State, Engel",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "mirsky2018kitsune",
+    "doi": "10.14722/ndss.2018.23204",
+    "bib_title": "Kitsune: An Ensemble of Autoencoders for Online Network Intrusion Detection",
+    "real_title": "Kitsune: An Ensemble of Autoencoders for Online Network Intrusion Detection",
+    "bib_author": "Mirsky, Yisroel and Doitshman, Tomer and Elovici, Yuval and Shabtai, Asaf",
+    "real_authors": "Mirsky, Doitshman, Elovici, Shabtai",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "shen2021ares",
+    "doi": "10.14722/ndss.2021.24072",
+    "bib_title": "ARES",
+    "real_title": "",
+    "bib_author": "Shen, Yun and Zhang, Yu and Chen, Sencun and Wang, Long",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "aldujaili2018adversarial",
+    "doi": "10.1109/SPW.2018.00020",
+    "bib_title": "Adversarial Deep Learning for Robust Detection of Binary Malware",
+    "real_title": "Adversarial Deep Learning for Robust Detection of Binary Encoded Malware",
+    "bib_author": "Al-Dujaili, Abdullah and Huang, Alex and Hemberg, Erik and O'Reilly, Una-May",
+    "real_authors": "Al-Dujaili, Huang, Hemberg, OReilly",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "dinh2020federated",
+    "doi": "10.1109/TNET.2020.3035770",
+    "bib_title": "Federated Learning Over Wireless Networks: Convergence Analysis and Resource Allocation",
+    "real_title": "Federated Learning Over Wireless Networks: Convergence Analysis and Resource Allocation",
+    "bib_author": "Dinh, Canh T. and Tran, Nguyen H. and Nguyen, Minh N. and Hong, Choong Seon and Bao, Wei and Zomaya, Albert Y. and Gramoli, Vincent",
+    "real_authors": "Dinh, Tran, Nguyen, Hong, Bao, Zomaya, Gramoli",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "rey2022federated",
+    "doi": "10.1016/j.comnet.2022.109395",
+    "bib_title": "Federated Learning for Intrusion Detection in the Internet of Things",
+    "real_title": "Two stage downlink scheduling for balancing QoS in multihop IAB networks",
+    "bib_author": "Rey, Victor and S{\\'a",
+    "real_authors": "Ranjan, Jha, Karandikar, Chaporkar",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "hsu2019measuring",
+    "doi": "10.48550/arXiv.1909.06335",
+    "bib_title": "Measuring the Effects of Non-Identical Distributions on Federated Visual Classification",
+    "real_title": "Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification",
+    "bib_author": "Hsu, Tzu-Ming Harry and Qi, Hang and Brown, Matthew",
+    "real_authors": "Hsu, Qi, Brown",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "wang2019adaptive",
+    "doi": "10.1109/JSAC.2019.2904348",
+    "bib_title": "Adaptive Federated Learning in Resource Constrained Edge Computing Systems",
+    "real_title": "Adaptive Federated Learning in Resource Constrained Edge Computing Systems",
+    "bib_author": "Wang, Shiqiang and Tuor, Tiffany and Salonidis, Theodoros and Leung, Kin K. and Makaya, Christian and He, Ting and Chan, Kevin",
+    "real_authors": "Wang, Tuor, Salonidis, Leung, Makaya, He, Chan",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "chen2020joint",
+    "doi": "10.1109/INFOCOM.2019.8737385",
+    "bib_title": "Joint Service Placement and Request Routing in Multi-Cell Mobile Edge Computing Networks",
+    "real_title": "Joint Service Placement and Request Routing in Multi-cell Mobile Edge Computing Networks",
+    "bib_author": "Chen, Lixing and Xu, Jie",
+    "real_authors": "Poularakis, Llorca, Tulino, Taylor, Tassiulas",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "eskandari2020passban",
+    "doi": "10.1109/JIOT.2020.2970501",
+    "bib_title": "Passban IDS",
+    "real_title": "Passban IDS: An Intelligent Anomaly-Based Intrusion Detection System for IoT Edge Devices",
+    "bib_author": "Eskandari, Mojtaba and Yan, Zheng and Sarvas, Risto",
+    "real_authors": "Eskandari, Janjua, Vecchio, Antonelli",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "segurola2024unsupervised",
+    "doi": "10.1109/JIOT.2024.3359050",
+    "bib_title": "Unsupervised Network Intrusion Detection in IoT",
+    "real_title": "",
+    "bib_author": "Segurola-Gil, Aitor and Garitagoitia, I{\\~n",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "xiang2026federated",
+    "doi": "10.1007/s10723-023-09725-3",
+    "bib_title": "Federated Isolation Forest for Network Intrusion Detection in Edge Computing",
+    "real_title": "Intrusion Detection using Federated Attention Neural Network for Edge Enabled Internet of Things",
+    "bib_author": "Xiang, Xinjie and Liu, Ming and Wang, Dong and Zhang, Tao",
+    "real_authors": "Song, Ma",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "sarhan2023evaluating",
+    "doi": "10.1109/TIFS.2023.3288673",
+    "bib_title": "Evaluating Machine Learning Network Intrusion Detection Systems in Zero-Day Attack Scenarios",
+    "real_title": "",
+    "bib_author": "Sarhan, Mohanad and Layeghy, Siamak and Gallagher, Marcus and Portmann, Marius",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "prabowo2026contrastive",
+    "doi": "10.1109/GLOBECOM59602.2025.11431646",
+    "bib_title": "Multi-Scale Graph Contrastive Representation Learning for Network Traffic Intrusion Detection",
+    "real_title": "MGCRL: Multi-Scale Graph Contrastive Representation Learning For Network Intrusion Detection",
+    "bib_author": "Prabowo, Adi and Nugroho, Agung and Rahardjo, Budi",
+    "real_authors": "Al-Sabri, Albaseer, Abdallah, Al-Fuqaha",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "wang2022fedod",
+    "doi": "10.1109/TIFS.2022.3163145",
+    "bib_title": "FedOD",
+    "real_title": "",
+    "bib_author": "Wang, Chao and Liu, Yuxin and Chen, Xiaofeng",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "ferrag2022edgeiiotset",
+    "doi": "10.1109/ACCESS.2022.3186406",
+    "bib_title": "Edge-IIoTset",
+    "real_title": "",
+    "bib_author": "Ferrag, Mohamed Amine and Friha, Othmane and Hamouda, Djallel and Maglaras, Leandros and Janicke, Helge",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "neto2023botiot",
+    "doi": "10.3390/s23104625",
+    "bib_title": "A Systematic Assessment of the BoT-IoT",
+    "real_title": "Fast and Accurate ROI Extraction for Non-Contact Dorsal Hand Vein Detection in Complex Backgrounds Based on Improved U-Net",
+    "bib_author": "Neto, Ebenezer P. P. and Dadkhah, Sajjad and Ferreira, Rafael and Zohourian, Alireza and Lu, Rongxing and Ghorbani, Ali A.",
+    "real_authors": "Zhang, Zou, Deng, Wang, Chen, Lin, Xing, Dai",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "meidan2018nbiot",
+    "doi": "10.1109/MPRV.2018.03367731",
+    "bib_title": "N-BaIoT",
+    "real_title": "N-BaIoT—Network-Based Detection of IoT Botnet Attacks Using Deep Autoencoders",
+    "bib_author": "Meidan, Yair and Bohadana, Michael and Shabtai, Asaf and Ochoa, Martin and Tippenhauer, Nils and Guarnizo, J. David and Elovici, Yuval",
+    "real_authors": "Meidan, Bohadana, Mathov, Mirsky, Shabtai, Breitenbacher, Elovici",
+    "status": "RESOLVED",
+    "error_msg": ""
+  },
+  {
+    "key": "roesch1999snort",
+    "doi": "10.5555/1048408.1048438",
+    "bib_title": "Snort: Lightweight Intrusion Detection for Networks",
+    "real_title": "",
+    "bib_author": "Roesch, Martin",
+    "real_authors": "",
+    "status": "HTTP_404",
+    "error_msg": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "paxson1999bro",
+    "doi": "10.1016/S1389-1286(99)00112-7",
+    "bib_title": "Bro: A System for Detecting Network Intruders in Real-Time",
+    "real_title": "Bro: a system for detecting network intruders in real-time",
+    "bib_author": "Paxson, Vern",
+    "real_authors": "Paxson",
+    "status": "RESOLVED",
+    "error_msg": ""
+  }
+]
